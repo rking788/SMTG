@@ -1,0 +1,301 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AE85D7431368E34400CDA534 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7421368E34400CDA534 /* UIKit.framework */; };
+		AE85D7451368E34400CDA534 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7441368E34400CDA534 /* Foundation.framework */; };
+		AE85D7471368E34400CDA534 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7461368E34400CDA534 /* CoreGraphics.framework */; };
+		AE85D74D1368E34400CDA534 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE85D74B1368E34400CDA534 /* InfoPlist.strings */; };
+		AE85D7501368E34400CDA534 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D74F1368E34400CDA534 /* main.m */; };
+		AE85D7531368E34400CDA534 /* ECaddyAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7521368E34400CDA534 /* ECaddyAppDelegate.m */; };
+		AE85D7561368E34400CDA534 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7541368E34400CDA534 /* MainWindow.xib */; };
+		AE85D7591368E34400CDA534 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7581368E34400CDA534 /* FirstViewController.m */; };
+		AE85D75C1368E34400CDA534 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D75B1368E34400CDA534 /* SecondViewController.m */; };
+		AE85D75F1368E34400CDA534 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D75D1368E34400CDA534 /* FirstView.xib */; };
+		AE85D7621368E34400CDA534 /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7601368E34400CDA534 /* SecondView.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AE85D73E1368E34400CDA534 /* ECaddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ECaddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE85D7421368E34400CDA534 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		AE85D7441368E34400CDA534 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AE85D7461368E34400CDA534 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		AE85D74A1368E34400CDA534 /* ECaddy-Info.plist */ = {isa = PBXFileReference; path = "ECaddy-Info.plist"; sourceTree = "<group>"; };
+		AE85D74C1368E34400CDA534 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AE85D74E1368E34400CDA534 /* ECaddy-Prefix.pch */ = {isa = PBXFileReference; path = "ECaddy-Prefix.pch"; sourceTree = "<group>"; };
+		AE85D74F1368E34400CDA534 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AE85D7511368E34400CDA534 /* ECaddyAppDelegate.h */ = {isa = PBXFileReference; path = ECaddyAppDelegate.h; sourceTree = "<group>"; };
+		AE85D7521368E34400CDA534 /* ECaddyAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ECaddyAppDelegate.m; sourceTree = "<group>"; };
+		AE85D7551368E34400CDA534 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		AE85D7571368E34400CDA534 /* FirstViewController.h */ = {isa = PBXFileReference; path = FirstViewController.h; sourceTree = "<group>"; };
+		AE85D7581368E34400CDA534 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		AE85D75A1368E34400CDA534 /* SecondViewController.h */ = {isa = PBXFileReference; path = SecondViewController.h; sourceTree = "<group>"; };
+		AE85D75B1368E34400CDA534 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		AE85D75E1368E34400CDA534 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstView.xib; sourceTree = "<group>"; };
+		AE85D7611368E34400CDA534 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondView.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AE85D73B1368E34400CDA534 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE85D7431368E34400CDA534 /* UIKit.framework in Frameworks */,
+				AE85D7451368E34400CDA534 /* Foundation.framework in Frameworks */,
+				AE85D7471368E34400CDA534 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AE85D7331368E34400CDA534 = {
+			isa = PBXGroup;
+			children = (
+				AE85D7481368E34400CDA534 /* ECaddy */,
+				AE85D7411368E34400CDA534 /* Frameworks */,
+				AE85D73F1368E34400CDA534 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AE85D73F1368E34400CDA534 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AE85D73E1368E34400CDA534 /* ECaddy.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AE85D7411368E34400CDA534 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AE85D7421368E34400CDA534 /* UIKit.framework */,
+				AE85D7441368E34400CDA534 /* Foundation.framework */,
+				AE85D7461368E34400CDA534 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AE85D7481368E34400CDA534 /* ECaddy */ = {
+			isa = PBXGroup;
+			children = (
+				AE85D7511368E34400CDA534 /* ECaddyAppDelegate.h */,
+				AE85D7521368E34400CDA534 /* ECaddyAppDelegate.m */,
+				AE85D7541368E34400CDA534 /* MainWindow.xib */,
+				AE85D7571368E34400CDA534 /* FirstViewController.h */,
+				AE85D7581368E34400CDA534 /* FirstViewController.m */,
+				AE85D75A1368E34400CDA534 /* SecondViewController.h */,
+				AE85D75B1368E34400CDA534 /* SecondViewController.m */,
+				AE85D75D1368E34400CDA534 /* FirstView.xib */,
+				AE85D7601368E34400CDA534 /* SecondView.xib */,
+				AE85D7491368E34400CDA534 /* Supporting Files */,
+			);
+			path = ECaddy;
+			sourceTree = "<group>";
+		};
+		AE85D7491368E34400CDA534 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AE85D74A1368E34400CDA534 /* ECaddy-Info.plist */,
+				AE85D74B1368E34400CDA534 /* InfoPlist.strings */,
+				AE85D74E1368E34400CDA534 /* ECaddy-Prefix.pch */,
+				AE85D74F1368E34400CDA534 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AE85D73D1368E34400CDA534 /* ECaddy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AE85D7651368E34400CDA534 /* Build configuration list for PBXNativeTarget "ECaddy" */;
+			buildPhases = (
+				AE85D73A1368E34400CDA534 /* Sources */,
+				AE85D73B1368E34400CDA534 /* Frameworks */,
+				AE85D73C1368E34400CDA534 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ECaddy;
+			productName = ECaddy;
+			productReference = AE85D73E1368E34400CDA534 /* ECaddy.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AE85D7351368E34400CDA534 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = AE85D7381368E34400CDA534 /* Build configuration list for PBXProject "ECaddy" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AE85D7331368E34400CDA534;
+			productRefGroup = AE85D73F1368E34400CDA534 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AE85D73D1368E34400CDA534 /* ECaddy */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AE85D73C1368E34400CDA534 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE85D74D1368E34400CDA534 /* InfoPlist.strings in Resources */,
+				AE85D7561368E34400CDA534 /* MainWindow.xib in Resources */,
+				AE85D75F1368E34400CDA534 /* FirstView.xib in Resources */,
+				AE85D7621368E34400CDA534 /* SecondView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AE85D73A1368E34400CDA534 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE85D7501368E34400CDA534 /* main.m in Sources */,
+				AE85D7531368E34400CDA534 /* ECaddyAppDelegate.m in Sources */,
+				AE85D7591368E34400CDA534 /* FirstViewController.m in Sources */,
+				AE85D75C1368E34400CDA534 /* SecondViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		AE85D74B1368E34400CDA534 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AE85D74C1368E34400CDA534 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AE85D7541368E34400CDA534 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AE85D7551368E34400CDA534 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		AE85D75D1368E34400CDA534 /* FirstView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AE85D75E1368E34400CDA534 /* en */,
+			);
+			name = FirstView.xib;
+			sourceTree = "<group>";
+		};
+		AE85D7601368E34400CDA534 /* SecondView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AE85D7611368E34400CDA534 /* en */,
+			);
+			name = SecondView.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AE85D7631368E34400CDA534 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		AE85D7641368E34400CDA534 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		AE85D7661368E34400CDA534 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ECaddy/ECaddy-Prefix.pch";
+				INFOPLIST_FILE = "ECaddy/ECaddy-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		AE85D7671368E34400CDA534 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ECaddy/ECaddy-Prefix.pch";
+				INFOPLIST_FILE = "ECaddy/ECaddy-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AE85D7381368E34400CDA534 /* Build configuration list for PBXProject "ECaddy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE85D7631368E34400CDA534 /* Debug */,
+				AE85D7641368E34400CDA534 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AE85D7651368E34400CDA534 /* Build configuration list for PBXNativeTarget "ECaddy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE85D7661368E34400CDA534 /* Debug */,
+				AE85D7671368E34400CDA534 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AE85D7351368E34400CDA534 /* Project object */;
+}
