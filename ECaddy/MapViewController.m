@@ -18,7 +18,7 @@
 {
     [super viewDidLoad];
     
-    // TODO: Remove This. Set the center of the map to the first hole for now
+    // TODO: Remove This. Set the region of the map to the first hole
     [self zoomToFitMapAnnotations:mapView];
 }
 

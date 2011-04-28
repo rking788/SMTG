@@ -58,4 +58,33 @@
     [super dealloc];
 }
 
+#pragma mark UITableViewDataSource Protocol Methods
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
+}
+
+// Customize the appearance of table view cells.
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    static NSString *CellIdentifier = @"WeatherTableCell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        //cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+    }
+    
+    // Set up the cell...
+    NSString *cellValue = @"Active Course";
+    UILabel* lbl = [cell textLabel];
+    [lbl setText: cellValue];
+    UILabel* lbl2 = [cell detailTextLabel];
+    [lbl2 setText: @"Country Fareways"];
+    
+    return cell;
+}
+
+
 @end

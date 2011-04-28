@@ -24,6 +24,8 @@
 		AE85D77A1368E84700CDA534 /* WeatherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7781368E84600CDA534 /* WeatherView.xib */; };
 		AE85D7841368EC5200CDA534 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7831368EC5200CDA534 /* CoreLocation.framework */; };
 		AE85D7861368EC5900CDA534 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7851368EC5900CDA534 /* MapKit.framework */; };
+		AE85D7921369298E00CDA534 /* WeatherDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7901369298E00CDA534 /* WeatherDetails.m */; };
+		AE85D7931369298E00CDA534 /* WeatherDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7911369298E00CDA534 /* WeatherDetails.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +54,9 @@
 		AE85D7781368E84600CDA534 /* WeatherView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherView.xib; sourceTree = "<group>"; };
 		AE85D7831368EC5200CDA534 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		AE85D7851368EC5900CDA534 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		AE85D78F1369298E00CDA534 /* WeatherDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherDetails.h; sourceTree = "<group>"; };
+		AE85D7901369298E00CDA534 /* WeatherDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherDetails.m; sourceTree = "<group>"; };
+		AE85D7911369298E00CDA534 /* WeatherDetails.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherDetails.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +109,6 @@
 			children = (
 				AE85D7511368E34400CDA534 /* ECaddyAppDelegate.h */,
 				AE85D7521368E34400CDA534 /* ECaddyAppDelegate.m */,
-				AE85D7541368E34400CDA534 /* MainWindow.xib */,
 				AE85D7571368E34400CDA534 /* ScorecardViewController.h */,
 				AE85D7581368E34400CDA534 /* ScorecardViewController.m */,
 				AE85D75A1368E34400CDA534 /* DirectoryViewController.h */,
@@ -113,10 +117,14 @@
 				AE85D7721368E75700CDA534 /* MapViewController.m */,
 				AE85D7761368E84600CDA534 /* WeatherViewController.h */,
 				AE85D7771368E84600CDA534 /* WeatherViewController.m */,
+				AE85D78F1369298E00CDA534 /* WeatherDetails.h */,
+				AE85D7901369298E00CDA534 /* WeatherDetails.m */,
+				AE85D7541368E34400CDA534 /* MainWindow.xib */,
 				AE85D75D1368E34400CDA534 /* ScorecardView.xib */,
 				AE85D7601368E34400CDA534 /* DirectoryView.xib */,
 				AE85D7731368E75700CDA534 /* MapView.xib */,
 				AE85D7781368E84600CDA534 /* WeatherView.xib */,
+				AE85D7911369298E00CDA534 /* WeatherDetails.xib */,
 				AE85D7491368E34400CDA534 /* Supporting Files */,
 			);
 			path = ECaddy;
@@ -186,6 +194,7 @@
 				AE85D7621368E34400CDA534 /* DirectoryView.xib in Resources */,
 				AE85D7751368E75700CDA534 /* MapView.xib in Resources */,
 				AE85D77A1368E84700CDA534 /* WeatherView.xib in Resources */,
+				AE85D7931369298E00CDA534 /* WeatherDetails.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +211,7 @@
 				AE85D75C1368E34400CDA534 /* DirectoryViewController.m in Sources */,
 				AE85D7741368E75700CDA534 /* MapViewController.m in Sources */,
 				AE85D7791368E84700CDA534 /* WeatherViewController.m in Sources */,
+				AE85D7921369298E00CDA534 /* WeatherDetails.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,7 +257,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -264,7 +274,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;

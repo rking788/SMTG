@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface WeatherViewController : UIViewController {
+@interface WeatherViewController : UITableViewController {
     
 }
 
