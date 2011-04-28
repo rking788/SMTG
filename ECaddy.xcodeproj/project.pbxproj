@@ -14,10 +14,16 @@
 		AE85D7501368E34400CDA534 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D74F1368E34400CDA534 /* main.m */; };
 		AE85D7531368E34400CDA534 /* ECaddyAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7521368E34400CDA534 /* ECaddyAppDelegate.m */; };
 		AE85D7561368E34400CDA534 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7541368E34400CDA534 /* MainWindow.xib */; };
-		AE85D7591368E34400CDA534 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7581368E34400CDA534 /* FirstViewController.m */; };
-		AE85D75C1368E34400CDA534 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D75B1368E34400CDA534 /* SecondViewController.m */; };
-		AE85D75F1368E34400CDA534 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D75D1368E34400CDA534 /* FirstView.xib */; };
-		AE85D7621368E34400CDA534 /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7601368E34400CDA534 /* SecondView.xib */; };
+		AE85D7591368E34400CDA534 /* ScorecardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7581368E34400CDA534 /* ScorecardViewController.m */; };
+		AE85D75C1368E34400CDA534 /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D75B1368E34400CDA534 /* DirectoryViewController.m */; };
+		AE85D75F1368E34400CDA534 /* ScorecardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D75D1368E34400CDA534 /* ScorecardView.xib */; };
+		AE85D7621368E34400CDA534 /* DirectoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7601368E34400CDA534 /* DirectoryView.xib */; };
+		AE85D7741368E75700CDA534 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7721368E75700CDA534 /* MapViewController.m */; };
+		AE85D7751368E75700CDA534 /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7731368E75700CDA534 /* MapView.xib */; };
+		AE85D7791368E84700CDA534 /* WeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7771368E84600CDA534 /* WeatherViewController.m */; };
+		AE85D77A1368E84700CDA534 /* WeatherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7781368E84600CDA534 /* WeatherView.xib */; };
+		AE85D7841368EC5200CDA534 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7831368EC5200CDA534 /* CoreLocation.framework */; };
+		AE85D7861368EC5900CDA534 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7851368EC5900CDA534 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,19 +31,27 @@
 		AE85D7421368E34400CDA534 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AE85D7441368E34400CDA534 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AE85D7461368E34400CDA534 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		AE85D74A1368E34400CDA534 /* ECaddy-Info.plist */ = {isa = PBXFileReference; path = "ECaddy-Info.plist"; sourceTree = "<group>"; };
+		AE85D74A1368E34400CDA534 /* ECaddy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ECaddy-Info.plist"; sourceTree = "<group>"; };
 		AE85D74C1368E34400CDA534 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		AE85D74E1368E34400CDA534 /* ECaddy-Prefix.pch */ = {isa = PBXFileReference; path = "ECaddy-Prefix.pch"; sourceTree = "<group>"; };
+		AE85D74E1368E34400CDA534 /* ECaddy-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ECaddy-Prefix.pch"; sourceTree = "<group>"; };
 		AE85D74F1368E34400CDA534 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		AE85D7511368E34400CDA534 /* ECaddyAppDelegate.h */ = {isa = PBXFileReference; path = ECaddyAppDelegate.h; sourceTree = "<group>"; };
+		AE85D7511368E34400CDA534 /* ECaddyAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ECaddyAppDelegate.h; sourceTree = "<group>"; };
 		AE85D7521368E34400CDA534 /* ECaddyAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ECaddyAppDelegate.m; sourceTree = "<group>"; };
 		AE85D7551368E34400CDA534 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		AE85D7571368E34400CDA534 /* FirstViewController.h */ = {isa = PBXFileReference; path = FirstViewController.h; sourceTree = "<group>"; };
-		AE85D7581368E34400CDA534 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		AE85D75A1368E34400CDA534 /* SecondViewController.h */ = {isa = PBXFileReference; path = SecondViewController.h; sourceTree = "<group>"; };
-		AE85D75B1368E34400CDA534 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
-		AE85D75E1368E34400CDA534 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstView.xib; sourceTree = "<group>"; };
-		AE85D7611368E34400CDA534 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondView.xib; sourceTree = "<group>"; };
+		AE85D7571368E34400CDA534 /* ScorecardViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScorecardViewController.h; sourceTree = "<group>"; };
+		AE85D7581368E34400CDA534 /* ScorecardViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScorecardViewController.m; sourceTree = "<group>"; };
+		AE85D75A1368E34400CDA534 /* DirectoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DirectoryViewController.h; sourceTree = "<group>"; };
+		AE85D75B1368E34400CDA534 /* DirectoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DirectoryViewController.m; sourceTree = "<group>"; };
+		AE85D75E1368E34400CDA534 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ScorecardView.xib; sourceTree = "<group>"; };
+		AE85D7611368E34400CDA534 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DirectoryView.xib; sourceTree = "<group>"; };
+		AE85D7711368E75700CDA534 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		AE85D7721368E75700CDA534 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		AE85D7731368E75700CDA534 /* MapView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapView.xib; sourceTree = "<group>"; };
+		AE85D7761368E84600CDA534 /* WeatherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherViewController.h; sourceTree = "<group>"; };
+		AE85D7771368E84600CDA534 /* WeatherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherViewController.m; sourceTree = "<group>"; };
+		AE85D7781368E84600CDA534 /* WeatherView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherView.xib; sourceTree = "<group>"; };
+		AE85D7831368EC5200CDA534 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		AE85D7851368EC5900CDA534 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +59,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE85D7861368EC5900CDA534 /* MapKit.framework in Frameworks */,
+				AE85D7841368EC5200CDA534 /* CoreLocation.framework in Frameworks */,
 				AE85D7431368E34400CDA534 /* UIKit.framework in Frameworks */,
 				AE85D7451368E34400CDA534 /* Foundation.framework in Frameworks */,
 				AE85D7471368E34400CDA534 /* CoreGraphics.framework in Frameworks */,
@@ -74,6 +90,8 @@
 		AE85D7411368E34400CDA534 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AE85D7851368EC5900CDA534 /* MapKit.framework */,
+				AE85D7831368EC5200CDA534 /* CoreLocation.framework */,
 				AE85D7421368E34400CDA534 /* UIKit.framework */,
 				AE85D7441368E34400CDA534 /* Foundation.framework */,
 				AE85D7461368E34400CDA534 /* CoreGraphics.framework */,
@@ -87,12 +105,18 @@
 				AE85D7511368E34400CDA534 /* ECaddyAppDelegate.h */,
 				AE85D7521368E34400CDA534 /* ECaddyAppDelegate.m */,
 				AE85D7541368E34400CDA534 /* MainWindow.xib */,
-				AE85D7571368E34400CDA534 /* FirstViewController.h */,
-				AE85D7581368E34400CDA534 /* FirstViewController.m */,
-				AE85D75A1368E34400CDA534 /* SecondViewController.h */,
-				AE85D75B1368E34400CDA534 /* SecondViewController.m */,
-				AE85D75D1368E34400CDA534 /* FirstView.xib */,
-				AE85D7601368E34400CDA534 /* SecondView.xib */,
+				AE85D7571368E34400CDA534 /* ScorecardViewController.h */,
+				AE85D7581368E34400CDA534 /* ScorecardViewController.m */,
+				AE85D75A1368E34400CDA534 /* DirectoryViewController.h */,
+				AE85D75B1368E34400CDA534 /* DirectoryViewController.m */,
+				AE85D7711368E75700CDA534 /* MapViewController.h */,
+				AE85D7721368E75700CDA534 /* MapViewController.m */,
+				AE85D7761368E84600CDA534 /* WeatherViewController.h */,
+				AE85D7771368E84600CDA534 /* WeatherViewController.m */,
+				AE85D75D1368E34400CDA534 /* ScorecardView.xib */,
+				AE85D7601368E34400CDA534 /* DirectoryView.xib */,
+				AE85D7731368E75700CDA534 /* MapView.xib */,
+				AE85D7781368E84600CDA534 /* WeatherView.xib */,
 				AE85D7491368E34400CDA534 /* Supporting Files */,
 			);
 			path = ECaddy;
@@ -158,8 +182,10 @@
 			files = (
 				AE85D74D1368E34400CDA534 /* InfoPlist.strings in Resources */,
 				AE85D7561368E34400CDA534 /* MainWindow.xib in Resources */,
-				AE85D75F1368E34400CDA534 /* FirstView.xib in Resources */,
-				AE85D7621368E34400CDA534 /* SecondView.xib in Resources */,
+				AE85D75F1368E34400CDA534 /* ScorecardView.xib in Resources */,
+				AE85D7621368E34400CDA534 /* DirectoryView.xib in Resources */,
+				AE85D7751368E75700CDA534 /* MapView.xib in Resources */,
+				AE85D77A1368E84700CDA534 /* WeatherView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,8 +198,10 @@
 			files = (
 				AE85D7501368E34400CDA534 /* main.m in Sources */,
 				AE85D7531368E34400CDA534 /* ECaddyAppDelegate.m in Sources */,
-				AE85D7591368E34400CDA534 /* FirstViewController.m in Sources */,
-				AE85D75C1368E34400CDA534 /* SecondViewController.m in Sources */,
+				AE85D7591368E34400CDA534 /* ScorecardViewController.m in Sources */,
+				AE85D75C1368E34400CDA534 /* DirectoryViewController.m in Sources */,
+				AE85D7741368E75700CDA534 /* MapViewController.m in Sources */,
+				AE85D7791368E84700CDA534 /* WeatherViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,20 +224,20 @@
 			name = MainWindow.xib;
 			sourceTree = "<group>";
 		};
-		AE85D75D1368E34400CDA534 /* FirstView.xib */ = {
+		AE85D75D1368E34400CDA534 /* ScorecardView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				AE85D75E1368E34400CDA534 /* en */,
 			);
-			name = FirstView.xib;
+			name = ScorecardView.xib;
 			sourceTree = "<group>";
 		};
-		AE85D7601368E34400CDA534 /* SecondView.xib */ = {
+		AE85D7601368E34400CDA534 /* DirectoryView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				AE85D7611368E34400CDA534 /* en */,
 			);
-			name = SecondView.xib;
+			name = DirectoryView.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -294,6 +322,7 @@
 				AE85D7671368E34400CDA534 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
