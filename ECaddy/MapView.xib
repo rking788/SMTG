@@ -50,7 +50,7 @@
 						<string key="NSFrameSize">{320, 74}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="803479158"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIBarStyle">1</int>
 						<object class="NSArray" key="IBUIItems">
@@ -58,7 +58,7 @@
 							<object class="IBUINavigationItem" id="62791117">
 								<reference key="IBUINavigationBar" ref="77265984"/>
 								<string key="IBUITitle">Hole Number</string>
-								<string key="IBUIPrompt">Possibly Golf Course Name</string>
+								<string key="IBUIPrompt">Country Fareways</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 						</object>
@@ -69,7 +69,7 @@
 						<string key="NSFrame">{{0, 74}, {320, 337}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="77265984"/>
+						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -83,7 +83,7 @@
 				<string key="NSFrame">{{0, 20}, {320, 411}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="803479158"/>
+				<reference key="NSNextKeyView" ref="77265984"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>

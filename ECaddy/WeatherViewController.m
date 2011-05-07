@@ -145,6 +145,7 @@
     WeatherDetails* weatherView = [[WeatherDetails alloc] initWithNibName:@"WeatherDetails" bundle:nil];
     
     [weatherView setText:str3];
+    NSLog(@"%@", str3);
     [weatherView setModalTransitionStyle: UIModalTransitionStyleFlipHorizontal];
     [self presentModalViewController:weatherView animated:YES];
     [weatherView release];

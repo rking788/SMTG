@@ -13,6 +13,7 @@
 @synthesize text;
 @synthesize textView;
 @synthesize navBar;
+@synthesize weatherPic;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,6 +28,7 @@
 {
     [textView release];
     [navBar release];
+    [weatherPic release];
     [super dealloc];
 }
 
@@ -47,12 +49,19 @@
     [textView setText:text];
     
     self.navBar.topItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemCancel target:self action:@selector(cancel)] autorelease];
+    
+    // TODO: Remove this stupid thing
+    NSURL *url = [NSURL URLWithString:@"http://l.yimg.com/a/i/us/we/52/29.gif"];
+    NSData *data = [NSData dataWithContentsOfURL: url];
+    UIImage *img = [[UIImage alloc] initWithData: data];
+    [self.weatherPic setImage: img];
 }
 
 - (void)viewDidUnload
 {
     [self setTextView:nil];
     [self setNavBar:nil];
+    [self setWeatherPic:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

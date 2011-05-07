@@ -26,6 +26,11 @@
 		AE85D7861368EC5900CDA534 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7851368EC5900CDA534 /* MapKit.framework */; };
 		AE85D7921369298E00CDA534 /* WeatherDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7901369298E00CDA534 /* WeatherDetails.m */; };
 		AE85D7931369298E00CDA534 /* WeatherDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7911369298E00CDA534 /* WeatherDetails.xib */; };
+		AE886D651370E2490056BDF4 /* POIAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = AE886D641370E2490056BDF4 /* POIAnnotation.m */; };
+		AED1EA091374F950008365D5 /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = AED1EA081374F950008365D5 /* green.png */; };
+		AED1EA0C1374F959008365D5 /* tee.png in Resources */ = {isa = PBXBuildFile; fileRef = AED1EA0B1374F959008365D5 /* tee.png */; };
+		AED1EA1613750ECD008365D5 /* teeandgreen.png in Resources */ = {isa = PBXBuildFile; fileRef = AED1EA1513750ECC008365D5 /* teeandgreen.png */; };
+		AED1EA1813750ED4008365D5 /* teeandgreen_ret.png in Resources */ = {isa = PBXBuildFile; fileRef = AED1EA1713750ED4008365D5 /* teeandgreen_ret.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +62,12 @@
 		AE85D78F1369298E00CDA534 /* WeatherDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherDetails.h; sourceTree = "<group>"; };
 		AE85D7901369298E00CDA534 /* WeatherDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherDetails.m; sourceTree = "<group>"; };
 		AE85D7911369298E00CDA534 /* WeatherDetails.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherDetails.xib; sourceTree = "<group>"; };
+		AE886D621370E2400056BDF4 /* POIAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POIAnnotation.h; sourceTree = "<group>"; };
+		AE886D641370E2490056BDF4 /* POIAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POIAnnotation.m; sourceTree = "<group>"; };
+		AED1EA081374F950008365D5 /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
+		AED1EA0B1374F959008365D5 /* tee.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tee.png; sourceTree = "<group>"; };
+		AED1EA1513750ECC008365D5 /* teeandgreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = teeandgreen.png; path = ../teeandgreen.png; sourceTree = "<group>"; };
+		AED1EA1713750ED4008365D5 /* teeandgreen_ret.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = teeandgreen_ret.png; path = ../teeandgreen_ret.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +126,8 @@
 				AE85D75B1368E34400CDA534 /* DirectoryViewController.m */,
 				AE85D7711368E75700CDA534 /* MapViewController.h */,
 				AE85D7721368E75700CDA534 /* MapViewController.m */,
+				AE886D621370E2400056BDF4 /* POIAnnotation.h */,
+				AE886D641370E2490056BDF4 /* POIAnnotation.m */,
 				AE85D7761368E84600CDA534 /* WeatherViewController.h */,
 				AE85D7771368E84600CDA534 /* WeatherViewController.m */,
 				AE85D78F1369298E00CDA534 /* WeatherDetails.h */,
@@ -125,6 +138,10 @@
 				AE85D7731368E75700CDA534 /* MapView.xib */,
 				AE85D7781368E84600CDA534 /* WeatherView.xib */,
 				AE85D7911369298E00CDA534 /* WeatherDetails.xib */,
+				AED1EA081374F950008365D5 /* green.png */,
+				AED1EA0B1374F959008365D5 /* tee.png */,
+				AED1EA1513750ECC008365D5 /* teeandgreen.png */,
+				AED1EA1713750ED4008365D5 /* teeandgreen_ret.png */,
 				AE85D7491368E34400CDA534 /* Supporting Files */,
 			);
 			path = ECaddy;
@@ -195,6 +212,10 @@
 				AE85D7751368E75700CDA534 /* MapView.xib in Resources */,
 				AE85D77A1368E84700CDA534 /* WeatherView.xib in Resources */,
 				AE85D7931369298E00CDA534 /* WeatherDetails.xib in Resources */,
+				AED1EA091374F950008365D5 /* green.png in Resources */,
+				AED1EA0C1374F959008365D5 /* tee.png in Resources */,
+				AED1EA1613750ECD008365D5 /* teeandgreen.png in Resources */,
+				AED1EA1813750ED4008365D5 /* teeandgreen_ret.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +233,7 @@
 				AE85D7741368E75700CDA534 /* MapViewController.m in Sources */,
 				AE85D7791368E84700CDA534 /* WeatherViewController.m in Sources */,
 				AE85D7921369298E00CDA534 /* WeatherDetails.m in Sources */,
+				AE886D651370E2490056BDF4 /* POIAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
