@@ -16,17 +16,21 @@
     MKMapView *mapView;
     NSMutableArray* holeAnnotations;
     NSMutableArray* distanceAnnotations;
+    MKPolyline* holeLine;
+    MKPolylineView* holeLineView;
 }
 
 // Properties
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 @property (nonatomic, retain) NSMutableArray* holeAnnotations;
 @property (nonatomic, retain) NSMutableArray* distanceAnnotations;
+@property (nonatomic, retain) MKPolyline* holeLine;
+@property (nonatomic, retain) MKPolylineView* holeLineView;
 
 // Methods
 - (void)zoomToFitMapAnnotations:(MKMapView*)mapV;
 - (void) holeAnnotsTeeLat:(double) lat1 teeLong:(double) long1 greenLat:(double) lat2 greenLong:(double) long2;
-
+- (void) clearHoleAnnotsAndArray: (BOOL) bClearArray;
 
 enum
 {

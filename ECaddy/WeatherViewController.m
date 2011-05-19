@@ -128,28 +128,36 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSURL* url = [NSURL URLWithString:@"http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.places%20where%20text%3D%22OldTown%20ME%22&format=xml"];
-    NSString* str = [[NSString alloc] initWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
+ //   NSURL* url = [NSURL URLWithString:@"http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.places%20where%20text%3D%22OldTown%20ME%22&format=xml"];
+//    NSString* str = [[NSString alloc] initWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
     
-    NSRange range1 = [str rangeOfString:@"<woeid>" options:NSLiteralSearch];
-    NSRange range2 = [str rangeOfString:@"</woeid>" options:NSLiteralSearch];
-    NSRange range3;
-    range3.location = range1.location + range1.length;
-    range3.length = range2.location - (range1.location+range1.length);
-    NSString* str2 = [str substringWithRange:range3];
+//    NSRange range1 = [str rangeOfString:@"<woeid>" options:NSLiteralSearch];
+//    NSRange range2 = [str rangeOfString:@"</woeid>" options:NSLiteralSearch];
+//    NSRange range3;
+//    range3.location = range1.location + range1.length;
+//    range3.length = range2.location - (range1.location+range1.length);
+//    NSString* str2 = [str substringWithRange:range3];
     
+    // This is the woeid value for old town, me
+    NSString* str2 = @"2465118";
     NSURL* url2 = [NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@", str2]];
     NSString* str3 = [[NSString alloc] initWithContentsOfURL:url2 encoding:NSUTF8StringEncoding error:nil];
-    NSLog(@"Weather %@", str3);   
     
     WeatherDetails* weatherView = [[WeatherDetails alloc] initWithNibName:@"WeatherDetails" bundle:nil];
     
     [weatherView setText:str3];
     NSLog(@"%@", str3);
+    
+    // Set the course detail information from the selected tableview cell
+    NSString* courseName = [[[tableView cellForRowAtIndexPath: indexPath] textLabel] text];
+    NSString* courseLoc = [[[tableView cellForRowAtIndexPath:indexPath] detailTextLabel] text];
+    [weatherView setCourseName: courseName];
+    [weatherView setCourseLoc: courseLoc];
+    
+    // Set the transition mode and display the weather detail view modally
     [weatherView setModalTransitionStyle: UIModalTransitionStyleFlipHorizontal];
     [self presentModalViewController:weatherView animated:YES];
     [weatherView release];
-    [str release];
     [str3 release];
 }
 

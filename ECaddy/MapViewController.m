@@ -10,9 +10,12 @@
 
 
 @implementation MapViewController
+
 @synthesize mapView;
 @synthesize holeAnnotations;
 @synthesize distanceAnnotations;
+@synthesize holeLine;
+@synthesize holeLineView;
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -115,19 +118,27 @@
 
 #pragma mark Map View Methods
 
-- (void) holeAnnotsTeeLat:(double) lat1 teeLong:(double) long1 greenLat:(double) lat2 greenLong:(double) long2
-{    
-    //If there are already annotations on the map then remove them 
-    /*if([self.mapPOIAnnotations count] != 1){
-        [self.mapView removeAnnotations: self.mapPOIAnnotations];
-        [[self mapPOIAnnotations] removeAllObjects];
+- (void) clearHoleAnnotsAndArray: (BOOL) bClearArray
+{
+    if(self.holeAnnotations == nil)
+        return;
+    
+    // TODO: Not sure if this check is correct for the case where no objects have been added yet
+    // or if there is an easier way of doing it.
+    if(([self.holeAnnotations objectAtIndex:teeAnnotationIndex] != nil) && ([self.holeAnnotations objectAtIndex: greenAnnotationIndex])){
+        [self.mapView removeAnnotations: self.holeAnnotations];
     }
     
-    //If 'None' was selected then just leave the annotations blank
-    if([permitType isEqualToString:@"None"]){
-        return;
-    }
-    */
+    // If the bool flag is set then remove the annotations from the array too
+    if(bClearArray)
+        [self.holeAnnotations removeAllObjects];
+}
+
+- (void) holeAnnotsTeeLat:(double) lat1 teeLong:(double) long1 greenLat:(double) lat2 greenLong:(double) long2
+{    
+    // Clear the annotations if they already exist
+    [self.holeAnnotations removeAllObjects];
+    
     POIAnnotation* teeAnnot = [[POIAnnotation alloc] initWithLat:lat1 withLong:long1];
     [teeAnnot setImage: [UIImage imageNamed: @"tee.png"]];
     
@@ -136,24 +147,47 @@
     
     [self.holeAnnotations insertObject:teeAnnot atIndex: teeAnnotationIndex];
     [self.holeAnnotations insertObject:greenAnnot atIndex: greenAnnotationIndex];
-    
-//    NSLog(@"After inserting");
-    
-//    [self.holeAnnotations removeAllObjects];
-    
-//    [self.holeAnnotations insertObject:teeLoc atIndex: teeAnnotationIndex];
-//    [self.holeAnnotations insertObject:greenLoc atIndex: greenAnnotationIndex];
-    
-//    NSLog(@"After removing");
 
     [self.mapView addAnnotations:self.holeAnnotations];
     
     [teeAnnot release];
     [greenAnnot release];
     
+    //  Create the line from the tee to the green
+    MKMapPoint* pointArray = malloc(sizeof(CLLocationCoordinate2D) * 2);
+    CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(lat1, long1);
+    pointArray[0] = MKMapPointForCoordinate(coord);
+    
+    coord = CLLocationCoordinate2DMake(lat2, long2);
+    pointArray[1] = MKMapPointForCoordinate(coord);
+    
+    self.holeLine = [MKPolyline polylineWithPoints: pointArray count: 2];
+    [self.mapView addOverlay: holeLine];
+    
     return;
 }
 
+- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id )overlay
+{
+    MKOverlayView* overlayView = nil;
+    
+    if(overlay == self.holeLine){
+        //if we have not yet created an overlay view for this overlay, create it now.
+        if(nil == self.holeLineView){
+            self.holeLineView = [[[MKPolylineView alloc] initWithPolyline:self.holeLine] autorelease];
+            self.holeLineView.fillColor = [UIColor yellowColor];
+            self.holeLineView.strokeColor = [UIColor yellowColor];
+            self.holeLineView.lineWidth = 2;
+            self.holeLineView.alpha = 0.3;
+        }
+        
+        overlayView = self.holeLineView;
+        
+    }
+    
+    return overlayView;
+    
+}
 
 // MapView animation method for custom annotations
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views { 
@@ -206,11 +240,9 @@
             //      forControlEvents:UIControlEventTouchUpInside];
             //customPinView.rightCalloutAccessoryView = rightButton;
             
-            // TODO: it would be cool if these custom views animated into the map
             MKAnnotationView* customPinView = [[[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier: POIAnnotationID] autorelease];
             
             [customPinView setCanShowCallout: NO];
-            [customPinView setDraggable: NO];
             [customPinView setCenterOffset: CGPointMake(0, -20)];
             // NSLog(@"Draggable: %@", ([customPinView isDraggable] ? @"YES" : @"NO"));
             

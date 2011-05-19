@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE7F932813835FC9003CCD57 /* stateabbrs.txt in Resources */ = {isa = PBXBuildFile; fileRef = AE7F932713835FC9003CCD57 /* stateabbrs.txt */; };
+		AE7F932B13836621003CCD57 /* StateDirView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7F932A13836621003CCD57 /* StateDirView.xib */; };
+		AE816DC1137B7E140023F5D7 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AE816DBE137B7E140023F5D7 /* NSDataAdditions.m */; };
+		AE816DC2137B7E140023F5D7 /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = AE816DC0137B7E140023F5D7 /* TBXML.m */; };
+		AE816DC4137B7E670023F5D7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AE816DC3137B7E670023F5D7 /* libz.dylib */; };
 		AE85D7431368E34400CDA534 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7421368E34400CDA534 /* UIKit.framework */; };
 		AE85D7451368E34400CDA534 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7441368E34400CDA534 /* Foundation.framework */; };
 		AE85D7471368E34400CDA534 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7461368E34400CDA534 /* CoreGraphics.framework */; };
@@ -17,7 +22,7 @@
 		AE85D7591368E34400CDA534 /* ScorecardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7581368E34400CDA534 /* ScorecardViewController.m */; };
 		AE85D75C1368E34400CDA534 /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D75B1368E34400CDA534 /* DirectoryViewController.m */; };
 		AE85D75F1368E34400CDA534 /* ScorecardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D75D1368E34400CDA534 /* ScorecardView.xib */; };
-		AE85D7621368E34400CDA534 /* DirectoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7601368E34400CDA534 /* DirectoryView.xib */; };
+		AE85D7621368E34400CDA534 /* CourseSelectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7601368E34400CDA534 /* CourseSelectView.xib */; };
 		AE85D7741368E75700CDA534 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7721368E75700CDA534 /* MapViewController.m */; };
 		AE85D7751368E75700CDA534 /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7731368E75700CDA534 /* MapView.xib */; };
 		AE85D7791368E84700CDA534 /* WeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7771368E84600CDA534 /* WeatherViewController.m */; };
@@ -27,13 +32,24 @@
 		AE85D7921369298E00CDA534 /* WeatherDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7901369298E00CDA534 /* WeatherDetails.m */; };
 		AE85D7931369298E00CDA534 /* WeatherDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7911369298E00CDA534 /* WeatherDetails.xib */; };
 		AE886D651370E2490056BDF4 /* POIAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = AE886D641370E2490056BDF4 /* POIAnnotation.m */; };
+		AE8FE58E1384A96900EE8E66 /* CourseSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8FE58C1384A96900EE8E66 /* CourseSelectViewController.m */; };
+		AE9427CE13821ABF0047EBA4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9427CD13821ABF0047EBA4 /* CoreData.framework */; };
+		AE9427DB138232EA0047EBA4 /* ECaddy.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = AE9427DA138232EA0047EBA4 /* ECaddy.sqlite */; };
 		AED1EA091374F950008365D5 /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = AED1EA081374F950008365D5 /* green.png */; };
 		AED1EA0C1374F959008365D5 /* tee.png in Resources */ = {isa = PBXBuildFile; fileRef = AED1EA0B1374F959008365D5 /* tee.png */; };
 		AED1EA1613750ECD008365D5 /* teeandgreen.png in Resources */ = {isa = PBXBuildFile; fileRef = AED1EA1513750ECC008365D5 /* teeandgreen.png */; };
 		AED1EA1813750ED4008365D5 /* teeandgreen_ret.png in Resources */ = {isa = PBXBuildFile; fileRef = AED1EA1713750ED4008365D5 /* teeandgreen_ret.png */; };
+		AEFE6F151381BB60002B1AA3 /* coursemodel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AEFE6F131381BB60002B1AA3 /* coursemodel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AE7F932713835FC9003CCD57 /* stateabbrs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stateabbrs.txt; sourceTree = "<group>"; };
+		AE7F932A13836621003CCD57 /* StateDirView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StateDirView.xib; sourceTree = "<group>"; };
+		AE816DBD137B7E140023F5D7 /* NSDataAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataAdditions.h; sourceTree = "<group>"; };
+		AE816DBE137B7E140023F5D7 /* NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataAdditions.m; sourceTree = "<group>"; };
+		AE816DBF137B7E140023F5D7 /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBXML.h; sourceTree = "<group>"; };
+		AE816DC0137B7E140023F5D7 /* TBXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBXML.m; sourceTree = "<group>"; };
+		AE816DC3137B7E670023F5D7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		AE85D73E1368E34400CDA534 /* ECaddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ECaddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE85D7421368E34400CDA534 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AE85D7441368E34400CDA534 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -50,7 +66,7 @@
 		AE85D75A1368E34400CDA534 /* DirectoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DirectoryViewController.h; sourceTree = "<group>"; };
 		AE85D75B1368E34400CDA534 /* DirectoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DirectoryViewController.m; sourceTree = "<group>"; };
 		AE85D75E1368E34400CDA534 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ScorecardView.xib; sourceTree = "<group>"; };
-		AE85D7611368E34400CDA534 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DirectoryView.xib; sourceTree = "<group>"; };
+		AE85D7611368E34400CDA534 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/CourseSelectView.xib; sourceTree = "<group>"; };
 		AE85D7711368E75700CDA534 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		AE85D7721368E75700CDA534 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		AE85D7731368E75700CDA534 /* MapView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapView.xib; sourceTree = "<group>"; };
@@ -64,10 +80,17 @@
 		AE85D7911369298E00CDA534 /* WeatherDetails.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherDetails.xib; sourceTree = "<group>"; };
 		AE886D621370E2400056BDF4 /* POIAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POIAnnotation.h; sourceTree = "<group>"; };
 		AE886D641370E2490056BDF4 /* POIAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POIAnnotation.m; sourceTree = "<group>"; };
+		AE8FE58B1384A96900EE8E66 /* CourseSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseSelectViewController.h; sourceTree = "<group>"; };
+		AE8FE58C1384A96900EE8E66 /* CourseSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseSelectViewController.m; sourceTree = "<group>"; };
+		AE9427CD13821ABF0047EBA4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		AE9427DA138232EA0047EBA4 /* ECaddy.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = ECaddy.sqlite; sourceTree = "<group>"; };
+		AEB0722B137DB51600BE3C37 /* dbinit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dbinit.h; path = ../dbinit.h; sourceTree = "<group>"; };
+		AEB0722C137DB51600BE3C37 /* dbinit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = dbinit.m; path = ../dbinit.m; sourceTree = "<group>"; };
 		AED1EA081374F950008365D5 /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
 		AED1EA0B1374F959008365D5 /* tee.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tee.png; sourceTree = "<group>"; };
 		AED1EA1513750ECC008365D5 /* teeandgreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = teeandgreen.png; path = ../teeandgreen.png; sourceTree = "<group>"; };
 		AED1EA1713750ED4008365D5 /* teeandgreen_ret.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = teeandgreen_ret.png; path = ../teeandgreen_ret.png; sourceTree = "<group>"; };
+		AEFE6F141381BB60002B1AA3 /* coursemodel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = coursemodel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +98,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE9427CE13821ABF0047EBA4 /* CoreData.framework in Frameworks */,
+				AE816DC4137B7E670023F5D7 /* libz.dylib in Frameworks */,
 				AE85D7861368EC5900CDA534 /* MapKit.framework in Frameworks */,
 				AE85D7841368EC5200CDA534 /* CoreLocation.framework in Frameworks */,
 				AE85D7431368E34400CDA534 /* UIKit.framework in Frameworks */,
@@ -86,11 +111,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AE816DBB137B7DB50023F5D7 /* TBXML */ = {
+			isa = PBXGroup;
+			children = (
+				AE816DBD137B7E140023F5D7 /* NSDataAdditions.h */,
+				AE816DBE137B7E140023F5D7 /* NSDataAdditions.m */,
+				AE816DBF137B7E140023F5D7 /* TBXML.h */,
+				AE816DC0137B7E140023F5D7 /* TBXML.m */,
+			);
+			name = TBXML;
+			sourceTree = "<group>";
+		};
 		AE85D7331368E34400CDA534 = {
 			isa = PBXGroup;
 			children = (
 				AE85D7481368E34400CDA534 /* ECaddy */,
 				AE85D7411368E34400CDA534 /* Frameworks */,
+				AE816DBB137B7DB50023F5D7 /* TBXML */,
 				AE85D73F1368E34400CDA534 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -106,6 +143,7 @@
 		AE85D7411368E34400CDA534 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AE9427CD13821ABF0047EBA4 /* CoreData.framework */,
 				AE85D7851368EC5900CDA534 /* MapKit.framework */,
 				AE85D7831368EC5200CDA534 /* CoreLocation.framework */,
 				AE85D7421368E34400CDA534 /* UIKit.framework */,
@@ -118,8 +156,12 @@
 		AE85D7481368E34400CDA534 /* ECaddy */ = {
 			isa = PBXGroup;
 			children = (
+				AEB0722B137DB51600BE3C37 /* dbinit.h */,
+				AEB0722C137DB51600BE3C37 /* dbinit.m */,
 				AE85D7511368E34400CDA534 /* ECaddyAppDelegate.h */,
 				AE85D7521368E34400CDA534 /* ECaddyAppDelegate.m */,
+				AE8FE58B1384A96900EE8E66 /* CourseSelectViewController.h */,
+				AE8FE58C1384A96900EE8E66 /* CourseSelectViewController.m */,
 				AE85D7571368E34400CDA534 /* ScorecardViewController.h */,
 				AE85D7581368E34400CDA534 /* ScorecardViewController.m */,
 				AE85D75A1368E34400CDA534 /* DirectoryViewController.h */,
@@ -134,14 +176,17 @@
 				AE85D7901369298E00CDA534 /* WeatherDetails.m */,
 				AE85D7541368E34400CDA534 /* MainWindow.xib */,
 				AE85D75D1368E34400CDA534 /* ScorecardView.xib */,
-				AE85D7601368E34400CDA534 /* DirectoryView.xib */,
+				AE85D7601368E34400CDA534 /* CourseSelectView.xib */,
+				AE7F932A13836621003CCD57 /* StateDirView.xib */,
 				AE85D7731368E75700CDA534 /* MapView.xib */,
 				AE85D7781368E84600CDA534 /* WeatherView.xib */,
 				AE85D7911369298E00CDA534 /* WeatherDetails.xib */,
+				AEFE6F131381BB60002B1AA3 /* coursemodel.xcdatamodeld */,
 				AED1EA081374F950008365D5 /* green.png */,
 				AED1EA0B1374F959008365D5 /* tee.png */,
 				AED1EA1513750ECC008365D5 /* teeandgreen.png */,
 				AED1EA1713750ED4008365D5 /* teeandgreen_ret.png */,
+				AE9427DA138232EA0047EBA4 /* ECaddy.sqlite */,
 				AE85D7491368E34400CDA534 /* Supporting Files */,
 			);
 			path = ECaddy;
@@ -150,10 +195,12 @@
 		AE85D7491368E34400CDA534 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AE7F932713835FC9003CCD57 /* stateabbrs.txt */,
 				AE85D74A1368E34400CDA534 /* ECaddy-Info.plist */,
 				AE85D74B1368E34400CDA534 /* InfoPlist.strings */,
 				AE85D74E1368E34400CDA534 /* ECaddy-Prefix.pch */,
 				AE85D74F1368E34400CDA534 /* main.m */,
+				AE816DC3137B7E670023F5D7 /* libz.dylib */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -208,7 +255,7 @@
 				AE85D74D1368E34400CDA534 /* InfoPlist.strings in Resources */,
 				AE85D7561368E34400CDA534 /* MainWindow.xib in Resources */,
 				AE85D75F1368E34400CDA534 /* ScorecardView.xib in Resources */,
-				AE85D7621368E34400CDA534 /* DirectoryView.xib in Resources */,
+				AE85D7621368E34400CDA534 /* CourseSelectView.xib in Resources */,
 				AE85D7751368E75700CDA534 /* MapView.xib in Resources */,
 				AE85D77A1368E84700CDA534 /* WeatherView.xib in Resources */,
 				AE85D7931369298E00CDA534 /* WeatherDetails.xib in Resources */,
@@ -216,6 +263,9 @@
 				AED1EA0C1374F959008365D5 /* tee.png in Resources */,
 				AED1EA1613750ECD008365D5 /* teeandgreen.png in Resources */,
 				AED1EA1813750ED4008365D5 /* teeandgreen_ret.png in Resources */,
+				AE9427DB138232EA0047EBA4 /* ECaddy.sqlite in Resources */,
+				AE7F932813835FC9003CCD57 /* stateabbrs.txt in Resources */,
+				AE7F932B13836621003CCD57 /* StateDirView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +284,10 @@
 				AE85D7791368E84700CDA534 /* WeatherViewController.m in Sources */,
 				AE85D7921369298E00CDA534 /* WeatherDetails.m in Sources */,
 				AE886D651370E2490056BDF4 /* POIAnnotation.m in Sources */,
+				AE816DC1137B7E140023F5D7 /* NSDataAdditions.m in Sources */,
+				AE816DC2137B7E140023F5D7 /* TBXML.m in Sources */,
+				AEFE6F151381BB60002B1AA3 /* coursemodel.xcdatamodeld in Sources */,
+				AE8FE58E1384A96900EE8E66 /* CourseSelectViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,12 +318,12 @@
 			name = ScorecardView.xib;
 			sourceTree = "<group>";
 		};
-		AE85D7601368E34400CDA534 /* DirectoryView.xib */ = {
+		AE85D7601368E34400CDA534 /* CourseSelectView.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				AE85D7611368E34400CDA534 /* en */,
 			);
-			name = DirectoryView.xib;
+			name = CourseSelectView.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -317,6 +371,7 @@
 				GCC_PREFIX_HEADER = "ECaddy/ECaddy-Prefix.pch";
 				INFOPLIST_FILE = "ECaddy/ECaddy-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -330,6 +385,7 @@
 				GCC_PREFIX_HEADER = "ECaddy/ECaddy-Prefix.pch";
 				INFOPLIST_FILE = "ECaddy/ECaddy-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -357,6 +413,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		AEFE6F131381BB60002B1AA3 /* coursemodel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				AEFE6F141381BB60002B1AA3 /* coursemodel.xcdatamodel */,
+			);
+			currentVersion = AEFE6F141381BB60002B1AA3 /* coursemodel.xcdatamodel */;
+			path = coursemodel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = AE85D7351368E34400CDA534 /* Project object */;
 }
