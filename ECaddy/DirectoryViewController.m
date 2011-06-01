@@ -159,8 +159,10 @@
     csvc.manObjCon = self.manObjCon;
     NSString* countryStr = [[countrySet allObjects] objectAtIndex: indexPath.section];
     csvc.selectedState = [[stateArrDict valueForKey: countryStr] objectAtIndex: indexPath.row];
-    
+    csvc.navController = self.navController;
     [self.navController pushViewController:csvc animated:YES];
+    
+    [csvc release];
 }
 
 // Customize the appearance of table view cells.

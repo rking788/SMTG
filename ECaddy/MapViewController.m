@@ -7,10 +7,12 @@
 //
 
 #import "MapViewController.h"
-
+#import <CoreLocation/CoreLocation.h>
+#import <QuartzCore/QuartzCore.h>
 
 @implementation MapViewController
 
+@synthesize distLbl;
 @synthesize mapView;
 @synthesize holeAnnotations;
 @synthesize distanceAnnotations;
@@ -63,6 +65,7 @@
     [self setMapView:nil];
     [self setHoleAnnotations: nil];
     [self setDistanceAnnotations:nil];
+    [self setDistLbl:nil];
     [super viewDidUnload];
     
     // Release any retained subviews of the main view.
@@ -75,6 +78,7 @@
     [mapView release];
     [holeAnnotations release];
     [distanceAnnotations release];
+    [distLbl release];
     [super dealloc];
 }
 
@@ -152,17 +156,29 @@
     
     [teeAnnot release];
     [greenAnnot release];
-    
+
     //  Create the line from the tee to the green
     MKMapPoint* pointArray = malloc(sizeof(CLLocationCoordinate2D) * 2);
-    CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(lat1, long1);
-    pointArray[0] = MKMapPointForCoordinate(coord);
     
-    coord = CLLocationCoordinate2DMake(lat2, long2);
-    pointArray[1] = MKMapPointForCoordinate(coord);
+    CLLocation* loc1 = [[CLLocation alloc] initWithLatitude: lat1 longitude:long1];
+    pointArray[0] = MKMapPointForCoordinate([loc1 coordinate]);
+    
+    CLLocation* loc2 = [[CLLocation alloc] initWithLatitude: lat2 longitude:long2];
+    pointArray[1] = MKMapPointForCoordinate([loc2 coordinate]);
     
     self.holeLine = [MKPolyline polylineWithPoints: pointArray count: 2];
-    [self.mapView addOverlay: holeLine];
+    [self.mapView addOverlay: self.holeLine];
+    
+    // Find the distance between the two points
+    CLLocationDistance distance = [loc2 distanceFromLocation: loc1] * 1.0936133;
+    NSLog(@"Distance calculated to be %lf yards", distance);
+    
+    // Set the distance label
+    [self.distLbl setText: [NSString stringWithFormat: @"Tee to Pin: %d yd", (int)distance]];
+    [self.distLbl setTextColor: [UIColor colorWithRed: 0.219607845 green: 0.521568656 blue:0 alpha:1.0]];
+    [self.distLbl setBackgroundColor: [UIColor colorWithRed: 0.870588243 green: 0.862745106 blue:0.0 alpha:1.0]];
+    self.distLbl.layer.borderColor = [UIColor colorWithRed: 0.219607845 green: 0.521568656 blue:0 alpha:1.0].CGColor;
+    self.distLbl.layer.borderWidth = 2.0;
     
     return;
 }

@@ -35,6 +35,8 @@
 		AE8FE58E1384A96900EE8E66 /* CourseSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8FE58C1384A96900EE8E66 /* CourseSelectViewController.m */; };
 		AE9427CE13821ABF0047EBA4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9427CD13821ABF0047EBA4 /* CoreData.framework */; };
 		AE9427DB138232EA0047EBA4 /* ECaddy.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = AE9427DA138232EA0047EBA4 /* ECaddy.sqlite */; };
+		AEA35AE81384CE7600111BAA /* CourseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA35AE61384CE7600111BAA /* CourseDetailViewController.m */; };
+		AEA35AE91384CE7600111BAA /* CourseDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA35AE71384CE7600111BAA /* CourseDetailView.xib */; };
 		AED1EA091374F950008365D5 /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = AED1EA081374F950008365D5 /* green.png */; };
 		AED1EA0C1374F959008365D5 /* tee.png in Resources */ = {isa = PBXBuildFile; fileRef = AED1EA0B1374F959008365D5 /* tee.png */; };
 		AED1EA1613750ECD008365D5 /* teeandgreen.png in Resources */ = {isa = PBXBuildFile; fileRef = AED1EA1513750ECC008365D5 /* teeandgreen.png */; };
@@ -84,6 +86,9 @@
 		AE8FE58C1384A96900EE8E66 /* CourseSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseSelectViewController.m; sourceTree = "<group>"; };
 		AE9427CD13821ABF0047EBA4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		AE9427DA138232EA0047EBA4 /* ECaddy.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = ECaddy.sqlite; sourceTree = "<group>"; };
+		AEA35AE51384CE7600111BAA /* CourseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseDetailViewController.h; sourceTree = "<group>"; };
+		AEA35AE61384CE7600111BAA /* CourseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseDetailViewController.m; sourceTree = "<group>"; };
+		AEA35AE71384CE7600111BAA /* CourseDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CourseDetailView.xib; sourceTree = "<group>"; };
 		AEB0722B137DB51600BE3C37 /* dbinit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dbinit.h; path = ../dbinit.h; sourceTree = "<group>"; };
 		AEB0722C137DB51600BE3C37 /* dbinit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = dbinit.m; path = ../dbinit.m; sourceTree = "<group>"; };
 		AED1EA081374F950008365D5 /* green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green.png; sourceTree = "<group>"; };
@@ -162,6 +167,8 @@
 				AE85D7521368E34400CDA534 /* ECaddyAppDelegate.m */,
 				AE8FE58B1384A96900EE8E66 /* CourseSelectViewController.h */,
 				AE8FE58C1384A96900EE8E66 /* CourseSelectViewController.m */,
+				AEA35AE51384CE7600111BAA /* CourseDetailViewController.h */,
+				AEA35AE61384CE7600111BAA /* CourseDetailViewController.m */,
 				AE85D7571368E34400CDA534 /* ScorecardViewController.h */,
 				AE85D7581368E34400CDA534 /* ScorecardViewController.m */,
 				AE85D75A1368E34400CDA534 /* DirectoryViewController.h */,
@@ -181,6 +188,7 @@
 				AE85D7731368E75700CDA534 /* MapView.xib */,
 				AE85D7781368E84600CDA534 /* WeatherView.xib */,
 				AE85D7911369298E00CDA534 /* WeatherDetails.xib */,
+				AEA35AE71384CE7600111BAA /* CourseDetailView.xib */,
 				AEFE6F131381BB60002B1AA3 /* coursemodel.xcdatamodeld */,
 				AED1EA081374F950008365D5 /* green.png */,
 				AED1EA0B1374F959008365D5 /* tee.png */,
@@ -266,6 +274,7 @@
 				AE9427DB138232EA0047EBA4 /* ECaddy.sqlite in Resources */,
 				AE7F932813835FC9003CCD57 /* stateabbrs.txt in Resources */,
 				AE7F932B13836621003CCD57 /* StateDirView.xib in Resources */,
+				AEA35AE91384CE7600111BAA /* CourseDetailView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +297,7 @@
 				AE816DC2137B7E140023F5D7 /* TBXML.m in Sources */,
 				AEFE6F151381BB60002B1AA3 /* coursemodel.xcdatamodeld in Sources */,
 				AE8FE58E1384A96900EE8E66 /* CourseSelectViewController.m in Sources */,
+				AEA35AE81384CE7600111BAA /* CourseDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

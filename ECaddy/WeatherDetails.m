@@ -2,8 +2,8 @@
 //  WeatherDetails.m
 //  ECaddy
 //
-//  Created by Teacher on 4/28/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created by RKing on 4/28/11.
+//  Copyright 2011 RPKing. All rights reserved.
 //
 
 #import "WeatherDetails.h"
@@ -14,6 +14,7 @@
 @implementation WeatherDetails
 
 @synthesize text;
+@synthesize actIndicator;
 @synthesize curWeatherTV;
 @synthesize todayForecastTV;
 @synthesize nextDayForecastTV;
@@ -39,6 +40,7 @@
     [courseDetailsLbl release];
     [todayForecastTV release];
     [nextDayForecastTV release];
+    [actIndicator release];
     [super dealloc];
 }
 
@@ -64,7 +66,13 @@
     //courseDetailsLbl.layer.borderColor = [UIColor colorWithRed:0 green:0.5 blue:0 alpha:1.0].CGColor;
     //courseDetailsLbl.layer.borderWidth = 2.0;
     
+    // Animate the activity indicator until the text is set
+    [actIndicator setHidden: NO];
+    [actIndicator startAnimating];
+    [self getWeatherInfo];
     [self setWeatherInfo];
+    [actIndicator stopAnimating];
+    [actIndicator setHidden: YES];
 }
 
 - (void)viewDidUnload
@@ -75,6 +83,7 @@
     [self setCourseDetailsLbl:nil];
     [self setTodayForecastTV:nil];
     [self setNextDayForecastTV:nil];
+    [self setActIndicator:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -92,6 +101,18 @@
 }
 
 #pragma mark Weather Methods
+
+- (void) getWeatherInfo
+{
+    // This is the woeid value for old town, me
+    NSString* str2 = @"2465118";
+    NSURL* url2 = [NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@", str2]];
+    NSString* str3 = [[NSString alloc] initWithContentsOfURL:url2 encoding:NSUTF8StringEncoding error:nil];
+    
+    [self setText:str3];
+    //NSLog(@"%@", str3);
+    [str3 release];
+}
 
 - (void) setWeatherInfo
 {
@@ -143,7 +164,6 @@
     NSString* sunSet = [TBXML valueOfAttributeNamed: @"sunset" forElement: AST];
     
     // Current Condition Information
-    NSLog(@"Condition name: %@", [TBXML elementName: COND]);
     NSString* curText = [TBXML valueOfAttributeNamed: @"text" forElement: COND];
     NSString* curTemp = [TBXML valueOfAttributeNamed: @"temp" forElement: COND];
     curTemp = [curTemp stringByAppendingString: tempUnits];

@@ -18,10 +18,14 @@
     NSMutableArray* distanceAnnotations;
     MKPolyline* holeLine;
     MKPolylineView* holeLineView;
+    UILabel *distLbl;
 }
 
 // Properties
+// Possibly temporary overlays for distances
+@property (nonatomic, retain) IBOutlet UILabel *distLbl;
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
+
 @property (nonatomic, retain) NSMutableArray* holeAnnotations;
 @property (nonatomic, retain) NSMutableArray* distanceAnnotations;
 @property (nonatomic, retain) MKPolyline* holeLine;
