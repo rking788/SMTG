@@ -156,7 +156,10 @@
     // Set the text of label 1
     if(indexPath.row == kCourseName){
         [lbl setText: @"Course"];
-        [lbl2 setText: @"Country Fareways"];
+        if(self.curCourse)
+            [lbl2 setText: [self.curCourse coursename]];
+        else
+            [lbl2 setText: @"Country Fareways"];
     }
     else if(indexPath.row == kNumPlayers){
         [lbl setText: @"# of Players"];

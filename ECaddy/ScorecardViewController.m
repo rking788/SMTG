@@ -7,12 +7,13 @@
 //
 
 #import "ScorecardViewController.h"
-//#import "DirectoryViewController.h"
 #import "NewRoundViewController.h"
 #import "ECaddyAppDelegate.h"
 
 @implementation ScorecardViewController
 
+
+@synthesize courseObj;
 
 /*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -21,6 +22,17 @@
     [super viewDidLoad];
 }
 */
+- (void) viewDidAppear:(BOOL)animated
+{
+    NSLog(@"In ViewDidAppear");
+    if(self.courseObj){
+        NSLog(@"Not nil");
+        [self startNewRoundWithCourseOrNil: self.courseObj];
+    }
+    
+    // This will keep it from going back and forth between the next view controller
+    self.courseObj = nil;
+}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -72,14 +84,26 @@
     [self.navigationController pushViewController: dvc animated:YES];
     [dvc release];
     */
-    NewRoundViewController* nrvc = [[NewRoundViewController alloc] initWithNibName: @"NewRoundView" bundle:nil];
-    [self.navigationController pushViewController:nrvc animated:YES];
-    [nrvc release];
+    [self startNewRoundWithCourseOrNil: nil];
 }
 
 - (IBAction)continueClicked:(id)sender {
+
 }
 
 - (IBAction)viewClicked:(id)sender {
+
 }
+
+- (void) startNewRoundWithCourseOrNil: (Course*) course
+{
+    NewRoundViewController* nrvc = [[NewRoundViewController alloc] initWithNibName: @"NewRoundView" bundle:nil];
+    
+    if(course)
+        [nrvc setCurCourse: course];
+    
+    [self.navigationController pushViewController:nrvc animated:YES];
+    [nrvc release];    
+}
+
 @end

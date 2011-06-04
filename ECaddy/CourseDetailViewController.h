@@ -15,9 +15,11 @@
     UITextView *cdTV;
     Course* courseObj;
 }
+- (IBAction)startRoundClicked:(id)sender;
+
 @property (nonatomic, retain) IBOutlet UITextView *cdTV;
 
-@property (nonatomic, retain) NSManagedObject* courseObj;
+@property (nonatomic, retain) Course* courseObj;
 
 - (void) populateCourseDetails;
 

@@ -78,13 +78,10 @@
     name = [self.courseObj coursename];
     phone = [self.courseObj phone];
     website = [self.courseObj website];
-    address = [self.courseObj address];
-    state = [self.courseObj state];
-    //name = [self.courseObj valueForKey: @"coursename"];
-    //phone = [self.courseObj valueForKey: @"phone"];
-    //website = [self.courseObj valueForKey: @"website"];
-    //address = [self.courseObj valueForKey: @"address"];
-    //state = [self.courseObj valueForKey: @"state"];
+    
+    // These need to be valueForKeys because they are Location Entities
+    address = [self.courseObj valueForKey: @"address"];
+    state = [self.courseObj valueForKey: @"state"];
     
     detailText = [NSString stringWithFormat: @"%@\n%@, %@\n%@", name, address, state, phone];
     
@@ -96,4 +93,15 @@
     
 }
 
+- (IBAction)startRoundClicked:(id)sender {
+    
+    [self.tabBarController setSelectedViewController: [self.tabBarController.viewControllers objectAtIndex: 0]];
+    UINavigationController* navCont = (UINavigationController*) self.tabBarController.selectedViewController;
+    [[[navCont viewControllers] objectAtIndex: 0] setCourseObj: self.courseObj];
+    [navCont popToRootViewControllerAnimated: NO];
+    [[[navCont viewControllers] objectAtIndex: 0] viewDidAppear: YES];
+    
+    NSLog(@"Class: %@",[[[navCont viewControllers] objectAtIndex: 0] class]);
+    return;
+}
 @end
