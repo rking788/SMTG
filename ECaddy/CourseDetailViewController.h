@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-
+#import "Course.h"
 
 @interface CourseDetailViewController : UIViewController {
     
     UITextView *cdTV;
-    NSManagedObject* courseObj;
+    Course* courseObj;
 }
 @property (nonatomic, retain) IBOutlet UITextView *cdTV;
 

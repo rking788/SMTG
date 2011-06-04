@@ -106,8 +106,16 @@
     NSString* website = nil;
     NSString* woeid = nil;
     NSString* addr = nil;
-    NSString* country = nil;
     NSString* state = nil;
+    NSString* country = nil;
+    NSString* enabled = @"1";
+    NSString* favorite = @"0";
+    NSString* numHoles = nil;
+    NSString* mensPars = nil;
+    NSString* womensPars = nil;
+    
+    BOOL isEnabled = YES;
+    BOOL isFavorite = NO;
     
     while(cur){
         if([cur length] != 0){
@@ -121,9 +129,26 @@
             woeid = [[lineFields objectAtIndex:5] stringByTrimmingCharactersInSet:badChars];
             state = [[lineFields objectAtIndex: 6] stringByTrimmingCharactersInSet:badChars];
             country = [[lineFields objectAtIndex: 7] stringByTrimmingCharactersInSet:badChars];
+            enabled = [[lineFields objectAtIndex: 8] stringByTrimmingCharactersInSet: badChars];
+            numHoles = [[lineFields objectAtIndex: 9] stringByTrimmingCharactersInSet: badChars];
+            // These aren't in the CSV yet
+            //favorite = [[lineFields objectAtIndex: 9] stringByTrimmingCharactersInSet badChars];
+            favorite = NO;
+            //mensPars = [[lineFields objectAtIndex: 10] stringByTrimmingCharactersInSet badChars];
+            //womensPars [[lineFields objectAtIndex: 11] stringByTrimmingCharactersInSet badChars];
             
             if([website isEqualToString:@"NULL"])
                 website = nil;
+            
+            if([enabled isEqualToString:@"1"])
+                isEnabled = YES;
+            else
+                isEnabled = NO;
+            
+            if([favorite isEqualToString: @"1"])
+                isFavorite = YES;
+            else
+                isFavorite = NO;
             
             [courseObj setValue: name forKey: @"coursename"];
             [courseObj setValue: addr forKey: @"address"];
@@ -131,8 +156,12 @@
             [courseObj setValue: website forKey: @"website"];
             [courseObj setValue: woeid forKey: @"woeid"];
             [courseObj setValue: state forKey: @"state"];
-            [courseObj setValue:country forKey:@"country"];
-            
+            [courseObj setValue: country forKey:@"country"];
+            [courseObj setValue: [NSNumber numberWithBool: isEnabled] forKey:@"enabled"];
+            [courseObj setValue: [NSNumber numberWithBool: isFavorite] forKey: @"favorite"];
+            [courseObj setValue: [NSNumber numberWithInt: [numHoles intValue]] forKey: @"numholes"];
+            [courseObj setValue: mensPars forKey: @"menpars"];
+            [courseObj setValue: womensPars forKey: @"womenpars"];
         }
         
         cur = (NSString*)[enumer nextObject];

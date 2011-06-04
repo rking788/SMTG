@@ -8,6 +8,7 @@
 
 #import "CourseSelectViewController.h"
 #import "CourseDetailViewController.h"
+#import "ECaddyAppDelegate.h"
 
 @implementation CourseSelectViewController
 
@@ -18,8 +19,8 @@
 @synthesize searchBar;
 @synthesize tableV;
 @synthesize blackView;
-@synthesize navController;
 @synthesize searching;
+@synthesize courseSelectDelegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,7 +35,6 @@
 {
     [courseNames release];
     [courseLocs release];
-    [navController release];
     [searchBar release];
     [tableV release];
     [blackView release];
@@ -95,7 +95,6 @@
     // e.g. self.myOutlet = nil;
     self.courseLocs = nil;
     self.courseNames = nil;
-    self.navController = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -169,24 +168,38 @@
 {
     [tableView deselectRowAtIndexPath: indexPath animated:NO];    
     
-    NSFetchRequest* fetchrequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext:self.manObjCon];
-    [fetchrequest setEntity:entity];
+    // TODO: Based on the currently active tab (directory or scorecards)
+    // we want to do something different when a course is selected
+    UITabBarController* tbc = [(ECaddyAppDelegate*)[[UIApplication sharedApplication] delegate] tabBarController];
+    UITabBarItem* tbi = [[tbc tabBar] selectedItem];
+    NSString* tabItemTitle = [tbi title];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"coursename == %@", 
-                              [[[tableView cellForRowAtIndexPath:indexPath] textLabel] text]];
+    NSFetchRequest* fetchrequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext: self.manObjCon];
+    [fetchrequest setEntity: entity];
+    
+    NSString* courseName = [[[tableView cellForRowAtIndexPath: indexPath] textLabel] text];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"coursename == %@", courseName];
     [fetchrequest setPredicate:predicate];
 
     NSError *error = nil;
     NSArray *array = [self.manObjCon executeFetchRequest:fetchrequest error:&error];
     if (array != nil) {
-        NSManagedObject* courseObj = [array objectAtIndex:0];
+        Course* courseObj = [array objectAtIndex:0];
     
-        CourseDetailViewController* cdvc = [[CourseDetailViewController alloc] initWithNibName:@"CourseDetailView" bundle:nil];
+        if([tabItemTitle isEqualToString: @"Scorecards"]){
+            // Do Something
+            [self.courseSelectDelegate selectCourse: courseObj];
+            [self dismissModalViewControllerAnimated:YES];
+        }
+        else if([tabItemTitle isEqualToString: @"Directory"]){
+            // Do Something Else
+            CourseDetailViewController* cdvc = [[CourseDetailViewController alloc] initWithNibName:@"CourseDetailView" bundle:nil];
         
-        [cdvc setCourseObj: courseObj];
-        [self.navController pushViewController:cdvc animated:YES];
-        [cdvc release];
+            [cdvc setCourseObj: courseObj];
+            [self.navigationController pushViewController:cdvc animated:YES];
+            [cdvc release];
+        }
     }
     else {
         // Deal with error.

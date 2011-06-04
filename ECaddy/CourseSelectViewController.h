@@ -8,7 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "Course.h"
 
+@protocol CourseSelectDelegate <NSObject>
+
+- (void) selectCourse: (Course*) golfCourse;
+
+@end
 
 @interface CourseSelectViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>{
     // Original arrays
@@ -21,10 +27,11 @@
     
     NSString* selectedState;
     NSManagedObjectContext* manObjCon;
-    UINavigationController* navController;
     UISearchBar *searchBar;
     UITableView *tableV;
     UIView *blackView;
+    
+    id<CourseSelectDelegate> courseSelectDelegate;
     
     BOOL searching;
 }
@@ -32,14 +39,14 @@
 @property (nonatomic, retain) IBOutlet UITableView *tableV;
 @property (nonatomic, retain) IBOutlet UIView *blackView;
 
-@property (nonatomic, retain) UINavigationController *navController;
-
 @property (nonatomic, retain) NSMutableArray* courseNames;
 @property (nonatomic, retain) NSMutableArray* courseLocs;
 @property (nonatomic, retain) NSMutableArray* nameSearch;
 @property (nonatomic, retain) NSMutableArray* locsSearch;
 @property (nonatomic, retain) NSString* selectedState;
 @property (nonatomic, retain) NSManagedObjectContext* manObjCon;
+
+@property (nonatomic, assign) id<CourseSelectDelegate> courseSelectDelegate;
 
 @property BOOL searching;
 

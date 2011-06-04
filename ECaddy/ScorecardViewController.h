@@ -12,5 +12,8 @@
 @interface ScorecardViewController : UIViewController {
 
 }
+- (IBAction)startClicked:(id)sender;
+- (IBAction)continueClicked:(id)sender;
+- (IBAction)viewClicked:(id)sender;
 
 @end

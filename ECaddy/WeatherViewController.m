@@ -128,16 +128,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
- //   NSURL* url = [NSURL URLWithString:@"http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20geo.places%20where%20text%3D%22OldTown%20ME%22&format=xml"];
-//    NSString* str = [[NSString alloc] initWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
-    
-//    NSRange range1 = [str rangeOfString:@"<woeid>" options:NSLiteralSearch];
-//    NSRange range2 = [str rangeOfString:@"</woeid>" options:NSLiteralSearch];
-//    NSRange range3;
-//    range3.location = range1.location + range1.length;
-//    range3.length = range2.location - (range1.location+range1.length);
-//    NSString* str2 = [str substringWithRange:range3];
-    
     WeatherDetails* weatherView = [[WeatherDetails alloc] initWithNibName:@"WeatherDetails" bundle:nil];
     
     // Set the course detail information from the selected tableview cell
@@ -149,6 +139,7 @@
     // Set the transition mode and display the weather detail view modally
     [weatherView setModalTransitionStyle: UIModalTransitionStyleFlipHorizontal];
     [self presentModalViewController:weatherView animated:YES];
-    [weatherView release];}
+    [weatherView release];
+}
 
 @end

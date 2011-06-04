@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-
+#import "CourseSelectViewController.h"
 
 @interface DirectoryViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
  
@@ -17,15 +17,14 @@
     NSDictionary* abbrsDict;
     NSDictionary* stateArrDict;
     NSManagedObjectContext* manObjCon;
-    UINavigationController *navController;
+    id<CourseSelectDelegate> courseSelectDelegate;
 }
-@property (nonatomic, retain) IBOutlet UINavigationController *navController;
-
 @property (nonatomic, retain) NSSet* stateSet;
 @property (nonatomic, retain) NSSet* countrySet;
 @property (nonatomic, retain) NSDictionary* abbrsDict;
 @property (nonatomic, retain) NSDictionary* stateArrDict;
 @property (nonatomic, retain) NSManagedObjectContext* manObjCon;
+@property (nonatomic, assign) id<CourseSelectDelegate> courseSelectDelegate;
 
 - (void) fillStatesCountries;
 

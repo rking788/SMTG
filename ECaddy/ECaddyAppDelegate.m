@@ -34,16 +34,10 @@ NSString* const DBFILENAME = @"ECaddy.sqlite";
     // Migrate the default DB if necessary
     [self loadDefaultDB];
     
-    // Assign the managedObjectContext to the MapViewController
-    NSManagedObjectContext* context = [self managedObjectContext];
-    
-    DirectoryViewController* dvc = (DirectoryViewController*) [self.tabBarController.viewControllers objectAtIndex: 1];
-    [dvc setManObjCon: context];
-    
     // Uncomment this to do database initialization
     //dbinit* dbInit = [[dbinit alloc] init];
     //[dbInit insertWOEIDS];
-    //dbInit.manObjCon = context;
+    //dbInit.manObjCon = [self managedObjectContext];
     //[dbInit fillDB];
     //[dbInit release];
     

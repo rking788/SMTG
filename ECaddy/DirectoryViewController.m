@@ -8,11 +8,12 @@
 
 #import "DirectoryViewController.h"
 #import "CourseSelectViewController.h"
+#import "ECaddyAppDelegate.h"
 
 @implementation DirectoryViewController
-@synthesize navController;
 
 @synthesize stateSet, countrySet, abbrsDict, stateArrDict;
+@synthesize courseSelectDelegate;
 @synthesize manObjCon;
 
 
@@ -21,6 +22,9 @@
 {
     [super viewDidLoad];
 
+    // Get the managed object context from the app delegate
+    self.manObjCon = [(ECaddyAppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    
     // Initialize abbreviation dictionary
     NSString* stateAbbrsPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"stateabbrs.txt"];
     self.abbrsDict = [[NSDictionary alloc] initWithContentsOfFile: stateAbbrsPath];
@@ -59,7 +63,6 @@
 
 - (void)viewDidUnload
 {
-    [self setNavController:nil];
     [super viewDidUnload];
 
     // Release any retained subviews of the main view.
@@ -76,7 +79,6 @@
     [countrySet release];
     [abbrsDict release];
     [stateArrDict release];
-    [navController release];
     [super dealloc];
 }
 
@@ -159,9 +161,8 @@
     csvc.manObjCon = self.manObjCon;
     NSString* countryStr = [[countrySet allObjects] objectAtIndex: indexPath.section];
     csvc.selectedState = [[stateArrDict valueForKey: countryStr] objectAtIndex: indexPath.row];
-    csvc.navController = self.navController;
-    [self.navController pushViewController:csvc animated:YES];
-    
+    csvc.courseSelectDelegate = self.courseSelectDelegate;
+    [self.navigationController pushViewController:csvc animated:YES];    
     [csvc release];
 }
 

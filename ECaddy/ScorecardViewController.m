@@ -7,9 +7,12 @@
 //
 
 #import "ScorecardViewController.h"
-
+//#import "DirectoryViewController.h"
+#import "NewRoundViewController.h"
+#import "ECaddyAppDelegate.h"
 
 @implementation ScorecardViewController
+
 
 /*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -58,4 +61,25 @@
     [super dealloc];
 }
 
+- (IBAction)startClicked:(id)sender {
+   /* DirectoryViewController* dvc = [[DirectoryViewController alloc] initWithNibName:@"StateDirView" bundle:nil];
+    
+    // Need to provide the managed object context to the directory 
+    // to find the available courses and stuff
+    NSManagedObjectContext* manObjCon = [(ECaddyAppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    
+    [dvc setManObjCon: manObjCon];
+    [self.navigationController pushViewController: dvc animated:YES];
+    [dvc release];
+    */
+    NewRoundViewController* nrvc = [[NewRoundViewController alloc] initWithNibName: @"NewRoundView" bundle:nil];
+    [self.navigationController pushViewController:nrvc animated:YES];
+    [nrvc release];
+}
+
+- (IBAction)continueClicked:(id)sender {
+}
+
+- (IBAction)viewClicked:(id)sender {
+}
 @end

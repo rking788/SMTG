@@ -33,6 +33,16 @@
     
     // TODO: Remove This. Set the region of the map to the first hole
     [self zoomToFitMapAnnotations:mapView];
+    
+    [self.navigationItem setTitle: @"Country Fareways Hole #1"];
+    
+    // TODO: This needs to be changed but it is the same basic idea.
+    UIBarButtonItem *flipButton = [[UIBarButtonItem alloc] initWithTitle:@"Next Hole"                                            
+        style:UIBarButtonItemStyleBordered 
+        target:self 
+        action: nil];
+    self.navigationItem.rightBarButtonItem = flipButton;
+    [flipButton release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

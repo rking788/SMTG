@@ -32,9 +32,13 @@
 		AE85D7921369298E00CDA534 /* WeatherDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7901369298E00CDA534 /* WeatherDetails.m */; };
 		AE85D7931369298E00CDA534 /* WeatherDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7911369298E00CDA534 /* WeatherDetails.xib */; };
 		AE886D651370E2490056BDF4 /* POIAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = AE886D641370E2490056BDF4 /* POIAnnotation.m */; };
+		AE8E2C1A139886630098A426 /* NewRoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8E2C18139886630098A426 /* NewRoundViewController.m */; };
+		AE8E2C1B139886630098A426 /* NewRoundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE8E2C19139886630098A426 /* NewRoundView.xib */; };
 		AE8FE58E1384A96900EE8E66 /* CourseSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8FE58C1384A96900EE8E66 /* CourseSelectViewController.m */; };
+		AE9177EF139AC07F00AC5706 /* ECaddy.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = AE9177EE139AC07F00AC5706 /* ECaddy.sqlite */; };
+		AE9177F5139AC17300AC5706 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9177F4139AC17300AC5706 /* Course.m */; };
+		AE9177F8139AC17400AC5706 /* Scorecard.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9177F7139AC17400AC5706 /* Scorecard.m */; };
 		AE9427CE13821ABF0047EBA4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9427CD13821ABF0047EBA4 /* CoreData.framework */; };
-		AE9427DB138232EA0047EBA4 /* ECaddy.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = AE9427DA138232EA0047EBA4 /* ECaddy.sqlite */; };
 		AEA35AE81384CE7600111BAA /* CourseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA35AE61384CE7600111BAA /* CourseDetailViewController.m */; };
 		AEA35AE91384CE7600111BAA /* CourseDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA35AE71384CE7600111BAA /* CourseDetailView.xib */; };
 		AED1EA091374F950008365D5 /* green.png in Resources */ = {isa = PBXBuildFile; fileRef = AED1EA081374F950008365D5 /* green.png */; };
@@ -82,10 +86,17 @@
 		AE85D7911369298E00CDA534 /* WeatherDetails.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherDetails.xib; sourceTree = "<group>"; };
 		AE886D621370E2400056BDF4 /* POIAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POIAnnotation.h; sourceTree = "<group>"; };
 		AE886D641370E2490056BDF4 /* POIAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POIAnnotation.m; sourceTree = "<group>"; };
+		AE8E2C17139886630098A426 /* NewRoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewRoundViewController.h; sourceTree = "<group>"; };
+		AE8E2C18139886630098A426 /* NewRoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewRoundViewController.m; sourceTree = "<group>"; };
+		AE8E2C19139886630098A426 /* NewRoundView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewRoundView.xib; sourceTree = "<group>"; };
 		AE8FE58B1384A96900EE8E66 /* CourseSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseSelectViewController.h; sourceTree = "<group>"; };
 		AE8FE58C1384A96900EE8E66 /* CourseSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseSelectViewController.m; sourceTree = "<group>"; };
+		AE9177EE139AC07F00AC5706 /* ECaddy.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = ECaddy.sqlite; sourceTree = "<group>"; };
+		AE9177F3139AC17300AC5706 /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Course.h; sourceTree = "<group>"; };
+		AE9177F4139AC17300AC5706 /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Course.m; sourceTree = "<group>"; };
+		AE9177F6139AC17400AC5706 /* Scorecard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scorecard.h; sourceTree = "<group>"; };
+		AE9177F7139AC17400AC5706 /* Scorecard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Scorecard.m; sourceTree = "<group>"; };
 		AE9427CD13821ABF0047EBA4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		AE9427DA138232EA0047EBA4 /* ECaddy.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = ECaddy.sqlite; sourceTree = "<group>"; };
 		AEA35AE51384CE7600111BAA /* CourseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseDetailViewController.h; sourceTree = "<group>"; };
 		AEA35AE61384CE7600111BAA /* CourseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseDetailViewController.m; sourceTree = "<group>"; };
 		AEA35AE71384CE7600111BAA /* CourseDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CourseDetailView.xib; sourceTree = "<group>"; };
@@ -165,6 +176,10 @@
 				AEB0722C137DB51600BE3C37 /* dbinit.m */,
 				AE85D7511368E34400CDA534 /* ECaddyAppDelegate.h */,
 				AE85D7521368E34400CDA534 /* ECaddyAppDelegate.m */,
+				AE9177F6139AC17400AC5706 /* Scorecard.h */,
+				AE9177F7139AC17400AC5706 /* Scorecard.m */,
+				AE9177F3139AC17300AC5706 /* Course.h */,
+				AE9177F4139AC17300AC5706 /* Course.m */,
 				AE8FE58B1384A96900EE8E66 /* CourseSelectViewController.h */,
 				AE8FE58C1384A96900EE8E66 /* CourseSelectViewController.m */,
 				AEA35AE51384CE7600111BAA /* CourseDetailViewController.h */,
@@ -181,6 +196,8 @@
 				AE85D7771368E84600CDA534 /* WeatherViewController.m */,
 				AE85D78F1369298E00CDA534 /* WeatherDetails.h */,
 				AE85D7901369298E00CDA534 /* WeatherDetails.m */,
+				AE8E2C17139886630098A426 /* NewRoundViewController.h */,
+				AE8E2C18139886630098A426 /* NewRoundViewController.m */,
 				AE85D7541368E34400CDA534 /* MainWindow.xib */,
 				AE85D75D1368E34400CDA534 /* ScorecardView.xib */,
 				AE85D7601368E34400CDA534 /* CourseSelectView.xib */,
@@ -189,12 +206,13 @@
 				AE85D7781368E84600CDA534 /* WeatherView.xib */,
 				AE85D7911369298E00CDA534 /* WeatherDetails.xib */,
 				AEA35AE71384CE7600111BAA /* CourseDetailView.xib */,
+				AE8E2C19139886630098A426 /* NewRoundView.xib */,
+				AE9177EE139AC07F00AC5706 /* ECaddy.sqlite */,
 				AEFE6F131381BB60002B1AA3 /* coursemodel.xcdatamodeld */,
 				AED1EA081374F950008365D5 /* green.png */,
 				AED1EA0B1374F959008365D5 /* tee.png */,
 				AED1EA1513750ECC008365D5 /* teeandgreen.png */,
 				AED1EA1713750ED4008365D5 /* teeandgreen_ret.png */,
-				AE9427DA138232EA0047EBA4 /* ECaddy.sqlite */,
 				AE85D7491368E34400CDA534 /* Supporting Files */,
 			);
 			path = ECaddy;
@@ -271,10 +289,11 @@
 				AED1EA0C1374F959008365D5 /* tee.png in Resources */,
 				AED1EA1613750ECD008365D5 /* teeandgreen.png in Resources */,
 				AED1EA1813750ED4008365D5 /* teeandgreen_ret.png in Resources */,
-				AE9427DB138232EA0047EBA4 /* ECaddy.sqlite in Resources */,
 				AE7F932813835FC9003CCD57 /* stateabbrs.txt in Resources */,
 				AE7F932B13836621003CCD57 /* StateDirView.xib in Resources */,
 				AEA35AE91384CE7600111BAA /* CourseDetailView.xib in Resources */,
+				AE8E2C1B139886630098A426 /* NewRoundView.xib in Resources */,
+				AE9177EF139AC07F00AC5706 /* ECaddy.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +317,9 @@
 				AEFE6F151381BB60002B1AA3 /* coursemodel.xcdatamodeld in Sources */,
 				AE8FE58E1384A96900EE8E66 /* CourseSelectViewController.m in Sources */,
 				AEA35AE81384CE7600111BAA /* CourseDetailViewController.m in Sources */,
+				AE8E2C1A139886630098A426 /* NewRoundViewController.m in Sources */,
+				AE9177F5139AC17300AC5706 /* Course.m in Sources */,
+				AE9177F8139AC17400AC5706 /* Scorecard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

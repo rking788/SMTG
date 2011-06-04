@@ -75,11 +75,16 @@
     NSString* state = nil;
     NSString* detailText = nil;
     
-    name = [self.courseObj valueForKey: @"coursename"];
-    phone = [self.courseObj valueForKey: @"phone"];
-    website = [self.courseObj valueForKey: @"website"];
-    address = [self.courseObj valueForKey: @"address"];
-    state = [self.courseObj valueForKey: @"state"];
+    name = [self.courseObj coursename];
+    phone = [self.courseObj phone];
+    website = [self.courseObj website];
+    address = [self.courseObj address];
+    state = [self.courseObj state];
+    //name = [self.courseObj valueForKey: @"coursename"];
+    //phone = [self.courseObj valueForKey: @"phone"];
+    //website = [self.courseObj valueForKey: @"website"];
+    //address = [self.courseObj valueForKey: @"address"];
+    //state = [self.courseObj valueForKey: @"state"];
     
     detailText = [NSString stringWithFormat: @"%@\n%@, %@\n%@", name, address, state, phone];
     
