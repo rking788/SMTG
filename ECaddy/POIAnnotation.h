@@ -15,6 +15,8 @@
     UIImage* image;
     NSNumber* latitude;
     NSNumber* longitude;
+    
+    BOOL draggable;
 }
 
 @property (retain, nonatomic) NSString* title;
@@ -23,6 +25,8 @@
 @property (nonatomic, retain) UIImage *image;
 @property (nonatomic, retain) NSNumber *latitude;
 @property (nonatomic, retain) NSNumber *longitude;
+
+@property (nonatomic, assign, getter = isDraggable) BOOL draggable;
 
 -(id) initWithLat:(double) initLat withLong:(double) initLongitude;
 

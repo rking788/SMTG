@@ -169,7 +169,7 @@
     
     if(![manObjCon save:&err]){
         // Handle the error here
-        NSLog(@"Failed to save the lot objects to managedObjectContext");
+        NSLog(@"Failed to save the course objects to managedObjectContext");
     }
     
     [fileContents release];

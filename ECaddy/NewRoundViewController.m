@@ -6,6 +6,8 @@
 //  Copyright 2011 RPKing. All rights reserved.
 //
 
+// TODOS: Need to figure out when to save the scorecards to the managedobjectcontext or when to store in a file.
+
 #import "NewRoundViewController.h"
 #import "DirectoryViewController.h"
 #import "ECaddyAppDelegate.h"
@@ -56,7 +58,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    UIView* footView = [[UIView alloc] init];
+    UIView* footView = [[[UIView alloc] init] autorelease];
     //create the button
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
@@ -70,7 +72,7 @@
     [button setBackgroundColor:[UIColor yellowColor]];
 
     //set action of the button
-    [button addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(beginRound) forControlEvents:UIControlEventTouchUpInside];
     
     //add the button to the view
     [footView addSubview:button];
@@ -230,11 +232,13 @@
      
         [dvc setManObjCon: manObjCon];
         [dvc setCourseSelectDelegate: self];
-        //[self.navigationController pushViewController: dvc animated:YES];
-        // Set the transition mode and display the weather detail view modally
+        [dvc setModal: YES];
+        
+        // Display the directory view controller with a UINavigationController as it's parent
         [uinc setModalTransitionStyle: UIModalTransitionStyleCoverVertical];
         [self presentModalViewController:uinc animated:YES];
         [uinc release];
+        
         // Don't think we need to release this anymore since we release the navcontroller
         // [dvc release];
     }
@@ -309,13 +313,36 @@
 #pragma mark CourseSelectProtocol implementation
 
 - (void) selectCourse: (Course*) golfCourse
-{    
+{   
+    // Dismiss the modal course selection view controllers
+    [self dismissModalViewControllerAnimated:YES];
+    
+    // If the course is nil then we probably clicked cancel or something
+    if(!golfCourse)
+        return;
+    
     NSLog(@"Selected course: %@", [golfCourse coursename]);
+    
     self.curCourse = golfCourse;
     
     NSIndexPath* indPath = [NSIndexPath indexPathForRow: kCourseName inSection: 0];
     UILabel* detailLbl = [[self.tableView cellForRowAtIndexPath: indPath] detailTextLabel];
     [detailLbl setText: [golfCourse coursename]];
+}
+
+- (void) beginRound
+{
+    if(!self.curCourse){
+        NSLog(@"Error: the current course is nil when trying to begin a round.");
+        return;
+    }
+    
+    ECaddyAppDelegate* appDelegate = (ECaddyAppDelegate*) [[UIApplication sharedApplication] delegate];
+    Scorecard* newScorecard = [appDelegate startNewRoundWithCourse: self.curCourse];
+    Course* course1 = newScorecard.course;
+    NSSet* scorecardset = self.curCourse.scorecards;
+    NSLog(@"Just do something stupid");
+    NSLog(@"The date is set as: %@", newScorecard.dateplayed);
 }
 
 @end

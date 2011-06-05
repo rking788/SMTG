@@ -159,16 +159,22 @@
     POIAnnotation* greenAnnot = [[POIAnnotation alloc] initWithLat:lat2 withLong:long2];
     [greenAnnot setImage: [UIImage imageNamed: @"green.png"]];
     
+    POIAnnotation* draggable1 = [[POIAnnotation alloc] initWithLat: ((lat1+lat2)/2) withLong:((long1+long2)/2)];
+    [draggable1 setDraggable: YES];
+    
     [self.holeAnnotations insertObject:teeAnnot atIndex: teeAnnotationIndex];
     [self.holeAnnotations insertObject:greenAnnot atIndex: greenAnnotationIndex];
+    [self.distanceAnnotations addObject:draggable1];
 
     [self.mapView addAnnotations:self.holeAnnotations];
+    [self.mapView addAnnotations: self.distanceAnnotations];
     
     [teeAnnot release];
     [greenAnnot release];
+    [draggable1 release];
 
     //  Create the line from the tee to the green
-    MKMapPoint* pointArray = malloc(sizeof(CLLocationCoordinate2D) * 2);
+    MKMapPoint* pointArray = malloc(sizeof(CLLocationCoordinate2D) * 3);
     
     CLLocation* loc1 = [[CLLocation alloc] initWithLatitude: lat1 longitude:long1];
     pointArray[0] = MKMapPointForCoordinate([loc1 coordinate]);
@@ -176,8 +182,13 @@
     CLLocation* loc2 = [[CLLocation alloc] initWithLatitude: lat2 longitude:long2];
     pointArray[1] = MKMapPointForCoordinate([loc2 coordinate]);
     
-    self.holeLine = [MKPolyline polylineWithPoints: pointArray count: 2];
+    CLLocation* midloc = [[CLLocation alloc] initWithLatitude:((lat1+lat2)/2) longitude:((long1+long2)/2)];
+    pointArray[2] = MKMapPointForCoordinate([midloc coordinate]);
+    
+    [self setHoleLine: [MKPolyline polylineWithPoints: pointArray count: 3]];
     [self.mapView addOverlay: self.holeLine];
+
+    free((void*) pointArray);
     
     // Find the distance between the two points
     CLLocationDistance distance = [loc2 distanceFromLocation: loc1] * 1.0936133;
@@ -189,6 +200,10 @@
     [self.distLbl setBackgroundColor: [UIColor colorWithRed: 0.870588243 green: 0.862745106 blue:0.0 alpha:1.0]];
     self.distLbl.layer.borderColor = [UIColor colorWithRed: 0.219607845 green: 0.521568656 blue:0 alpha:1.0].CGColor;
     self.distLbl.layer.borderWidth = 2.0;
+
+    [loc1 release];
+    [loc2 release];
+    [midloc release];
     
     return;
 }
@@ -239,6 +254,23 @@
     
     // handle our two custom annotations
     //
+    if ([annotation isKindOfClass:[POIAnnotation class]] && [annotation isDraggable]) // for Golden Gate Bridge
+    {
+        // try to dequeue an existing pin view first
+        static NSString* POIAnnotationID = @"poiAnnotationIdentifierDraggable";
+        MKPinAnnotationView* pinView = (MKPinAnnotationView *)
+        [self.mapView dequeueReusableAnnotationViewWithIdentifier:POIAnnotationID];
+        if (!pinView)
+        {
+            MKPinAnnotationView* customPinView = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier: POIAnnotationID] autorelease];
+            
+            [customPinView setCanShowCallout: NO];
+            [customPinView setDraggable: YES];
+            [customPinView setPinColor: MKPinAnnotationColorPurple];
+            
+            return customPinView;
+        }
+    }
     if ([annotation isKindOfClass:[POIAnnotation class]]) // for Golden Gate Bridge
     {
         // try to dequeue an existing pin view first
@@ -288,19 +320,49 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState
 {
-   /* NSLog(@"Changing Drag State");
+    //NSLog(@"Changing Drag State");
     if(newState == MKAnnotationViewDragStateEnding){
         POIAnnotation* annot = annotationView.annotation;
         NSNumber* num1 = annot.latitude;
         NSNumber* num2 = annot.longitude;
-        NSLog(@"New Lat: %@, New Long: %@", num1, num2);
+       
+        [self.mapView removeOverlay: self.holeLine];
+        [self setHoleLineView: nil]; 
+        
+        //  Create the line from the tee to the green
+        double lat1 = [[[self.holeAnnotations objectAtIndex: teeAnnotationIndex] latitude] doubleValue];
+        double long1 = [[[self.holeAnnotations objectAtIndex:teeAnnotationIndex] longitude] doubleValue];
+        double lat2 = [[[self.holeAnnotations objectAtIndex: greenAnnotationIndex] latitude] doubleValue];
+        double long2 = [[[self.holeAnnotations objectAtIndex: greenAnnotationIndex] longitude] doubleValue];
+        
+        MKMapPoint* pointArray = malloc(sizeof(CLLocationCoordinate2D) * 3);
+        
+        CLLocation* loc1 = [[CLLocation alloc] initWithLatitude: lat1 longitude:long1];
+        pointArray[0] = MKMapPointForCoordinate([loc1 coordinate]);
+        
+        CLLocation* midloc = [[CLLocation alloc] initWithLatitude: [num1 doubleValue] longitude: [num2 doubleValue]];
+        pointArray[1] = MKMapPointForCoordinate([midloc coordinate]);
+        
+        CLLocation* loc2 = [[CLLocation alloc] initWithLatitude: lat2 longitude:long2];
+        pointArray[2] = MKMapPointForCoordinate([loc2 coordinate]);
+        
+        [self setHoleLine: [MKPolyline polylineWithPoints: pointArray count: 3]];
+        
+        [self.mapView addOverlay: [self holeLine]];
+        
+        // Free up memory
+        free((void*) pointArray);
+        [loc1 release];
+        [loc2 release];
+        [midloc release];
+        
     }
     else if(newState == MKAnnotationViewDragStateStarting){
         POIAnnotation* annot = annotationView.annotation;
         NSNumber* num1 = annot.latitude;
         NSNumber* num2 = annot.longitude;
         NSLog(@"Starting Lat: %@, Starting Long: %@", num1, num2);
-    }*/
+    }
 }
 
 

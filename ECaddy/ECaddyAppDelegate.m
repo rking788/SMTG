@@ -18,8 +18,9 @@
 
 @synthesize tabBarController=_tabBarController;
 
-// TODO: need to explicitly write these accessors
 @synthesize managedObjectModel, managedObjectContext, persistentStoreCoordinator;
+@synthesize curCourse, curScorecard;
+
 
 // Constant for the database file name
 NSString* const DBFILENAME = @"ECaddy.sqlite";
@@ -40,6 +41,9 @@ NSString* const DBFILENAME = @"ECaddy.sqlite";
     //dbInit.manObjCon = [self managedObjectContext];
     //[dbInit fillDB];
     //[dbInit release];
+    
+    self.curCourse = nil;
+    self.curScorecard = nil;
     
     return YES;
 }
@@ -87,6 +91,8 @@ NSString* const DBFILENAME = @"ECaddy.sqlite";
 {
     [_window release];
     [_tabBarController release];
+    [curCourse release];
+    [curScorecard release];
     [super dealloc];
 }
 
@@ -202,6 +208,23 @@ NSString* const DBFILENAME = @"ECaddy.sqlite";
     //    NSAssert1(0, @"Default database file does not exist", nil);
     // }
     
+}
+
+- (Scorecard*) startNewRoundWithCourse: (Course*) golfCourse
+{
+    Scorecard* newScorecard;
+    self.curCourse = golfCourse;
+    
+    //Create the new scorecard object to be entered into the database
+    newScorecard = [NSEntityDescription insertNewObjectForEntityForName: @"Scorecard" inManagedObjectContext: self.managedObjectContext];
+   // newScorecard.course = golfCourse;
+
+    // Initialize the date for the scorecard
+    newScorecard.dateplayed = [NSDate date];
+    
+    self.curScorecard = newScorecard;
+    
+    return newScorecard;
 }
 
 @end

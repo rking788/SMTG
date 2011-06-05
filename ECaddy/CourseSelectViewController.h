@@ -34,6 +34,7 @@
     id<CourseSelectDelegate> courseSelectDelegate;
     
     BOOL searching;
+    BOOL modal;
 }
 @property (nonatomic, retain) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, retain) IBOutlet UITableView *tableV;
@@ -48,12 +49,14 @@
 
 @property (nonatomic, assign) id<CourseSelectDelegate> courseSelectDelegate;
 
-@property BOOL searching;
+@property (nonatomic, assign, getter = isSearching) BOOL searching;
+@property (nonatomic, assign, getter = isModal) BOOL modal;
 
 - (void) fillNamesAndLocs;
 - (void) doneSearching_Clicked:(id)sender;
 - (void) handleTapFrom: (UITapGestureRecognizer*) recognizer;
 - (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText;
 - (void) searchTableView;
+- (void) modalCancel: (id) sender;
 
 @end

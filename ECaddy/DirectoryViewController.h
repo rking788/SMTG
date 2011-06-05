@@ -17,6 +17,9 @@
     NSDictionary* abbrsDict;
     NSDictionary* stateArrDict;
     NSManagedObjectContext* manObjCon;
+  
+    BOOL modal;
+    
     id<CourseSelectDelegate> courseSelectDelegate;
 }
 @property (nonatomic, retain) NSSet* stateSet;
@@ -26,6 +29,9 @@
 @property (nonatomic, retain) NSManagedObjectContext* manObjCon;
 @property (nonatomic, assign) id<CourseSelectDelegate> courseSelectDelegate;
 
+@property (nonatomic, assign, getter = isModal) BOOL modal;
+
 - (void) fillStatesCountries;
+- (void) modalCancel: (id) sender;
 
 @end

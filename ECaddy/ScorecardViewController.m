@@ -1,4 +1,4 @@
-//
+ //
 //  ScorecardViewController.m
 //  ECaddy
 //
@@ -24,9 +24,7 @@
 */
 - (void) viewDidAppear:(BOOL)animated
 {
-    NSLog(@"In ViewDidAppear");
     if(self.courseObj){
-        NSLog(@"Not nil");
         [self startNewRoundWithCourseOrNil: self.courseObj];
     }
     
@@ -74,16 +72,6 @@
 }
 
 - (IBAction)startClicked:(id)sender {
-   /* DirectoryViewController* dvc = [[DirectoryViewController alloc] initWithNibName:@"StateDirView" bundle:nil];
-    
-    // Need to provide the managed object context to the directory 
-    // to find the available courses and stuff
-    NSManagedObjectContext* manObjCon = [(ECaddyAppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
-    
-    [dvc setManObjCon: manObjCon];
-    [self.navigationController pushViewController: dvc animated:YES];
-    [dvc release];
-    */
     [self startNewRoundWithCourseOrNil: nil];
 }
 

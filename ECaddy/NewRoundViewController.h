@@ -26,5 +26,6 @@ typedef enum _tagTableRows
 
 - (void) showPickerView;
 - (void) dismissPickerView;
+- (void) beginRound;
 
 @end

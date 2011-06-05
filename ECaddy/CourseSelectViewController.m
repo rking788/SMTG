@@ -6,6 +6,8 @@
 //  Copyright 2011 RPKing. All rights reserved.
 //
 
+// TODOS: When searching, the addresses get really messed up. Searching for Cobbossee Colony Golf Course gives fort fairfield as the address which is very wrong.
+
 #import "CourseSelectViewController.h"
 #import "CourseDetailViewController.h"
 #import "ECaddyAppDelegate.h"
@@ -21,6 +23,7 @@
 @synthesize blackView;
 @synthesize searching;
 @synthesize courseSelectDelegate;
+@synthesize modal;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -83,6 +86,12 @@
     [recognizer release];
     
     self.searching = NO;
+
+    // If the view controller is presented modally we want to provide a 
+    // cancel button or done button in the navigation bar
+    if([self isModal]){
+        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemCancel target:self action:@selector(modalCancel:)] autorelease];
+    }
 }
 
 - (void)viewDidUnload
@@ -190,7 +199,6 @@
         if([tabItemTitle isEqualToString: @"Scorecards"]){
             // Do Something
             [self.courseSelectDelegate selectCourse: courseObj];
-            [self dismissModalViewControllerAnimated:YES];
         }
         else if([tabItemTitle isEqualToString: @"Directory"]){
             // Do Something Else
@@ -319,6 +327,11 @@
 - (void) handleTapFrom: (UITapGestureRecognizer*) recognizer
 {
     [self doneSearching_Clicked: self];
+}
+
+- (void) modalCancel:(id)sender
+{
+    [self.courseSelectDelegate selectCourse: nil];
 }
 
 @end

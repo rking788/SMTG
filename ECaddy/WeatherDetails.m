@@ -67,6 +67,17 @@
     //courseDetailsLbl.layer.borderWidth = 2.0;
     
     // Animate the activity indicator until the text is set
+  //  [actIndicator setHidden: NO];
+  //  [actIndicator startAnimating];
+  //  [self getWeatherInfo];
+  //  [self setWeatherInfo];
+  //  [actIndicator stopAnimating];
+  //  [actIndicator setHidden: YES];
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    // Animate the activity indicator until the text is set
     [actIndicator setHidden: NO];
     [actIndicator startAnimating];
     [self getWeatherInfo];

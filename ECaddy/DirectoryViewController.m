@@ -15,7 +15,7 @@
 @synthesize stateSet, countrySet, abbrsDict, stateArrDict;
 @synthesize courseSelectDelegate;
 @synthesize manObjCon;
-
+@synthesize modal;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -33,6 +33,12 @@
     [self fillStatesCountries];
     
     [self.navigationItem setTitle: @"State Select"];
+
+    // If the view controller is presented modally we want to provide a 
+    // cancel button or done button in the navigation bar
+    if([self isModal]){
+        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemCancel target:self action:@selector(modalCancel:)] autorelease];
+    }
 }
 
 
@@ -159,6 +165,11 @@
     [tableView deselectRowAtIndexPath: indexPath animated:NO];
     CourseSelectViewController* csvc = [[CourseSelectViewController alloc] initWithNibName:@"CourseSelectView" bundle:nil];
     csvc.manObjCon = self.manObjCon;
+    if([self isModal])
+        csvc.modal = YES;
+    else
+        csvc.modal = NO;
+    
     NSString* countryStr = [[countrySet allObjects] objectAtIndex: indexPath.section];
     csvc.selectedState = [[stateArrDict valueForKey: countryStr] objectAtIndex: indexPath.row];
     csvc.courseSelectDelegate = self.courseSelectDelegate;
@@ -191,6 +202,11 @@
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     return cell;
+}
+
+- (void) modalCancel: (id) sender
+{
+    [self.courseSelectDelegate selectCourse: nil];
 }
 
 

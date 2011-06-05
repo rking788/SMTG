@@ -15,6 +15,7 @@
 @synthesize title;
 @synthesize subtitle;
 @synthesize image, latitude, longitude;
+@synthesize draggable;
 
 -(id) init{
     self = [super init];
@@ -22,6 +23,7 @@
         [self setLatitude: [NSNumber numberWithDouble: 44.902517]];
         [self setLongitude: [NSNumber numberWithDouble: -68.667400]];
         [self setTitle: @"Placeholder"];
+        [self setDraggable: NO];
     }
     
     return self;
@@ -32,6 +34,7 @@
     if(self){
         [self setLatitude: [NSNumber numberWithDouble: initLat]];
         [self setLongitude: [NSNumber numberWithDouble: initLongitude]];
+        [self setDraggable: NO];
     }
     
     return self;
