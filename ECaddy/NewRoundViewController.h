@@ -24,6 +24,7 @@ typedef enum _tagTableRows
 @property (nonatomic, retain) UIActionSheet* actSheet;
 @property (nonatomic, retain) Course* curCourse;
 
+- (void) loadDefaultCourse;
 - (void) showPickerView;
 - (void) dismissPickerView;
 - (void) beginRound;

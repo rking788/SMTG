@@ -11,7 +11,7 @@
 #import "NewRoundViewController.h"
 #import "DirectoryViewController.h"
 #import "ECaddyAppDelegate.h"
-
+#import "ScoreTrackerViewController.h"
 
 @implementation NewRoundViewController
 
@@ -54,6 +54,11 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
     self.navigationItem.title = @"New Round";
+    
+    if(self.curCourse)
+        NSLog(@"A course has already been selected");
+    else
+        [self loadDefaultCourse];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
@@ -161,7 +166,7 @@
         if(self.curCourse)
             [lbl2 setText: [self.curCourse coursename]];
         else
-            [lbl2 setText: @"Country Fareways"];
+            [lbl2 setText: @"Please Select a Course"];
     }
     else if(indexPath.row == kNumPlayers){
         [lbl setText: @"# of Players"];
@@ -339,10 +344,43 @@
     
     ECaddyAppDelegate* appDelegate = (ECaddyAppDelegate*) [[UIApplication sharedApplication] delegate];
     Scorecard* newScorecard = [appDelegate startNewRoundWithCourse: self.curCourse];
-    Course* course1 = newScorecard.course;
-    NSSet* scorecardset = self.curCourse.scorecards;
-    NSLog(@"Just do something stupid");
-    NSLog(@"The date is set as: %@", newScorecard.dateplayed);
+
+    // Add the scoretracker view controller to the navigation stack
+    ScoreTrackerViewController* stvc = [[ScoreTrackerViewController alloc] initWithNibName: @"ScoreTrackerView" bundle:nil];
+    
+    [stvc setScorecard: newScorecard];
+    
+    [self.navigationController pushViewController:stvc animated:YES];
+    [stvc release];
+}
+
+- (void) loadDefaultCourse
+{
+    
+    // Should probably use the name of the default course here
+    // Or at least the default state. A random golf course would be weird.
+    NSManagedObjectContext* manObjCon = [(ECaddyAppDelegate*)
+                                         [[UIApplication sharedApplication] delegate] managedObjectContext];
+    
+    NSFetchRequest* fetchrequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext: manObjCon];
+    [fetchrequest setEntity:entity];
+    
+    [fetchrequest setFetchLimit: 1];
+    
+    NSError *error = nil;
+    NSArray *array = [manObjCon executeFetchRequest:fetchrequest error:&error];
+    if (array != nil) {
+    
+        self.curCourse = [array objectAtIndex: 0];
+    }
+    else {
+        // Deal with error.
+        NSLog(@"Error fetching lots");
+    }
+    
+    [fetchrequest release];
+
 }
 
 @end

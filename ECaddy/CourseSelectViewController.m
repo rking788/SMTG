@@ -6,8 +6,6 @@
 //  Copyright 2011 RPKing. All rights reserved.
 //
 
-// TODOS: When searching, the addresses get really messed up. Searching for Cobbossee Colony Golf Course gives fort fairfield as the address which is very wrong.
-
 #import "CourseSelectViewController.h"
 #import "CourseDetailViewController.h"
 #import "ECaddyAppDelegate.h"
@@ -119,6 +117,9 @@
         // have been selected (not sure why that would happen 
     }
     
+    // TODO: could use setPropertiesToFetch:(NSArray*) to fetch just 
+    // the course name attribute or something
+    
     NSFetchRequest* fetchrequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext:self.manObjCon];
     [fetchrequest setEntity:entity];
@@ -154,9 +155,6 @@
     [sortDescript release];
     [sdArr release];
     [fetchrequest release];
-   
-    // Reset the managed object context (we don't need those objects anymore i dont think)
-    [manObjCon reset];
 }
 
 #pragma mark UITableViewDataSource Protocol Methods
@@ -165,7 +163,7 @@
 {
     NSInteger num = 0;
     
-    if(self.searching)
+    if(self.searching && ([self.searchBar.text length] > 0))
         num = [self.nameSearch count];
     else
         num = [self.courseNames count];
@@ -177,8 +175,6 @@
 {
     [tableView deselectRowAtIndexPath: indexPath animated:NO];    
     
-    // TODO: Based on the currently active tab (directory or scorecards)
-    // we want to do something different when a course is selected
     UITabBarController* tbc = [(ECaddyAppDelegate*)[[UIApplication sharedApplication] delegate] tabBarController];
     UITabBarItem* tbi = [[tbc tabBar] selectedItem];
     NSString* tabItemTitle = [tbi title];
@@ -233,7 +229,7 @@
     UILabel* lbl = [cell textLabel];
     UILabel* lbl2 = [cell detailTextLabel];
     
-    if(self.searching){
+    if(self.searching && ([self.searchBar.text length] > 0)){
         [lbl setText: [self.nameSearch objectAtIndex: indexPath.row]];
         [lbl2 setText: [self.locsSearch objectAtIndex: indexPath.row]];
     }
@@ -252,6 +248,7 @@
     
     //Remove all objects first.
     [self.nameSearch removeAllObjects];
+    [self.locsSearch removeAllObjects];
     
     if([searchText length] > 0) {
         [UIView beginAnimations:nil context:NULL];
@@ -313,13 +310,15 @@
 {
     self.searching = NO;
     
-    [UIView beginAnimations:nil context:NULL];
-    self.blackView.alpha = 0.0;
-    [UIView commitAnimations];
-
     self.searchBar.text = @"";
     [self.searchBar resignFirstResponder];
     self.navigationItem.rightBarButtonItem = nil;
+    
+    [UIView beginAnimations:nil context:NULL];
+    self.blackView.alpha = 0.0;
+    [UIView commitAnimations];
+    
+    self.tableV.scrollEnabled = YES;
     
     [self.tableV reloadData];
 }

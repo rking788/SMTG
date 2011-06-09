@@ -217,7 +217,7 @@ NSString* const DBFILENAME = @"ECaddy.sqlite";
     
     //Create the new scorecard object to be entered into the database
     newScorecard = [NSEntityDescription insertNewObjectForEntityForName: @"Scorecard" inManagedObjectContext: self.managedObjectContext];
-   // newScorecard.course = golfCourse;
+    newScorecard.course = golfCourse;
 
     // Initialize the date for the scorecard
     newScorecard.dateplayed = [NSDate date];

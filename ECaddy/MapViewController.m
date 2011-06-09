@@ -6,6 +6,8 @@
 //  Copyright 2011 RPKing. All rights reserved.
 //
 
+// TODOS: Need to support the players current location. Figure out what to do with the tee pins when the players location is displayed.
+
 #import "MapViewController.h"
 #import <CoreLocation/CoreLocation.h>
 #import <QuartzCore/QuartzCore.h>

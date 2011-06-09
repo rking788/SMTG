@@ -65,25 +65,41 @@
     [self.courseDetailsLbl setText: courseLbl];
     //courseDetailsLbl.layer.borderColor = [UIColor colorWithRed:0 green:0.5 blue:0 alpha:1.0].CGColor;
     //courseDetailsLbl.layer.borderWidth = 2.0;
-    
-    // Animate the activity indicator until the text is set
-  //  [actIndicator setHidden: NO];
-  //  [actIndicator startAnimating];
-  //  [self getWeatherInfo];
-  //  [self setWeatherInfo];
-  //  [actIndicator stopAnimating];
-  //  [actIndicator setHidden: YES];
 }
 
 - (void) viewDidAppear:(BOOL)animated
 {
     // Animate the activity indicator until the text is set
+//    [actIndicator setHidden: NO];
+//    [actIndicator startAnimating];
+    
+    //[self getWeatherInfo];
+    //[self setWeatherInfo];
+    
+    // Do the weather processing in another thread
+//    [NSThread detachNewThreadSelector: @selector(getWeatherInfo) 
+//                             toTarget: self withObject:nil];
+    
+   // [actIndicator stopAnimating];
+   // [actIndicator setHidden: YES];
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{    
+    // TODO: Display a new view if there is no network available or not 
+    // weather information can be retrieved 
+    
+    // Animate the activity indicator until the text is set
     [actIndicator setHidden: NO];
     [actIndicator startAnimating];
-    [self getWeatherInfo];
-    [self setWeatherInfo];
-    [actIndicator stopAnimating];
-    [actIndicator setHidden: YES];
+    
+    //[self getWeatherInfo];
+    //[self setWeatherInfo];
+    
+    // Do the weather processing in another thread
+    [NSThread detachNewThreadSelector: @selector(getWeatherInfo) 
+                             toTarget: self withObject:nil];
+   
 }
 
 - (void)viewDidUnload
@@ -115,14 +131,22 @@
 
 - (void) getWeatherInfo
 {
+    NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+    
     // This is the woeid value for old town, me
     NSString* str2 = @"2465118";
     NSURL* url2 = [NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@", str2]];
     NSString* str3 = [[NSString alloc] initWithContentsOfURL:url2 encoding:NSUTF8StringEncoding error:nil];
     
     [self setText:str3];
-    //NSLog(@"%@", str3);
+    
     [str3 release];
+    
+    [pool release];
+    
+    // Signal the main thread that we are done getting the weather
+    [self performSelectorOnMainThread:@selector(setWeatherInfo) 
+                           withObject: nil waitUntilDone:FALSE];
 }
 
 - (void) setWeatherInfo
@@ -223,6 +247,8 @@
                                tomDateStr, tomText, tomHigh, tomLow];
     [self.nextDayForecastTV setText: tomForecast];
     
+    [actIndicator stopAnimating];
+    [actIndicator setHidden: YES];
 }
 
 @end
