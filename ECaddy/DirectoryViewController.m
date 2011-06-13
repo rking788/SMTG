@@ -94,6 +94,10 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Location" inManagedObjectContext:self.manObjCon];
     [fetchrequest setEntity:entity];
     
+    NSSortDescriptor* sortDescript = [[NSSortDescriptor alloc] initWithKey:@"state" ascending:YES];
+    NSArray* sdArr = [[NSArray alloc] initWithObjects: sortDescript, nil];
+    [fetchrequest setSortDescriptors: sdArr];
+    
     NSError *error = nil;
     NSArray *array = [self.manObjCon executeFetchRequest:fetchrequest error:&error];
     if (array != nil) {
@@ -137,7 +141,10 @@
     }
     
     [fetchrequest release];
-    [manObjCon reset];
+    [sdArr release];
+    [sortDescript release];
+    // Probably don't want to reset the context and lose the scorecard and other objects
+    // [manObjCon reset];
 
 }
 

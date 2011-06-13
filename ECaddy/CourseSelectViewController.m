@@ -8,6 +8,7 @@
 
 #import "CourseSelectViewController.h"
 #import "CourseDetailViewController.h"
+#import "WeatherDetails.h"
 #import "ECaddyAppDelegate.h"
 
 @implementation CourseSelectViewController
@@ -183,8 +184,8 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext: self.manObjCon];
     [fetchrequest setEntity: entity];
     
-    NSString* courseName = [[[tableView cellForRowAtIndexPath: indexPath] textLabel] text];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"coursename == %@", courseName];
+    NSString* name = [[[tableView cellForRowAtIndexPath: indexPath] textLabel] text];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"coursename == %@", name];
     [fetchrequest setPredicate:predicate];
 
     NSError *error = nil;
@@ -193,16 +194,31 @@
         Course* courseObj = [array objectAtIndex:0];
     
         if([tabItemTitle isEqualToString: @"Scorecards"]){
-            // Do Something
+            // Notify the New Round View Controller that a course was selected
             [self.courseSelectDelegate selectCourse: courseObj];
         }
         else if([tabItemTitle isEqualToString: @"Directory"]){
-            // Do Something Else
+            // Display the course details
             CourseDetailViewController* cdvc = [[CourseDetailViewController alloc] initWithNibName:@"CourseDetailView" bundle:nil];
         
             [cdvc setCourseObj: courseObj];
             [self.navigationController pushViewController:cdvc animated:YES];
             [cdvc release];
+        }
+        else if([tabItemTitle isEqualToString: @"Weather"]){
+            WeatherDetails* weatherView = [[WeatherDetails alloc] initWithNibName:@"WeatherDetails" bundle:nil];
+            
+            // Set the course detail information from the selected tableview cell
+            NSString* woeid = [courseObj valueForKey: @"woeid"];
+            NSString* courseLoc = [[[tableView cellForRowAtIndexPath:indexPath] detailTextLabel] text];
+            [weatherView setCourseName: name];
+            [weatherView setCourseLoc: courseLoc];
+            [weatherView setWOEID: woeid];
+            
+            // Set the transition mode and display the weather detail view modally
+            [weatherView setModalTransitionStyle: UIModalTransitionStyleFlipHorizontal];
+            [self presentModalViewController:weatherView animated:YES];
+            [weatherView release];
         }
     }
     else {

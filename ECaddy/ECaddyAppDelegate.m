@@ -210,7 +210,7 @@ NSString* const DBFILENAME = @"ECaddy.sqlite";
     
 }
 
-- (Scorecard*) startNewRoundWithCourse: (Course*) golfCourse
+- (Scorecard*) startNewRoundWithCourse: (Course*) golfCourse withNPlayers: (NSNumber*) nPlayers
 {
     Scorecard* newScorecard;
     self.curCourse = golfCourse;
@@ -221,6 +221,7 @@ NSString* const DBFILENAME = @"ECaddy.sqlite";
 
     // Initialize the date for the scorecard
     newScorecard.dateplayed = [NSDate date];
+    newScorecard.numplayers = nPlayers;
     
     self.curScorecard = newScorecard;
     

@@ -21,7 +21,9 @@
 @synthesize navBar;
 @synthesize weatherPic;
 @synthesize courseDetailsLbl;
-@synthesize courseName, courseLoc;
+@synthesize courseName;
+@synthesize courseLoc;
+@synthesize WOEID;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,12 +37,13 @@
 - (void)dealloc
 {
     [curWeatherTV release];
-    [navBar release];
+//    [navBar release];
     [weatherPic release];
     [courseDetailsLbl release];
     [todayForecastTV release];
     [nextDayForecastTV release];
     [actIndicator release];
+    [WOEID release];
     [super dealloc];
 }
 
@@ -67,23 +70,6 @@
     //courseDetailsLbl.layer.borderWidth = 2.0;
 }
 
-- (void) viewDidAppear:(BOOL)animated
-{
-    // Animate the activity indicator until the text is set
-//    [actIndicator setHidden: NO];
-//    [actIndicator startAnimating];
-    
-    //[self getWeatherInfo];
-    //[self setWeatherInfo];
-    
-    // Do the weather processing in another thread
-//    [NSThread detachNewThreadSelector: @selector(getWeatherInfo) 
-//                             toTarget: self withObject:nil];
-    
-   // [actIndicator stopAnimating];
-   // [actIndicator setHidden: YES];
-}
-
 - (void) viewWillAppear:(BOOL)animated
 {    
     // TODO: Display a new view if there is no network available or not 
@@ -105,12 +91,13 @@
 - (void)viewDidUnload
 {
     [self setCurWeatherTV: nil];
-    [self setNavBar:nil];
+//    [self setNavBar:nil];
     [self setWeatherPic:nil];
     [self setCourseDetailsLbl:nil];
     [self setTodayForecastTV:nil];
     [self setNextDayForecastTV:nil];
     [self setActIndicator:nil];
+    [self setWOEID: nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -134,8 +121,7 @@
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
     
     // This is the woeid value for old town, me
-    NSString* str2 = @"2465118";
-    NSURL* url2 = [NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@", str2]];
+    NSURL* url2 = [NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@", [self WOEID]]];
     NSString* str3 = [[NSString alloc] initWithContentsOfURL:url2 encoding:NSUTF8StringEncoding error:nil];
     
     [self setText:str3];

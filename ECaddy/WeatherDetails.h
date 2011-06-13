@@ -13,6 +13,7 @@
     NSString* text;
     NSString* courseName;
     NSString* courseLoc;
+    NSString* WOEID;
     UIActivityIndicatorView *actIndicator;
     
     UINavigationBar *navBar;
@@ -28,6 +29,7 @@
 @property (nonatomic, retain) NSString* text;
 @property (nonatomic, retain) NSString* courseName;
 @property (nonatomic, retain) NSString* courseLoc;
+@property (nonatomic, retain) NSString* WOEID;
 
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *actIndicator;
 

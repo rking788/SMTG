@@ -342,8 +342,14 @@
         return;
     }
     
+    NSIndexPath* indPath = [NSIndexPath indexPathForRow: kNumPlayers inSection:0];
+    UILabel* numPlayersLbl = [[self.tableView cellForRowAtIndexPath: indPath] detailTextLabel];
+    NSNumberFormatter* numFormat = [[NSNumberFormatter alloc] init];
+    [numFormat setNumberStyle: NSNumberFormatterNoStyle];
+    
     ECaddyAppDelegate* appDelegate = (ECaddyAppDelegate*) [[UIApplication sharedApplication] delegate];
-    Scorecard* newScorecard = [appDelegate startNewRoundWithCourse: self.curCourse];
+    Scorecard* newScorecard = [appDelegate startNewRoundWithCourse: self.curCourse
+                               withNPlayers: [numFormat numberFromString: [numPlayersLbl text]]];
 
     // Add the scoretracker view controller to the navigation stack
     ScoreTrackerViewController* stvc = [[ScoreTrackerViewController alloc] initWithNibName: @"ScoreTrackerView" bundle:nil];
@@ -351,7 +357,9 @@
     [stvc setScorecard: newScorecard];
     
     [self.navigationController pushViewController:stvc animated:YES];
+    
     [stvc release];
+    [numFormat release];
 }
 
 - (void) loadDefaultCourse

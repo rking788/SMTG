@@ -32,6 +32,6 @@
 - (NSString *)applicationDocumentsDirectory;
 - (void) loadDefaultDB;
 
-- (Scorecard*) startNewRoundWithCourse: (Course*) golfCourse;
+- (Scorecard*) startNewRoundWithCourse: (Course*) golfCourse withNPlayers: (NSNumber*) nPlayers;
 
 @end

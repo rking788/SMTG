@@ -12,6 +12,7 @@
 		AE816DC1137B7E140023F5D7 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AE816DBE137B7E140023F5D7 /* NSDataAdditions.m */; };
 		AE816DC2137B7E140023F5D7 /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = AE816DC0137B7E140023F5D7 /* TBXML.m */; };
 		AE816DC4137B7E670023F5D7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AE816DC3137B7E670023F5D7 /* libz.dylib */; };
+		AE834A7F13A3F6AC00EFF1DB /* ScorecardTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE834A7E13A3F6AC00EFF1DB /* ScorecardTableCell.m */; };
 		AE85D7431368E34400CDA534 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7421368E34400CDA534 /* UIKit.framework */; };
 		AE85D7451368E34400CDA534 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7441368E34400CDA534 /* Foundation.framework */; };
 		AE85D7471368E34400CDA534 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7461368E34400CDA534 /* CoreGraphics.framework */; };
@@ -31,11 +32,12 @@
 		AE85D7861368EC5900CDA534 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7851368EC5900CDA534 /* MapKit.framework */; };
 		AE85D7921369298E00CDA534 /* WeatherDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7901369298E00CDA534 /* WeatherDetails.m */; };
 		AE85D7931369298E00CDA534 /* WeatherDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7911369298E00CDA534 /* WeatherDetails.xib */; };
+		AE880E6913A1ACBE00824DF6 /* HeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE880E6813A1ACBE00824DF6 /* HeaderFooterView.m */; };
 		AE886D651370E2490056BDF4 /* POIAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = AE886D641370E2490056BDF4 /* POIAnnotation.m */; };
+		AE8B92D813A0633000A3EE23 /* ECaddy.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = AE8B92D713A0633000A3EE23 /* ECaddy.sqlite */; };
 		AE8E2C1A139886630098A426 /* NewRoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8E2C18139886630098A426 /* NewRoundViewController.m */; };
 		AE8E2C1B139886630098A426 /* NewRoundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE8E2C19139886630098A426 /* NewRoundView.xib */; };
 		AE8FE58E1384A96900EE8E66 /* CourseSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8FE58C1384A96900EE8E66 /* CourseSelectViewController.m */; };
-		AE9177EF139AC07F00AC5706 /* ECaddy.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = AE9177EE139AC07F00AC5706 /* ECaddy.sqlite */; };
 		AE9177F5139AC17300AC5706 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9177F4139AC17300AC5706 /* Course.m */; };
 		AE9177F8139AC17400AC5706 /* Scorecard.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9177F7139AC17400AC5706 /* Scorecard.m */; };
 		AE9427CE13821ABF0047EBA4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9427CD13821ABF0047EBA4 /* CoreData.framework */; };
@@ -58,6 +60,8 @@
 		AE816DBF137B7E140023F5D7 /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBXML.h; sourceTree = "<group>"; };
 		AE816DC0137B7E140023F5D7 /* TBXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBXML.m; sourceTree = "<group>"; };
 		AE816DC3137B7E670023F5D7 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		AE834A7D13A3F6AC00EFF1DB /* ScorecardTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScorecardTableCell.h; sourceTree = "<group>"; };
+		AE834A7E13A3F6AC00EFF1DB /* ScorecardTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScorecardTableCell.m; sourceTree = "<group>"; };
 		AE85D73E1368E34400CDA534 /* ECaddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ECaddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE85D7421368E34400CDA534 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AE85D7441368E34400CDA534 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -86,14 +90,16 @@
 		AE85D78F1369298E00CDA534 /* WeatherDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherDetails.h; sourceTree = "<group>"; };
 		AE85D7901369298E00CDA534 /* WeatherDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherDetails.m; sourceTree = "<group>"; };
 		AE85D7911369298E00CDA534 /* WeatherDetails.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherDetails.xib; sourceTree = "<group>"; };
+		AE880E6713A1ACBE00824DF6 /* HeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderFooterView.h; sourceTree = "<group>"; };
+		AE880E6813A1ACBE00824DF6 /* HeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderFooterView.m; sourceTree = "<group>"; };
 		AE886D621370E2400056BDF4 /* POIAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POIAnnotation.h; sourceTree = "<group>"; };
 		AE886D641370E2490056BDF4 /* POIAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POIAnnotation.m; sourceTree = "<group>"; };
+		AE8B92D713A0633000A3EE23 /* ECaddy.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = ECaddy.sqlite; sourceTree = "<group>"; };
 		AE8E2C17139886630098A426 /* NewRoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewRoundViewController.h; sourceTree = "<group>"; };
 		AE8E2C18139886630098A426 /* NewRoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewRoundViewController.m; sourceTree = "<group>"; };
 		AE8E2C19139886630098A426 /* NewRoundView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewRoundView.xib; sourceTree = "<group>"; };
 		AE8FE58B1384A96900EE8E66 /* CourseSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseSelectViewController.h; sourceTree = "<group>"; };
 		AE8FE58C1384A96900EE8E66 /* CourseSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseSelectViewController.m; sourceTree = "<group>"; };
-		AE9177EE139AC07F00AC5706 /* ECaddy.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = ECaddy.sqlite; sourceTree = "<group>"; };
 		AE9177F3139AC17300AC5706 /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Course.h; sourceTree = "<group>"; };
 		AE9177F4139AC17300AC5706 /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Course.m; sourceTree = "<group>"; };
 		AE9177F6139AC17400AC5706 /* Scorecard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scorecard.h; sourceTree = "<group>"; };
@@ -205,6 +211,10 @@
 				AE85D7901369298E00CDA534 /* WeatherDetails.m */,
 				AE8E2C17139886630098A426 /* NewRoundViewController.h */,
 				AE8E2C18139886630098A426 /* NewRoundViewController.m */,
+				AE880E6713A1ACBE00824DF6 /* HeaderFooterView.h */,
+				AE880E6813A1ACBE00824DF6 /* HeaderFooterView.m */,
+				AE834A7D13A3F6AC00EFF1DB /* ScorecardTableCell.h */,
+				AE834A7E13A3F6AC00EFF1DB /* ScorecardTableCell.m */,
 				AE85D7541368E34400CDA534 /* MainWindow.xib */,
 				AE85D75D1368E34400CDA534 /* ScorecardView.xib */,
 				AE85D7601368E34400CDA534 /* CourseSelectView.xib */,
@@ -215,7 +225,7 @@
 				AE85D7911369298E00CDA534 /* WeatherDetails.xib */,
 				AE8E2C19139886630098A426 /* NewRoundView.xib */,
 				AEA99329139DBF8800DD723C /* ScoreTrackerView.xib */,
-				AE9177EE139AC07F00AC5706 /* ECaddy.sqlite */,
+				AE8B92D713A0633000A3EE23 /* ECaddy.sqlite */,
 				AEFE6F131381BB60002B1AA3 /* coursemodel.xcdatamodeld */,
 				AED1EA081374F950008365D5 /* green.png */,
 				AED1EA0B1374F959008365D5 /* tee.png */,
@@ -301,8 +311,8 @@
 				AE7F932B13836621003CCD57 /* StateDirView.xib in Resources */,
 				AEA35AE91384CE7600111BAA /* CourseDetailView.xib in Resources */,
 				AE8E2C1B139886630098A426 /* NewRoundView.xib in Resources */,
-				AE9177EF139AC07F00AC5706 /* ECaddy.sqlite in Resources */,
 				AEA9932B139DBF8800DD723C /* ScoreTrackerView.xib in Resources */,
+				AE8B92D813A0633000A3EE23 /* ECaddy.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,8 +323,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE85D7501368E34400CDA534 /* main.m in Sources */,
 				AE816DC2137B7E140023F5D7 /* TBXML.m in Sources */,
+				AE85D7501368E34400CDA534 /* main.m in Sources */,
 				AE85D7531368E34400CDA534 /* ECaddyAppDelegate.m in Sources */,
 				AE85D7591368E34400CDA534 /* ScorecardViewController.m in Sources */,
 				AE85D75C1368E34400CDA534 /* DirectoryViewController.m in Sources */,
@@ -330,6 +340,8 @@
 				AE9177F5139AC17300AC5706 /* Course.m in Sources */,
 				AE9177F8139AC17400AC5706 /* Scorecard.m in Sources */,
 				AEA9932A139DBF8800DD723C /* ScoreTrackerViewController.m in Sources */,
+				AE880E6913A1ACBE00824DF6 /* HeaderFooterView.m in Sources */,
+				AE834A7F13A3F6AC00EFF1DB /* ScorecardTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
