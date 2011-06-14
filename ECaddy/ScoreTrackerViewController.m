@@ -15,6 +15,7 @@
 @synthesize scoreHeaderView;
 @synthesize scoreFooterView;
 @synthesize titleTextView;
+@synthesize favstarBtn;
 @synthesize scorecardDict;
 @synthesize scorecard;
 
@@ -34,6 +35,7 @@
     [scoreHeaderView release];
     [scoreFooterView release];
     [scorecardDict release];
+    [favstarBtn release];
     [super dealloc];
 }
 
@@ -68,6 +70,9 @@
         [self.scoreHeaderView setScoreTracker: (ScoreTrackerViewController*) self];
         
         [dateF release];
+        
+        [self.favstarBtn setImage: [UIImage imageNamed: ([[self.scorecard.course favorite] boolValue] ? @"favstar_selected.png" : 
+                                                         @"favstar_deselected.png")] forState: UIControlStateNormal];
     }
 }
 
@@ -76,6 +81,7 @@
     [self setTitleTextView:nil];
     [self setScoreHeaderView:nil];
     [self setScoreFooterView:nil];
+    [self setFavstarBtn:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -288,4 +294,17 @@
     [f release];
 }
 
+# pragma mark - TODO Probably need to save the managed object context here 
+
+- (IBAction)favstarPressed:(id)sender {
+    BOOL fav = [[self.scorecard.course favorite] boolValue];
+    
+    fav = !fav;
+    [self.favstarBtn setImage: [UIImage imageNamed: (fav ? @"favstar_selected.png" : 
+                                                     @"favstar_deselected.png")] forState: UIControlStateNormal];
+    
+    [self.scorecard.course setFavorite: [NSNumber numberWithBool: fav]];
+    
+    // TODO Probably need to save the course object in the managed object context
+}
 @end

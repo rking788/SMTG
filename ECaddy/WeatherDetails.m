@@ -10,9 +10,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "TBXML.h"
 
-
 @implementation WeatherDetails
 
+@synthesize courseObj;
 @synthesize text;
 @synthesize actIndicator;
 @synthesize curWeatherTV;
@@ -21,6 +21,8 @@
 @synthesize navBar;
 @synthesize weatherPic;
 @synthesize courseDetailsLbl;
+@synthesize favstarBtn;
+@synthesize errorView;
 @synthesize courseName;
 @synthesize courseLoc;
 @synthesize WOEID;
@@ -44,6 +46,8 @@
     [nextDayForecastTV release];
     [actIndicator release];
     [WOEID release];
+    [favstarBtn release];
+    [errorView release];
     [super dealloc];
 }
 
@@ -68,13 +72,15 @@
     [self.courseDetailsLbl setText: courseLbl];
     //courseDetailsLbl.layer.borderColor = [UIColor colorWithRed:0 green:0.5 blue:0 alpha:1.0].CGColor;
     //courseDetailsLbl.layer.borderWidth = 2.0;
+    
+    // Set the initial state of the favorite star
+    [self.favstarBtn setImage: [UIImage imageNamed: ([[self.courseObj favorite] boolValue] ? @"favstar_selected.png" : 
+                                                     @"favstar_deselected.png")] forState: UIControlStateNormal];
+
 }
 
 - (void) viewWillAppear:(BOOL)animated
-{    
-    // TODO: Display a new view if there is no network available or not 
-    // weather information can be retrieved 
-    
+{  
     // Animate the activity indicator until the text is set
     [actIndicator setHidden: NO];
     [actIndicator startAnimating];
@@ -98,6 +104,8 @@
     [self setNextDayForecastTV:nil];
     [self setActIndicator:nil];
     [self setWOEID: nil];
+    [self setFavstarBtn:nil];
+    [self setErrorView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -107,6 +115,20 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - TODO Probably need to save the managed object context here if the star changes 
+
+- (IBAction)favstarPressed:(id)sender {
+    BOOL fav = [[self.courseObj favorite] boolValue];
+    
+    fav = !fav;
+    [self.favstarBtn setImage: [UIImage imageNamed: (fav ? @"favstar_selected.png" : 
+                                                     @"favstar_deselected.png")] forState: UIControlStateNormal];
+    
+    [self.courseObj setFavorite: [NSNumber numberWithBool: fav]];
+    
+    // TODO Probably need to save the course object in the managed object context
 }
 
 - (void) cancel
@@ -137,6 +159,13 @@
 
 - (void) setWeatherInfo
 {
+    // If the weather text is nil then there was a problem with the network or something.
+    if(!self.text){
+        [self.view bringSubviewToFront: self.errorView];
+        [self.errorView setHidden: NO];
+        return;
+    }
+    
     // Parse the XML to get the weather information 
     // TODO: Maybe this should use a struct or something? or a class i have no idea right now
     // just want it to work.

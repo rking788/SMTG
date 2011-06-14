@@ -14,6 +14,10 @@
  
     NSSet* stateSet;
     NSSet* countrySet;
+    
+    NSMutableArray* favoriteNames;
+    NSMutableArray* favoriteLocs;
+    
     NSDictionary* abbrsDict;
     NSDictionary* stateArrDict;
     NSManagedObjectContext* manObjCon;
@@ -21,17 +25,23 @@
     BOOL modal;
     
     id<CourseSelectDelegate> courseSelectDelegate;
+    UITableView *theTable;
 }
 @property (nonatomic, retain) NSSet* stateSet;
 @property (nonatomic, retain) NSSet* countrySet;
+@property (nonatomic, retain) NSMutableArray* favoriteNames;
+@property (nonatomic, retain) NSMutableArray* favoriteLocs;
 @property (nonatomic, retain) NSDictionary* abbrsDict;
 @property (nonatomic, retain) NSDictionary* stateArrDict;
 @property (nonatomic, retain) NSManagedObjectContext* manObjCon;
 @property (nonatomic, assign) id<CourseSelectDelegate> courseSelectDelegate;
 
+@property (nonatomic, retain) IBOutlet UITableView *theTable;
+
 @property (nonatomic, assign, getter = isModal) BOOL modal;
 
 - (void) fillStatesCountries;
+- (void) fillFavorites;
 - (void) modalCancel: (id) sender;
 
 @end

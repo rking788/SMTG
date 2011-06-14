@@ -17,15 +17,19 @@
 @end
 
 @interface CourseSelectViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>{
-    // Original arrays
-    NSMutableArray* courseNames;
-    NSMutableArray* courseLocs;
+    NSMutableArray* arrayOfChars;
+    NSMutableDictionary* coursesDict;
+    
+    // Favorite arrays
+    NSMutableArray* favoriteNames;
+    NSMutableArray* favoriteLocs;
     
     // Search arrays
     NSMutableArray* nameSearch;
     NSMutableArray* locsSearch;
     
     NSString* selectedState;
+    NSString* longStateName;
     NSManagedObjectContext* manObjCon;
     UISearchBar *searchBar;
     UITableView *tableV;
@@ -40,12 +44,15 @@
 @property (nonatomic, retain) IBOutlet UITableView *tableV;
 @property (nonatomic, retain) IBOutlet UIView *blackView;
 
-@property (nonatomic, retain) NSMutableArray* courseNames;
-@property (nonatomic, retain) NSMutableArray* courseLocs;
+@property (nonatomic, retain) NSMutableArray* arrayOfChars;
+@property (nonatomic, retain) NSMutableDictionary* coursesDict; 
 @property (nonatomic, retain) NSMutableArray* nameSearch;
 @property (nonatomic, retain) NSMutableArray* locsSearch;
 @property (nonatomic, retain) NSString* selectedState;
+@property (nonatomic, retain) NSString* longStateName;
 @property (nonatomic, retain) NSManagedObjectContext* manObjCon;
+@property (nonatomic, retain) NSMutableArray* favoriteNames;
+@property (nonatomic, retain) NSMutableArray* favoriteLocs;
 
 @property (nonatomic, assign) id<CourseSelectDelegate> courseSelectDelegate;
 
@@ -58,5 +65,7 @@
 - (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText;
 - (void) searchTableView;
 - (void) modalCancel: (id) sender;
+- (void) fillFavorites;
+- (Course*) courseObjectWithName: (NSString*) name;
 
 @end

@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Course.h"
 
 @interface WeatherDetails : UIViewController {
+    Course* courseObj;
+    
     NSString* text;
     NSString* courseName;
     NSString* courseLoc;
@@ -21,11 +23,15 @@
     UIImageView *weatherPic;
     
     UILabel *courseDetailsLbl;
+    UIButton *favstarBtn;
+    UIView *errorView;
     
     UITextView *curWeatherTV;
     UITextView *todayForecastTV;
     UITextView *nextDayForecastTV;
 }
+@property (nonatomic, retain) Course* courseObj;
+
 @property (nonatomic, retain) NSString* text;
 @property (nonatomic, retain) NSString* courseName;
 @property (nonatomic, retain) NSString* courseLoc;
@@ -40,6 +46,10 @@
 @property (nonatomic, retain) IBOutlet UINavigationBar *navBar;
 @property (nonatomic, retain) IBOutlet UIImageView *weatherPic;
 @property (nonatomic, retain) IBOutlet UILabel *courseDetailsLbl;
+@property (nonatomic, retain) IBOutlet UIButton *favstarBtn;
+@property (nonatomic, retain) IBOutlet UIView *errorView;
+
+- (IBAction)favstarPressed:(id)sender;
 
 - (void) cancel;
 - (void) getWeatherInfo;

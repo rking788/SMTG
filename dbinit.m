@@ -163,7 +163,7 @@
             [courseObj setValue: mensPars forKey: @"menpars"];
             [courseObj setValue: womensPars forKey: @"womenpars"];
         }
-        
+
         cur = (NSString*)[enumer nextObject];
     }
     

@@ -14,6 +14,7 @@
 @interface ScoreTrackerViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
     Scorecard* scorecard;
     UITextView *titleTextView;
+    UIButton *favstarBtn;
     HeaderFooterView *scoreHeaderView;
     HeaderFooterView *scoreFooterView;
     NSMutableDictionary* scorecardDict;
@@ -27,8 +28,12 @@ enum{
 @property (nonatomic, retain) IBOutlet HeaderFooterView *scoreHeaderView;
 @property (nonatomic, retain) IBOutlet HeaderFooterView *scoreFooterView;
 @property (nonatomic, retain) IBOutlet UITextView *titleTextView;
+@property (nonatomic, retain) IBOutlet UIButton *favstarBtn;
+
 @property (nonatomic, retain) NSMutableDictionary* scorecardDict;
 @property (nonatomic, retain) Scorecard* scorecard;
+
+- (IBAction)favstarPressed:(id)sender;
 
 - (void) nameChangedFrom: (NSString*) oldName To: (NSString*) newName;
 - (NSString*) stringForScoreWithRow: (NSUInteger) row AndCol: (NSUInteger) col;

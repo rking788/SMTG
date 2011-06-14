@@ -37,7 +37,10 @@
 		AE8B92D813A0633000A3EE23 /* ECaddy.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = AE8B92D713A0633000A3EE23 /* ECaddy.sqlite */; };
 		AE8E2C1A139886630098A426 /* NewRoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8E2C18139886630098A426 /* NewRoundViewController.m */; };
 		AE8E2C1B139886630098A426 /* NewRoundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE8E2C19139886630098A426 /* NewRoundView.xib */; };
+		AE8F3D3E13A6D3B000C9DB74 /* sadweather.png in Resources */ = {isa = PBXBuildFile; fileRef = AE8F3D3D13A6D3B000C9DB74 /* sadweather.png */; };
 		AE8FE58E1384A96900EE8E66 /* CourseSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8FE58C1384A96900EE8E66 /* CourseSelectViewController.m */; };
+		AE90A58313A5C1D100F87850 /* favstar_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = AE90A58213A5C1D100F87850 /* favstar_selected.png */; };
+		AE90A58613A5C37000F87850 /* favstar_deselected.png in Resources */ = {isa = PBXBuildFile; fileRef = AE90A58513A5C37000F87850 /* favstar_deselected.png */; };
 		AE9177F5139AC17300AC5706 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9177F4139AC17300AC5706 /* Course.m */; };
 		AE9177F8139AC17400AC5706 /* Scorecard.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9177F7139AC17400AC5706 /* Scorecard.m */; };
 		AE9427CE13821ABF0047EBA4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9427CD13821ABF0047EBA4 /* CoreData.framework */; };
@@ -98,8 +101,11 @@
 		AE8E2C17139886630098A426 /* NewRoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewRoundViewController.h; sourceTree = "<group>"; };
 		AE8E2C18139886630098A426 /* NewRoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewRoundViewController.m; sourceTree = "<group>"; };
 		AE8E2C19139886630098A426 /* NewRoundView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewRoundView.xib; sourceTree = "<group>"; };
+		AE8F3D3D13A6D3B000C9DB74 /* sadweather.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sadweather.png; sourceTree = "<group>"; };
 		AE8FE58B1384A96900EE8E66 /* CourseSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseSelectViewController.h; sourceTree = "<group>"; };
 		AE8FE58C1384A96900EE8E66 /* CourseSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseSelectViewController.m; sourceTree = "<group>"; };
+		AE90A58213A5C1D100F87850 /* favstar_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favstar_selected.png; sourceTree = "<group>"; };
+		AE90A58513A5C37000F87850 /* favstar_deselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favstar_deselected.png; sourceTree = "<group>"; };
 		AE9177F3139AC17300AC5706 /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Course.h; sourceTree = "<group>"; };
 		AE9177F4139AC17300AC5706 /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Course.m; sourceTree = "<group>"; };
 		AE9177F6139AC17400AC5706 /* Scorecard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scorecard.h; sourceTree = "<group>"; };
@@ -231,6 +237,9 @@
 				AED1EA0B1374F959008365D5 /* tee.png */,
 				AED1EA1513750ECC008365D5 /* teeandgreen.png */,
 				AED1EA1713750ED4008365D5 /* teeandgreen_ret.png */,
+				AE90A58213A5C1D100F87850 /* favstar_selected.png */,
+				AE90A58513A5C37000F87850 /* favstar_deselected.png */,
+				AE8F3D3D13A6D3B000C9DB74 /* sadweather.png */,
 				AE85D7491368E34400CDA534 /* Supporting Files */,
 			);
 			path = ECaddy;
@@ -313,6 +322,9 @@
 				AE8E2C1B139886630098A426 /* NewRoundView.xib in Resources */,
 				AEA9932B139DBF8800DD723C /* ScoreTrackerView.xib in Resources */,
 				AE8B92D813A0633000A3EE23 /* ECaddy.sqlite in Resources */,
+				AE90A58313A5C1D100F87850 /* favstar_selected.png in Resources */,
+				AE90A58613A5C37000F87850 /* favstar_deselected.png in Resources */,
+				AE8F3D3E13A6D3B000C9DB74 /* sadweather.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

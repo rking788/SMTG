@@ -7,12 +7,14 @@
 //
 
 #import "CourseDetailViewController.h"
-
+#import "ECaddyAppDelegate.h"
 
 @implementation CourseDetailViewController
 
 @synthesize cdTV;
 @synthesize courseObj;
+@synthesize favstarBtn;
+@synthesize manObjCon;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,6 +29,8 @@
 {
     [cdTV release];
     [courseObj release];
+    [favstarBtn release];
+    [manObjCon release];
     [super dealloc];
 }
 
@@ -49,12 +53,21 @@
     
     // Populate the details in the view
     [self populateCourseDetails];
+    
+    // Set the inital state of the favorite star
+    BOOL isFav = [[self.courseObj favorite] boolValue];
+    [self.favstarBtn setImage: [UIImage imageNamed: (isFav ? @"favstar_selected.png" : 
+                                    @"favstar_deselected.png")] forState:UIControlStateNormal];
+    
+    self.manObjCon = nil;
 }
 
 - (void)viewDidUnload
 {
     [self setCdTV:nil];
     [self setCourseObj: nil];
+    [self setFavstarBtn: nil];
+    [self setManObjCon: nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -104,4 +117,30 @@
     NSLog(@"Class: %@",[[[navCont viewControllers] objectAtIndex: 0] class]);
     return;
 }
+
+#pragma mark TODO Probably need to save the course object in the managed object context
+
+- (IBAction) favstarPressed:(id)sender
+{
+    if(!manObjCon){
+        ECaddyAppDelegate* appDel = (ECaddyAppDelegate*)[[UIApplication sharedApplication] delegate];
+        self.manObjCon = [appDel managedObjectContext];
+    }
+    
+    BOOL fav = [[self.courseObj favorite] boolValue];
+    NSError* err = nil;
+    
+    fav = !fav;
+    [self.favstarBtn setImage: [UIImage imageNamed: (fav ? @"favstar_selected.png" : 
+                                    @"favstar_deselected.png")] forState: UIControlStateNormal];
+    
+    [self.courseObj setFavorite: [NSNumber numberWithBool: fav]];
+
+    // Probably need to save the course object in the managed object context
+    if(![self.manObjCon save:&err]){
+        // Handle the error here
+        NSLog(@"Failed to save new favorite course to managedObjectContext");
+    }
+}
+
 @end

@@ -14,10 +14,15 @@
     
     UITextView *cdTV;
     Course* courseObj;
+    NSManagedObjectContext* manObjCon;
 }
-- (IBAction)startRoundClicked:(id)sender;
+- (IBAction) startRoundClicked:(id)sender;
+- (IBAction) favstarPressed: (id) sender;
 
 @property (nonatomic, retain) IBOutlet UITextView *cdTV;
+@property (nonatomic, retain) IBOutlet UIButton* favstarBtn;
+
+@property (nonatomic, retain) NSManagedObjectContext* manObjCon;
 
 @property (nonatomic, retain) Course* courseObj;
 
