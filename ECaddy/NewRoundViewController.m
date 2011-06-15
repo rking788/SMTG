@@ -58,7 +58,7 @@
     if(self.curCourse)
         NSLog(@"A course has already been selected");
     else
-        [self loadDefaultCourse];
+        self.curCourse = [self loadDefaultCourse];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
@@ -362,8 +362,12 @@
     [numFormat release];
 }
 
-- (void) loadDefaultCourse
+- (Course*) loadDefaultCourse
 {
+    NSUserDefaults* defaultPrefs = [NSUserDefaults standardUserDefaults];
+    Course* retCourse = nil;
+    NSString* name = nil;
+    NSPredicate* predicate = nil;
     
     // Should probably use the name of the default course here
     // Or at least the default state. A random golf course would be weird.
@@ -374,21 +378,44 @@
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext: manObjCon];
     [fetchrequest setEntity:entity];
     
+    if([defaultPrefs stringForKey: @"coursename"]){
+        name = [defaultPrefs stringForKey: @"coursename"];
+        predicate = [NSPredicate predicateWithFormat:@"coursename == %@", name];
+        [fetchrequest setPredicate:predicate];
+    }
+    else if([defaultPrefs stringForKey: @"state"]){
+        predicate = [NSPredicate predicateWithFormat:@"state == %@", 
+                                  [defaultPrefs stringForKey: @"state"]];
+        [fetchrequest setPredicate:predicate];
+    }
+    
+    if(!predicate){
+        [fetchrequest release];
+        return nil;
+    }
+    
     [fetchrequest setFetchLimit: 1];
+    
+    NSSortDescriptor* sortDescript = [[NSSortDescriptor alloc] initWithKey:@"coursename" ascending:YES];
+    NSArray* sdArr = [[NSArray alloc] initWithObjects: sortDescript, nil];
+    [fetchrequest setSortDescriptors: sdArr];
     
     NSError *error = nil;
     NSArray *array = [manObjCon executeFetchRequest:fetchrequest error:&error];
     if (array != nil) {
-    
-        self.curCourse = [array objectAtIndex: 0];
+        if([array count] != 0)
+            retCourse = [array objectAtIndex: 0];
     }
     else {
         // Deal with error.
         NSLog(@"Error fetching lots");
     }
     
+    [sortDescript release];
+    [sdArr release];
     [fetchrequest release];
 
+    return retCourse;
 }
 
 @end

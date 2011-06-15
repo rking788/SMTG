@@ -21,7 +21,6 @@
 @synthesize managedObjectModel, managedObjectContext, persistentStoreCoordinator;
 @synthesize curCourse, curScorecard;
 
-
 // Constant for the database file name
 NSString* const DBFILENAME = @"ECaddy.sqlite";
 
@@ -41,6 +40,9 @@ NSString* const DBFILENAME = @"ECaddy.sqlite";
     //dbInit.manObjCon = [self managedObjectContext];
     //[dbInit fillDB];
     //[dbInit release];
+    
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults removeObjectForKey: @"coursename"];
     
     self.curCourse = nil;
     self.curScorecard = nil;

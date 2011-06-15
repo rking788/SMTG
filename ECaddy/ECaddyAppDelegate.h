@@ -14,6 +14,7 @@
 @interface ECaddyAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
     Course* curCourse;
     Scorecard* curScorecard;
+    NSUserDefaults* defaultPrefs;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
