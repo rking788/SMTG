@@ -18,7 +18,7 @@
 @synthesize selectedState, longStateName;
 @synthesize favoriteLocs, favoriteNames;
 @synthesize manObjCon;
-@synthesize searchBar;
+@synthesize searchB;
 @synthesize tableV;
 @synthesize blackView;
 @synthesize searching;
@@ -38,7 +38,7 @@
 {
     [arrayOfChars release];
     [coursesDict release];
-    [searchBar release];
+    [searchB release];
     [tableV release];
     [blackView release];
     [longStateName release];
@@ -104,6 +104,7 @@
     if([self isModal]){
         self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemCancel target:self action:@selector(modalCancel:)] autorelease];
     }
+    
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -118,7 +119,7 @@
 
 - (void)viewDidUnload
 {
-    [self setSearchBar:nil];
+    [self setSearchB:nil];
     [self setTableV:nil];
     [self setBlackView:nil];
     [super viewDidUnload];
@@ -152,7 +153,7 @@
     
     NSDictionary* entityProps = [entity propertiesByName];
     NSArray* propArr = [[NSArray alloc] initWithObjects: [entityProps objectForKey: @"coursename"],
-                        [entityProps objectForKey: @"address"], [entityProps objectForKey: @"state"], nil];
+                        [entityProps objectForKey: @"address"], nil];
     [fetchrequest setPropertiesToFetch: propArr];
     
     NSError *error = nil;
@@ -164,7 +165,7 @@
         for(NSManagedObject* manObj in array){
             
             nameStr = [manObj valueForKey: @"coursename"];
-            locStr = [[[manObj valueForKey: @"address"] stringByAppendingString: @", "] stringByAppendingString:  [manObj valueForKey:@"state"]];
+            locStr = [manObj valueForKey: @"address"];
             
             [self.favoriteNames addObject: nameStr];
             [self.favoriteLocs addObject: locStr];
@@ -217,7 +218,9 @@
             tmpArr = nil;
             
             nameStr = [manObj valueForKey: @"coursename"];
-            locStr = [manObj valueForKey: @"address"];
+            //locStr = [manObj valueForKey: @"address"];
+            locStr = [[manObj valueForKey: @"address"] stringByTrimmingCharactersInSet:
+                      [NSCharacterSet characterSetWithCharactersInString:@" ,"]];
             combinedStr = [nameStr stringByAppendingFormat: @";%@", locStr];
             firstCharStr = [nameStr substringToIndex: 1];
             
@@ -309,7 +312,7 @@
     BOOL isFavs = ([self.favoriteNames count] == 0) ? NO : YES;
     NSInteger newSection = section;
     
-    if(self.searching && ([self.searchBar.text length] > 0)){
+    if(self.searching && ([self.searchB.text length] > 0)){
         num = [self.nameSearch count];
         return num;
     }
@@ -343,7 +346,7 @@
     UITabBarItem* tbi = [[tbc tabBar] selectedItem];
     NSString* tabItemTitle = [tbi title];
     
-    Course* courseObject = [self courseObjectWithName: [[tVC textLabel] text]];
+    Course* courseObject = [[self class] courseObjectWithName: [[tVC textLabel] text] InContext: self.manObjCon];
     
     // If we are searching and they selected a course then we want to close the search
     // for when they return to this view
@@ -382,13 +385,13 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-    
     static NSString *CellIdentifier = @"CourseTableCell";
     BOOL isActives = NO;
     BOOL isFavs = ([favoriteNames count] == 0) ? NO : YES;
     BOOL isSpecial = NO;
     NSInteger section = indexPath.section;
     NSInteger newSection = indexPath.section;
+    NSCharacterSet* charSet = [NSCharacterSet characterSetWithCharactersInString: @" ,"];
     
     if(isActives)
         newSection--;
@@ -405,10 +408,10 @@
     UILabel* lbl = [cell textLabel];
     UILabel* lbl2 = [cell detailTextLabel];
     
-    if(self.searching && ([self.searchBar.text length] > 0)){
+    if(self.searching && ([self.searchB.text length] > 0)){
         isSpecial = YES;
         [lbl setText: [self.nameSearch objectAtIndex: indexPath.row]];
-        [lbl2 setText: [self.locsSearch objectAtIndex: indexPath.row]];
+        [lbl2 setText: [[self.locsSearch objectAtIndex: indexPath.row]stringByTrimmingCharactersInSet: charSet]];
     }
     else if(isActives && (indexPath.section == 0)){
         [lbl setText: @"Active Course"];
@@ -416,7 +419,8 @@
     }
     else if(isFavs && (((section == 0) && (!isActives)) || ((section == 1) && (isActives)))){
         [lbl setText: [self.favoriteNames objectAtIndex: indexPath.row]];
-        [lbl2 setText: [self.favoriteLocs objectAtIndex: indexPath.row]];
+        [lbl2 setText: [[self.favoriteLocs objectAtIndex: indexPath.row] 
+                        stringByTrimmingCharactersInSet: charSet]];
     }
     else {
         NSArray* componentsArr = nil;
@@ -474,19 +478,19 @@
     return retInt;
 }
 
-- (Course*) courseObjectWithName:(NSString *)name
++ (Course*) courseObjectWithName:(NSString *)name InContext: (NSManagedObjectContext*) context
 {
     Course* courseObj = nil;
     
     NSFetchRequest* fetchrequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext: self.manObjCon];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext: context];
     [fetchrequest setEntity: entity];
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"coursename == %@", name];
     [fetchrequest setPredicate:predicate];
     
     NSError *error = nil;
-    NSArray *array = [self.manObjCon executeFetchRequest:fetchrequest error:&error];
+    NSArray *array = [context executeFetchRequest:fetchrequest error:&error];
     if (array != nil) {
         courseObj = [array objectAtIndex:0];
     }
@@ -531,13 +535,14 @@
 
 - (void) searchTableView {
     
-    NSString *searchText = self.searchBar.text;
+    NSString *searchText = self.searchB.text;
     NSString* nameStr = nil;
     NSString* locStr = nil;
     NSArray* componentsArr = nil;
+    NSInteger scopeIndex = [self.searchB selectedScopeButtonIndex];
+    NSRange titleResultsRange = {NSNotFound, 0};
     
     NSArray* tempArr = [self.coursesDict allValues];
-    NSArray* temp = [self.coursesDict objectsForKeys: self.arrayOfChars notFoundMarker: @"new"];
     for(NSArray* tempArr2 in tempArr){
 
         for (NSString *sTemp in tempArr2)
@@ -545,8 +550,11 @@
             componentsArr = [sTemp componentsSeparatedByString: @";"];
             nameStr = [componentsArr objectAtIndex: 0];
             locStr = [componentsArr objectAtIndex: 1];
-            NSRange titleResultsRange = [nameStr rangeOfString:searchText options:NSCaseInsensitiveSearch];
-        
+            if(scopeIndex == kNAME_SCOPE_INDEX)
+                titleResultsRange = [nameStr rangeOfString:searchText options:NSCaseInsensitiveSearch];
+            else if(scopeIndex == kLOC_SCOPE_INDEX)
+                titleResultsRange = [locStr rangeOfString:searchText options:NSCaseInsensitiveSearch];
+            
             if (titleResultsRange.length > 0){
                 [self.nameSearch addObject: nameStr];
                 [self.locsSearch addObject: locStr];
@@ -555,6 +563,7 @@
     }
 }
 
+#pragma  mark - TODO If the tableview is somewhat scrolled then the blackView doesn't cover the table view completely
 - (void) searchBarTextDidBeginEditing:(UISearchBar *)theSearchBar 
 {
     self.searching = YES;
@@ -570,12 +579,28 @@
                                                target:self action:@selector(doneSearching_Clicked:)] autorelease];
 }
 
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar 
+{
+  //  searchBar.showsScopeBar = YES;
+  //  [searchBar sizeToFit];
+    
+    return YES;
+}
+
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar 
+{
+  //  searchBar.showsScopeBar = NO;
+  //  [searchBar sizeToFit];
+    
+    return YES;
+}
+
 - (void) doneSearching_Clicked:(id)sender 
 {
     self.searching = NO;
     
-    self.searchBar.text = @"";
-    [self.searchBar resignFirstResponder];
+    self.searchB.text = @"";
+    [self.searchB resignFirstResponder];
     self.navigationItem.rightBarButtonItem = nil;
     
     [UIView beginAnimations:nil context:NULL];

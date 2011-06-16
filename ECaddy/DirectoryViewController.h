@@ -43,5 +43,6 @@
 - (void) fillStatesCountries;
 - (void) fillFavorites;
 - (void) modalCancel: (id) sender;
+- (void) gotoCourseSelectWithState: (NSString*) stateAbbr Animate: (BOOL) animate;
 
 @end

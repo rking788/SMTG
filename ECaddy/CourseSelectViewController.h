@@ -10,6 +10,11 @@
 #import <CoreData/CoreData.h>
 #import "Course.h"
 
+enum{
+    kNAME_SCOPE_INDEX,
+    kLOC_SCOPE_INDEX
+};
+
 @protocol CourseSelectDelegate <NSObject>
 
 - (void) selectCourse: (Course*) golfCourse;
@@ -31,7 +36,7 @@
     NSString* selectedState;
     NSString* longStateName;
     NSManagedObjectContext* manObjCon;
-    UISearchBar *searchBar;
+    UISearchBar *searchB;
     UITableView *tableV;
     UIView *blackView;
     
@@ -40,7 +45,7 @@
     BOOL searching;
     BOOL modal;
 }
-@property (nonatomic, retain) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, retain) IBOutlet UISearchBar *searchB;
 @property (nonatomic, retain) IBOutlet UITableView *tableV;
 @property (nonatomic, retain) IBOutlet UIView *blackView;
 
@@ -66,6 +71,7 @@
 - (void) searchTableView;
 - (void) modalCancel: (id) sender;
 - (void) fillFavorites;
-- (Course*) courseObjectWithName: (NSString*) name;
+
++ (Course*) courseObjectWithName: (NSString*) name InContext: (NSManagedObjectContext*) context;
 
 @end

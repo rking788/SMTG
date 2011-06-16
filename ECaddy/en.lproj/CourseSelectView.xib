@@ -51,10 +51,10 @@
 							<object class="IBUISearchBar" id="35950366">
 								<reference key="NSNextResponder" ref="718457646"/>
 								<int key="NSvFlags">290</int>
-								<string key="NSFrameSize">{320, 44}</string>
+								<string key="NSFrameSize">{320, 88}</string>
 								<reference key="NSSuperview" ref="718457646"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="718457646"/>
+								<reference key="NSNextKeyView" ref="404565528"/>
 								<int key="IBUIContentMode">3</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBBarStyle">1</int>
@@ -62,12 +62,18 @@
 								<object class="IBUITextInputTraits" key="IBTextInputTraits">
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
+								<object class="NSArray" key="IBScopeButtonTitles">
+									<bool key="EncodedWithXMLCoder">YES</bool>
+									<string>Course Name</string>
+									<string>Location</string>
+								</object>
+								<bool key="IBShowsScopeBar">YES</bool>
 							</object>
 						</object>
 						<string key="NSFrameSize">{320, 367}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="404565528"/>
+						<reference key="NSNextKeyView" ref="35950366"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="311238396">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -86,7 +92,7 @@
 					<object class="IBUIView" id="404565528">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrameSize">{320, 367}</string>
+						<string key="NSFrame">{{0, 88}, {320, 278}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
@@ -101,7 +107,7 @@
 				<string key="NSFrame">{{0, 64}, {320, 367}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="35950366"/>
+				<reference key="NSNextKeyView" ref="718457646"/>
 				<reference key="IBUIBackgroundColor" ref="311238396"/>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUISimulatedNavigationBarMetrics" key="IBUISimulatedTopBarMetrics">
@@ -149,14 +155,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">searchBar</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="35950366"/>
-					</object>
-					<int key="connectionID">13</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">blackView</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="404565528"/>
@@ -170,6 +168,14 @@
 						<reference key="destination" ref="718457646"/>
 					</object>
 					<int key="connectionID">17</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">searchB</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="35950366"/>
+					</object>
+					<int key="connectionID">28</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -214,17 +220,14 @@
 						<string key="objectName">Table View</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">15</int>
-						<reference key="object" ref="404565528"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-						</object>
-						<reference key="parent" ref="191373211"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">9</int>
 						<reference key="object" ref="35950366"/>
 						<reference key="parent" ref="718457646"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">15</int>
+						<reference key="object" ref="404565528"/>
+						<reference key="parent" ref="191373211"/>
 					</object>
 				</object>
 			</object>
@@ -263,7 +266,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">18</int>
+			<int key="maxID">28</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -276,7 +279,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>blackView</string>
-							<string>searchBar</string>
+							<string>searchB</string>
 							<string>tableV</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -291,7 +294,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>blackView</string>
-							<string>searchBar</string>
+							<string>searchB</string>
 							<string>tableV</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -301,7 +304,7 @@
 								<string key="candidateClassName">UIView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">searchBar</string>
+								<string key="name">searchB</string>
 								<string key="candidateClassName">UISearchBar</string>
 							</object>
 							<object class="IBToOneOutletInfo">

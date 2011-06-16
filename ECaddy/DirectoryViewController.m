@@ -48,7 +48,11 @@
     if([self isModal]){
         self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemCancel target:self action:@selector(modalCancel:)] autorelease];
     }
-
+    
+    // Check for a valid default state and possibly just skip to CourseSelectVC
+    NSUserDefaults* defaultPrefs = [NSUserDefaults standardUserDefaults];
+    if([defaultPrefs stringForKey: @"state"])
+        [self gotoCourseSelectWithState: [defaultPrefs stringForKey: @"state"] Animate: NO];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -141,7 +145,9 @@
         for(NSManagedObject* manObj in array){
             
             nameStr = [manObj valueForKey: @"coursename"];
-            locStr = [[[manObj valueForKey: @"address"] stringByAppendingString: @", "] stringByAppendingString:  [manObj valueForKey:@"state"]];
+            locStr = [[[manObj valueForKey: @"address"]
+                      stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@" ,"]]
+                      stringByAppendingFormat: @",%@", [manObj valueForKey: @"state"]];
             
             [self.favoriteNames addObject: nameStr];
             [self.favoriteLocs addObject: locStr];
@@ -319,13 +325,11 @@
     }
 
     [tableView deselectRowAtIndexPath: indexPath animated:NO];
-    
-
-    CourseSelectViewController* csvc = [[CourseSelectViewController alloc] initWithNibName:@"CourseSelectView" bundle:nil];
-    csvc.manObjCon = self.manObjCon;
         
     if(isActCell || isFavsCell){
-        Course* courseObject = [csvc courseObjectWithName: [[[tableView cellForRowAtIndexPath: indexPath] textLabel] text]];
+        NSString* courseName = [[[tableView cellForRowAtIndexPath: indexPath] textLabel] text];
+        Course* courseObject = [CourseSelectViewController courseObjectWithName: courseName
+                                InContext: self.manObjCon];
         
         UITableViewCell* tVC = [tableView cellForRowAtIndexPath: indexPath];
         UITabBarController* tbc = [(ECaddyAppDelegate*)[[UIApplication sharedApplication] delegate] tabBarController];
@@ -362,20 +366,11 @@
         
     }
     else{
-        if([self isModal])
-            csvc.modal = YES;
-        else
-            csvc.modal = NO;
         
-        NSString* countryStr = [[countrySet allObjects] objectAtIndex: newSection];
-        csvc.selectedState = [[stateArrDict valueForKey: countryStr] objectAtIndex: indexPath.row];
-        csvc.longStateName = [self.abbrsDict valueForKey: csvc.selectedState];
-        csvc.courseSelectDelegate = self.courseSelectDelegate;
-        
-        [self.navigationController pushViewController:csvc animated:YES];    
+        NSString* countryStr = [[self.countrySet allObjects] objectAtIndex: newSection];
+        NSString* stateStr = [[self.stateArrDict valueForKey: countryStr] objectAtIndex: indexPath.row];
+        [self gotoCourseSelectWithState: stateStr Animate: YES];
     }
-    
-    [csvc release];
 }
 
 // Customize the appearance of table view cells.
@@ -449,5 +444,23 @@
     [self.courseSelectDelegate selectCourse: nil];
 }
 
+- (void) gotoCourseSelectWithState: (NSString*) stateAbbr Animate:(BOOL) animated
+{
+    CourseSelectViewController* csvc = [[CourseSelectViewController alloc] initWithNibName:@"CourseSelectView" bundle:nil];
+    
+    if([self isModal])
+        csvc.modal = YES;
+    else
+        csvc.modal = NO;
+    
+    csvc.selectedState = stateAbbr;
+    csvc.longStateName = [self.abbrsDict valueForKey: stateAbbr];
+    csvc.courseSelectDelegate = self.courseSelectDelegate;
+    csvc.manObjCon = self.manObjCon;
+    
+    [self.navigationController pushViewController:csvc animated: animated];
+
+    [csvc release];
+}
 
 @end

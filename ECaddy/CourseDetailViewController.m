@@ -81,6 +81,7 @@
 
 - (void) populateCourseDetails
 {
+    NSCharacterSet* charSet = [NSCharacterSet characterSetWithCharactersInString: @" ,"];
     NSString* name = nil;
     NSString* phone = nil;
     NSString* website = nil;
@@ -94,6 +95,7 @@
     
     // These need to be valueForKeys because they are Location Entities
     address = [self.courseObj valueForKey: @"address"];
+    address = [address stringByTrimmingCharactersInSet: charSet];
     state = [self.courseObj valueForKey: @"state"];
     
     detailText = [NSString stringWithFormat: @"%@\n%@, %@\n%@", name, address, state, phone];

@@ -256,7 +256,7 @@
     
     // handle our two custom annotations
     //
-    if ([annotation isKindOfClass:[POIAnnotation class]] && [annotation isDraggable]) // for Golden Gate Bridge
+    if ([annotation isKindOfClass:[POIAnnotation class]] && [(POIAnnotation*)annotation isDraggable]) // for Golden Gate Bridge
     {
         // try to dequeue an existing pin view first
         static NSString* POIAnnotationID = @"poiAnnotationIdentifierDraggable";
