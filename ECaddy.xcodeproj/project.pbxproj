@@ -39,6 +39,8 @@
 		AE8E2C1B139886630098A426 /* NewRoundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE8E2C19139886630098A426 /* NewRoundView.xib */; };
 		AE8F3D3E13A6D3B000C9DB74 /* sadweather.png in Resources */ = {isa = PBXBuildFile; fileRef = AE8F3D3D13A6D3B000C9DB74 /* sadweather.png */; };
 		AE8FE58E1384A96900EE8E66 /* CourseSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8FE58C1384A96900EE8E66 /* CourseSelectViewController.m */; };
+		AE9006A013A9C6B3008247BF /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE90069E13A9C6B3008247BF /* SettingsViewController.m */; };
+		AE9006A113A9C6B3008247BF /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE90069F13A9C6B3008247BF /* SettingsView.xib */; };
 		AE90A58313A5C1D100F87850 /* favstar_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = AE90A58213A5C1D100F87850 /* favstar_selected.png */; };
 		AE90A58613A5C37000F87850 /* favstar_deselected.png in Resources */ = {isa = PBXBuildFile; fileRef = AE90A58513A5C37000F87850 /* favstar_deselected.png */; };
 		AE9177F5139AC17300AC5706 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9177F4139AC17300AC5706 /* Course.m */; };
@@ -104,6 +106,9 @@
 		AE8F3D3D13A6D3B000C9DB74 /* sadweather.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sadweather.png; sourceTree = "<group>"; };
 		AE8FE58B1384A96900EE8E66 /* CourseSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseSelectViewController.h; sourceTree = "<group>"; };
 		AE8FE58C1384A96900EE8E66 /* CourseSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseSelectViewController.m; sourceTree = "<group>"; };
+		AE90069D13A9C6B3008247BF /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		AE90069E13A9C6B3008247BF /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		AE90069F13A9C6B3008247BF /* SettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
 		AE90A58213A5C1D100F87850 /* favstar_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favstar_selected.png; sourceTree = "<group>"; };
 		AE90A58513A5C37000F87850 /* favstar_deselected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favstar_deselected.png; sourceTree = "<group>"; };
 		AE9177F3139AC17300AC5706 /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Course.h; sourceTree = "<group>"; };
@@ -221,6 +226,8 @@
 				AE880E6813A1ACBE00824DF6 /* HeaderFooterView.m */,
 				AE834A7D13A3F6AC00EFF1DB /* ScorecardTableCell.h */,
 				AE834A7E13A3F6AC00EFF1DB /* ScorecardTableCell.m */,
+				AE90069D13A9C6B3008247BF /* SettingsViewController.h */,
+				AE90069E13A9C6B3008247BF /* SettingsViewController.m */,
 				AE85D7541368E34400CDA534 /* MainWindow.xib */,
 				AE85D75D1368E34400CDA534 /* ScorecardView.xib */,
 				AE85D7601368E34400CDA534 /* CourseSelectView.xib */,
@@ -231,6 +238,7 @@
 				AE85D7911369298E00CDA534 /* WeatherDetails.xib */,
 				AE8E2C19139886630098A426 /* NewRoundView.xib */,
 				AEA99329139DBF8800DD723C /* ScoreTrackerView.xib */,
+				AE90069F13A9C6B3008247BF /* SettingsView.xib */,
 				AE8B92D713A0633000A3EE23 /* ECaddy.sqlite */,
 				AEFE6F131381BB60002B1AA3 /* coursemodel.xcdatamodeld */,
 				AED1EA081374F950008365D5 /* green.png */,
@@ -325,6 +333,7 @@
 				AE90A58313A5C1D100F87850 /* favstar_selected.png in Resources */,
 				AE90A58613A5C37000F87850 /* favstar_deselected.png in Resources */,
 				AE8F3D3E13A6D3B000C9DB74 /* sadweather.png in Resources */,
+				AE9006A113A9C6B3008247BF /* SettingsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +363,7 @@
 				AEA9932A139DBF8800DD723C /* ScoreTrackerViewController.m in Sources */,
 				AE880E6913A1ACBE00824DF6 /* HeaderFooterView.m in Sources */,
 				AE834A7F13A3F6AC00EFF1DB /* ScorecardTableCell.m in Sources */,
+				AE9006A013A9C6B3008247BF /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
