@@ -8,7 +8,6 @@
 
 #import "ScorecardViewController.h"
 #import "NewRoundViewController.h"
-#import "ECaddyAppDelegate.h"
 
 @implementation ScorecardViewController
 

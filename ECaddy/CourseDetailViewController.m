@@ -120,29 +120,24 @@
     return;
 }
 
-#pragma mark TODO Probably need to save the course object in the managed object context
-
 - (IBAction) favstarPressed:(id)sender
 {
-    if(!manObjCon){
-        ECaddyAppDelegate* appDel = (ECaddyAppDelegate*)[[UIApplication sharedApplication] delegate];
+    ECaddyAppDelegate* appDel = [ECaddyAppDelegate sharedAppDelegate];
+  
+    if(!self.manObjCon){
         self.manObjCon = [appDel managedObjectContext];
     }
     
     BOOL fav = [[self.courseObj favorite] boolValue];
-    NSError* err = nil;
-    
+ 
     fav = !fav;
     [self.favstarBtn setImage: [UIImage imageNamed: (fav ? @"favstar_selected.png" : 
                                     @"favstar_deselected.png")] forState: UIControlStateNormal];
     
     [self.courseObj setFavorite: [NSNumber numberWithBool: fav]];
 
-    // Probably need to save the course object in the managed object context
-    if(![self.manObjCon save:&err]){
-        // Handle the error here
-        NSLog(@"Failed to save new favorite course to managedObjectContext");
-    }
+    // Save the managed object context to save the favorite change
+    [appDel saveContext];
 }
 
 @end

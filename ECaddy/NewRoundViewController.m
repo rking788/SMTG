@@ -233,7 +233,7 @@
         
         // Need to provide the managed object context to the directory 
         // to find the available courses and stuff
-        NSManagedObjectContext* manObjCon = [(ECaddyAppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
+        NSManagedObjectContext* manObjCon = [[ECaddyAppDelegate sharedAppDelegate] managedObjectContext];
      
         [dvc setManObjCon: manObjCon];
         [dvc setCourseSelectDelegate: self];
@@ -347,7 +347,7 @@
     NSNumberFormatter* numFormat = [[NSNumberFormatter alloc] init];
     [numFormat setNumberStyle: NSNumberFormatterNoStyle];
     
-    ECaddyAppDelegate* appDelegate = (ECaddyAppDelegate*) [[UIApplication sharedApplication] delegate];
+    ECaddyAppDelegate* appDelegate = [ECaddyAppDelegate sharedAppDelegate];
     Scorecard* newScorecard = [appDelegate startNewRoundWithCourse: self.curCourse
                                withNPlayers: [numFormat numberFromString: [numPlayersLbl text]]];
 
@@ -371,8 +371,7 @@
     
     // Should probably use the name of the default course here
     // Or at least the default state. A random golf course would be weird.
-    NSManagedObjectContext* manObjCon = [(ECaddyAppDelegate*)
-                                         [[UIApplication sharedApplication] delegate] managedObjectContext];
+    NSManagedObjectContext* manObjCon = [[ECaddyAppDelegate sharedAppDelegate] managedObjectContext];
     
     NSFetchRequest* fetchrequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext: manObjCon];

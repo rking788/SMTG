@@ -9,6 +9,7 @@
 #import "WeatherDetails.h"
 #import <QuartzCore/QuartzCore.h>
 #import "TBXML.h"
+#import "ECaddyAppDelegate.h"
 
 @implementation WeatherDetails
 
@@ -117,9 +118,9 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark - TODO Probably need to save the managed object context here if the star changes 
-
 - (IBAction)favstarPressed:(id)sender {
+    ECaddyAppDelegate* appDel = [ECaddyAppDelegate sharedAppDelegate];
+    
     BOOL fav = [[self.courseObj favorite] boolValue];
     
     fav = !fav;
@@ -128,7 +129,7 @@
     
     [self.courseObj setFavorite: [NSNumber numberWithBool: fav]];
     
-    // TODO Probably need to save the course object in the managed object context
+    [appDel saveContext];
 }
 
 - (void) cancel

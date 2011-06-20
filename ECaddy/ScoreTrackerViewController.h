@@ -18,6 +18,7 @@
     HeaderFooterView *scoreHeaderView;
     HeaderFooterView *scoreFooterView;
     NSMutableDictionary* scorecardDict;
+    UIButton *saveCurSC;
 }
 
 enum{

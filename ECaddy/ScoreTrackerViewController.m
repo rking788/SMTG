@@ -8,6 +8,7 @@
 
 #import "ScoreTrackerViewController.h"
 #import "ScorecardTableCell.h"
+#import "ECaddyAppDelegate.h"
 
 
 @implementation ScoreTrackerViewController
@@ -297,6 +298,8 @@
 # pragma mark - TODO Probably need to save the managed object context here 
 
 - (IBAction)favstarPressed:(id)sender {
+    ECaddyAppDelegate* appDel = [ECaddyAppDelegate sharedAppDelegate];
+    
     BOOL fav = [[self.scorecard.course favorite] boolValue];
     
     fav = !fav;
@@ -305,6 +308,6 @@
     
     [self.scorecard.course setFavorite: [NSNumber numberWithBool: fav]];
     
-    // TODO Probably need to save the course object in the managed object context
+    [appDel saveContext];
 }
 @end

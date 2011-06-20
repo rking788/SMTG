@@ -2,8 +2,8 @@
 //  dbinit.m
 //  ECaddy
 //
-//  Created by Teacher on 5/13/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created by RKing on 5/13/11.
+//  Copyright 2011 RPKing. All rights reserved.
 //
 
 #import "dbinit.h"
@@ -167,7 +167,7 @@
         cur = (NSString*)[enumer nextObject];
     }
     
-    if(![manObjCon save:&err]){
+    if(![self.manObjCon save:&err]){
         // Handle the error here
         NSLog(@"Failed to save the course objects to managedObjectContext");
     }

@@ -11,10 +11,12 @@
 
 @class Course;
 
-@interface Scorecard : NSManagedObject {
+
+@interface Scorecard : NSManagedObject{
 @private
 }
 
+@property (nonatomic, retain) NSNumber* active;
 @property (nonatomic, retain) NSDate * dateplayed;
 @property (nonatomic, retain) id scores;
 @property (nonatomic, retain) NSString* playernames;

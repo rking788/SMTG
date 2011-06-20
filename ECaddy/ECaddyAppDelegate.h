@@ -35,4 +35,8 @@
 
 - (Scorecard*) startNewRoundWithCourse: (Course*) golfCourse withNPlayers: (NSNumber*) nPlayers;
 
+- (void) saveContext;
+
++ (ECaddyAppDelegate*) sharedAppDelegate;
+
 @end

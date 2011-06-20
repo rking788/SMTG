@@ -11,11 +11,11 @@
 
 
 @implementation Scorecard
+@dynamic active;
 @dynamic dateplayed;
 @dynamic scores;
 @dynamic playernames;
 @dynamic numplayers;
 @dynamic course;
-
 
 @end

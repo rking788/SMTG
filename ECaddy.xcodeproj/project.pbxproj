@@ -34,7 +34,6 @@
 		AE85D7931369298E00CDA534 /* WeatherDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7911369298E00CDA534 /* WeatherDetails.xib */; };
 		AE880E6913A1ACBE00824DF6 /* HeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE880E6813A1ACBE00824DF6 /* HeaderFooterView.m */; };
 		AE886D651370E2490056BDF4 /* POIAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = AE886D641370E2490056BDF4 /* POIAnnotation.m */; };
-		AE8B92D813A0633000A3EE23 /* ECaddy.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = AE8B92D713A0633000A3EE23 /* ECaddy.sqlite */; };
 		AE8E2C1A139886630098A426 /* NewRoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8E2C18139886630098A426 /* NewRoundViewController.m */; };
 		AE8E2C1B139886630098A426 /* NewRoundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE8E2C19139886630098A426 /* NewRoundView.xib */; };
 		AE8F3D3E13A6D3B000C9DB74 /* sadweather.png in Resources */ = {isa = PBXBuildFile; fileRef = AE8F3D3D13A6D3B000C9DB74 /* sadweather.png */; };
@@ -54,6 +53,8 @@
 		AED1EA0C1374F959008365D5 /* tee.png in Resources */ = {isa = PBXBuildFile; fileRef = AED1EA0B1374F959008365D5 /* tee.png */; };
 		AED1EA1613750ECD008365D5 /* teeandgreen.png in Resources */ = {isa = PBXBuildFile; fileRef = AED1EA1513750ECC008365D5 /* teeandgreen.png */; };
 		AED1EA1813750ED4008365D5 /* teeandgreen_ret.png in Resources */ = {isa = PBXBuildFile; fileRef = AED1EA1713750ED4008365D5 /* teeandgreen_ret.png */; };
+		AEE5BF6813AEF99200A21E52 /* dbinit.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB0722C137DB51600BE3C37 /* dbinit.m */; };
+		AEE5BF6B13AEFBA900A21E52 /* ECaddy.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = AEE5BF6A13AEFBA900A21E52 /* ECaddy.sqlite */; };
 		AEFE6F151381BB60002B1AA3 /* coursemodel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AEFE6F131381BB60002B1AA3 /* coursemodel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -99,7 +100,6 @@
 		AE880E6813A1ACBE00824DF6 /* HeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderFooterView.m; sourceTree = "<group>"; };
 		AE886D621370E2400056BDF4 /* POIAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POIAnnotation.h; sourceTree = "<group>"; };
 		AE886D641370E2490056BDF4 /* POIAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POIAnnotation.m; sourceTree = "<group>"; };
-		AE8B92D713A0633000A3EE23 /* ECaddy.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = ECaddy.sqlite; sourceTree = "<group>"; };
 		AE8E2C17139886630098A426 /* NewRoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewRoundViewController.h; sourceTree = "<group>"; };
 		AE8E2C18139886630098A426 /* NewRoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewRoundViewController.m; sourceTree = "<group>"; };
 		AE8E2C19139886630098A426 /* NewRoundView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewRoundView.xib; sourceTree = "<group>"; };
@@ -128,6 +128,7 @@
 		AED1EA0B1374F959008365D5 /* tee.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tee.png; sourceTree = "<group>"; };
 		AED1EA1513750ECC008365D5 /* teeandgreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = teeandgreen.png; path = ../teeandgreen.png; sourceTree = "<group>"; };
 		AED1EA1713750ED4008365D5 /* teeandgreen_ret.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = teeandgreen_ret.png; path = ../teeandgreen_ret.png; sourceTree = "<group>"; };
+		AEE5BF6A13AEFBA900A21E52 /* ECaddy.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = ECaddy.sqlite; sourceTree = "<group>"; };
 		AEFE6F141381BB60002B1AA3 /* coursemodel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = coursemodel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -238,8 +239,8 @@
 				AE85D7911369298E00CDA534 /* WeatherDetails.xib */,
 				AE8E2C19139886630098A426 /* NewRoundView.xib */,
 				AEA99329139DBF8800DD723C /* ScoreTrackerView.xib */,
+				AEE5BF6A13AEFBA900A21E52 /* ECaddy.sqlite */,
 				AE90069F13A9C6B3008247BF /* SettingsView.xib */,
-				AE8B92D713A0633000A3EE23 /* ECaddy.sqlite */,
 				AEFE6F131381BB60002B1AA3 /* coursemodel.xcdatamodeld */,
 				AED1EA081374F950008365D5 /* green.png */,
 				AED1EA0B1374F959008365D5 /* tee.png */,
@@ -329,11 +330,11 @@
 				AEA35AE91384CE7600111BAA /* CourseDetailView.xib in Resources */,
 				AE8E2C1B139886630098A426 /* NewRoundView.xib in Resources */,
 				AEA9932B139DBF8800DD723C /* ScoreTrackerView.xib in Resources */,
-				AE8B92D813A0633000A3EE23 /* ECaddy.sqlite in Resources */,
 				AE90A58313A5C1D100F87850 /* favstar_selected.png in Resources */,
 				AE90A58613A5C37000F87850 /* favstar_deselected.png in Resources */,
 				AE8F3D3E13A6D3B000C9DB74 /* sadweather.png in Resources */,
 				AE9006A113A9C6B3008247BF /* SettingsView.xib in Resources */,
+				AEE5BF6B13AEFBA900A21E52 /* ECaddy.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +345,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEE5BF6813AEF99200A21E52 /* dbinit.m in Sources */,
 				AE816DC2137B7E140023F5D7 /* TBXML.m in Sources */,
 				AE85D7501368E34400CDA534 /* main.m in Sources */,
 				AE85D7531368E34400CDA534 /* ECaddyAppDelegate.m in Sources */,

@@ -342,7 +342,7 @@
     [tableView deselectRowAtIndexPath: indexPath animated:NO];
     
     UITableViewCell* tVC = [tableView cellForRowAtIndexPath: indexPath];
-    UITabBarController* tbc = [(ECaddyAppDelegate*)[[UIApplication sharedApplication] delegate] tabBarController];
+    UITabBarController* tbc = [[ECaddyAppDelegate sharedAppDelegate] tabBarController];
     UITabBarItem* tbi = [[tbc tabBar] selectedItem];
     NSString* tabItemTitle = [tbi title];
     
