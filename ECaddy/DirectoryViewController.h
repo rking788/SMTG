@@ -26,6 +26,9 @@
     
     id<CourseSelectDelegate> courseSelectDelegate;
     UITableView *theTable;
+    
+    // Property used to determine what field to pick in settings tab
+    NSInteger settingsDetailType;
 }
 @property (nonatomic, retain) NSSet* stateSet;
 @property (nonatomic, retain) NSSet* countrySet;
@@ -39,6 +42,8 @@
 @property (nonatomic, retain) IBOutlet UITableView *theTable;
 
 @property (nonatomic, assign, getter = isModal) BOOL modal;
+
+@property (nonatomic, assign) NSInteger settingsDetailType;
 
 - (void) fillStatesCountries;
 - (void) fillFavorites;

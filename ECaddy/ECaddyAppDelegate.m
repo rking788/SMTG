@@ -41,9 +41,6 @@ NSString* const DBFILENAME = @"ECaddy.sqlite";
     //[dbInit fillDB];
     //[dbInit release];
     
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject: @"Rob King" forKey:@"name"];
-    
     self.curCourse = nil;
     self.curScorecard = nil;
     

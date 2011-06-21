@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CourseSelectViewController.h"
 
 typedef enum _tagsectitleind
 {
@@ -36,18 +37,22 @@ typedef enum _tagdictindexes
     numDictValueSize
 } dictindexes;
 
-@interface SettingsViewController : UITableViewController {
+@interface SettingsViewController : UITableViewController <CourseSelectDelegate>{
     NSUserDefaults* defs;
     
     NSMutableArray* sectionTitles;
     NSMutableDictionary* userPrefsDict;
     NSMutableDictionary* coursePrefsDict;
+    
+    NSInteger selectedSettingsDetail;
 }
 @property (nonatomic, retain) NSUserDefaults* defs;
 
 @property (nonatomic, retain) NSMutableArray* sectionTitles;
 @property (nonatomic, retain) NSMutableDictionary* userPrefsDict;
 @property (nonatomic, retain) NSMutableDictionary* coursePrefsDict;
+
+@property (nonatomic, assign) NSInteger selectedSettingsDetail;
 
 // Initialization functions
 - (void) setupSectionTitles;
@@ -57,5 +62,10 @@ typedef enum _tagdictindexes
 // Helper functions
 - (NSString*) keyForIndex: (NSInteger) index InSection:(NSInteger) sec;
 - (NSInteger) indexForKey: (NSString*) key;
+
+// Settings Details Functions
+- (void) saveState: (NSString*) state;
+- (void) saveDetailsWithTableView:(UITableView*) tv WithVC: (UIViewController*) vc;
+- (void) cancelDetailsWithVC: (UIViewController*) vc;
 
 @end

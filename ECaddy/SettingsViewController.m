@@ -7,7 +7,9 @@
 //
 
 #import "SettingsViewController.h"
-
+#import "ECaddyAppDelegate.h"
+#import "SettingsDetailsViewController.h"
+#import "DirectoryViewController.h"
 
 @implementation SettingsViewController
 
@@ -15,6 +17,7 @@
 @synthesize sectionTitles;
 @synthesize userPrefsDict;
 @synthesize coursePrefsDict;
+@synthesize selectedSettingsDetail;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -98,7 +101,8 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    //return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 #pragma mark - Table view data source
@@ -216,6 +220,68 @@
      */
     
     [tableView deselectRowAtIndexPath: indexPath animated: YES];
+    
+    // Default name setting selected
+    if(indexPath.section == kUSER_SEC && indexPath.row == kNAME){
+        SettingsDetailsViewController* sdvc = [[SettingsDetailsViewController alloc] initWithNibName:@"NameEditView" bundle:nil];
+
+        [sdvc setDelVC: self];
+        [sdvc setDelTV: tableView];
+        [sdvc setDetailType: kNAME_EDIT];
+        [sdvc setCurName: [[[tableView cellForRowAtIndexPath: indexPath] detailTextLabel] text]]; 
+        [self presentModalViewController: sdvc animated: YES];
+        [sdvc release];
+        [self setSelectedSettingsDetail: kNAME_EDIT];
+    }
+    else if((indexPath.section == kCOURSE_SEC) && (indexPath.row == kCOURSE)){
+        DirectoryViewController* dvc = [[DirectoryViewController alloc] initWithNibName:@"StateDirView" bundle:nil];
+        UINavigationController* uinc = [[UINavigationController alloc] initWithRootViewController: dvc];
+        
+        // Need to provide the managed object context to the directory 
+        // to find the available courses and stuff
+        NSManagedObjectContext* manObjCon = [[ECaddyAppDelegate sharedAppDelegate] managedObjectContext];
+        
+        [dvc setManObjCon: manObjCon];
+        [dvc setCourseSelectDelegate: self];
+        [dvc setModal: YES];
+        [dvc setSettingsDetailType: kCOURSE_EDIT];
+        
+        // Display the directory view controller with a UINavigationController as it's parent
+        [uinc setModalTransitionStyle: UIModalTransitionStyleCoverVertical];
+        [self presentModalViewController:uinc animated:YES];
+        [uinc release];
+        
+        [self setSelectedSettingsDetail: kCOURSE_EDIT];
+    }
+    else if((indexPath.section == kCOURSE_SEC) && (indexPath.row == kSTATE)){
+        DirectoryViewController* dvc = [[DirectoryViewController alloc] initWithNibName:@"StateDirView" bundle:nil];
+        UINavigationController* uinc = [[UINavigationController alloc] initWithRootViewController: dvc];
+        
+        // Need to provide the managed object context to the directory 
+        // to find the available courses and stuff
+        NSManagedObjectContext* manObjCon = [[ECaddyAppDelegate sharedAppDelegate] managedObjectContext];
+        
+        [dvc setManObjCon: manObjCon];
+        [dvc setCourseSelectDelegate: self];
+        [dvc setModal: YES];
+        [dvc setSettingsDetailType: kSTATE_EDIT];
+        
+        // Display the directory view controller with a UINavigationController as it's parent
+        [uinc setModalTransitionStyle: UIModalTransitionStyleCoverVertical];
+        [self presentModalViewController:uinc animated:YES];
+        [uinc release];
+        
+        [self setSelectedSettingsDetail: kSTATE_EDIT];
+    }
+    else if((indexPath.section == kCOURSE_SEC) && (indexPath.row == kVISIBILITY)){
+        SettingsDetailsViewController* sdvc = [[SettingsDetailsViewController alloc] initWithNibName:@"HideStateView" bundle:nil];
+        
+        [sdvc setDelVC: self];
+        [sdvc setDetailType: kSTATE_VISIBILITY];
+        [self presentModalViewController: sdvc animated: YES];
+        [sdvc release];
+        [self setSelectedSettingsDetail: kSTATE_VISIBILITY];
+    }
 }
 
 #pragma mark - Initialization methods
@@ -297,7 +363,7 @@
         // Course Prefs
         switch (index) {
             case kCOURSE:
-                retStr = @"course";
+                retStr = @"coursename";
                 break;
             case kSTATE:
                 retStr = @"state";
@@ -316,6 +382,64 @@
 - (NSInteger) indexForKey: (NSString*) key 
 {
     return -1;
+}
+
+#pragma mark - Settings Details Methods
+- (void) saveDetailsWithTableView:(UITableView*) tv WithVC: (SettingsDetailsViewController*) vc
+{
+    if(self.selectedSettingsDetail == kNAME_EDIT){
+        NSMutableArray* tmpArr = [self.userPrefsDict objectForKey:[self keyForIndex:kNAME InSection:kUSER_SEC]];
+
+        [tmpArr replaceObjectAtIndex: kDEF_VALUE withObject: vc.curName];
+        [self.defs setObject: vc.curName forKey:@"name"];
+        [self.defs synchronize];
+    }
+    
+    [tv reloadData];
+    [vc dismissModalViewControllerAnimated: YES];
+}
+
+- (void) saveState: (NSString*) state
+{
+    NSMutableArray* tmpArr = [self.coursePrefsDict objectForKey:[self keyForIndex:kSTATE InSection:kCOURSE_SEC]];
+    
+    [tmpArr replaceObjectAtIndex: kDEF_VALUE withObject: state];
+    [self.defs setObject: state forKey:@"state"];
+    [self.defs synchronize];
+
+    [self.tableView reloadData];
+    [self dismissModalViewControllerAnimated: YES];
+}
+
+- (void) cancelDetailsWithVC: (UIViewController*) vc
+{
+    [vc dismissModalViewControllerAnimated: YES];
+}
+
+#pragma mark - CourseSelectDelegate methods
+- (void) selectCourse: (Course*) golfCourse
+{
+    // They clicked cancel
+    if(!golfCourse){
+        [self dismissModalViewControllerAnimated: YES];
+        return;
+    }
+    
+    if(self.selectedSettingsDetail == kCOURSE_EDIT){
+        NSMutableArray* tmpArr = [self.coursePrefsDict objectForKey:[self keyForIndex:kCOURSE InSection: kCOURSE_SEC]];
+        
+        [tmpArr replaceObjectAtIndex: kDEF_VALUE withObject: [golfCourse coursename]];
+        [self.defs setObject: [golfCourse coursename] forKey:@"coursename"];
+    }
+    else if(self.selectedSettingsDetail == kSTATE_EDIT){
+        NSMutableArray* tmpArr = [self.coursePrefsDict objectForKey:[self keyForIndex:kSTATE InSection: kCOURSE_SEC]];
+        
+        [tmpArr replaceObjectAtIndex: kDEF_VALUE withObject: [golfCourse valueForKey:@"state"]];
+        [self.defs setObject: [golfCourse valueForKey:@"state"] forKey:@"state"];
+    }
+    
+    [self.tableView reloadData];
+    [self dismissModalViewControllerAnimated: YES];
 }
 
 @end

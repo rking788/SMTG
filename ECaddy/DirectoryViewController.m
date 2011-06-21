@@ -12,6 +12,8 @@
 #import "Course.h"
 #import "CourseDetailViewController.h"
 #import "WeatherDetails.h"
+#import "SettingsViewController.h"
+#import "SettingsDetailsViewController.h"
 
 @implementation DirectoryViewController
 
@@ -21,6 +23,7 @@
 @synthesize theTable;
 @synthesize manObjCon;
 @synthesize modal;
+@synthesize settingsDetailType;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -51,7 +54,7 @@
     
     // Check for a valid default state and possibly just skip to CourseSelectVC
     NSUserDefaults* defaultPrefs = [NSUserDefaults standardUserDefaults];
-    if([defaultPrefs stringForKey: @"state"])
+    if([defaultPrefs stringForKey: @"state"] && (self.settingsDetailType != kSTATE_EDIT))
         [self gotoCourseSelectWithState: [defaultPrefs stringForKey: @"state"] Animate: NO];
 }
 
@@ -76,7 +79,8 @@
         ret = YES;
     }
     
-    return ret;
+    //return ret;
+    return YES;
 }
 
 
@@ -170,6 +174,11 @@
     NSFetchRequest* fetchrequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Location" inManagedObjectContext:self.manObjCon];
     [fetchrequest setEntity:entity];
+    
+    if(self.settingsDetailType != kSTATE_EDIT){
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"enabled == %@", [NSNumber numberWithBool: YES]];
+        [fetchrequest setPredicate:predicate];
+    }
     
     NSSortDescriptor* sortDescript = [[NSSortDescriptor alloc] initWithKey:@"state" ascending:YES];
     NSArray* sdArr = [[NSArray alloc] initWithObjects: sortDescript, nil];
@@ -363,9 +372,20 @@
             [self presentModalViewController:weatherView animated:YES];
             [weatherView release];
         }
+        else if([tabItemTitle isEqualToString: @"Settings"]){
+            // Notify the settings that a course was selected
+            [self.courseSelectDelegate selectCourse: courseObject];
+        }
         
     }
     else{
+        if(self.settingsDetailType == kSTATE_EDIT){
+            NSString* countryStr = [[countrySet allObjects] objectAtIndex: newSection];
+            NSString* stateStr = [[stateArrDict valueForKey: countryStr] objectAtIndex: indexPath.row];
+            [(SettingsViewController*) self.courseSelectDelegate saveState: stateStr];
+
+            return;
+        }
         
         NSString* countryStr = [[self.countrySet allObjects] objectAtIndex: newSection];
         NSString* stateStr = [[self.stateArrDict valueForKey: countryStr] objectAtIndex: indexPath.row];
@@ -446,6 +466,11 @@
 
 - (void) gotoCourseSelectWithState: (NSString*) stateAbbr Animate:(BOOL) animated
 {
+    // If the default state isn't enabled then we don't want to go to that course
+    // select page
+    if(![[self.stateSet allObjects] containsObject: stateAbbr])
+        return;
+    
     CourseSelectViewController* csvc = [[CourseSelectViewController alloc] initWithNibName:@"CourseSelectView" bundle:nil];
     
     if([self isModal])

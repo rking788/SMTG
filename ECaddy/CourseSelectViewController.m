@@ -132,7 +132,8 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    //return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 - (void) fillFavorites
@@ -379,6 +380,10 @@
         [self presentModalViewController:weatherView animated:YES];
         [weatherView release];
     }
+    else if([tabItemTitle isEqualToString: @"Settings"]){
+        // Notify the settings tab that we selected a course
+        [self.courseSelectDelegate selectCourse: courseObject];
+    }
 }
 
 // Customize the appearance of table view cells.
@@ -430,7 +435,7 @@
         [lbl setText: [componentsArr objectAtIndex:0]];
         [lbl2 setText: [componentsArr objectAtIndex:1]];
     }
-    
+
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     return cell;
