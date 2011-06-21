@@ -10,7 +10,7 @@
 #import "DirectoryViewController.h"
 
 // Include this to initliaze the database
-#import "dbinit.h"
+//#import "dbinit.h"
 
 @implementation ECaddyAppDelegate
 
@@ -35,11 +35,11 @@ NSString* const DBFILENAME = @"ECaddy.sqlite";
     [self loadDefaultDB];
     
     // Uncomment this to do database initialization
-    dbinit* dbInit = [[dbinit alloc] init];
+    //dbinit* dbInit = [[dbinit alloc] init];
     //[dbInit insertWOEIDS];
-    dbInit.manObjCon = [self managedObjectContext];
-    [dbInit fillDB];
-    [dbInit release];
+    //dbInit.manObjCon = [self managedObjectContext];
+    //[dbInit fillDB];
+    //[dbInit release];
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject: @"Rob King" forKey:@"name"];

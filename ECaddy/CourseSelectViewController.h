@@ -29,9 +29,8 @@ enum{
     NSMutableArray* favoriteNames;
     NSMutableArray* favoriteLocs;
     
-    // Search arrays
-    NSMutableArray* nameSearch;
-    NSMutableArray* locsSearch;
+    // Search array (This array has a name and a location seperated by a ;
+    NSArray* nameSearch;
     
     NSString* selectedState;
     NSString* longStateName;
@@ -51,8 +50,7 @@ enum{
 
 @property (nonatomic, retain) NSMutableArray* arrayOfChars;
 @property (nonatomic, retain) NSMutableDictionary* coursesDict; 
-@property (nonatomic, retain) NSMutableArray* nameSearch;
-@property (nonatomic, retain) NSMutableArray* locsSearch;
+@property (nonatomic, retain) NSArray* nameSearch;
 @property (nonatomic, retain) NSString* selectedState;
 @property (nonatomic, retain) NSString* longStateName;
 @property (nonatomic, retain) NSManagedObjectContext* manObjCon;

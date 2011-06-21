@@ -17,6 +17,7 @@
 
 @synthesize actSheet;
 @synthesize curCourse;
+@synthesize curScorecard;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -30,6 +31,7 @@
 - (void)dealloc
 {
     [curCourse release];
+    [curScorecard release];
     [super dealloc];
 }
 
@@ -77,7 +79,7 @@
     [button setBackgroundColor:[UIColor yellowColor]];
 
     //set action of the button
-    [button addTarget:self action:@selector(beginRound) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(beginClicked) forControlEvents:UIControlEventTouchUpInside];
     
     //add the button to the view
     [footView addSubview:button];
@@ -105,11 +107,26 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     self.curCourse = nil;
+    self.curScorecard = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    ECaddyAppDelegate* del = [ECaddyAppDelegate sharedAppDelegate];
+    
+    if(del.curScorecard){
+        self.curScorecard = del.curScorecard;
+    }
+    else{
+        self.curScorecard = [self findActiveScorecard];
+    }
+    
+    // Add a resume button to the right side of the navigation bar to resume the round
+    if(self.curScorecard){
+        NSLog(@"Found an active scorecard so adding a right bar button item");
+        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Resume" style: UIBarButtonItemStyleBordered target:self action:@selector(resumeRound)] autorelease];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -335,13 +352,26 @@
     [detailLbl setText: [golfCourse coursename]];
 }
 
-- (void) beginRound
+- (void) beginClicked
 {
     if(!self.curCourse){
         NSLog(@"Error: the current course is nil when trying to begin a round.");
         return;
     }
     
+    // If there is a current scorecard then display an alert view
+    if(self.curScorecard){
+        UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"Warning" message: @"You are about to begin a new round with a round already active. The active round will be overwritten." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Continue", nil];
+        
+        [av show];
+        return;
+    }
+    
+    [self beginRound];
+}
+
+- (void) beginRound
+{
     NSIndexPath* indPath = [NSIndexPath indexPathForRow: kNumPlayers inSection:0];
     UILabel* numPlayersLbl = [[self.tableView cellForRowAtIndexPath: indPath] detailTextLabel];
     NSNumberFormatter* numFormat = [[NSNumberFormatter alloc] init];
@@ -351,15 +381,27 @@
     Scorecard* newScorecard = [appDelegate startNewRoundWithCourse: self.curCourse
                                withNPlayers: [numFormat numberFromString: [numPlayersLbl text]]];
 
+    [self gotoScoreTrackerWithSC: newScorecard];
+    
+    [numFormat release];
+}
+
+- (void) gotoScoreTrackerWithSC: (Scorecard*) sc
+{
     // Add the scoretracker view controller to the navigation stack
     ScoreTrackerViewController* stvc = [[ScoreTrackerViewController alloc] initWithNibName: @"ScoreTrackerView" bundle:nil];
     
-    [stvc setScorecard: newScorecard];
+    [stvc setScorecard: sc];
     
     [self.navigationController pushViewController:stvc animated:YES];
     
     [stvc release];
-    [numFormat release];
+}
+
+- (void) resumeRound
+{
+    NSLog(@"Resuming current round with the current scorecard");
+    [self gotoScoreTrackerWithSC: self.curScorecard];
 }
 
 - (Course*) loadDefaultCourse
@@ -415,6 +457,49 @@
     [fetchrequest release];
 
     return retCourse;
+}
+
+- (Scorecard*) findActiveScorecard
+{
+    Scorecard* retScorecard = nil;
+    NSPredicate* predicate = nil;
+    
+    // Should probably use the name of the default course here
+    // Or at least the default state. A random golf course would be weird.
+    NSManagedObjectContext* manObjCon = [[ECaddyAppDelegate sharedAppDelegate] managedObjectContext];
+    
+    NSFetchRequest* fetchrequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Scorecard" inManagedObjectContext: manObjCon];
+    [fetchrequest setEntity:entity];
+    
+    predicate = [NSPredicate predicateWithFormat:@"active == %@", [NSNumber numberWithBool: YES]];
+    [fetchrequest setPredicate:predicate];
+    
+    [fetchrequest setFetchLimit: 1];
+    
+    NSError *error = nil;
+    NSArray *array = [manObjCon executeFetchRequest:fetchrequest error:&error];
+    if (array != nil) {
+        if([array count] != 0)
+            retScorecard = [array objectAtIndex: 0];
+    }
+    else {
+        // Deal with error.
+        NSLog(@"Error fetching lots");
+    }
+    
+    [fetchrequest release];
+    
+    return retScorecard;
+}
+
+
+#pragma mark - UIAlertViewDelegate Methods
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if([[alertView buttonTitleAtIndex: buttonIndex] isEqualToString: @"Continue"]){
+        [self beginRound];
+    }
 }
 
 @end

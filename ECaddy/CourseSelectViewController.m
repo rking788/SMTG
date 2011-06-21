@@ -14,7 +14,7 @@
 @implementation CourseSelectViewController
 
 @synthesize arrayOfChars, coursesDict;
-@synthesize nameSearch, locsSearch;
+@synthesize nameSearch;
 @synthesize selectedState, longStateName;
 @synthesize favoriteLocs, favoriteNames;
 @synthesize manObjCon;
@@ -73,7 +73,6 @@
     self.arrayOfChars = [[NSMutableArray alloc] initWithCapacity: 26];
     
     self.nameSearch = [[NSMutableArray alloc] init];
-    self.locsSearch = [[NSMutableArray alloc] init];
     
     self.favoriteNames = [[NSMutableArray alloc] init];
     self.favoriteLocs = [[NSMutableArray alloc] init];
@@ -410,8 +409,9 @@
     
     if(self.searching && ([self.searchB.text length] > 0)){
         isSpecial = YES;
-        [lbl setText: [self.nameSearch objectAtIndex: indexPath.row]];
-        [lbl2 setText: [[self.locsSearch objectAtIndex: indexPath.row]stringByTrimmingCharactersInSet: charSet]];
+        NSArray* compArr = [[self.nameSearch objectAtIndex:indexPath.row] componentsSeparatedByString:@";"];
+        [lbl setText: [compArr objectAtIndex:0]];
+        [lbl2 setText: [[compArr objectAtIndex:1] stringByTrimmingCharactersInSet: charSet]];
     }
     else if(isActives && (indexPath.section == 0)){
         [lbl setText: @"Active Course"];
@@ -507,10 +507,6 @@
 # pragma mark Search Bar methods
 - (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText {
     
-    //Remove all objects first.
-    [self.nameSearch removeAllObjects];
-    [self.locsSearch removeAllObjects];
-    
     if([searchText length] > 0) {
         [UIView beginAnimations:nil context:NULL];
         self.blackView.alpha = 0.0;
@@ -541,6 +537,7 @@
     NSArray* componentsArr = nil;
     NSInteger scopeIndex = [self.searchB selectedScopeButtonIndex];
     NSRange titleResultsRange = {NSNotFound, 0};
+    NSMutableArray* tmpArr = [[NSMutableArray alloc] init];
     
     NSArray* tempArr = [self.coursesDict allValues];
     for(NSArray* tempArr2 in tempArr){
@@ -556,11 +553,13 @@
                 titleResultsRange = [locStr rangeOfString:searchText options:NSCaseInsensitiveSearch];
             
             if (titleResultsRange.length > 0){
-                [self.nameSearch addObject: nameStr];
-                [self.locsSearch addObject: locStr];
+                [tmpArr addObject: sTemp];
             }
         }
     }
+    
+    self.nameSearch = [tmpArr sortedArrayUsingSelector: @selector(compare:)];
+    [tmpArr release];
 }
 
 #pragma  mark - TODO If the tableview is somewhat scrolled then the blackView doesn't cover the table view completely

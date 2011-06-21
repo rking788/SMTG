@@ -53,7 +53,6 @@
 		AED1EA0C1374F959008365D5 /* tee.png in Resources */ = {isa = PBXBuildFile; fileRef = AED1EA0B1374F959008365D5 /* tee.png */; };
 		AED1EA1613750ECD008365D5 /* teeandgreen.png in Resources */ = {isa = PBXBuildFile; fileRef = AED1EA1513750ECC008365D5 /* teeandgreen.png */; };
 		AED1EA1813750ED4008365D5 /* teeandgreen_ret.png in Resources */ = {isa = PBXBuildFile; fileRef = AED1EA1713750ED4008365D5 /* teeandgreen_ret.png */; };
-		AEE5BF6813AEF99200A21E52 /* dbinit.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB0722C137DB51600BE3C37 /* dbinit.m */; };
 		AEE5BF6B13AEFBA900A21E52 /* ECaddy.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = AEE5BF6A13AEFBA900A21E52 /* ECaddy.sqlite */; };
 		AEFE6F151381BB60002B1AA3 /* coursemodel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AEFE6F131381BB60002B1AA3 /* coursemodel.xcdatamodeld */; };
 /* End PBXBuildFile section */
@@ -345,7 +344,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEE5BF6813AEF99200A21E52 /* dbinit.m in Sources */,
 				AE816DC2137B7E140023F5D7 /* TBXML.m in Sources */,
 				AE85D7501368E34400CDA534 /* main.m in Sources */,
 				AE85D7531368E34400CDA534 /* ECaddyAppDelegate.m in Sources */,

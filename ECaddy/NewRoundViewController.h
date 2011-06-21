@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "CourseSelectViewController.h"
 
+@class Scorecard;
+
 typedef enum _tagTableRows
 {
     kCourseName = 0,
@@ -16,17 +18,23 @@ typedef enum _tagTableRows
     numTableRows
 } TableRows;
 
-@interface NewRoundViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate, CourseSelectDelegate> {
+@interface NewRoundViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate, CourseSelectDelegate, UIAlertViewDelegate> {
     UIActionSheet* actSheet;
     Course* curCourse;
+    Scorecard* curScorecard;
 }
 
 @property (nonatomic, retain) UIActionSheet* actSheet;
 @property (nonatomic, retain) Course* curCourse;
+@property (nonatomic, retain) Scorecard* curScorecard;
 
 - (Course*) loadDefaultCourse;
 - (void) showPickerView;
 - (void) dismissPickerView;
+- (void) beginClicked;
 - (void) beginRound;
+- (void) resumeRound;
+- (void) gotoScoreTrackerWithSC: (Scorecard*) sc;
+- (Scorecard*) findActiveScorecard;
 
 @end
