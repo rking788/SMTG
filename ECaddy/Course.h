@@ -14,11 +14,11 @@
 }
 @property (nonatomic, retain) NSString * phone;
 @property (nonatomic, retain) NSString * website;
-@property (nonatomic, retain) id womenpars;
+@property (nonatomic, retain) NSArray* womenpars;
 @property (nonatomic, retain) NSString * woeid;
 @property (nonatomic, retain) NSNumber * numholes;
 @property (nonatomic, retain) NSString * coursename;
-@property (nonatomic, retain) id menpars;
+@property (nonatomic, retain) NSArray* menpars;
 @property (nonatomic, retain) NSNumber * favorite;
 @property (nonatomic, retain) NSSet* scorecards;
 

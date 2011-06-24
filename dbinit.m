@@ -99,7 +99,7 @@
     NSEnumerator* enumer = [lines objectEnumerator];
     NSString* cur = [enumer nextObject];
     NSManagedObject* courseObj = nil; 
-    NSCharacterSet* badChars = [NSCharacterSet  characterSetWithCharactersInString:@"\""];
+    NSCharacterSet* badChars = [NSCharacterSet  characterSetWithCharactersInString:@"\"*"];
     
     NSString* name = nil;
     NSString* phone = nil;
@@ -111,8 +111,14 @@
     NSString* enabled = @"1";
     NSString* favorite = @"0";
     NSString* numHoles = nil;
-    NSString* mensPars = nil;
-    NSString* womensPars = nil;
+    NSString* tmpMensPars = nil;
+    NSString* tmpWomensPars = nil;
+    NSArray* mensPars = nil;
+    NSArray* womensPars = nil;
+    NSString* tmpTeeCoordsStr = nil;
+    NSString* tmpGreenCoordsStr = nil;
+    NSArray* teeCoords = nil;
+    NSArray* greenCoords = nil;
     
     BOOL isEnabled = YES;
     BOOL isFavorite = NO;
@@ -130,12 +136,12 @@
             state = [[lineFields objectAtIndex: 6] stringByTrimmingCharactersInSet:badChars];
             country = [[lineFields objectAtIndex: 7] stringByTrimmingCharactersInSet:badChars];
             enabled = [[lineFields objectAtIndex: 8] stringByTrimmingCharactersInSet: badChars];
-            numHoles = [[lineFields objectAtIndex: 9] stringByTrimmingCharactersInSet: badChars];
-            // These aren't in the CSV yet
-            //favorite = [[lineFields objectAtIndex: 9] stringByTrimmingCharactersInSet badChars];
-            favorite = NO;
-            //mensPars = [[lineFields objectAtIndex: 10] stringByTrimmingCharactersInSet badChars];
-            //womensPars [[lineFields objectAtIndex: 11] stringByTrimmingCharactersInSet badChars];
+            favorite = [[lineFields objectAtIndex: 9] stringByTrimmingCharactersInSet: badChars];
+            numHoles = [[lineFields objectAtIndex: 10] stringByTrimmingCharactersInSet: badChars];
+            tmpMensPars = [[lineFields objectAtIndex: 11] stringByTrimmingCharactersInSet: badChars];
+            tmpWomensPars = [[lineFields objectAtIndex: 12] stringByTrimmingCharactersInSet: badChars];
+            tmpTeeCoordsStr = [[lineFields objectAtIndex: 13] stringByTrimmingCharactersInSet: badChars];
+            tmpGreenCoordsStr = [[lineFields objectAtIndex: 14] stringByTrimmingCharactersInSet: badChars];
             
             if([website isEqualToString:@"NULL"])
                 website = nil;
@@ -150,6 +156,38 @@
             else
                 isFavorite = NO;
             
+            // These are special cases (may need to be changed depending on the CSV format
+            if([tmpMensPars length] == 0){
+                mensPars = nil;
+            }
+            else{
+                mensPars = [tmpMensPars componentsSeparatedByString: @","];
+            }
+            
+            if([tmpWomensPars length] == 0){
+                womensPars = nil;
+            }
+            else{
+                womensPars = [tmpWomensPars componentsSeparatedByString: @","];
+            }
+            
+            NSRange stringRange = [tmpTeeCoordsStr rangeOfString: @"\N"];
+            if(stringRange.length > 0){
+                teeCoords = nil;
+            }
+            else{
+                teeCoords = [tmpTeeCoordsStr componentsSeparatedByString: @"*"];
+            }
+
+            stringRange = [tmpGreenCoordsStr rangeOfString: @"\N"];
+            if(stringRange.length > 0){
+                greenCoords = nil;
+            }
+            else{
+                greenCoords = [tmpGreenCoordsStr componentsSeparatedByString: @"*"];
+            }
+
+            
             [courseObj setValue: name forKey: @"coursename"];
             [courseObj setValue: addr forKey: @"address"];
             [courseObj setValue: phone forKey: @"phone"];
@@ -162,6 +200,8 @@
             [courseObj setValue: [NSNumber numberWithInt: [numHoles intValue]] forKey: @"numholes"];
             [courseObj setValue: mensPars forKey: @"menpars"];
             [courseObj setValue: womensPars forKey: @"womenpars"];
+            [courseObj setValue: teeCoords forKey: @"teeCoords"];
+            [courseObj setValue: greenCoords forKey: @"greenCoords"];
         }
 
         cur = (NSString*)[enumer nextObject];

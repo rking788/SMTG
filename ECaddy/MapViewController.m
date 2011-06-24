@@ -11,13 +11,21 @@
 #import "MapViewController.h"
 #import <CoreLocation/CoreLocation.h>
 #import <QuartzCore/QuartzCore.h>
+#import "POIAnnotation.h"
+#import "ECaddyAppDelegate.h"
+#import "Course.h"
 
 @implementation MapViewController
 
+@synthesize manObjCon;
 @synthesize distLbl;
 @synthesize mapView;
 @synthesize holeAnnotations;
 @synthesize distanceAnnotations;
+@synthesize curHole;
+@synthesize coordsAvailable;
+@synthesize teeCoords;
+@synthesize greenCoords;
 @synthesize holeLine;
 @synthesize holeLineView;
 
@@ -27,24 +35,35 @@
 {
     [super viewDidLoad];
     
+    // TODO: If there is no current course then we should NOT do anything here
+    // maybe display another view like in the weather details when an internet connection is not available
+    
+    self.manObjCon = [[ECaddyAppDelegate sharedAppDelegate] managedObjectContext];
+    
     // Initialize the hole annotation size to 2 (tee and green)
     self.holeAnnotations = [[NSMutableArray alloc] initWithCapacity: 2];
     self.distanceAnnotations = [[NSMutableArray alloc] init];
     
-    [self holeAnnotsTeeLat:44.044435 teeLong:-69.939185 greenLat:44.044311 greenLong:-69.937617];
-    
-    // TODO: Remove This. Set the region of the map to the first hole
-    [self zoomToFitMapAnnotations:mapView];
-    
-    [self.navigationItem setTitle: @"Country Fareways Hole #1"];
-    
     // TODO: This needs to be changed but it is the same basic idea.
-    UIBarButtonItem *flipButton = [[UIBarButtonItem alloc] initWithTitle:@"Next Hole"                                            
+    UIBarButtonItem* nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next"                                            
         style:UIBarButtonItemStyleBordered 
         target:self 
-        action: nil];
-    self.navigationItem.rightBarButtonItem = flipButton;
-    [flipButton release];
+        action: @selector(goToNextHole:)];
+    self.navigationItem.rightBarButtonItem = nextButton;
+    
+    // Add a button to the left side of the navigation bar for the prev hole button
+    UIBarButtonItem* prevButton = [[UIBarButtonItem alloc] initWithTitle:@"Previous"                                             
+                                        style:UIBarButtonItemStylePlain 
+                                        target:self 
+                                        action: @selector(goToPrevHole:)];
+    self.navigationItem.leftBarButtonItem = prevButton;
+    
+    // Fill the coordinate arrays
+    [self populateHoleCoords];
+    
+    // Start on hole 0 because gotonexthole will increment this value
+    self.curHole = 0;
+    [self goToNextHole: nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -75,9 +94,12 @@
 
 - (void)viewDidUnload
 {
+    [self setManObjCon: nil];
     [self setMapView:nil];
     [self setHoleAnnotations: nil];
     [self setDistanceAnnotations:nil];
+    [self setTeeCoords: nil];
+    [self setGreenCoords: nil];
     [self setDistLbl:nil];
     [super viewDidUnload];
     
@@ -92,6 +114,9 @@
     [holeAnnotations release];
     [distanceAnnotations release];
     [distLbl release];
+    [teeCoords release];
+    [greenCoords release];
+    [manObjCon release];
     [super dealloc];
 }
 
@@ -126,23 +151,108 @@
     MKCoordinateRegion region;
     region.center.latitude = topLeftCoord.latitude - (topLeftCoord.latitude - bottomRightCoord.latitude) * 0.5;
     region.center.longitude = topLeftCoord.longitude + (bottomRightCoord.longitude - topLeftCoord.longitude) * 0.5;
-    region.span.latitudeDelta = fabs(topLeftCoord.latitude - bottomRightCoord.latitude) * 1.1; // Add a little extra space on the sides
-    region.span.longitudeDelta = fabs(bottomRightCoord.longitude - topLeftCoord.longitude) * 1.1; // Add a little extra space on the sides
+    region.span.latitudeDelta = fabs(topLeftCoord.latitude - bottomRightCoord.latitude) * 1.2; // Add a little extra space on the sides
+    region.span.longitudeDelta = fabs(bottomRightCoord.longitude - topLeftCoord.longitude) * 1.2; // Add a little extra space on the sides
     
     region = [mapV regionThatFits:region];
     [mapV setRegion:region animated:YES];
+}
+
+# pragma mark - TODO Sometimes the zoomtoFite doesn't really work correctly
+- (void) goToNextHole:(id)sender
+{
+    // If we are past the last hole then display a summary view maybe
+    if(self.curHole >= [self.teeCoords count])
+        return;
+    
+    // Increment the current hole counter
+    ++self.curHole;
+    
+    if(![self isCoordsAvailable])
+        return;
+    
+    NSArray* tee = [MapViewController latAndLongForHole:self.curHole FromCoords: self.teeCoords];
+    NSArray* green = [MapViewController latAndLongForHole:self.curHole FromCoords:self.greenCoords];
+    [self holeAnnotsTeeCoords: tee greenLat:green]; 
+    
+    [self zoomToFitMapAnnotations:mapView];
+    
+    // Set the title to the current hole
+    [self.navigationItem setTitle: [NSString stringWithFormat: @"Hole #%d", self.curHole]];
+    
+    if(self.curHole == 1){
+        [self.navigationItem.leftBarButtonItem setEnabled: NO];
+    }
+    else if(self.curHole > 1){
+        [self.navigationItem.leftBarButtonItem setEnabled: YES];
+    }
+}
+
+- (void) goToPrevHole:(id)sender
+{
+    // If we are past the last hole then display a summary view maybe
+    if(self.curHole == 1)
+        return;
+    
+    // Increment the current hole counter
+    --self.curHole;
+    
+    if(![self isCoordsAvailable])
+        return;
+    
+    NSArray* tee = [MapViewController latAndLongForHole:self.curHole FromCoords: self.teeCoords];
+    NSArray* green = [MapViewController latAndLongForHole:self.curHole FromCoords:self.greenCoords];
+    [self holeAnnotsTeeCoords: tee greenLat:green]; 
+    
+    [self zoomToFitMapAnnotations:mapView];
+    
+    // Set the title to the current hole
+    [self.navigationItem setTitle: [NSString stringWithFormat: @"Hole #%d", self.curHole]];
+    
+    if(self.curHole == 1){
+        [self.navigationItem.leftBarButtonItem  setEnabled: NO];
+    }
+    else if(self.curHole > 1){
+        [self.navigationItem.leftBarButtonItem setEnabled: YES];
+    }
+}
+
+- (void) populateHoleCoords
+{
+    Course* curCourse = (Course*) [[ECaddyAppDelegate sharedAppDelegate] curCourse];
+    
+    self.teeCoords = [curCourse valueForKey: @"teeCoords"];
+    self.greenCoords = [curCourse valueForKey: @"greenCoords"];
+    
+    if(self.teeCoords && self.greenCoords)
+        self.coordsAvailable = YES;
+}
+
++ (NSArray*) latAndLongForHole: (NSUInteger) hole FromCoords: (NSArray*) coords
+{
+    NSNumberFormatter* numFormat = [[NSNumberFormatter alloc] init];
+    [numFormat setNumberStyle: NSNumberFormatterNoStyle];
+    
+    NSString* coordsStr = [coords objectAtIndex: (hole - 1)];
+ 
+    NSNumber* lat = [numFormat numberFromString: [[coordsStr componentsSeparatedByString:@","] objectAtIndex: 0]];
+    NSNumber* longitude = [numFormat numberFromString: [[coordsStr componentsSeparatedByString: @","] objectAtIndex: 1]];
+    
+    [numFormat release];
+    
+    return [NSArray arrayWithObjects:lat, longitude, nil];
 }
 
 #pragma mark Map View Methods
 
 - (void) clearHoleAnnotsAndArray: (BOOL) bClearArray
 {
-    if(self.holeAnnotations == nil)
+    if([[self.mapView annotations] count] == 0)
+        return;
+    if([self.holeAnnotations count] == 0)
         return;
     
-    // TODO: Not sure if this check is correct for the case where no objects have been added yet
-    // or if there is an easier way of doing it.
-    if(([self.holeAnnotations objectAtIndex:teeAnnotationIndex] != nil) && ([self.holeAnnotations objectAtIndex: greenAnnotationIndex])){
+    if(([self.holeAnnotations objectAtIndex:teeAnnotationIndex]) && ([self.holeAnnotations objectAtIndex: greenAnnotationIndex])){
         [self.mapView removeAnnotations: self.holeAnnotations];
     }
     
@@ -151,16 +261,40 @@
         [self.holeAnnotations removeAllObjects];
 }
 
-- (void) holeAnnotsTeeLat:(double) lat1 teeLong:(double) long1 greenLat:(double) lat2 greenLong:(double) long2
-{    
+- (void) clearDistanceAnnotsAndArray: (BOOL) bClearArray
+{
+    if([[self.mapView annotations] count] == 0)
+        return;
+    if([self.distanceAnnotations count] == 0)
+        return;
+    
+    if(self.holeLine)
+        [self.mapView removeOverlay: self.holeLine];
+        [self setHoleLineView: nil]; 
+
+    [self.mapView removeAnnotations: self.distanceAnnotations];
+    
+    // If the bool flag is set then remove the annotations from the array too
+    if(bClearArray)
+        [self.distanceAnnotations removeAllObjects];
+}
+
+
+- (void) holeAnnotsTeeCoords:(NSArray *)tee greenLat:(NSArray *)green
+{
+    double lat1 = [[tee objectAtIndex: 0] doubleValue] / 1000000.0;
+    double long1 = [[tee objectAtIndex: 1] doubleValue] / 1000000.0;
+    
+    double lat2 = [[green objectAtIndex: 0] doubleValue] / 1000000.0;
+    double long2 = [[green objectAtIndex: 1] doubleValue] / 1000000.0;
+    
     // Clear the annotations if they already exist
-    [self.holeAnnotations removeAllObjects];
+    [self clearHoleAnnotsAndArray: YES];
+    [self clearDistanceAnnotsAndArray: YES];
     
     POIAnnotation* teeAnnot = [[POIAnnotation alloc] initWithLat:lat1 withLong:long1];
-    [teeAnnot setImage: [UIImage imageNamed: @"tee.png"]];
     
     POIAnnotation* greenAnnot = [[POIAnnotation alloc] initWithLat:lat2 withLong:long2];
-    [greenAnnot setImage: [UIImage imageNamed: @"green.png"]];
     
     POIAnnotation* draggable1 = [[POIAnnotation alloc] initWithLat: ((lat1+lat2)/2) withLong:((long1+long2)/2)];
     [draggable1 setDraggable: YES];
@@ -171,10 +305,6 @@
 
     [self.mapView addAnnotations:self.holeAnnotations];
     [self.mapView addAnnotations: self.distanceAnnotations];
-    
-    [teeAnnot release];
-    [greenAnnot release];
-    [draggable1 release];
 
     //  Create the line from the tee to the green
     MKMapPoint* pointArray = malloc(sizeof(CLLocationCoordinate2D) * 3);
@@ -194,16 +324,25 @@
     free((void*) pointArray);
     
     // Find the distance between the two points
-    CLLocationDistance distance = [loc2 distanceFromLocation: loc1] * 1.0936133;
-    NSLog(@"Distance calculated to be %lf yards", distance);
+    CLLocationDistance distanceToGreen = [loc2 distanceFromLocation: loc1] * 1.0936133;
+    CLLocationDistance distanceToPin = [midloc distanceFromLocation: loc1] * 1.0935133;
+    NSLog(@"Distance calculated to be %lf yards", distanceToPin);
     
     // Set the distance label
-    [self.distLbl setText: [NSString stringWithFormat: @"Tee to Pin: %d yd", (int)distance]];
+    [self.distLbl setText: [NSString stringWithFormat: @"Tee to Pin: %d yd", (int)distanceToPin]];
     [self.distLbl setTextColor: [UIColor colorWithRed: 0.219607845 green: 0.521568656 blue:0 alpha:1.0]];
     [self.distLbl setBackgroundColor: [UIColor colorWithRed: 0.870588243 green: 0.862745106 blue:0.0 alpha:1.0]];
     self.distLbl.layer.borderColor = [UIColor colorWithRed: 0.219607845 green: 0.521568656 blue:0 alpha:1.0].CGColor;
     self.distLbl.layer.borderWidth = 2.0;
 
+    // Set the title for the annotation equal to the distance to that annotation from the tee
+    [draggable1 setTitle: [NSString stringWithFormat: @"%d yd", (int) distanceToPin]];
+    [greenAnnot setTitle: [NSString stringWithFormat: @"%d yd", (int) distanceToGreen]];
+        
+    [teeAnnot release];
+    [greenAnnot release];
+    [draggable1 release];
+    
     [loc1 release];
     [loc2 release];
     [midloc release];
@@ -249,6 +388,7 @@
     }
 }
 
+#pragma mark - TODO This needs to be fixed. The draggable pins are purple sometimes and red other times.
 - (MKAnnotationView *)mapView:(MKMapView *)theMapView viewForAnnotation:(id <MKAnnotation>)annotation
 {
     // if it's the user location, just return nil.
@@ -256,32 +396,30 @@
         return nil;
     
     // handle our two custom annotations
-    //
-    if ([annotation isKindOfClass:[POIAnnotation class]] && [(POIAnnotation*)annotation isDraggable]) // for Golden Gate Bridge
-    {
+    if ([annotation isKindOfClass:[POIAnnotation class]] && [(POIAnnotation*)annotation isDraggable]){
         // try to dequeue an existing pin view first
-        static NSString* POIAnnotationID = @"poiAnnotationIdentifierDraggable";
+        static NSString* POIDraggableAnnotationID = @"poiAnnotationIdentifierDraggable";
         MKPinAnnotationView* pinView = (MKPinAnnotationView *)
-        [self.mapView dequeueReusableAnnotationViewWithIdentifier:POIAnnotationID];
+        [self.mapView dequeueReusableAnnotationViewWithIdentifier:POIDraggableAnnotationID];
         if (!pinView)
         {
-            MKPinAnnotationView* customPinView = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier: POIAnnotationID] autorelease];
+            MKPinAnnotationView* customPinView = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier: POIDraggableAnnotationID] autorelease];
             
-            [customPinView setCanShowCallout: NO];
+            [customPinView setCanShowCallout: YES];
             [customPinView setDraggable: YES];
             [customPinView setPinColor: MKPinAnnotationColorPurple];
             
             return customPinView;
         }
+        return pinView;
     }
-    if ([annotation isKindOfClass:[POIAnnotation class]]) // for Golden Gate Bridge
-    {
+    if ([annotation isKindOfClass:[POIAnnotation class]] && (![(POIAnnotation*) annotation isDraggable])){
+        
         // try to dequeue an existing pin view first
         static NSString* POIAnnotationID = @"poiAnnotationIdentifier";
         MKPinAnnotationView* pinView = (MKPinAnnotationView *)
         [self.mapView dequeueReusableAnnotationViewWithIdentifier:POIAnnotationID];
-        if (!pinView)
-        {
+        if (!pinView){
             // if an existing pin view was not available, create one
             //MKPinAnnotationView* customPinView = [[[MKPinAnnotationView alloc]
             //                                       initWithAnnotation:annotation reuseIdentifier:POIAnnotationID] autorelease];
@@ -303,18 +441,38 @@
             
             MKAnnotationView* customPinView = [[[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier: POIAnnotationID] autorelease];
             
-            [customPinView setCanShowCallout: NO];
-            [customPinView setCenterOffset: CGPointMake(0, -20)];
-            // NSLog(@"Draggable: %@", ([customPinView isDraggable] ? @"YES" : @"NO"));
+            // TODO: Use this offset to offset the callout so it doesn't adjust
+            // the map when the bubble is displayed this value will need to be diferent
+            // if the green is on the left (x will have to be +20)
+            CGPoint calloutpoint = [customPinView calloutOffset];
+            calloutpoint.x -= 20;
             
-             [customPinView setImage: [((POIAnnotation*)annotation) image]];
+            [customPinView setCalloutOffset: calloutpoint];
+            [customPinView setCanShowCallout: YES];
+            
+            // TODO: Probably remove this offset once new images are used
+            [customPinView setCenterOffset: CGPointMake(0, -20)];
+            
+            if([customPinView.annotation isEqual: [self.holeAnnotations objectAtIndex: teeAnnotationIndex]]){
+                [customPinView setImage: [UIImage imageNamed: @"tee.png"]];
+            }
+            else if([customPinView.annotation isEqual: [self.holeAnnotations objectAtIndex:greenAnnotationIndex]]){
+                [customPinView setImage: [UIImage imageNamed: @"green.png"]];
+            }
             
             return customPinView;
         }
-        else
-        {
+        else{
             pinView.annotation = annotation;
         }
+        
+        if([pinView.annotation isEqual: [self.holeAnnotations objectAtIndex: teeAnnotationIndex]]){
+            [pinView setImage: [UIImage imageNamed: @"tee.png"]];
+        }
+        else if([pinView.annotation isEqual: [self.holeAnnotations objectAtIndex:greenAnnotationIndex]]){
+            [pinView setImage: [UIImage imageNamed: @"green.png"]];
+        }
+        
         return pinView;
     }
     
@@ -368,5 +526,13 @@
     }
 }
 
+- (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView
+{
+    //NSLog(@"Done");
+    // TODO: This doesn't work very well. It is not called reliably
+    
+    // Select the green annotation to display the yardage bubble
+   // [self.mapView selectAnnotation: [self.holeAnnotations objectAtIndex:greenAnnotationIndex]animated: YES];
+}
 
 @end
