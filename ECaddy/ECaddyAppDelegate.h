@@ -34,6 +34,7 @@
 - (void) loadDefaultDB;
 
 - (Scorecard*) startNewRoundWithCourse: (Course*) golfCourse withNPlayers: (NSNumber*) nPlayers;
+- (Scorecard*) findActiveScorecard;
 
 - (void) saveContext;
 

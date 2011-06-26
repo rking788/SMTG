@@ -31,7 +31,7 @@
 - (void)dealloc
 {
     [curCourse release];
-    [curScorecard release];
+    //[curScorecard release];
     [super dealloc];
 }
 
@@ -107,7 +107,7 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     self.curCourse = nil;
-    self.curScorecard = nil;
+   // self.curScorecard = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -117,14 +117,21 @@
     
     if(del.curScorecard){
         self.curScorecard = del.curScorecard;
+        self.curCourse = del.curScorecard.course;
     }
     else{
-        self.curScorecard = [self findActiveScorecard];
+        self.curScorecard = [del findActiveScorecard];
     }
     
     // Add a resume button to the right side of the navigation bar to resume the round
     if(self.curScorecard){
-        NSLog(@"Found an active scorecard so adding a right bar button item");
+        
+        self.curCourse = self.curScorecard.course;
+        
+        // Set the current course and scorecard in the app delegate
+       // del.curScorecard = self.curScorecard;
+       // del.curCourse = self.curCourse;
+        
         self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Resume" style: UIBarButtonItemStyleBordered target:self action:@selector(resumeRound)] autorelease];
     }
 }
@@ -248,6 +255,8 @@
     if(indexPath.row == kCourseName){
         DirectoryViewController* dvc = [[DirectoryViewController alloc] initWithNibName:@"StateDirView" bundle:nil];
         UINavigationController* uinc = [[UINavigationController alloc] initWithRootViewController: dvc];
+        
+        [uinc.navigationBar setBarStyle: UIBarStyleBlack];
         
         // Need to provide the managed object context to the directory 
         // to find the available courses and stuff
@@ -401,7 +410,6 @@
 
 - (void) resumeRound
 {
-    NSLog(@"Resuming current round with the current scorecard");
     [self gotoScoreTrackerWithSC: self.curScorecard];
 }
 
@@ -460,44 +468,13 @@
     return retCourse;
 }
 
-- (Scorecard*) findActiveScorecard
-{
-    Scorecard* retScorecard = nil;
-    NSPredicate* predicate = nil;
-    
-    // Should probably use the name of the default course here
-    // Or at least the default state. A random golf course would be weird.
-    NSManagedObjectContext* manObjCon = [[ECaddyAppDelegate sharedAppDelegate] managedObjectContext];
-    
-    NSFetchRequest* fetchrequest = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Scorecard" inManagedObjectContext: manObjCon];
-    [fetchrequest setEntity:entity];
-    
-    predicate = [NSPredicate predicateWithFormat:@"active == %@", [NSNumber numberWithBool: YES]];
-    [fetchrequest setPredicate:predicate];
-    
-    [fetchrequest setFetchLimit: 1];
-    
-    NSError *error = nil;
-    NSArray *array = [manObjCon executeFetchRequest:fetchrequest error:&error];
-    if (array != nil) {
-        if([array count] != 0)
-            retScorecard = [array objectAtIndex: 0];
-    }
-    else {
-        // Deal with error.
-        NSLog(@"Error fetching lots");
-    }
-    
-    [fetchrequest release];
-    
-    return retScorecard;
-}
-
-
 #pragma mark - UIAlertViewDelegate Methods
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    self.curScorecard.active = [NSNumber numberWithBool: NO];
+    ECaddyAppDelegate* del = [ECaddyAppDelegate sharedAppDelegate];
+    [del saveContext];
+    
     if([[alertView buttonTitleAtIndex: buttonIndex] isEqualToString: @"Continue"]){
         [self beginRound];
     }

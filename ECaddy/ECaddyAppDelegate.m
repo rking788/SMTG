@@ -238,6 +238,42 @@ NSString* const DBFILENAME = @"ECaddy.sqlite";
     }
 }
 
+- (Scorecard*) findActiveScorecard
+{
+    NSPredicate* predicate = nil;
+    
+    // Should probably use the name of the default course here
+    // Or at least the default state. A random golf course would be weird.
+    NSManagedObjectContext* manObjCon = [[ECaddyAppDelegate sharedAppDelegate] managedObjectContext];
+    
+    NSFetchRequest* fetchrequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Scorecard" inManagedObjectContext: manObjCon];
+    [fetchrequest setEntity:entity];
+    
+    predicate = [NSPredicate predicateWithFormat:@"active == %@", [NSNumber numberWithBool: YES]];
+    [fetchrequest setPredicate:predicate];
+    
+    [fetchrequest setFetchLimit: 1];
+    
+    NSError *error = nil;
+    NSArray *array = [manObjCon executeFetchRequest:fetchrequest error:&error];
+    if (array != nil) {
+        if([array count] != 0)
+            self.curScorecard = [array objectAtIndex: 0];
+    }
+    else {
+        // Deal with error.
+        NSLog(@"Error fetching lots");
+    }
+    
+    [fetchrequest release];
+    
+    if(self.curScorecard)
+        self.curCourse = self.curScorecard.course;
+    
+    return self.curScorecard;
+}
+
 + (ECaddyAppDelegate*) sharedAppDelegate
 {
     return (ECaddyAppDelegate*) [[UIApplication sharedApplication] delegate];

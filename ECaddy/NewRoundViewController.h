@@ -35,6 +35,5 @@ typedef enum _tagTableRows
 - (void) beginRound;
 - (void) resumeRound;
 - (void) gotoScoreTrackerWithSC: (Scorecard*) sc;
-- (Scorecard*) findActiveScorecard;
 
 @end

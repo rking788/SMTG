@@ -9,16 +9,22 @@
 #import "ScoreTrackerViewController.h"
 #import "ScorecardTableCell.h"
 #import "ECaddyAppDelegate.h"
+#import "Scorecard.h"
+#import "Course.h"
+#import "HeaderFooterView.h"
 
+#define kOFFSET_FOR_KEYBOARD 125.0
 
 @implementation ScoreTrackerViewController
 
+@synthesize appDel;
+@synthesize scorecard;
 @synthesize scoreHeaderView;
 @synthesize scoreFooterView;
 @synthesize titleTextView;
 @synthesize favstarBtn;
 @synthesize scorecardDict;
-@synthesize scorecard;
+@synthesize scrollView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,12 +37,14 @@
 
 - (void)dealloc
 {
-    [scorecard release];
+    [appDel release];
+    //[scorecard release];
     [titleTextView release];
     [scoreHeaderView release];
     [scoreFooterView release];
     [scorecardDict release];
     [favstarBtn release];
+    [scrollView release];
     [super dealloc];
 }
 
@@ -55,6 +63,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.appDel = [ECaddyAppDelegate sharedAppDelegate];
+    
     if(self.scorecard){
         NSString* name;
         NSString* date;
@@ -72,48 +82,67 @@
         
         [dateF release];
         
-        [self.favstarBtn setImage: [UIImage imageNamed: ([[self.scorecard.course favorite] boolValue] ? @"favstar_selected.png" : 
-                                                         @"favstar_deselected.png")] forState: UIControlStateNormal];
+        [self.favstarBtn setImage: [UIImage imageNamed: ([[self.scorecard.course favorite] boolValue] ? @"favstar_selected.png" : @"favstar_deselected.png")] forState: UIControlStateNormal];
+        
+        NSUInteger num = [[self.scorecard numplayers] unsignedIntegerValue];
+        // Add the right number of names to the header of the table view
+        [self.scoreHeaderView addColumnsForNumPlayers: num];
+        
+        // Get the player names from the header view
+        [self.scorecard setPlayernames: [self.scoreHeaderView stringOfPlayers]];
+        [self.scorecard setNumplayers: [NSNumber numberWithUnsignedInteger: num]];
+        
+        // Initialize the dictionary holding the following data:
+        //    keys    = NString Player Names
+        //    values  = NSMutableArray of scores
+        self.scorecardDict = [[NSMutableDictionary alloc] initWithCapacity: num];
+        
+        NSMutableArray* dictArr = nil;
+        // Initialize the values in the scorecard dictionary
+        for(NSString* str in [[self.scorecard playernames] componentsSeparatedByString: @";"]){
+            
+            // TODO: This 18 should probably be changed to the number of holes on the course
+            dictArr = [[NSMutableArray alloc] initWithObjects:@"-", @"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-", nil];
+            [self.scorecardDict setObject: dictArr forKey: str];
+            [dictArr release];
+        }
+
     }
 }
 
 - (void)viewDidUnload
 {
+    scrollView = nil;
+    [super viewDidUnload];
+    [self setAppDel: nil];
+   // [self setScorecard: nil];
     [self setTitleTextView:nil];
     [self setScoreHeaderView:nil];
     [self setScoreFooterView:nil];
     [self setFavstarBtn:nil];
-    [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    self.scorecard = nil;
     [self setScorecardDict: nil];
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {   
-    NSUInteger num = [[self.scorecard numplayers] unsignedIntegerValue];
-    // Add the right number of names to the header of the table view
-    [self.scoreHeaderView addColumnsForNumPlayers: num];
+    [super viewWillAppear: animated];
+    // Load the players scores from the current scorecard object
     
-    // Get the player names from the header view
-    [self.scorecard setPlayernames: [self.scoreHeaderView stringOfPlayers]];
-    [self.scorecard setNumplayers: [NSNumber numberWithUnsignedInteger: num]];
-    
-    // Initialize the dictionary holding the following data:
-    //    keys    = NString Player Names
-    //    values  = NSMutableArray of scores
-    self.scorecardDict = [[NSMutableDictionary alloc] initWithCapacity: num];
-    
-    NSMutableArray* dictArr = nil;
-    // Initialize the values in the scorecard dictionary
-    for(NSString* str in [[self.scorecard playernames] componentsSeparatedByString: @";"]){
-    
-        // TODO: This 18 should probably be changed to the number of holes on the course
-        dictArr = [[NSMutableArray alloc] initWithObjects:@"-", @"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-", nil];
-        [self.scorecardDict setObject: dictArr forKey: str];
-        [dictArr release];
-    }
+    NSMutableDictionary* scoresdict = self.scorecard.scores;
+    if(scoresdict)
+        self.scorecardDict = (NSMutableDictionary*) self.scorecard.scores;
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear: animated];
+    // Save the players scores to the sqlite store
+    self.scorecard.scores = self.scorecardDict;
+
+    [self.appDel saveContext];
+    // Maybe Use a seperate thread to keep from being sluggish
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -205,7 +234,14 @@
     label.text = [NSString stringWithFormat: @"%d", indexPath.row + 1];
     
     label = (UILabel*) [cell viewWithTag: PAR_TAG];
-    label.text = [NSString stringWithFormat: @"%d", 3];
+    
+    NSNumber* parnum = [self.scorecard.course.menpars objectAtIndex: indexPath.row]; 
+    // TODO: Right now just using the mens pars maybe want to support womens' pars later
+    if(!parnum)
+        label.text = @"-";
+    else{
+        label.text = [NSString stringWithFormat: @"%@", [self.scorecard.course.menpars objectAtIndex: indexPath.row]];
+    }
     
     UITextField* field;
     for(UIView* view in cell.subviews){
@@ -273,8 +309,19 @@
     return YES;
 }
 
+- (void) textFieldDidBeginEditing:(UITextField *)textField
+{
+    //move the main view, so that the keyboard does not hide it.
+    if  (self.view.frame.origin.y >= 0)
+    {
+        [self setViewMovedUp: YES];
+    }
+}
+
 - (void) textFieldDidEndEditing: (UITextField*) textField
 {
+    [self setViewMovedUp: NO];
+    
     NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
     [f setNumberStyle: NSNumberFormatterDecimalStyle];
     NSNumber * newNumber = [f numberFromString: textField.text];
@@ -296,11 +343,33 @@
     [f release];
 }
 
-# pragma mark - TODO Probably need to save the managed object context here 
+
+#pragma  mark TODO: when the view is moved up, the scroll view top needs to be moved down a bit the holes from 2-18 are visible but hole #1 is not quite visible
+- (void) setViewMovedUp: (BOOL) movedUp
+{
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.5]; // if you want to slide up the view
+        
+    CGRect rect = self.view.frame;
+    if (movedUp)
+    {
+        // 1. move the view's origin up so that the text field that will be hidden come above the keyboard 
+        // 2. increase the size of the view so that the area behind the keyboard is covered up.
+        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
+        rect.size.height += kOFFSET_FOR_KEYBOARD;
+    }
+    else
+    {
+        // revert back to the normal state.
+        rect.origin.y += kOFFSET_FOR_KEYBOARD;
+        rect.size.height -= kOFFSET_FOR_KEYBOARD;
+    }
+    self.view.frame = rect;
+    
+    [UIView commitAnimations];
+}
 
 - (IBAction)favstarPressed:(id)sender {
-    ECaddyAppDelegate* appDel = [ECaddyAppDelegate sharedAppDelegate];
-    
     BOOL fav = [[self.scorecard.course favorite] boolValue];
     
     fav = !fav;
@@ -309,6 +378,6 @@
     
     [self.scorecard.course setFavorite: [NSNumber numberWithBool: fav]];
     
-    [appDel saveContext];
+    [self.appDel saveContext];
 }
 @end

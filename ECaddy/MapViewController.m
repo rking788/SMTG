@@ -6,7 +6,7 @@
 //  Copyright 2011 RPKing. All rights reserved.
 //
 
-// TODOS: Need to support the players current location. Figure out what to do with the tee pins when the players location is displayed.
+#pragma mark - TODOS: Need to support the players current location. Figure out what to do with the tee pins when the players location is displayed.
 
 #import "MapViewController.h"
 #import <CoreLocation/CoreLocation.h>
@@ -158,7 +158,6 @@
     [mapV setRegion:region animated:YES];
 }
 
-# pragma mark - TODO Sometimes the zoomtoFite doesn't really work correctly
 - (void) goToNextHole:(id)sender
 {
     // If we are past the last hole then display a summary view maybe
