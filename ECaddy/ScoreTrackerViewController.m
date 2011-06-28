@@ -38,7 +38,7 @@
 - (void)dealloc
 {
     [appDel release];
-    //[scorecard release];
+    [scorecard release];
     [titleTextView release];
     [scoreHeaderView release];
     [scoreFooterView release];
@@ -77,20 +77,28 @@
         date = [dateF stringFromDate: [self.scorecard dateplayed]];
         [self.titleTextView setText: [NSString stringWithFormat: @"%@\n%@", name, date]];
  
-        // Give the header view a reference to us to alert us of changes
+        // Give the header and footer views a reference to us to alert us of changes
         [self.scoreHeaderView setScoreTracker: (ScoreTrackerViewController*) self];
+        [self.scoreFooterView setScoreTracker: (ScoreTrackerViewController*) self];
         
         [dateF release];
         
         [self.favstarBtn setImage: [UIImage imageNamed: ([[self.scorecard.course favorite] boolValue] ? @"favstar_selected.png" : @"favstar_deselected.png")] forState: UIControlStateNormal];
         
         NSUInteger num = [[self.scorecard numplayers] unsignedIntegerValue];
+        
         // Add the right number of names to the header of the table view
-        [self.scoreHeaderView addColumnsForNumPlayers: num];
+        [self.scoreHeaderView addHeaderColumnsForNumPlayers: num];
+        [self.scoreHeaderView setHeaderOrFooter: @"Header"];
+        [self.scoreFooterView addFooterColumnsForNumPlayers: num];
+        [self.scoreFooterView setHeaderOrFooter: @"Footer"];
         
         // Get the player names from the header view
         [self.scorecard setPlayernames: [self.scoreHeaderView stringOfPlayers]];
         [self.scorecard setNumplayers: [NSNumber numberWithUnsignedInteger: num]];
+        
+        // Set the player names in the footer view to let it get the column numbers
+        [self.scoreFooterView setPlayerNamesArr: [[self.scoreHeaderView stringOfPlayers] componentsSeparatedByString: @";"]];
         
         // Initialize the dictionary holding the following data:
         //    keys    = NString Player Names
@@ -115,7 +123,7 @@
     scrollView = nil;
     [super viewDidUnload];
     [self setAppDel: nil];
-   // [self setScorecard: nil];
+    [self setScorecard: nil];
     [self setTitleTextView:nil];
     [self setScoreHeaderView:nil];
     [self setScoreFooterView:nil];
@@ -177,6 +185,8 @@
     if (cell == nil) {
         //cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
         cell = [[[ScorecardTableCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+        
+        [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
         
         label = [[[UILabel alloc] initWithFrame: CGRectMake(0.0, 0.0, constColWidth-1, tableView.rowHeight)] autorelease];
         
@@ -244,14 +254,19 @@
     }
     
     UITextField* field;
+    NSUInteger col = 0;
     for(UIView* view in cell.subviews){
         if(view.tag == HOLENUM_TAG || view.tag == PAR_TAG)
             continue;
         if(view.tag == 0)
             continue;
-        
+
         field = (UITextField*) view;
+        field.tag = [ScoreTrackerViewController tagFromRow: indexPath.row AndCol: col];
         field.text = [self stringForScoreWithRow:indexPath.row AndCol: [[[ScoreTrackerViewController rowAndColFromTag: field.tag] objectAtIndex: 1] unsignedIntegerValue]];
+       
+        // Only increment the column number if it is a textfield column
+        col++;
     }
   //  UITextField* field = (UITextField*) [cell viewWithTag: PAR_TAG + 2];
   //  field.text = [NSString stringWithFormat: @"%d", (field.tag - PAR_TAG)];
@@ -276,8 +291,15 @@
 
 - (void) nameChangedFrom: (NSString*) oldName To: (NSString*) newName
 {
+    // If the names haven't changed then there is nothing else to do
+    if([oldName isEqualToString: newName])
+        return;
+    
     // Update the names in the scorecard string
     [self.scorecard setPlayernames: [self.scoreHeaderView stringOfPlayers]];
+    
+    // Update the names in the footer view
+    [self.scoreFooterView setPlayerNamesArr: [[self.scoreHeaderView stringOfPlayers] componentsSeparatedByString: @";"]];
     
     // Update the keys in the scorecardDict
     NSMutableArray* copyValue = [self.scorecardDict objectForKey: oldName];
@@ -324,12 +346,7 @@
     
     NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
     [f setNumberStyle: NSNumberFormatterDecimalStyle];
-    NSNumber * newNumber = [f numberFromString: textField.text];
-    
-    if(!newNumber){
-   	     [textField setText: @""];
-        return;
-    }
+    NSNumber* newNumber = [f numberFromString: textField.text];
    
     NSArray* rowCol = [[ScoreTrackerViewController rowAndColFromTag: textField.tag] retain];
     NSUInteger row = [[rowCol objectAtIndex: 0] unsignedIntegerValue];
@@ -337,7 +354,17 @@
     
     NSString* playerName = [self.scoreHeaderView stringForNameInCol: col];
     
-    [[self.scorecardDict objectForKey: playerName] replaceObjectAtIndex: row withObject: newNumber];
+    if(newNumber){
+        [[self.scorecardDict objectForKey: playerName] replaceObjectAtIndex: row withObject: newNumber];
+    }
+    else{
+        [textField setText: @""];
+        // This is the place holder if text is not a valid number
+        [[self.scorecardDict objectForKey: playerName] replaceObjectAtIndex: row withObject: @"-"];
+    }
+    
+    // Update the totals in the footer view
+    [self.scoreFooterView setTotalsWithScoreDict: self.scorecardDict];
     
     [rowCol release];
     [f release];
@@ -351,15 +378,13 @@
     [UIView setAnimationDuration:0.5]; // if you want to slide up the view
         
     CGRect rect = self.view.frame;
-    if (movedUp)
-    {
+    if (movedUp){
         // 1. move the view's origin up so that the text field that will be hidden come above the keyboard 
         // 2. increase the size of the view so that the area behind the keyboard is covered up.
         rect.origin.y -= kOFFSET_FOR_KEYBOARD;
         rect.size.height += kOFFSET_FOR_KEYBOARD;
     }
-    else
-    {
+    else{
         // revert back to the normal state.
         rect.origin.y += kOFFSET_FOR_KEYBOARD;
         rect.size.height -= kOFFSET_FOR_KEYBOARD;

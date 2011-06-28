@@ -8,10 +8,12 @@
 
 #import "HeaderFooterView.h"
 #import "ScoreTrackerViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation HeaderFooterView
 
 @synthesize numCols;
+@synthesize headerOrFooter;
 @synthesize playerNamesArr;
 @synthesize scoreTracker;
 
@@ -36,7 +38,7 @@
 */
 
 #pragma mark - TODO The way the default player is inserted is really messed up it should be done correctly
-- (void) addColumnsForNumPlayers: (NSUInteger) numPlayers
+- (void) addHeaderColumnsForNumPlayers: (NSUInteger) numPlayers
 {
     CGFloat constColSize = 45;
     NSUInteger i = 0;
@@ -122,6 +124,104 @@
     [playerNames release];
 }
 
+- (void) addFooterColumnsForNumPlayers: (NSUInteger) numPlayers
+{
+    CGFloat constColSize = 45.0;
+    NSUInteger i = 0;
+    NSString* fontStr = @"Helvetica";
+    
+    // Set up two constant columns for the "Hole #" and "Par" values
+    CGRect rect1 = CGRectMake(0, 0, (constColSize * 2) + 1, self.bounds.size.height);
+    UILabel* totalLabel = [[UILabel alloc] initWithFrame: rect1];
+    [totalLabel setText: @"TOTAL"];
+    [totalLabel setFont: [UIFont fontWithName: @"Helvetica Bold" size: 14.0]];
+  //  [totalLabel setContentHorizontalAlignment: UIControlContentHorizontalAlignmentCenter];
+    [totalLabel setTextAlignment: UITextAlignmentCenter];
+   // [totalLabel setContentVerticalAlignment: UIControlContentVerticalAlignmentCenter];
+    [totalLabel setMinimumFontSize: (CGFloat) 12.0];
+    [totalLabel setAdjustsFontSizeToFitWidth: YES];
+   // [totalLabel setBorderStyle: UITextBorderStyleLine];
+    [totalLabel setEnabled: YES];
+    [totalLabel setTag: kTOTAL_TAG];
+    
+    totalLabel.layer.borderColor = [UIColor blackColor].CGColor;
+    totalLabel.layer.borderWidth = 1.0;
+    
+    // Add the constant columns as subviews
+    [self addSubview: totalLabel];
+    
+    [totalLabel release];
+    
+    // Set a variable number of columns that is equal to the number of players playing
+    CGRect playerTotRect;
+    UITextField* playerTotTF;
+    CGFloat varColWidth = (CGFloat)((self.bounds.size.width - (2 * constColSize))/ numPlayers);
+    CGFloat varColOffset = ((constColSize) * 2);;
+    
+    for(i = 0; i < numPlayers; i++){
+        // Setup the TextField with a calculated CGRect
+        playerTotRect = CGRectMake((varColOffset + (i * varColWidth)), 0, varColWidth, self.bounds.size.height);
+        playerTotTF = [[UITextField alloc] initWithFrame: playerTotRect];
+        
+        // Set up the text field to be entered in the header
+        [playerTotTF setText: @"-"];
+        [playerTotTF setTextAlignment: UITextAlignmentCenter];
+        [playerTotTF setContentVerticalAlignment: UIControlContentVerticalAlignmentCenter];
+        [playerTotTF setAdjustsFontSizeToFitWidth: YES];
+        [playerTotTF setMinimumFontSize: 8];
+        [playerTotTF setBorderStyle: UITextBorderStyleLine];
+        [playerTotTF setFont: [UIFont fontWithName: fontStr size: 17.0]];
+        [playerTotTF setDelegate: self];
+        [playerTotTF setReturnKeyType: UIReturnKeyDone];
+        [playerTotTF setTag: ((kTOTAL_TAG + 1) + i)];
+        [playerTotTF setUserInteractionEnabled: NO];
+        
+        [self addSubview: playerTotTF];
+        
+        [playerTotTF release];
+    }
+}
+
+- (void) setTotalsWithScoreDict: (NSMutableDictionary*) scoreDict
+{
+    NSUInteger tag = kTOTAL_TAG;
+    NSInteger total;
+    UITextField* textField;
+    
+    for(UIView* view in self.subviews){
+        tag = view.tag;
+        
+        if(tag <= kTOTAL_TAG)
+            continue;
+        
+        total = -1;
+        textField = (UITextField*) view;
+        NSString* name = [self stringForNameInCol: [HeaderFooterView colFromTag: tag]];
+        NSArray* scores = [scoreDict objectForKey: name];
+        for(id score in scores){
+            if([score isKindOfClass: [NSNumber class]]){
+                if (total != -1) {
+                    total += [score intValue];
+                }
+                else{
+                    total = [score intValue];
+                }
+            }
+        }
+        
+        // Set the text field to the total or a - 
+        if(total != -1)
+            [textField setText: [NSString stringWithFormat: @"%d", total]];
+        else
+            [textField setText: @"-"];
+    }
+}
+
++ (NSUInteger) colFromTag:(NSUInteger)tag
+{
+    return [[NSNumber numberWithUnsignedInt: (tag - (kTOTAL_TAG + 1))] unsignedIntValue];
+}
+
 # pragma mark UITextFieldDelegate methods
 
 - (BOOL) textFieldShouldReturn: (UITextField*) textField
@@ -146,17 +246,18 @@
 
 - (NSString*) stringOfPlayers
 {
-    return [playerNamesArr componentsJoinedByString: @";"];
+    return [self.playerNamesArr componentsJoinedByString: @";"];
 }
 
 - (NSString*) stringForNameInCol: (NSUInteger) col
 {
-    return [playerNamesArr objectAtIndex: col];
+    return [self.playerNamesArr objectAtIndex: col];
 }
 
 - (void)dealloc
 {
     [playerNamesArr release];
+    [headerOrFooter release];
     [super dealloc];
 }
 

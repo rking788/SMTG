@@ -31,7 +31,7 @@
 - (void)dealloc
 {
     [curCourse release];
-    //[curScorecard release];
+    [curScorecard release];
     [super dealloc];
 }
 
@@ -107,7 +107,7 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     self.curCourse = nil;
-   // self.curScorecard = nil;
+    self.curScorecard = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -286,6 +286,8 @@
     NSInteger nCur = [[numPlayers text] integerValue];
     nCur = nCur - 1;
     
+    [self.actSheet setTitle: @"Number of Golfers"];
+    
     [self.actSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
     
     CGRect pickerFrame = CGRectMake(0, 40, 0, 0);
@@ -332,7 +334,7 @@
 }
 
 - (NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    return 5;
+    return 9;
 }
 
 - (NSString*) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
