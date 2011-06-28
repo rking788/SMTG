@@ -427,7 +427,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Robert KIng (PLJWL35TX2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Robert KIng (PLJWL35TX2)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -436,6 +437,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				PROVISIONING_PROFILE = "2F7D09D7-F4A8-43EF-B877-C3E8D49ADD35";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2F7D09D7-F4A8-43EF-B877-C3E8D49ADD35";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -444,13 +447,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Robert KIng (PLJWL35TX2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Robert KIng (PLJWL35TX2)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "2F7D09D7-F4A8-43EF-B877-C3E8D49ADD35";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2F7D09D7-F4A8-43EF-B877-C3E8D49ADD35";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

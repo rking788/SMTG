@@ -28,7 +28,9 @@
 @synthesize greenCoords;
 @synthesize holeLine;
 @synthesize holeLineView;
-
+@synthesize locManager;
+@synthesize userLoc;
+@synthesize userLocEnabled;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -101,6 +103,8 @@
     [self setTeeCoords: nil];
     [self setGreenCoords: nil];
     [self setDistLbl:nil];
+    [self setLocManager: nil];
+    [self setUserLoc: nil];
     [super viewDidUnload];
     
     // Release any retained subviews of the main view.
@@ -117,6 +121,8 @@
     [teeCoords release];
     [greenCoords release];
     [manObjCon release];
+    [locManager release];
+    [userLoc release];
     [super dealloc];
 }
 
@@ -240,6 +246,108 @@
     [numFormat release];
     
     return [NSArray arrayWithObjects:lat, longitude, nil];
+}
+
+- (IBAction)toggleLocationOnOff:(id)sender
+{
+    if(!self.locManager){
+        self.locManager = [[CLLocationManager alloc] init];
+        self.locManager.delegate = self;
+    }
+    
+    if([self isUserLocEnabled]){
+        [self.locManager stopUpdatingLocation];
+        [self.mapView setShowsUserLocation: NO];
+        self.userLocEnabled = NO;
+    }
+    else{
+        if([CLLocationManager locationServicesEnabled]){
+            [self.locManager startUpdatingLocation];
+        }     
+    }
+}
+
+- (void) locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    if(!self.userLoc){
+        self.userLoc = [[CLLocation alloc] initWithLatitude: newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];
+    }
+    
+    if(![self isUserLocEnabled]){
+        self.userLocEnabled = YES;
+        [self.mapView setShowsUserLocation: YES];
+        
+        if([self isCoordsAvailable]){
+            // Remove the tee annotation and show the user annotation
+            [self.mapView removeAnnotation: [self.holeAnnotations objectAtIndex: teeAnnotationIndex]];
+        
+            // Draw line from user location -> draggable -> green
+            [self drawMapLine];
+        }
+    }
+}
+
+- (void) drawMapLine
+{
+    NSNumber* midLat = [(POIAnnotation*) [self.distanceAnnotations objectAtIndex: 0] latitude];
+    NSNumber* midLong = [(POIAnnotation*) [self.distanceAnnotations objectAtIndex: 0] longitude];
+    
+    // Remove the old line
+    [self.mapView removeOverlay: self.holeLine];
+    [self setHoleLineView: nil]; 
+    
+    //  Create the line from the tee to the green or from the user location to the green
+    double lat1; 
+    double long1;
+    if([self isUserLocEnabled]){
+        lat1 = self.userLoc.coordinate.latitude;
+        long1 = self.userLoc.coordinate.longitude;
+    }
+    else{
+        lat1 = [[[self.holeAnnotations objectAtIndex: teeAnnotationIndex] latitude] doubleValue];
+        long1 = [[[self.holeAnnotations objectAtIndex: teeAnnotationIndex] longitude] doubleValue];
+    }
+    
+    double lat2 = [[[self.holeAnnotations objectAtIndex: greenAnnotationIndex] latitude] doubleValue];
+    double long2 = [[[self.holeAnnotations objectAtIndex: greenAnnotationIndex] longitude] doubleValue];
+    
+    MKMapPoint* pointArray = malloc(sizeof(CLLocationCoordinate2D) * 3);
+    
+    CLLocation* loc1 = [[CLLocation alloc] initWithLatitude: lat1 longitude:long1];
+    pointArray[0] = MKMapPointForCoordinate([loc1 coordinate]);
+    
+    CLLocation* midloc = [[CLLocation alloc] initWithLatitude: [midLat doubleValue] longitude: [midLong doubleValue]];
+    pointArray[1] = MKMapPointForCoordinate([midloc coordinate]);
+    
+    CLLocation* loc2 = [[CLLocation alloc] initWithLatitude: lat2 longitude:long2];
+    pointArray[2] = MKMapPointForCoordinate([loc2 coordinate]);
+    
+    [self setHoleLine: [MKPolyline polylineWithPoints: pointArray count: 3]];
+    
+    [self.mapView addOverlay: [self holeLine]];
+    
+    // Find the distance between the two points
+    CLLocationDistance distanceToGreen = [loc2 distanceFromLocation: loc1] * 1.0936133;
+    CLLocationDistance distanceToPin = [midloc distanceFromLocation: loc1] * 1.0935133;
+    NSLog(@"Distance calculated to be %lf yards", distanceToPin);
+    
+    // Set the distance label
+    [self.distLbl setText: [NSString stringWithFormat: @"Tee to Pin: %d yd", (int)distanceToPin]];
+    [self.distLbl setTextColor: [UIColor colorWithRed: 0.219607845 green: 0.521568656 blue:0 alpha:1.0]];
+    [self.distLbl setBackgroundColor: [UIColor colorWithRed: 0.870588243 green: 0.862745106 blue:0.0 alpha:1.0]];
+    self.distLbl.layer.borderColor = [UIColor colorWithRed: 0.219607845 green: 0.521568656 blue:0 alpha:1.0].CGColor;
+    self.distLbl.layer.borderWidth = 2.0;
+    
+    // Set the title for the annotation equal to the distance to that annotation from the tee
+    [[self.distanceAnnotations objectAtIndex:0] setTitle: [NSString stringWithFormat: @"%d yd", (int) distanceToPin]];
+    [[self.holeAnnotations objectAtIndex: greenAnnotationIndex] setTitle: [NSString stringWithFormat: @"%d yd", (int) distanceToGreen]];
+    
+    // Free up memory
+    free((void*) pointArray);
+    [loc1 release];
+    [loc2 release];
+    [midloc release];
+
 }
 
 #pragma mark Map View Methods
@@ -387,7 +495,6 @@
     }
 }
 
-#pragma mark - TODO This needs to be fixed. The draggable pins are purple sometimes and red other times.
 - (MKAnnotationView *)mapView:(MKMapView *)theMapView viewForAnnotation:(id <MKAnnotation>)annotation
 {
     // if it's the user location, just return nil.
@@ -478,20 +585,30 @@
     return nil;
 }
 
+# pragma mark - TODO replace a lot of this code with [self drawMapLine]
+# pragma mark - TODO The annotation distances are not being recalculated after the draggable annotation is moved
+
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState
 {
     //NSLog(@"Changing Drag State");
     if(newState == MKAnnotationViewDragStateEnding){
         POIAnnotation* annot = annotationView.annotation;
-        NSNumber* num1 = annot.latitude;
-        NSNumber* num2 = annot.longitude;
-       
+        
         [self.mapView removeOverlay: self.holeLine];
         [self setHoleLineView: nil]; 
         
         //  Create the line from the tee to the green
-        double lat1 = [[[self.holeAnnotations objectAtIndex: teeAnnotationIndex] latitude] doubleValue];
-        double long1 = [[[self.holeAnnotations objectAtIndex:teeAnnotationIndex] longitude] doubleValue];
+        double lat1;
+        double long1;
+        
+        if([self isUserLocEnabled]){
+            lat1 = self.userLoc.coordinate.latitude;
+            long1 = self.userLoc.coordinate.longitude;
+        }
+        else{
+            lat1 = [[[self.holeAnnotations objectAtIndex: teeAnnotationIndex] latitude] doubleValue];
+            long1 = [[[self.holeAnnotations objectAtIndex:teeAnnotationIndex] longitude] doubleValue];
+        }
         double lat2 = [[[self.holeAnnotations objectAtIndex: greenAnnotationIndex] latitude] doubleValue];
         double long2 = [[[self.holeAnnotations objectAtIndex: greenAnnotationIndex] longitude] doubleValue];
         
@@ -500,7 +617,7 @@
         CLLocation* loc1 = [[CLLocation alloc] initWithLatitude: lat1 longitude:long1];
         pointArray[0] = MKMapPointForCoordinate([loc1 coordinate]);
         
-        CLLocation* midloc = [[CLLocation alloc] initWithLatitude: [num1 doubleValue] longitude: [num2 doubleValue]];
+        CLLocation* midloc = [[CLLocation alloc] initWithLatitude: [annot.latitude doubleValue] longitude: [annot.longitude doubleValue]];
         pointArray[1] = MKMapPointForCoordinate([midloc coordinate]);
         
         CLLocation* loc2 = [[CLLocation alloc] initWithLatitude: lat2 longitude:long2];

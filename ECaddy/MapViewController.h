@@ -13,7 +13,7 @@
 @class POIAnnotation;
 
 
-@interface MapViewController : UIViewController <MKMapViewDelegate> {
+@interface MapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate> {
     
     NSManagedObjectContext* manObjCon;
     
@@ -33,6 +33,10 @@
     MKPolylineView* holeLineView;
    
     UILabel *distLbl;
+
+    CLLocationManager* locManager;
+    CLLocation* userLoc;
+    BOOL userLocEnabled;
 }
 
 // Properties
@@ -54,6 +58,10 @@
 @property (nonatomic, retain) MKPolyline* holeLine;
 @property (nonatomic, retain) MKPolylineView* holeLineView;
 
+@property (nonatomic, retain) CLLocationManager* locManager;
+@property (nonatomic, retain) CLLocation* userLoc;
+@property (nonatomic, assign, getter = isUserLocEnabled) BOOL userLocEnabled;
+
 // Methods
 - (void)zoomToFitMapAnnotations:(MKMapView*)mapV;
 - (void) holeAnnotsTeeCoords: (NSArray*) tee greenLat:(NSArray*) green;
@@ -65,12 +73,17 @@
 - (void) goToNextHole: (id) sender;
 - (void) goToPrevHole: (id) sender;
 
+- (void) drawMapLine;
+
 + (NSArray*) latAndLongForHole: (NSUInteger) hole FromCoords: (NSArray*) coords;
+
+- (IBAction)toggleLocationOnOff:(id)sender;
 
 enum
 {
     teeAnnotationIndex = 0,
-    greenAnnotationIndex
+    greenAnnotationIndex,
+    userAnnotationIndex
 };
 
 @end

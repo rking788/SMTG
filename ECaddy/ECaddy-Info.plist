@@ -20,7 +20,7 @@
 		<string>teeandgreen_ret.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>RPKing.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>RPKing2.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -39,6 +39,8 @@
 	<true/>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
+	<key>UIPrerenderedIcon</key>
+	<false/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -49,7 +51,5 @@
 	<array/>
 	<key>UTImportedTypeDeclarations</key>
 	<array/>
-	<key>UIPrerenderedIcon</key>
-	<false/>
 </dict>
 </plist>
