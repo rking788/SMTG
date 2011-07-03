@@ -10,19 +10,23 @@
 #import "NewRoundViewController.h"
 #import "ScorecardTableViewController.h"
 
+# pragma mark - TODO Need to shrink the content view so that the buttons are still in the middle of the screen.
+
 @implementation ScorecardViewController
 
-
+@synthesize contentView;
 @synthesize adView;
 @synthesize courseObj;
+@synthesize adVisible;
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self createAdBannerView];
 }
-*/
+
 - (void) viewDidAppear:(BOOL)animated
 {
     if(self.courseObj){
@@ -31,6 +35,11 @@
     
     // This will keep it from going back and forth between the next view controller
     self.courseObj = nil;
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [self fixupAdView: self.interfaceOrientation];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -44,6 +53,8 @@
     else if(interfaceOrientation == UIInterfaceOrientationPortrait){
         ret = YES;
     }
+    
+    [self fixupAdView: interfaceOrientation];
     
     //return ret;
     return YES;
@@ -61,6 +72,7 @@
 
 - (void)viewDidUnload
 {
+    [self setContentView: nil];
     [self setAdView:nil];
     [super viewDidUnload];
 
@@ -71,6 +83,7 @@
 
 - (void)dealloc
 {
+    [contentView release];
     [adView release];
     [super dealloc];
 }
@@ -106,6 +119,98 @@
     
     [self.navigationController pushViewController:nrvc animated:YES];
     [nrvc release];    
+}
+
+#pragma mark iAd methods
+- (int)getBannerHeight:(UIInterfaceOrientation)orientation {
+    if (UIInterfaceOrientationIsLandscape(orientation)) {
+        return 32;
+    } else {
+        return 50;
+    }
+}
+
+- (int)getBannerHeight {
+    return [self getBannerHeight: self.interfaceOrientation];
+}
+
+- (void)createAdBannerView {
+    Class classAdBannerView = NSClassFromString(@"ADBannerView");
+    if (classAdBannerView != nil) {
+        self.adView = [[[classAdBannerView alloc] 
+                              initWithFrame:CGRectZero] autorelease];
+        [adView setRequiredContentSizeIdentifiers:[NSSet setWithObjects: 
+                                                          ADBannerContentSizeIdentifierPortrait, 
+                                                          ADBannerContentSizeIdentifierLandscape, nil]];
+        if (UIInterfaceOrientationIsLandscape([UIDevice currentDevice].orientation)) {
+            [adView setCurrentContentSizeIdentifier:
+             ADBannerContentSizeIdentifierLandscape];
+        } else {
+            [adView setCurrentContentSizeIdentifier:
+             ADBannerContentSizeIdentifierPortrait];            
+        }
+        [adView setFrame:CGRectOffset([adView frame], 0, -[self getBannerHeight])];
+        [adView setDelegate:self];
+        
+        [self.view addSubview:adView];        
+    }
+}
+
+- (void)fixupAdView:(UIInterfaceOrientation)toInterfaceOrientation {
+    if (adView != nil) {        
+        if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+            [adView setCurrentContentSizeIdentifier:
+             ADBannerContentSizeIdentifierLandscape];
+        } else {
+            [adView setCurrentContentSizeIdentifier:
+             ADBannerContentSizeIdentifierPortrait];
+        }          
+        [UIView beginAnimations:@"fixupViews" context:nil];
+        if (adVisible) {
+            CGRect adBannerViewFrame = [adView frame];
+            adBannerViewFrame.origin.x = 0;
+            adBannerViewFrame.origin.y = 0;
+            [adView setFrame:adBannerViewFrame];
+            CGRect contentViewFrame = contentView.frame;
+            contentViewFrame.origin.y = 
+            [self getBannerHeight:toInterfaceOrientation];
+            contentViewFrame.size.height = self.view.frame.size.height - 
+            [self getBannerHeight:toInterfaceOrientation];
+            contentView.frame = contentViewFrame;
+        } else {
+            CGRect adBannerViewFrame = [adView frame];
+            adBannerViewFrame.origin.x = 0;
+            adBannerViewFrame.origin.y = -[self getBannerHeight:toInterfaceOrientation];
+            [adView setFrame:adBannerViewFrame];
+            CGRect contentViewFrame = contentView.frame;
+            contentViewFrame.origin.y = 0;
+            contentViewFrame.size.height = self.view.frame.size.height;
+            contentView.frame = contentViewFrame;            
+        }
+        [UIView commitAnimations];
+    }   
+}
+
+#pragma mark ADBannerViewDelegate Methods
+
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner
+{
+    NSLog(@"A Banner was loaded");
+    
+    if (!adVisible){                
+        adVisible = YES;
+        [self fixupAdView: self.interfaceOrientation];
+    }
+}
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
+    NSLog(@"Failed to load a banner");
+    
+    if (adVisible){        
+        adVisible = NO;
+        [self fixupAdView: self.interfaceOrientation];
+    }
 }
 
 @end

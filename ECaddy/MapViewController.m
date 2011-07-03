@@ -594,7 +594,8 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState
 {
-    //NSLog(@"Changing Drag State");
+    NSLog(@"Changing Drag State to: %d", newState);
+    
     if(newState == MKAnnotationViewDragStateEnding){
         POIAnnotation* annot = annotationView.annotation;
         
@@ -653,13 +654,6 @@
         [loc1 release];
         [loc2 release];
         [midloc release];
-        
-    }
-    else if(newState == MKAnnotationViewDragStateStarting){
-        POIAnnotation* annot = annotationView.annotation;
-        NSNumber* num1 = annot.latitude;
-        NSNumber* num2 = annot.longitude;
-        NSLog(@"Starting Lat: %@, Starting Long: %@", num1, num2);
     }
 }
 

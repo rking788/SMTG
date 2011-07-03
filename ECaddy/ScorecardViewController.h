@@ -10,11 +10,16 @@
 #import "Course.h"
 #import "iAd/ADBannerView.h"
 
-@interface ScorecardViewController : UIViewController {
+@interface ScorecardViewController : UIViewController <ADBannerViewDelegate> {
     Course* courseObj;
-    ADBannerView* adView;
+    
+    UIView* contentView;
+    id adView;
+    BOOL adVisible;
 }
-@property (nonatomic, retain) IBOutlet ADBannerView* adView;
+@property (nonatomic, retain) IBOutlet UIView* contentView;
+@property (nonatomic, retain) id adView;
+@property (nonatomic) BOOL adVisible;
 
 @property (nonatomic, retain) Course* courseObj; 
 
@@ -23,5 +28,8 @@
 - (IBAction)viewClicked:(id)sender;
 
 - (void) startNewRoundWithCourseOrNil: (Course*) course;
+
+- (void)createAdBannerView;
+- (void)fixupAdView:(UIInterfaceOrientation)toInterfaceOrientation;
 
 @end
