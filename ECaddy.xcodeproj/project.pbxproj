@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE38B0B713BE4C6900D7F9FA /* scorecard_tab.png in Resources */ = {isa = PBXBuildFile; fileRef = AE38B0B513BE4C6900D7F9FA /* scorecard_tab.png */; };
+		AE38B0B813BE4C6900D7F9FA /* scorecard_tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE38B0B613BE4C6900D7F9FA /* scorecard_tab@2x.png */; };
+		AE3D287413B99CB10054903D /* ScorecardTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D287213B99CB00054903D /* ScorecardTableViewController.m */; };
+		AE3D287513B99CB10054903D /* ScorecardTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE3D287313B99CB00054903D /* ScorecardTableView.xib */; };
 		AE7F932813835FC9003CCD57 /* stateabbrs.txt in Resources */ = {isa = PBXBuildFile; fileRef = AE7F932713835FC9003CCD57 /* stateabbrs.txt */; };
 		AE7F932B13836621003CCD57 /* StateDirView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7F932A13836621003CCD57 /* StateDirView.xib */; };
 		AE816DC1137B7E140023F5D7 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AE816DBE137B7E140023F5D7 /* NSDataAdditions.m */; };
@@ -33,7 +37,10 @@
 		AE85D7921369298E00CDA534 /* WeatherDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7901369298E00CDA534 /* WeatherDetails.m */; };
 		AE85D7931369298E00CDA534 /* WeatherDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7911369298E00CDA534 /* WeatherDetails.xib */; };
 		AE880E6913A1ACBE00824DF6 /* HeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE880E6813A1ACBE00824DF6 /* HeaderFooterView.m */; };
+		AE8832FB13BE4FFA0040FAE9 /* directory_tab.png in Resources */ = {isa = PBXBuildFile; fileRef = AE8832F913BE4FFA0040FAE9 /* directory_tab.png */; };
+		AE8832FC13BE4FFA0040FAE9 /* directory_tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE8832FA13BE4FFA0040FAE9 /* directory_tab@2x.png */; };
 		AE886D651370E2490056BDF4 /* POIAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = AE886D641370E2490056BDF4 /* POIAnnotation.m */; };
+		AE8A215213BABA8C001F4F3C /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8A215113BABA8C001F4F3C /* iAd.framework */; };
 		AE8B65B413B24995005EFFE7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8B65B313B24995005EFFE7 /* QuartzCore.framework */; };
 		AE8DD06813B033ED00D7FCB3 /* NameEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE8DD06713B033ED00D7FCB3 /* NameEditView.xib */; };
 		AE8DD06D13B034A700D7FCB3 /* SettingsDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8DD06B13B034A700D7FCB3 /* SettingsDetailsViewController.m */; };
@@ -62,6 +69,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AE38B0B513BE4C6900D7F9FA /* scorecard_tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scorecard_tab.png; sourceTree = "<group>"; };
+		AE38B0B613BE4C6900D7F9FA /* scorecard_tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scorecard_tab@2x.png"; sourceTree = "<group>"; };
+		AE3D287113B99CAF0054903D /* ScorecardTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScorecardTableViewController.h; sourceTree = "<group>"; };
+		AE3D287213B99CB00054903D /* ScorecardTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScorecardTableViewController.m; sourceTree = "<group>"; };
+		AE3D287313B99CB00054903D /* ScorecardTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScorecardTableView.xib; sourceTree = "<group>"; };
 		AE7F932713835FC9003CCD57 /* stateabbrs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stateabbrs.txt; sourceTree = "<group>"; };
 		AE7F932A13836621003CCD57 /* StateDirView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StateDirView.xib; sourceTree = "<group>"; };
 		AE816DBD137B7E140023F5D7 /* NSDataAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataAdditions.h; sourceTree = "<group>"; };
@@ -101,8 +113,11 @@
 		AE85D7911369298E00CDA534 /* WeatherDetails.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherDetails.xib; sourceTree = "<group>"; };
 		AE880E6713A1ACBE00824DF6 /* HeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderFooterView.h; sourceTree = "<group>"; };
 		AE880E6813A1ACBE00824DF6 /* HeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderFooterView.m; sourceTree = "<group>"; };
+		AE8832F913BE4FFA0040FAE9 /* directory_tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = directory_tab.png; sourceTree = "<group>"; };
+		AE8832FA13BE4FFA0040FAE9 /* directory_tab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "directory_tab@2x.png"; sourceTree = "<group>"; };
 		AE886D621370E2400056BDF4 /* POIAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = POIAnnotation.h; sourceTree = "<group>"; };
 		AE886D641370E2490056BDF4 /* POIAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POIAnnotation.m; sourceTree = "<group>"; };
+		AE8A215113BABA8C001F4F3C /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		AE8B65B313B24995005EFFE7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		AE8DD06713B033ED00D7FCB3 /* NameEditView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NameEditView.xib; sourceTree = "<group>"; };
 		AE8DD06A13B034A700D7FCB3 /* SettingsDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsDetailsViewController.h; sourceTree = "<group>"; };
@@ -145,14 +160,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE8A215213BABA8C001F4F3C /* iAd.framework in Frameworks */,
 				AE8B65B413B24995005EFFE7 /* QuartzCore.framework in Frameworks */,
 				AE9427CE13821ABF0047EBA4 /* CoreData.framework in Frameworks */,
-				AE816DC4137B7E670023F5D7 /* libz.dylib in Frameworks */,
 				AE85D7861368EC5900CDA534 /* MapKit.framework in Frameworks */,
 				AE85D7841368EC5200CDA534 /* CoreLocation.framework in Frameworks */,
 				AE85D7431368E34400CDA534 /* UIKit.framework in Frameworks */,
 				AE85D7451368E34400CDA534 /* Foundation.framework in Frameworks */,
 				AE85D7471368E34400CDA534 /* CoreGraphics.framework in Frameworks */,
+				AE816DC4137B7E670023F5D7 /* libz.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +207,7 @@
 		AE85D7411368E34400CDA534 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AE8A215113BABA8C001F4F3C /* iAd.framework */,
 				AE8B65B313B24995005EFFE7 /* QuartzCore.framework */,
 				AE9427CD13821ABF0047EBA4 /* CoreData.framework */,
 				AE85D7851368EC5900CDA534 /* MapKit.framework */,
@@ -237,6 +254,8 @@
 				AE880E6813A1ACBE00824DF6 /* HeaderFooterView.m */,
 				AE834A7D13A3F6AC00EFF1DB /* ScorecardTableCell.h */,
 				AE834A7E13A3F6AC00EFF1DB /* ScorecardTableCell.m */,
+				AE3D287113B99CAF0054903D /* ScorecardTableViewController.h */,
+				AE3D287213B99CB00054903D /* ScorecardTableViewController.m */,
 				AE90069D13A9C6B3008247BF /* SettingsViewController.h */,
 				AE90069E13A9C6B3008247BF /* SettingsViewController.m */,
 				AE8DD06A13B034A700D7FCB3 /* SettingsDetailsViewController.h */,
@@ -254,6 +273,7 @@
 				AE90069F13A9C6B3008247BF /* SettingsView.xib */,
 				AE8DD06713B033ED00D7FCB3 /* NameEditView.xib */,
 				AE8DD06F13B05EB900D7FCB3 /* HideStateView.xib */,
+				AE3D287313B99CB00054903D /* ScorecardTableView.xib */,
 				AEFE6F131381BB60002B1AA3 /* coursemodel.xcdatamodeld */,
 				AED1EA081374F950008365D5 /* green.png */,
 				AED1EA0B1374F959008365D5 /* tee.png */,
@@ -262,6 +282,10 @@
 				AE90A58213A5C1D100F87850 /* favstar_selected.png */,
 				AE90A58513A5C37000F87850 /* favstar_deselected.png */,
 				AE8F3D3D13A6D3B000C9DB74 /* sadweather.png */,
+				AE8832F913BE4FFA0040FAE9 /* directory_tab.png */,
+				AE8832FA13BE4FFA0040FAE9 /* directory_tab@2x.png */,
+				AE38B0B513BE4C6900D7F9FA /* scorecard_tab.png */,
+				AE38B0B613BE4C6900D7F9FA /* scorecard_tab@2x.png */,
 				AE92303513B2E87F00455BA4 /* ECaddy.sqlite */,
 				AE85D7491368E34400CDA534 /* Supporting Files */,
 			);
@@ -351,6 +375,11 @@
 				AE8DD06813B033ED00D7FCB3 /* NameEditView.xib in Resources */,
 				AE8DD07013B05EB900D7FCB3 /* HideStateView.xib in Resources */,
 				AE92303613B2E87F00455BA4 /* ECaddy.sqlite in Resources */,
+				AE3D287513B99CB10054903D /* ScorecardTableView.xib in Resources */,
+				AE38B0B713BE4C6900D7F9FA /* scorecard_tab.png in Resources */,
+				AE38B0B813BE4C6900D7F9FA /* scorecard_tab@2x.png in Resources */,
+				AE8832FB13BE4FFA0040FAE9 /* directory_tab.png in Resources */,
+				AE8832FC13BE4FFA0040FAE9 /* directory_tab@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,6 +411,7 @@
 				AE834A7F13A3F6AC00EFF1DB /* ScorecardTableCell.m in Sources */,
 				AE9006A013A9C6B3008247BF /* SettingsViewController.m in Sources */,
 				AE8DD06D13B034A700D7FCB3 /* SettingsDetailsViewController.m in Sources */,
+				AE3D287413B99CB10054903D /* ScorecardTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

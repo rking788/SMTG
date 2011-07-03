@@ -15,6 +15,8 @@
 
 #define kOFFSET_FOR_KEYBOARD 125.0
 
+#pragma mark - TODO Save the scorecard once it is created. If we view the scorecard and then the application terminates without going back to the new round view, then there is no active course the next time. ( thats wrong).
+
 @implementation ScoreTrackerViewController
 
 @synthesize appDel;
@@ -141,6 +143,9 @@
     NSMutableDictionary* scoresdict = self.scorecard.scores;
     if(scoresdict)
         self.scorecardDict = (NSMutableDictionary*) self.scorecard.scores;
+    
+    // Update the totals in the footer view
+    [self.scoreFooterView setTotalsWithScoreDict: self.scorecardDict];
 }
 
 - (void) viewWillDisappear:(BOOL)animated

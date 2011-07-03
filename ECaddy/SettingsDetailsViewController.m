@@ -2,8 +2,8 @@
 //  SettingsDetailsViewController.m
 //  ECaddy
 //
-//  Created by Teacher on 6/20/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created by RKing on 6/20/11.
+//  Copyright 2011 RPKing. All rights reserved.
 //
 
 #import "SettingsDetailsViewController.h"

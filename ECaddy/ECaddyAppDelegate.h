@@ -11,6 +11,8 @@
 #import "Course.h"
 #import "Scorecard.h"
 
+# pragma mark - TODO Possibly try to reduce memory footprint for the entire app
+
 @interface ECaddyAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
     Course* curCourse;
     Scorecard* curScorecard;

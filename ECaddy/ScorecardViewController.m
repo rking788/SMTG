@@ -8,10 +8,12 @@
 
 #import "ScorecardViewController.h"
 #import "NewRoundViewController.h"
+#import "ScorecardTableViewController.h"
 
 @implementation ScorecardViewController
 
 
+@synthesize adView;
 @synthesize courseObj;
 
 /*
@@ -59,6 +61,7 @@
 
 - (void)viewDidUnload
 {
+    [self setAdView:nil];
     [super viewDidUnload];
 
     // Release any retained subviews of the main view.
@@ -68,6 +71,7 @@
 
 - (void)dealloc
 {
+    [adView release];
     [super dealloc];
 }
 
@@ -75,12 +79,22 @@
     [self startNewRoundWithCourseOrNil: nil];
 }
 
-- (IBAction)continueClicked:(id)sender {
-
+- (IBAction)continueClicked:(id)sender
+{
+    ScorecardTableViewController* nrvc = [[ScorecardTableViewController alloc] initWithNibName: @"ScorecardTableView" bundle:nil];
+    
+    nrvc.navigationItem.title = @"Continue";
+    [self.navigationController pushViewController:nrvc animated:YES];
+    [nrvc release];  
 }
 
-- (IBAction)viewClicked:(id)sender {
-
+- (IBAction)viewClicked:(id)sender
+{
+    ScorecardTableViewController* nrvc = [[ScorecardTableViewController alloc] initWithNibName: @"ScorecardTableView" bundle:nil];
+    
+    nrvc.navigationItem.title = @"View";
+    [self.navigationController pushViewController:nrvc animated:YES];
+    [nrvc release];  
 }
 
 - (void) startNewRoundWithCourseOrNil: (Course*) course

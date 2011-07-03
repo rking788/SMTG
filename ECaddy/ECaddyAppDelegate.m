@@ -234,7 +234,7 @@ NSString* const DBFILENAME = @"ECaddy.sqlite";
     
     if(![self.managedObjectContext save:&err]){
         // Handle the error here
-        NSLog(@"Failed to save new favorite course to managedObjectContext");
+        NSLog(@"Failed to save the managedObjectContext");
     }
 }
 

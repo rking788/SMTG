@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "Course.h"
+#import "iAd/ADBannerView.h"
 
 @interface ScorecardViewController : UIViewController {
     Course* courseObj;
+    ADBannerView* adView;
 }
+@property (nonatomic, retain) IBOutlet ADBannerView* adView;
+
 @property (nonatomic, retain) Course* courseObj; 
 
 - (IBAction)startClicked:(id)sender;

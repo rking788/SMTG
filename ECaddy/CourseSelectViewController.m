@@ -11,6 +11,8 @@
 #import "WeatherDetails.h"
 #import "ECaddyAppDelegate.h"
 
+#pragma mark - TODO Fill active course for table view
+
 @implementation CourseSelectViewController
 
 @synthesize arrayOfChars, coursesDict;

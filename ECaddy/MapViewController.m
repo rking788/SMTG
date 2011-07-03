@@ -256,9 +256,13 @@
     }
     
     if([self isUserLocEnabled]){
+        // User location is disabled so add the tee back on and redraw the line
         [self.locManager stopUpdatingLocation];
         [self.mapView setShowsUserLocation: NO];
         self.userLocEnabled = NO;
+        
+        [self.mapView addAnnotation: [self.holeAnnotations objectAtIndex: teeAnnotationIndex]];
+        [self drawMapLine];
     }
     else{
         if([CLLocationManager locationServicesEnabled]){
@@ -623,8 +627,25 @@
         CLLocation* loc2 = [[CLLocation alloc] initWithLatitude: lat2 longitude:long2];
         pointArray[2] = MKMapPointForCoordinate([loc2 coordinate]);
         
-        [self setHoleLine: [MKPolyline polylineWithPoints: pointArray count: 3]];
+        // Recalculate the distance from the tee to the distance annotation
+        // Find the distance between the two points
+        CLLocationDistance distanceToGreen = [loc2 distanceFromLocation: loc1] * 1.0936133;
+        CLLocationDistance distanceToPin = [midloc distanceFromLocation: loc1] * 1.0935133;
+        NSLog(@"Distance calculated to be %lf yards", distanceToPin);
         
+        // Set the distance label
+        [self.distLbl setText: [NSString stringWithFormat: @"Tee to Pin: %d yd", (int)distanceToPin]];
+        [self.distLbl setTextColor: [UIColor colorWithRed: 0.219607845 green: 0.521568656 blue:0 alpha:1.0]];
+        [self.distLbl setBackgroundColor: [UIColor colorWithRed: 0.870588243 green: 0.862745106 blue:0.0 alpha:1.0]];
+        self.distLbl.layer.borderColor = [UIColor colorWithRed: 0.219607845 green: 0.521568656 blue:0 alpha:1.0].CGColor;
+        self.distLbl.layer.borderWidth = 2.0;
+        
+        // Set the title for the annotation equal to the distance to that annotation from the tee
+        [annot setTitle: [NSString stringWithFormat: @"%d yd", (int) distanceToPin]];
+        [(POIAnnotation*) [self.holeAnnotations objectAtIndex: greenAnnotationIndex] setTitle: [NSString stringWithFormat: @"%d yd", (int) distanceToGreen]];
+        
+        
+        [self setHoleLine: [MKPolyline polylineWithPoints: pointArray count: 3]];
         [self.mapView addOverlay: [self holeLine]];
         
         // Free up memory
