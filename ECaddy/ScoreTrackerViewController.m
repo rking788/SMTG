@@ -13,7 +13,7 @@
 #import "Course.h"
 #import "HeaderFooterView.h"
 
-#define kOFFSET_FOR_KEYBOARD 125.0
+#define kOFFSET_FOR_KEYBOARD 99.0
 
 #pragma mark - TODO Save the scorecard once it is created. If we view the scorecard and then the application terminates without going back to the new round view, then there is no active course the next time. ( thats wrong).
 
@@ -26,7 +26,8 @@
 @synthesize titleTextView;
 @synthesize favstarBtn;
 @synthesize scorecardDict;
-@synthesize scrollView;
+@synthesize tableV;
+@synthesize activeField;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,7 +47,7 @@
     [scoreFooterView release];
     [scorecardDict release];
     [favstarBtn release];
-    [scrollView release];
+    [tableV release];
     [super dealloc];
 }
 
@@ -66,6 +67,9 @@
     // Do any additional setup after loading the view from its nib.
     
     self.appDel = [ECaddyAppDelegate sharedAppDelegate];
+    
+    // Register listeners for keyboard notifications
+    [self registerForKeyboardNotifications];
     
     if(self.scorecard){
         NSString* name;
@@ -122,7 +126,7 @@
 
 - (void)viewDidUnload
 {
-    scrollView = nil;
+    [self setTableV:nil];
     [super viewDidUnload];
     [self setAppDel: nil];
     [self setScorecard: nil];
@@ -338,16 +342,12 @@
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField
 {
-    //move the main view, so that the keyboard does not hide it.
-    if  (self.view.frame.origin.y >= 0)
-    {
-        [self setViewMovedUp: YES];
-    }
+    self.activeField = textField;
 }
 
 - (void) textFieldDidEndEditing: (UITextField*) textField
 {
-    [self setViewMovedUp: NO];
+    self.activeField = textField;
     
     NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
     [f setNumberStyle: NSNumberFormatterDecimalStyle];
@@ -375,30 +375,6 @@
     [f release];
 }
 
-
-#pragma  mark TODO: when the view is moved up, the scroll view top needs to be moved down a bit the holes from 2-18 are visible but hole #1 is not quite visible
-- (void) setViewMovedUp: (BOOL) movedUp
-{
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.5]; // if you want to slide up the view
-        
-    CGRect rect = self.view.frame;
-    if (movedUp){
-        // 1. move the view's origin up so that the text field that will be hidden come above the keyboard 
-        // 2. increase the size of the view so that the area behind the keyboard is covered up.
-        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
-        rect.size.height += kOFFSET_FOR_KEYBOARD;
-    }
-    else{
-        // revert back to the normal state.
-        rect.origin.y += kOFFSET_FOR_KEYBOARD;
-        rect.size.height -= kOFFSET_FOR_KEYBOARD;
-    }
-    self.view.frame = rect;
-    
-    [UIView commitAnimations];
-}
-
 - (IBAction)favstarPressed:(id)sender {
     BOOL fav = [[self.scorecard.course favorite] boolValue];
     
@@ -410,4 +386,74 @@
     
     [self.appDel saveContext];
 }
+
+
+# pragma mark - THIS IS A TEST TO SEE IF IT WORKS WITH THE KEYBOARD STUFF
+// Call this method somewhere in your view controller setup code.
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+    
+}
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    // Move up the main view to hide the header
+    [self setViewMovedUp: YES];
+    
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    self.tableV.contentInset = contentInsets;
+    self.tableV.scrollIndicatorInsets = contentInsets;
+    
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    // Your application might not need or want this behavior.
+    CGRect aRect = self.view.frame;
+    aRect.size.height -= kbSize.height;
+    if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
+        CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y-kbSize.height);
+        [self.tableV setContentOffset:scrollPoint animated:YES];
+    }
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    // Move the main view back down to reveal the header
+    [self setViewMovedUp: NO];
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    self.tableV.contentInset = contentInsets;
+    self.tableV.scrollIndicatorInsets = contentInsets;
+}
+
+- (void) setViewMovedUp: (BOOL) movedUp
+{
+    CGFloat table_y_offset = self.tableV.frame.origin.y;
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.5];
+    
+    CGRect rect = self.view.frame;
+    if (movedUp){
+        rect.origin.y -= table_y_offset;
+        rect.size.height += table_y_offset;
+    }
+    else{
+        rect.origin.y += table_y_offset;
+        rect.size.height -= table_y_offset;
+    }
+    self.view.frame = rect;
+    
+    [UIView commitAnimations];
+}
+
 @end

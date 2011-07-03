@@ -6,7 +6,7 @@
 //  Copyright 2011 RPKing. All rights reserved.
 //
 
-#pragma mark - TODOS: Need to support the players current location. Figure out what to do with the tee pins when the players location is displayed.
+#pragma mark - TODOS: Need to figure out what to do if the player goes to the next hole while their current location is already active.
 
 #import "MapViewController.h"
 #import <CoreLocation/CoreLocation.h>

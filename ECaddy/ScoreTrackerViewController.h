@@ -19,7 +19,7 @@
     
     UITextView *titleTextView;
     UIButton *favstarBtn;
-    IBOutlet UIScrollView *scrollView;
+    UITableView *tableV;
     
     HeaderFooterView *scoreHeaderView;
     HeaderFooterView *scoreFooterView;
@@ -38,7 +38,9 @@ enum{
 @property (nonatomic, retain) IBOutlet HeaderFooterView *scoreFooterView;
 @property (nonatomic, retain) IBOutlet UITextView *titleTextView;
 @property (nonatomic, retain) IBOutlet UIButton *favstarBtn;
-@property (nonatomic, retain) IBOutlet UIScrollView* scrollView;
+@property (nonatomic, retain) IBOutlet UITableView *tableV;
+
+@property (nonatomic, assign) UITextField* activeField;
 
 @property (nonatomic, retain) NSMutableDictionary* scorecardDict;
 
@@ -50,5 +52,8 @@ enum{
 
 + (NSUInteger) tagFromRow: (NSUInteger) row AndCol: (NSUInteger) col;
 + (NSArray*) rowAndColFromTag: (NSUInteger) tag;
+
+- (void)registerForKeyboardNotifications;
+
 
 @end
