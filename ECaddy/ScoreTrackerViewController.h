@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FBConnect.h"
 
 @class ECaddyAppDelegate;
 @class Course;
 @class Scorecard;
 @class HeaderFooterView;
+@class Facebook;
 
-@interface ScoreTrackerViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate> {
+@interface ScoreTrackerViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, FBSessionDelegate, FBDialogDelegate, FBRequestDelegate> {
     ECaddyAppDelegate* appDel;
     Scorecard* scorecard;
     
@@ -25,6 +27,10 @@
     HeaderFooterView *scoreFooterView;
     NSMutableDictionary* scorecardDict;
     UIButton *saveCurSC;
+    
+    Facebook* _FB;
+    NSArray* FBpermissions;
+    BOOL FBLoggedIn;
 }
 
 enum{
@@ -44,6 +50,11 @@ enum{
 
 @property (nonatomic, retain) NSMutableDictionary* scorecardDict;
 
+// Facebook properties
+@property (readonly) Facebook* FB; 
+@property (nonatomic, retain) NSArray* FBpermissions;
+@property (nonatomic, getter = isFBLoggedIn) BOOL FBLoggedIn;
+
 - (IBAction)favstarPressed:(id)sender;
 
 - (void) nameChangedFrom: (NSString*) oldName To: (NSString*) newName;
@@ -54,6 +65,13 @@ enum{
 + (NSArray*) rowAndColFromTag: (NSUInteger) tag;
 
 - (void)registerForKeyboardNotifications;
+
+// Facebook Methods
+- (void) login;
+- (void) logout;
+- (void) FBButtonClicked: (id) sender;
+- (void)publishStream;
+- (void)uploadPhoto;
 
 
 @end

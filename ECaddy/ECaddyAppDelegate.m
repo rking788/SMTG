@@ -20,6 +20,7 @@
 
 @synthesize managedObjectModel, managedObjectContext, persistentStoreCoordinator;
 @synthesize curCourse, curScorecard;
+@synthesize FB = _FB;
 
 // Constant for the database file name
 NSString* const DBFILENAME = @"ECaddy.sqlite";
@@ -43,6 +44,8 @@ NSString* const DBFILENAME = @"ECaddy.sqlite";
     
     self.curCourse = nil;
     self.curScorecard = nil;
+    
+    _FB = nil;
     
     return YES;
 }
@@ -277,6 +280,15 @@ NSString* const DBFILENAME = @"ECaddy.sqlite";
 + (ECaddyAppDelegate*) sharedAppDelegate
 {
     return (ECaddyAppDelegate*) [[UIApplication sharedApplication] delegate];
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [self.FB handleOpenURL:url];
+}
+
+- (void) setFBInstance: (Facebook*) fb
+{
+    _FB = fb;
 }
 
 @end

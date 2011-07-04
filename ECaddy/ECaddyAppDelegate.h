@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "Course.h"
 #import "Scorecard.h"
+#import "FBConnect.h"
 
 # pragma mark - TODO Possibly try to reduce memory footprint for the entire app
 
@@ -17,6 +18,8 @@
     Course* curCourse;
     Scorecard* curScorecard;
     NSUserDefaults* defaultPrefs;
+    
+    Facebook* _FB;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -32,6 +35,8 @@
 @property (nonatomic, retain) Course* curCourse;
 @property (nonatomic, retain) Scorecard* curScorecard;
 
+@property (readonly) Facebook* FB;
+
 - (NSString *)applicationDocumentsDirectory;
 - (void) loadDefaultDB;
 
@@ -41,5 +46,7 @@
 - (void) saveContext;
 
 + (ECaddyAppDelegate*) sharedAppDelegate;
+
+- (void) setFBInstance: (Facebook*) fb;
 
 @end

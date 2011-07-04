@@ -12,8 +12,10 @@
 #import "Scorecard.h"
 #import "Course.h"
 #import "HeaderFooterView.h"
+#import "FBConnect.h"
 
-#define kOFFSET_FOR_KEYBOARD 99.0
+// Facebook app ID constant string
+static NSString* kAppId = @"142876775786876";
 
 #pragma mark - TODO Save the scorecard once it is created. If we view the scorecard and then the application terminates without going back to the new round view, then there is no active course the next time. ( thats wrong).
 
@@ -28,12 +30,15 @@
 @synthesize scorecardDict;
 @synthesize tableV;
 @synthesize activeField;
+@synthesize FB = _FB;
+@synthesize FBpermissions;
+@synthesize FBLoggedIn;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.FBpermissions = [NSArray arrayWithObjects: @"publish_stream", @"offline_access", nil];
     }
     return self;
 }
@@ -48,6 +53,7 @@
     [scorecardDict release];
     [favstarBtn release];
     [tableV release];
+    [FBpermissions release];
     [super dealloc];
 }
 
@@ -64,12 +70,21 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
     
     self.appDel = [ECaddyAppDelegate sharedAppDelegate];
     
     // Register listeners for keyboard notifications
     [self registerForKeyboardNotifications];
+    
+    // TODO: Implement this to provide actions like posting to facebook and finishing a round
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
+                                               initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                               target:self action:@selector(FBButtonClicked:)] autorelease];
+    
+    // Create the Facebook instance
+    self.FBLoggedIn = NO;
+    _FB = [[Facebook alloc] initWithAppId:kAppId];
+    [[ECaddyAppDelegate sharedAppDelegate] setFBInstance: self.FB];
     
     if(self.scorecard){
         NSString* name;
@@ -134,6 +149,7 @@
     [self setScoreHeaderView:nil];
     [self setScoreFooterView:nil];
     [self setFavstarBtn:nil];
+    [self setFBpermissions: nil];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     [self setScorecardDict: nil];
@@ -388,7 +404,7 @@
 }
 
 
-# pragma mark - THIS IS A TEST TO SEE IF IT WORKS WITH THE KEYBOARD STUFF
+# pragma mark - Keyboard related methods, to move view so nothing is hidden behind the keyboard
 // Call this method somewhere in your view controller setup code.
 - (void)registerForKeyboardNotifications
 {
@@ -455,5 +471,158 @@
     
     [UIView commitAnimations];
 }
+
+#pragma mark - Facebook Methods
+
+- (void) login
+{
+    [self.FB authorize: self.FBpermissions delegate: self];
+}
+
+- (void) logout
+{
+    [self.FB logout: self];
+}
+
+- (void) FBButtonClicked: (id) sender
+{
+    if(![self isFBLoggedIn]){
+        [self login];
+        self.FBLoggedIn = YES;
+    }
+    else{
+        [self uploadPhoto];
+        //[self logout];
+    }
+}
+
+/**
+ * Called when the user has logged in successfully.
+ */
+- (void)fbDidLogin {
+    self.FBLoggedIn = YES;
+    [self uploadPhoto];
+}
+
+/**
+ * Called when the user canceled the authorization dialog.
+ */
+-(void)fbDidNotLogin:(BOOL)cancelled {
+    NSLog(@"Failed logging in to Facebook");
+}
+
+/**
+ * Called when the request logout has succeeded.
+ */
+- (void)fbDidLogout {
+    self.FBLoggedIn = NO;
+}
+
+/**
+ * Open an inline dialog that allows the logged in user to publish a story to his or
+ * her wall.
+ */
+- (void)publishStream
+{
+    
+    SBJSON *jsonWriter = [[SBJSON new] autorelease];
+    
+    NSDictionary* actionLinks = [NSArray arrayWithObjects:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                           @"Always Running",@"text",@"http://itsti.me/",@"href", nil], nil];
+    
+    NSString *actionLinksStr = [jsonWriter stringWithObject:actionLinks];
+    NSDictionary* attachment = [NSDictionary dictionaryWithObjectsAndKeys:
+                                @"a long run", @"name",
+                                @"The Facebook Running app", @"caption",
+                                @"it is fun", @"description",
+                                @"http://itsti.me/", @"href", nil];
+    NSString *attachmentStr = [jsonWriter stringWithObject:attachment];
+    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                   @"Share on Facebook",  @"user_message_prompt",
+                                   actionLinksStr, @"action_links",
+                                   attachmentStr, @"attachment",
+                                   nil];
+    
+    
+    [self.FB dialog:@"feed"
+            andParams:params
+          andDelegate:self];
+}
+
+/**
+ * Upload a photo.
+ */
+- (void)uploadPhoto
+{
+    NSString *path = @"http://king.eece.maine.edu/fenway.png";
+    NSURL *url = [NSURL URLWithString:path];
+    NSData *data = [NSData dataWithContentsOfURL:url];
+    UIImage *img  = [[UIImage alloc] initWithData:data];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                   img, @"picture",
+                                   nil];
+    
+    [self.FB requestWithGraphPath:@"me/photos"
+                          andParams:params
+                      andHttpMethod:@"POST"
+                        andDelegate:self];
+    
+    [img release];
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// FBRequestDelegate
+
+/**
+ * Called when the Facebook API request has returned a response. This callback
+ * gives you access to the raw response. It's called before
+ * (void)request:(FBRequest *)request didLoad:(id)result,
+ * which is passed the parsed response object.
+ */
+- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
+    NSLog(@"received response");
+}
+
+/**
+ * Called when a request returns and its response has been parsed into
+ * an object. The resulting object may be a dictionary, an array, a string,
+ * or a number, depending on the format of the API response. If you need access
+ * to the raw response, use:
+ *
+ * (void)request:(FBRequest *)request
+ *      didReceiveResponse:(NSURLResponse *)response
+ */
+- (void)request:(FBRequest *)request didLoad:(id)result {
+    if ([result isKindOfClass:[NSArray class]]) {
+        result = [result objectAtIndex:0];
+    }
+    if ([result objectForKey:@"owner"]) {
+        NSLog(@"Photo upload Success");
+    } else {
+        NSLog(@"Request returned name %@", [result objectForKey:@"name"]);
+    }
+};
+
+/**
+ * Called when an error prevents the Facebook API request from completing
+ * successfully.
+ */
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
+    NSLog(@"Request Failed: %@", [error localizedDescription]);
+    NSLog(@"Error Details: %@", [error description]);
+};
+
+
+////////////////////////////////////////////////////////////////////////////////
+// FBDialogDelegate
+
+/**
+ * Called when a UIServer Dialog successfully return.
+ */
+- (void)dialogDidComplete:(FBDialog *)dialog {
+    NSLog(@"publish successfully");
+}
+
 
 @end
