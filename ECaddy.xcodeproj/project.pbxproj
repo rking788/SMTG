@@ -65,6 +65,8 @@
 		AED1EA0C1374F959008365D5 /* tee.png in Resources */ = {isa = PBXBuildFile; fileRef = AED1EA0B1374F959008365D5 /* tee.png */; };
 		AED1EA1613750ECD008365D5 /* teeandgreen.png in Resources */ = {isa = PBXBuildFile; fileRef = AED1EA1513750ECC008365D5 /* teeandgreen.png */; };
 		AED1EA1813750ED4008365D5 /* teeandgreen_ret.png in Resources */ = {isa = PBXBuildFile; fileRef = AED1EA1713750ED4008365D5 /* teeandgreen_ret.png */; };
+		AEE5301013C394DC003C866C /* CustomCourseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEE5300F13C394DC003C866C /* CustomCourseView.xib */; };
+		AEE5301513C39AE4003C866C /* CustomCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE5301313C39AE3003C866C /* CustomCourseViewController.m */; };
 		AEEE90BC13C1650100B8BBD8 /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE909513C1650100B8BBD8 /* Facebook.m */; };
 		AEEE90BD13C1650100B8BBD8 /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AEEE909813C1650100B8BBD8 /* FBDialog.bundle */; };
 		AEEE90BE13C1650100B8BBD8 /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEE909A13C1650100B8BBD8 /* FBDialog.m */; };
@@ -163,6 +165,9 @@
 		AED1EA0B1374F959008365D5 /* tee.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tee.png; sourceTree = "<group>"; };
 		AED1EA1513750ECC008365D5 /* teeandgreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = teeandgreen.png; path = ../teeandgreen.png; sourceTree = "<group>"; };
 		AED1EA1713750ED4008365D5 /* teeandgreen_ret.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = teeandgreen_ret.png; path = ../teeandgreen_ret.png; sourceTree = "<group>"; };
+		AEE5300F13C394DC003C866C /* CustomCourseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCourseView.xib; sourceTree = "<group>"; };
+		AEE5301213C39AE3003C866C /* CustomCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCourseViewController.h; sourceTree = "<group>"; };
+		AEE5301313C39AE3003C866C /* CustomCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCourseViewController.m; sourceTree = "<group>"; };
 		AEEE909413C1650100B8BBD8 /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
 		AEEE909513C1650100B8BBD8 /* Facebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Facebook.m; sourceTree = "<group>"; };
 		AEEE909613C1650100B8BBD8 /* facebook_ios_sdk_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = facebook_ios_sdk_Prefix.pch; sourceTree = "<group>"; };
@@ -296,6 +301,8 @@
 				AE90069E13A9C6B3008247BF /* SettingsViewController.m */,
 				AE8DD06A13B034A700D7FCB3 /* SettingsDetailsViewController.h */,
 				AE8DD06B13B034A700D7FCB3 /* SettingsDetailsViewController.m */,
+				AEE5301213C39AE3003C866C /* CustomCourseViewController.h */,
+				AEE5301313C39AE3003C866C /* CustomCourseViewController.m */,
 				AEA99329139DBF8800DD723C /* ScoreTrackerView.xib */,
 				AE85D7541368E34400CDA534 /* MainWindow.xib */,
 				AE85D75D1368E34400CDA534 /* ScorecardView.xib */,
@@ -310,6 +317,7 @@
 				AE8DD06713B033ED00D7FCB3 /* NameEditView.xib */,
 				AE8DD06F13B05EB900D7FCB3 /* HideStateView.xib */,
 				AE3D287313B99CB00054903D /* ScorecardTableView.xib */,
+				AEE5300F13C394DC003C866C /* CustomCourseView.xib */,
 				AEFE6F131381BB60002B1AA3 /* coursemodel.xcdatamodeld */,
 				AED1EA081374F950008365D5 /* green.png */,
 				AED1EA0B1374F959008365D5 /* tee.png */,
@@ -457,6 +465,7 @@
 				AE8832FB13BE4FFA0040FAE9 /* directory_tab.png in Resources */,
 				AE8832FC13BE4FFA0040FAE9 /* directory_tab@2x.png in Resources */,
 				AEEE90BD13C1650100B8BBD8 /* FBDialog.bundle in Resources */,
+				AEE5301013C394DC003C866C /* CustomCourseView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,6 +508,7 @@
 				AEEE90C413C1650100B8BBD8 /* SBJsonBase.m in Sources */,
 				AEEE90C513C1650100B8BBD8 /* SBJsonParser.m in Sources */,
 				AEEE90C613C1650100B8BBD8 /* SBJsonWriter.m in Sources */,
+				AEE5301513C39AE4003C866C /* CustomCourseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

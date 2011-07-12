@@ -69,6 +69,7 @@ enum{
 - (void) searchTableView;
 - (void) modalCancel: (id) sender;
 - (void) fillFavorites;
+- (void) courseCreateModal;
 
 + (Course*) courseObjectWithName: (NSString*) name InContext: (NSManagedObjectContext*) context;
 

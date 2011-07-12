@@ -14,6 +14,7 @@
 #import "WeatherDetails.h"
 #import "SettingsViewController.h"
 #import "SettingsDetailsViewController.h"
+#import "CustomCourseViewController.h"
 
 @implementation DirectoryViewController
 
@@ -229,12 +230,15 @@
     [fetchrequest release];
     [sdArr release];
     [sortDescript release];
-    // Probably don't want to reset the context and lose the scorecard and other objects
-    // [manObjCon reset];
-
 }
 
 #pragma mark UITableViewDataSource Protocol Methods
+
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    // This means the new course detail button was clicked so display the modal view to add a course
+    [self courseCreateModal];
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -243,18 +247,23 @@
     BOOL isActives = NO;
     BOOL isFavs = ([self.favoriteNames count] == 0) ? NO : YES;
     
+    // Always subtract one for the new course section
+    newSection--;
+    if(section == 0)
+        retInt = 1;
+    
     if(isActives){
         newSection--;
         
-        if(section == 0)
+        if(section == 1)
             retInt = 1;
     }
     else if(isFavs){
         newSection--;
         
-        if((section == 0) && (!isActives))
+        if((section == 1) && (!isActives))
             retInt = [favoriteNames count];
-        else if((section == 1) && (isActives))
+        else if((section == 2) && (isActives))
             retInt = [favoriteNames count];
     }
     
@@ -275,6 +284,9 @@
     
     retInt = [self.countrySet count];
     
+    // Always add one for the new course section
+    retInt++;
+    
     if(isActives)
         retInt++;
     else if(isFavs)
@@ -290,18 +302,24 @@
     BOOL isActives = NO;
     BOOL isFavs = ([favoriteNames count] == 0) ? NO : YES;
     
+    // Need to always subtract one because of the new course section
+    newSection--;
+    if(section == 0){
+        retStr = @"New Course";
+    }
+    
     if(isActives){
         newSection--;
         
-        if(section == 0)
+        if(section == 1)
             retStr = @"Active Course";
     }
     else if(isFavs){
         newSection--;
         
-        if((section == 0) && (!isActives))
+        if((section == 1) && (!isActives))
             retStr = @"Favorites";
-        else if((section == 1) && (isActives))
+        else if((section == 2) && (isActives))
             retStr = @"Favorites";
     }
     
@@ -317,25 +335,33 @@
 {
     BOOL isActives = NO;
     BOOL isFavs = ([favoriteNames count] == 0) ? NO : YES;
-    BOOL isActCell = NO, isFavsCell = NO;
+    BOOL isActCell = NO, isFavsCell = NO, isNewCourseCell = NO;
     NSInteger newSection = indexPath.section;
+    
+    newSection--;
+    if(indexPath.section == 0)
+        isNewCourseCell = YES;
     
     if(isActives){
         newSection--;
         
-        if(indexPath.section == 0)
+        if(indexPath.section == 1)
             isActCell = YES;
     }
     else if(isFavs){
         newSection--;
         
-        if(((indexPath.section == 0) && (!isActives)) || ((indexPath.section == 1) && (isActives)))
+        if(((indexPath.section == 1) && (!isActives)) || ((indexPath.section == 2) && (isActives)))
             isFavsCell = YES;
     }
 
     [tableView deselectRowAtIndexPath: indexPath animated:NO];
         
-    if(isActCell || isFavsCell){
+    if(isNewCourseCell){
+        // Display the modal view to add a course
+        [self courseCreateModal];
+    }
+    else if(isActCell || isFavsCell){
         NSString* courseName = [[[tableView cellForRowAtIndexPath: indexPath] textLabel] text];
         Course* courseObject = [CourseSelectViewController courseObjectWithName: courseName
                                 InContext: self.manObjCon];
@@ -396,32 +422,48 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    static NSString* NewCourseCellIdentifier = @"NewCourseTableCell";
     static NSString* StateCellIdentifier = @"StateTableCell";
     static NSString* ActiveFavsCellIdentifier = @"ActFavsTableCell";
     UITableViewCell* cell = nil;
     BOOL isActives = NO;
     BOOL isFavs = ([favoriteNames count] == 0) ? NO : YES;
     BOOL isActCell = NO, isFavCell = NO;
+    BOOL isNewCourseCell = NO;
     NSUInteger sect = indexPath.section;
     NSInteger newSection = indexPath.section;
     
-    // Top two sections are special
+    // Top three sections are special
+    newSection--;
+    if(indexPath.section == 0)
+        isNewCourseCell = YES;
+    
     if(isActives){
         newSection--;
         
-        if(sect == 0){
+        if(sect == 1){
             isActCell = YES;
         }
     }
     else if(isFavs){
         newSection--;
         
-        if(((sect == 0) && (!isActives)) || ((sect == 1) && (isActives))){
+        if(((sect == 1) && (!isActives)) || ((sect == 2) && (isActives))){
             isFavCell = YES;
         }
     }
     
-    if(isActCell || isFavCell){
+    if(isNewCourseCell){
+        cell = [tableView dequeueReusableCellWithIdentifier: NewCourseCellIdentifier];
+        if(!cell){
+            cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: NewCourseCellIdentifier] autorelease];
+        }
+        UILabel* lbl = [cell textLabel];
+        
+        [lbl setText: @"Add a new course"];
+        
+    }
+    else if(isActCell || isFavCell){
         cell = [tableView dequeueReusableCellWithIdentifier: ActiveFavsCellIdentifier];
         if(!cell)
             cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier: ActiveFavsCellIdentifier] autorelease];
@@ -454,7 +496,10 @@
         
     }
 
-    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    if (isNewCourseCell)
+        [cell setAccessoryType: UITableViewCellAccessoryDetailDisclosureButton];
+    else
+        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     return cell;
 }
@@ -486,6 +531,16 @@
     [self.navigationController pushViewController:csvc animated: animated];
 
     [csvc release];
+}
+
+- (void) courseCreateModal
+{
+    NSLog(@"Presenting the course create view modally");
+    
+    CustomCourseViewController* ccvc = [[CustomCourseViewController alloc] initWithNibName: @"CustomCourseView" bundle: nil];
+    
+    [self presentModalViewController: ccvc animated: YES];
+    [ccvc release];
 }
 
 @end

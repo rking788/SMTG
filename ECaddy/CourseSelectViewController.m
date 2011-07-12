@@ -10,8 +10,10 @@
 #import "CourseDetailViewController.h"
 #import "WeatherDetails.h"
 #import "ECaddyAppDelegate.h"
+#import "CustomCourseViewController.h"
 
 #pragma mark - TODO Fill active course for table view
+#pragma mark - TODO Check to make sure a state name is found in the abbreviation dictionary, if one is not then just use the abbreviated version, this may be the case if a custom course is added.
 
 @implementation CourseSelectViewController
 
@@ -252,6 +254,12 @@
 
 #pragma mark UITableViewDataSource Protocol Methods
 
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    // This means the new course detail button was clicked so display the modal view to add a course
+    [self courseCreateModal];
+}
+
 - (NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     NSString* retStr = nil;
@@ -264,18 +272,23 @@
         return retStr;
     }
     
+    // Need to always subtract one for the new course section
+    newSection--;
+    if(section == 0)
+        retStr = @"New Course";
+    
     if(isActives){
         newSection--;
         
-        if(section == 0)
+        if(section == 1)
             retStr = @"Active Course";
     }
     else if(isFavs){
         newSection--;
         
-        if((section == 0) && (!isActives))
+        if((section == 1) && (!isActives))
             retStr = @"Favorites";
-        else if((section == 1) && (isActives))
+        else if((section == 2) && (isActives))
             retStr = @"Favorites";
     }
     
@@ -299,6 +312,9 @@
     
     retInt = [self.arrayOfChars count];
     
+    // Always add one for the new course section
+    retInt++;
+    
     if(isActives)
         retInt++;
     else if(isFavs)
@@ -314,6 +330,9 @@
     BOOL isFavs = ([self.favoriteNames count] == 0) ? NO : YES;
     NSInteger newSection = section;
     
+    // Always subtract one for the new course section
+    newSection--;
+    
     if(self.searching && ([self.searchB.text length] > 0)){
         num = [self.nameSearch count];
         return num;
@@ -321,17 +340,20 @@
     else if(isActives){
         newSection--;
         
-        if(section == 0)
+        if(section == 1)
             num = 1;
     }
     else if(isFavs){
         newSection--;
         
-        if((section == 0) && (!isActives))
+        if((section == 1) && (!isActives))
             num = [favoriteNames count];
-        else if((section == 1) && (isActives))
+        else if((section == 2) && (isActives))
             num = [favoriteNames count];
     }
+    
+    if(section == 0)
+        num = 1;
     
     if(num == -1)
         num = [[self.coursesDict objectForKey: [self.arrayOfChars objectAtIndex: newSection]] count];
@@ -348,12 +370,17 @@
     UITabBarItem* tbi = [[tbc tabBar] selectedItem];
     NSString* tabItemTitle = [tbi title];
     
-    Course* courseObject = [[self class] courseObjectWithName: [[tVC textLabel] text] InContext: self.manObjCon];
+    if((!self.searching) && (indexPath.section == 0)){
+        [self courseCreateModal];
+        return;
+    }
     
     // If we are searching and they selected a course then we want to close the search
     // for when they return to this view
     if(self.searching)
         [self doneSearching_Clicked: self];
+    
+    Course* courseObject = [[self class] courseObjectWithName: [[tVC textLabel] text] InContext: self.manObjCon];
     
     if([tabItemTitle isEqualToString: @"Scorecards"]){
         // Notify the New Round View Controller that a course was selected
@@ -391,6 +418,7 @@
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
+    static NSString* NewCourseCellIdentifier = @"NewCourseTableCell";
     static NSString *CellIdentifier = @"CourseTableCell";
     BOOL isActives = NO;
     BOOL isFavs = ([favoriteNames count] == 0) ? NO : YES;
@@ -399,17 +427,28 @@
     NSInteger newSection = indexPath.section;
     NSCharacterSet* charSet = [NSCharacterSet characterSetWithCharactersInString: @" ,"];
     
+    // Always subtract one for the new course section
+    newSection--;
+    
     if(isActives)
         newSection--;
     if(isFavs)
         newSection--;
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        //cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+    UITableViewCell* cell = nil;
+    if(section == 0){
+        cell = [tableView dequeueReusableCellWithIdentifier: NewCourseCellIdentifier];
+        if (cell == nil) {
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: NewCourseCellIdentifier] autorelease];
+        }
     }
-    
+    else{
+        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:    CellIdentifier] autorelease];
+        }
+    }
+   
     // Set up the cell...
     UILabel* lbl = [cell textLabel];
     UILabel* lbl2 = [cell detailTextLabel];
@@ -420,11 +459,14 @@
         [lbl setText: [compArr objectAtIndex:0]];
         [lbl2 setText: [[compArr objectAtIndex:1] stringByTrimmingCharactersInSet: charSet]];
     }
-    else if(isActives && (indexPath.section == 0)){
+    else if(indexPath.section == 0){
+        [lbl setText: @"Add a new course"];
+    }
+    else if(isActives && (indexPath.section == 1)){
         [lbl setText: @"Active Course"];
         [lbl2 setText: @"Active Course Location"];
     }
-    else if(isFavs && (((section == 0) && (!isActives)) || ((section == 1) && (isActives)))){
+    else if(isFavs && (((section == 1) && (!isActives)) || ((section == 2) && (isActives)))){
         [lbl setText: [self.favoriteNames objectAtIndex: indexPath.row]];
         [lbl2 setText: [[self.favoriteLocs objectAtIndex: indexPath.row] 
                         stringByTrimmingCharactersInSet: charSet]];
@@ -438,7 +480,10 @@
         [lbl2 setText: [componentsArr objectAtIndex:1]];
     }
 
-    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    if((!self.searching) && (indexPath.section == 0))
+        [cell setAccessoryType: UITableViewCellAccessoryDetailDisclosureButton];
+    else
+        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     
     return cell;
 }
@@ -626,6 +671,16 @@
 - (void) modalCancel:(id)sender
 {
     [self.courseSelectDelegate selectCourse: nil];
+}
+
+- (void) courseCreateModal
+{
+    NSLog(@"Presenting the course create view modally");
+    
+    CustomCourseViewController* ccvc = [[CustomCourseViewController alloc] initWithNibName: @"CustomCourseView" bundle: nil];
+    
+    [self presentModalViewController: ccvc animated: YES];
+    [ccvc release];
 }
 
 @end
