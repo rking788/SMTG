@@ -18,6 +18,7 @@
 @dynamic coursename;
 @dynamic menpars;
 @dynamic favorite;
+@dynamic pending;
 @dynamic scorecards;
 
 - (void)addScorecardsObject:(NSManagedObject *)value {    

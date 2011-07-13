@@ -20,6 +20,9 @@
     UITextField *countryTF;
     UITextField *websiteTF;
     UINavigationBar *navBar;
+    UISegmentedControl *uploadSeg;
+    UIView *uploadingView;
+    UIActivityIndicatorView *uploadingInd;
 }
 @property (nonatomic, retain) IBOutlet UITextField *courseNameTF;
 @property (nonatomic, retain) IBOutlet UITextField *phoneTF;
@@ -29,12 +32,16 @@
 @property (nonatomic, retain) IBOutlet UITextField *countryTF;
 @property (nonatomic, retain) IBOutlet UITextField *websiteTF;
 @property (nonatomic, retain) IBOutlet UINavigationBar *navBar;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *uploadSeg;
+@property (nonatomic, retain) IBOutlet UIView *uploadingView;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *uploadingInd;
 
 - (void) save;
 - (void) cancel;
+- (void) writeCourseToServer: (Course*) course;
+- (void) dismiss: (NSNumber*) shouldSave;
 
 + (BOOL) stateEnabled: (NSString*) state;
 + (NSString*) getWOEIDWithCity: (NSString*) city AndState: (NSString*) state;
-+ (void) writeCourseToServer: (Course*) course;
 
 @end

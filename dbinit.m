@@ -110,6 +110,7 @@
     NSString* country = nil;
     NSString* enabled = @"1";
     NSString* favorite = @"0";
+    NSString* pending = @"0";
     NSString* numHoles = nil;
     NSString* tmpMensPars = nil;
     NSString* tmpWomensPars = nil;
@@ -122,6 +123,7 @@
     
     BOOL isEnabled = YES;
     BOOL isFavorite = NO;
+    BOOL isPending = NO;
     
     while(cur){
         if([cur length] != 0){
@@ -142,6 +144,7 @@
             tmpWomensPars = [[lineFields objectAtIndex: 12] stringByTrimmingCharactersInSet: badChars];
             tmpTeeCoordsStr = [[lineFields objectAtIndex: 13] stringByTrimmingCharactersInSet: badChars];
             tmpGreenCoordsStr = [[lineFields objectAtIndex: 14] stringByTrimmingCharactersInSet: badChars];
+            pending = [[lineFields objectAtIndex: 15] stringByTrimmingCharactersInSet: badChars];
             
             if([website isEqualToString:@"NULL"])
                 website = nil;
@@ -155,6 +158,11 @@
                 isFavorite = YES;
             else
                 isFavorite = NO;
+            
+            if([pending isEqualToString: @"1"])
+                isPending = YES;
+            else
+                isPending = NO;
             
             // These are special cases (may need to be changed depending on the CSV format
             if([tmpMensPars length] == 0){
@@ -202,6 +210,7 @@
             [courseObj setValue: womensPars forKey: @"womenpars"];
             [courseObj setValue: teeCoords forKey: @"teeCoords"];
             [courseObj setValue: greenCoords forKey: @"greenCoords"];
+            [courseObj setValue: [NSNumber numberWithBool: isPending] forKey: @"pending"];
         }
 
         cur = (NSString*)[enumer nextObject];

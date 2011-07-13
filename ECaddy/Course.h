@@ -20,6 +20,7 @@
 @property (nonatomic, retain) NSString * coursename;
 @property (nonatomic, retain) NSArray* menpars;
 @property (nonatomic, retain) NSNumber * favorite;
+@property (nonatomic, retain) NSNumber* pending;
 @property (nonatomic, retain) NSSet* scorecards;
 
 @end

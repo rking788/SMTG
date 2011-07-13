@@ -451,9 +451,11 @@ static NSString* kAppId = @"142876775786876";
     self.tableV.scrollIndicatorInsets = contentInsets;
 }
 
+# pragma mark - TODO: CRITICAL This still does not scroll up correctly
+
 - (void) setViewMovedUp: (BOOL) movedUp
 {
-    CGFloat table_y_offset = self.tableV.frame.origin.y;
+    CGFloat table_y_offset = self.scoreHeaderView.frame.origin.y;
     
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.5];

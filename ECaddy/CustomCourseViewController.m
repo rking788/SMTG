@@ -19,6 +19,9 @@
 @synthesize countryTF;
 @synthesize websiteTF;
 @synthesize navBar;
+@synthesize uploadSeg;
+@synthesize uploadingView;
+@synthesize uploadingInd;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -67,6 +70,9 @@
     [self setCountryTF:nil];
     [self setWebsiteTF:nil];
     [self setNavBar:nil];
+    [self setUploadSeg:nil];
+    [self setUploadingView:nil];
+    [self setUploadingInd:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -87,6 +93,9 @@
     [countryTF release];
     [websiteTF release];
     [navBar release];
+    [uploadSeg release];
+    [uploadingView release];
+    [uploadingInd release];
     [super dealloc];
 }
 
@@ -107,7 +116,7 @@
     return YES;
 }
 
-#pragma mark - TODO: Uncomment the part where it actually saves to the persistent store
+#pragma mark - TODO: Uncomment the part where it actually saves to the persistent store also implement the part where it fills the number of holes on the course
 - (void) save
 {
     BOOL isValid = YES;
@@ -210,21 +219,35 @@
     NSString* woeid = [CustomCourseViewController getWOEIDWithCity: [self.cityTF text] AndState:[newCourse valueForKey: @"state"]];
     [newCourse setWoeid: woeid];
     
+    // TODO: This should actually be implemented in the view somehow no just a constant
+    // Number of holes
+    [newCourse setNumholes: [NSNumber numberWithInt: 18]];
+    
     // Save the newly added golf course in the managed object context
     // TODO: This should be uncommented when we actually want to save it
     //[[ECaddyAppDelegate sharedAppDelegate] saveContext];
     
     // Try uploading the course information to the server
-    [CustomCourseViewController writeCourseToServer: newCourse];
+    if([self.uploadSeg selectedSegmentIndex] == 0){
+        [self.uploadingView setHidden: NO];
+        [self.uploadingInd setHidden: NO];
+        [self.uploadingInd startAnimating];
+        [NSThread detachNewThreadSelector: @selector(writeCourseToServer:) 
+                                 toTarget: self withObject: newCourse];
+        //[self writeCourseToServer: newCourse];
+    }
+    else{
+        [newCourse setPending: [NSNumber numberWithBool: YES]];
+        [abbrsDict release];
+        [self dismiss: [NSNumber numberWithBool: YES]];
+    }
     
     [abbrsDict release];
-    
-    [self dismissModalViewControllerAnimated: YES];
 }
 
 - (void) cancel
 {
-    [self dismissModalViewControllerAnimated: YES];
+    [self dismiss: [NSNumber numberWithBool: NO]];
 }
 
 + (BOOL) stateEnabled:(NSString *)state
@@ -292,22 +315,36 @@
     range3.length = range2.location - (range1.location+range1.length);
     woeidStr = [str substringWithRange:range3];
     
-    NSLog(@"woeid = %@", woeidStr);
-    
     [str release];
     
     return woeidStr;
 }
 
+- (void) dismiss: (NSNumber*) shouldSave
+{
+    if([shouldSave boolValue])
+        [[ECaddyAppDelegate sharedAppDelegate] saveContext];
+    
+    [self dismissModalViewControllerAnimated: YES];
+}
+
 #pragma mark - TODO: Finish implementing this stuff
 
-+ (void) writeCourseToServer:(Course *)course
+- (void) writeCourseToServer:(Course *)course
 {
+    BOOL pending = YES;
+    NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+    NSURLResponse* resp = nil;
+    NSError* err = nil;
+    
     // TODO: Probably don't want to print the description it has a lot of core data
     // information that isn't really needed
-    NSString* output = [course description];
-    NSURL* url = [NSURL URLWithString:@"http://king.eece.maine.edu/Courses/test.php"];
-    NSString* content = [NSString stringWithFormat: @"course=%@", output];
+    NSURL* url = [NSURL URLWithString:@"http://mainelyapps.com/SMTG/NewCourse.php"];
+    NSString* content = [NSString stringWithFormat:
+                            @"cn=%@&p=%@&addr=%@&st=%@&c=%@&web=%@&woeid=%@&nh=%@", 
+                            [course coursename], [course phone], [course valueForKey: @"address"], 
+                            [course valueForKey:@"state"], [course valueForKey:@"country"], 
+                            [course website], [course woeid], [course numholes]];
     
     NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL: url];
     
@@ -315,7 +352,24 @@
     [request setHTTPBody: [content dataUsingEncoding: NSUTF8StringEncoding]];
     
     // TODO: This should probably be an asynchronous request to not hold up the UI
-    [NSURLConnection sendSynchronousRequest: request returningResponse:nil error:nil];
+    NSData* ret = [NSURLConnection sendSynchronousRequest: request returningResponse: &resp error: &err];
+    
+    // This return value is used to set the pending value of the course
+    if((!ret) || (err))
+        pending = YES;
+    else
+        pending = NO;
+    
+    [course setPending: [NSNumber numberWithBool: pending]];
+    
+    // Hide the uploading view
+    [self.uploadingInd stopAnimating];
+    [self.uploadingView setHidden: YES];
+    
+    // Signal the main thread that we are done getting the weather
+    [self performSelectorOnMainThread:@selector(dismiss:) 
+                           withObject: [NSNumber numberWithBool: YES] waitUntilDone: YES];
+    [pool release];
 }
 
 #pragma mark - UIAlertViewDelegate Methods
