@@ -99,10 +99,22 @@
     [super dealloc];
 }
 
+- (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
+{
+    UIBarButtonItem *barButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target: textField action:@selector(resignFirstResponder)] autorelease];
+    UIBarButtonItem *flexibleSpaceLeft = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
+    
+    UIToolbar *toolbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)] autorelease];
+    toolbar.items = [NSArray arrayWithObjects: flexibleSpaceLeft, barButton, nil];
+    [toolbar setBarStyle: UIBarStyleBlackTranslucent];
+    
+    textField.inputAccessoryView = toolbar;
+    
+    return YES;
+}
+
 - (BOOL) textFieldShouldReturn:(UITextField *)textField
 {
-    NSLog(@"This text field should return");
-    
     // Move the keyboard to the next textfield
     NSInteger nextTFTag = textField.tag + 1;
     UITextField* nextTF = (UITextField*) [textField.superview viewWithTag: nextTFTag];

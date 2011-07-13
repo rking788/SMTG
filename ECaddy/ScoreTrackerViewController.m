@@ -451,7 +451,7 @@ static NSString* kAppId = @"142876775786876";
     self.tableV.scrollIndicatorInsets = contentInsets;
 }
 
-# pragma mark - TODO: CRITICAL This still does not scroll up correctly
+# pragma mark - TODO: CRITICAL This still does not scroll up correctly (When not clicking on the header just clicking right into a textfield
 
 - (void) setViewMovedUp: (BOOL) movedUp
 {
