@@ -30,7 +30,6 @@
 		AE85D7621368E34400CDA534 /* CourseSelectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7601368E34400CDA534 /* CourseSelectView.xib */; };
 		AE85D7741368E75700CDA534 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7721368E75700CDA534 /* MapViewController.m */; };
 		AE85D7751368E75700CDA534 /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7731368E75700CDA534 /* MapView.xib */; };
-		AE85D7791368E84700CDA534 /* WeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7771368E84600CDA534 /* WeatherViewController.m */; };
 		AE85D77A1368E84700CDA534 /* WeatherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7781368E84600CDA534 /* WeatherView.xib */; };
 		AE85D7841368EC5200CDA534 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7831368EC5200CDA534 /* CoreLocation.framework */; };
 		AE85D7861368EC5900CDA534 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7851368EC5900CDA534 /* MapKit.framework */; };
@@ -116,8 +115,6 @@
 		AE85D7711368E75700CDA534 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		AE85D7721368E75700CDA534 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		AE85D7731368E75700CDA534 /* MapView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapView.xib; sourceTree = "<group>"; };
-		AE85D7761368E84600CDA534 /* WeatherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherViewController.h; sourceTree = "<group>"; };
-		AE85D7771368E84600CDA534 /* WeatherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherViewController.m; sourceTree = "<group>"; };
 		AE85D7781368E84600CDA534 /* WeatherView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherView.xib; sourceTree = "<group>"; };
 		AE85D7831368EC5200CDA534 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		AE85D7851368EC5900CDA534 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -265,28 +262,26 @@
 			children = (
 				AEB0722B137DB51600BE3C37 /* dbinit.h */,
 				AEB0722C137DB51600BE3C37 /* dbinit.m */,
-				AE85D7511368E34400CDA534 /* ECaddyAppDelegate.h */,
-				AE85D7521368E34400CDA534 /* ECaddyAppDelegate.m */,
 				AE9177F6139AC17400AC5706 /* Scorecard.h */,
 				AE9177F7139AC17400AC5706 /* Scorecard.m */,
 				AE9177F3139AC17300AC5706 /* Course.h */,
 				AE9177F4139AC17300AC5706 /* Course.m */,
+				AE886D621370E2400056BDF4 /* POIAnnotation.h */,
+				AE886D641370E2490056BDF4 /* POIAnnotation.m */,
+				AE85D7511368E34400CDA534 /* ECaddyAppDelegate.h */,
+				AE85D7521368E34400CDA534 /* ECaddyAppDelegate.m */,
 				AE8FE58B1384A96900EE8E66 /* CourseSelectViewController.h */,
 				AE8FE58C1384A96900EE8E66 /* CourseSelectViewController.m */,
+				AE85D75A1368E34400CDA534 /* DirectoryViewController.h */,
+				AE85D75B1368E34400CDA534 /* DirectoryViewController.m */,
 				AEA35AE51384CE7600111BAA /* CourseDetailViewController.h */,
 				AEA35AE61384CE7600111BAA /* CourseDetailViewController.m */,
 				AE85D7571368E34400CDA534 /* ScorecardViewController.h */,
 				AE85D7581368E34400CDA534 /* ScorecardViewController.m */,
 				AEA99327139DBF8700DD723C /* ScoreTrackerViewController.h */,
 				AEA99328139DBF8700DD723C /* ScoreTrackerViewController.m */,
-				AE85D75A1368E34400CDA534 /* DirectoryViewController.h */,
-				AE85D75B1368E34400CDA534 /* DirectoryViewController.m */,
 				AE85D7711368E75700CDA534 /* MapViewController.h */,
 				AE85D7721368E75700CDA534 /* MapViewController.m */,
-				AE886D621370E2400056BDF4 /* POIAnnotation.h */,
-				AE886D641370E2490056BDF4 /* POIAnnotation.m */,
-				AE85D7761368E84600CDA534 /* WeatherViewController.h */,
-				AE85D7771368E84600CDA534 /* WeatherViewController.m */,
 				AE85D78F1369298E00CDA534 /* WeatherDetails.h */,
 				AE85D7901369298E00CDA534 /* WeatherDetails.m */,
 				AE8E2C17139886630098A426 /* NewRoundViewController.h */,
@@ -482,7 +477,6 @@
 				AE85D7591368E34400CDA534 /* ScorecardViewController.m in Sources */,
 				AE85D75C1368E34400CDA534 /* DirectoryViewController.m in Sources */,
 				AE85D7741368E75700CDA534 /* MapViewController.m in Sources */,
-				AE85D7791368E84700CDA534 /* WeatherViewController.m in Sources */,
 				AE85D7921369298E00CDA534 /* WeatherDetails.m in Sources */,
 				AE886D651370E2490056BDF4 /* POIAnnotation.m in Sources */,
 				AE816DC1137B7E140023F5D7 /* NSDataAdditions.m in Sources */,

@@ -16,15 +16,15 @@
 @class Facebook;
 
 @interface ScoreTrackerViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, FBSessionDelegate, FBDialogDelegate, FBRequestDelegate> {
-    ECaddyAppDelegate* appDel;
-    Scorecard* scorecard;
-    
+    HeaderFooterView *scoreHeaderView;
+    HeaderFooterView *scoreFooterView;
     UITextView *titleTextView;
     UIButton *favstarBtn;
     UITableView *tableV;
     
-    HeaderFooterView *scoreHeaderView;
-    HeaderFooterView *scoreFooterView;
+    ECaddyAppDelegate* appDel;
+    Scorecard* scorecard;
+    
     NSMutableDictionary* scorecardDict;
     UIButton *saveCurSC;
     
@@ -37,14 +37,15 @@ enum{
     HOLENUM_TAG = 20,
     PAR_TAG
 };
-@property (nonatomic, retain) ECaddyAppDelegate* appDel;
-@property (nonatomic, retain) Scorecard* scorecard;
 
 @property (nonatomic, retain) IBOutlet HeaderFooterView *scoreHeaderView;
 @property (nonatomic, retain) IBOutlet HeaderFooterView *scoreFooterView;
 @property (nonatomic, retain) IBOutlet UITextView *titleTextView;
 @property (nonatomic, retain) IBOutlet UIButton *favstarBtn;
 @property (nonatomic, retain) IBOutlet UITableView *tableV;
+
+@property (nonatomic, retain) ECaddyAppDelegate* appDel;
+@property (nonatomic, retain) Scorecard* scorecard;
 
 @property (nonatomic, assign) UITextField* activeField;
 

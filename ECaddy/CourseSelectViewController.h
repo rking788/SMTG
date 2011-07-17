@@ -10,6 +10,8 @@
 #import <CoreData/CoreData.h>
 #import "Course.h"
 
+@class ECaddyAppDelegate;
+
 enum{
     kNAME_SCOPE_INDEX,
     kLOC_SCOPE_INDEX
@@ -39,6 +41,8 @@ enum{
     UITableView *tableV;
     UIView *blackView;
     
+    ECaddyAppDelegate* appDel;
+    
     id<CourseSelectDelegate> courseSelectDelegate;
     
     BOOL searching;
@@ -57,6 +61,8 @@ enum{
 @property (nonatomic, retain) NSMutableArray* favoriteNames;
 @property (nonatomic, retain) NSMutableArray* favoriteLocs;
 
+@property (nonatomic, retain) ECaddyAppDelegate* appDel;
+
 @property (nonatomic, assign) id<CourseSelectDelegate> courseSelectDelegate;
 
 @property (nonatomic, assign, getter = isSearching) BOOL searching;
@@ -65,7 +71,7 @@ enum{
 - (void) fillNamesAndLocs;
 - (void) doneSearching_Clicked:(id)sender;
 - (void) handleTapFrom: (UITapGestureRecognizer*) recognizer;
-- (void)searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText;
+- (void) searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText;
 - (void) searchTableView;
 - (void) modalCancel: (id) sender;
 - (void) fillFavorites;

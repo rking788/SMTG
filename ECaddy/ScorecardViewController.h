@@ -7,21 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Course.h"
 #import "iAd/ADBannerView.h"
 
+@class Course;
+
 @interface ScorecardViewController : UIViewController <ADBannerViewDelegate> {
-    Course* courseObj;
-    
     UIView* contentView;
+    
+    Course* courseObj;    
     id adView;
     BOOL adVisible;
 }
 @property (nonatomic, retain) IBOutlet UIView* contentView;
+
+@property (nonatomic, retain) Course* courseObj;
 @property (nonatomic, retain) id adView;
 @property (nonatomic) BOOL adVisible;
-
-@property (nonatomic, retain) Course* courseObj; 
 
 - (IBAction)startClicked:(id)sender;
 - (IBAction)continueClicked:(id)sender;

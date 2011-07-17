@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-#import "Course.h"
+
+@class Course;
 
 @interface CourseDetailViewController : UIViewController {
     
@@ -16,15 +17,15 @@
     Course* courseObj;
     NSManagedObjectContext* manObjCon;
 }
-- (IBAction) startRoundClicked:(id)sender;
-- (IBAction) favstarPressed: (id) sender;
-
 @property (nonatomic, retain) IBOutlet UITextView *cdTV;
 @property (nonatomic, retain) IBOutlet UIButton* favstarBtn;
 
 @property (nonatomic, retain) NSManagedObjectContext* manObjCon;
 
 @property (nonatomic, retain) Course* courseObj;
+
+- (IBAction) startRoundClicked:(id)sender;
+- (IBAction) favstarPressed: (id) sender;
 
 - (void) populateCourseDetails;
 

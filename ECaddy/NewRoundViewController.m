@@ -6,7 +6,6 @@
 //  Copyright 2011 RPKing. All rights reserved.
 //
 
-// TODOS: Need to figure out when to save the scorecards to the managedobjectcontext or when to store in a file.
 
 #import "NewRoundViewController.h"
 #import "DirectoryViewController.h"
@@ -119,18 +118,11 @@
         self.curScorecard = del.curScorecard;
         self.curCourse = del.curScorecard.course;
     }
-    else{
-        self.curScorecard = [del findActiveScorecard];
-    }
     
     // Add a resume button to the right side of the navigation bar to resume the round
     if(self.curScorecard){
         
         self.curCourse = self.curScorecard.course;
-        
-        // Set the current course and scorecard in the app delegate
-       // del.curScorecard = self.curScorecard;
-       // del.curCourse = self.curCourse;
         
         self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Resume" style: UIBarButtonItemStyleBordered target:self action:@selector(resumeRound)] autorelease];
     }
@@ -301,15 +293,15 @@
     [actSheet addSubview: pickView];
     
     // TODO: Do not hard code these size values if possible
-    UISegmentedControl* closeButton = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Done", nil]];
-    closeButton.momentary = YES;
-    closeButton.frame = CGRectMake(260, 7.0f, 50.0f, 30.0f);
-    closeButton.segmentedControlStyle = UISegmentedControlStyleBar;
-    closeButton.tintColor = [UIColor blackColor];
-    [closeButton addTarget:self action:@selector(dismissPickerView) forControlEvents:UIControlEventValueChanged];
+    UISegmentedControl* doneButton = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Done", nil]];
+    doneButton.momentary = YES;
+    doneButton.frame = CGRectMake(260, 7.0f, 50.0f, 30.0f);
+    doneButton.segmentedControlStyle = UISegmentedControlStyleBar;
+    doneButton.tintColor = [UIColor blackColor];
+    [doneButton addTarget:self action:@selector(dismissPickerView) forControlEvents:UIControlEventValueChanged];
     
-    [self.actSheet addSubview:closeButton];
-    [closeButton release];
+    [self.actSheet addSubview: doneButton];
+    [doneButton release];
     
     [self.actSheet showInView: self.view.window];
     

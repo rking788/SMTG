@@ -144,8 +144,8 @@
 {
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
     
-    // This is the woeid value for old town, me
-    NSURL* url2 = [NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@", [self WOEID]]];
+    // Add the woeid to the URL
+    NSURL* url2 = [NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@", self.WOEID]];
     NSString* str3 = [[NSString alloc] initWithContentsOfURL:url2 encoding:NSUTF8StringEncoding error:nil];
     
     [self setText:str3];
@@ -168,9 +168,7 @@
         return;
     }
     
-    // Parse the XML to get the weather information 
-    // TODO: Maybe this should use a struct or something? or a class i have no idea right now
-    // just want it to work.
+    // Parse the XML to get the weather information
     TBXML* tbxml = [[TBXML tbxmlWithXMLString: self.text] retain];
 
     TBXMLElement* CHANNEL = [TBXML childElementNamed: @"channel" parentElement:tbxml.rootXMLElement];
@@ -264,8 +262,8 @@
                                tomDateStr, tomText, tomHigh, tomLow];
     [self.nextDayForecastTV setText: tomForecast];
     
-    [actIndicator stopAnimating];
-    [actIndicator setHidden: YES];
+    [self.actIndicator stopAnimating];
+    [self.actIndicator setHidden: YES];
 }
 
 @end

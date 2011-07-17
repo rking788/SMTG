@@ -17,7 +17,7 @@
 // Facebook app ID constant string
 static NSString* kAppId = @"142876775786876";
 
-#pragma mark - TODO Save the scorecard once it is created. If we view the scorecard and then the application terminates without going back to the new round view, then there is no active course the next time. ( thats wrong).
+#pragma mark - TODO The scores aren't being properly loaded. Like when there is more than one player and going in and out of this view
 
 @implementation ScoreTrackerViewController
 
@@ -76,7 +76,7 @@ static NSString* kAppId = @"142876775786876";
     // Register listeners for keyboard notifications
     [self registerForKeyboardNotifications];
     
-    // TODO: Implement this to provide actions like posting to facebook and finishing a round
+    // TODO: Finish implementing this to provide actions like posting to facebook and finishing a round
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
                                                initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                target:self action:@selector(FBButtonClicked:)] autorelease];
@@ -166,6 +166,8 @@ static NSString* kAppId = @"142876775786876";
     
     // Update the totals in the footer view
     [self.scoreFooterView setTotalsWithScoreDict: self.scorecardDict];
+    
+    [self.appDel saveContext];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -189,7 +191,7 @@ static NSString* kAppId = @"142876775786876";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger num = 18;
+    NSInteger num = [self.scorecard.course.numholes integerValue];
     
     return num;
 }
@@ -270,7 +272,8 @@ static NSString* kAppId = @"142876775786876";
     
     label = (UILabel*) [cell viewWithTag: PAR_TAG];
     
-    NSNumber* parnum = [self.scorecard.course.menpars objectAtIndex: indexPath.row]; 
+    NSNumber* parnum = [self.scorecard.course.menpars objectAtIndex: indexPath.row];
+    
     // TODO: Right now just using the mens pars maybe want to support womens' pars later
     if(!parnum)
         label.text = @"-";
@@ -293,8 +296,6 @@ static NSString* kAppId = @"142876775786876";
         // Only increment the column number if it is a textfield column
         col++;
     }
-  //  UITextField* field = (UITextField*) [cell viewWithTag: PAR_TAG + 2];
-  //  field.text = [NSString stringWithFormat: @"%d", (field.tag - PAR_TAG)];
     
     return cell;
 }
@@ -417,6 +418,7 @@ static NSString* kAppId = @"142876775786876";
                                                  name:UIKeyboardWillHideNotification object:nil];
     
 }
+
 // Called when the UIKeyboardDidShowNotification is sent.
 - (void)keyboardWasShown:(NSNotification*)aNotification
 {
@@ -434,9 +436,13 @@ static NSString* kAppId = @"142876775786876";
     // Your application might not need or want this behavior.
     CGRect aRect = self.view.frame;
     aRect.size.height -= kbSize.height;
-    if (!CGRectContainsPoint(aRect, activeField.frame.origin) ) {
-        CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y-kbSize.height);
-        [self.tableV setContentOffset:scrollPoint animated:YES];
+    CGPoint bottom = CGPointMake(activeField.superview.frame.origin.x,
+                                 (activeField.superview.frame.origin.y + activeField.superview.frame.size.height));
+    //if (!CGRectContainsPoint(aRect, activeField.superview.frame.origin) ) {
+    if (!CGRectContainsPoint(aRect, bottom) ) {
+        //CGPoint scrollPoint = CGPointMake(0.0, activeField.superview.frame.origin.y-kbSize.height);
+        [self.tableV scrollRectToVisible: self.activeField.superview.frame animated:YES];
+        // [self.tableV setContentOffset:scrollPoint animated:YES];
     }
 }
 
@@ -450,8 +456,6 @@ static NSString* kAppId = @"142876775786876";
     self.tableV.contentInset = contentInsets;
     self.tableV.scrollIndicatorInsets = contentInsets;
 }
-
-# pragma mark - TODO: CRITICAL This still does not scroll up correctly (When not clicking on the header just clicking right into a textfield
 
 - (void) setViewMovedUp: (BOOL) movedUp
 {

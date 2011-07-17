@@ -30,13 +30,6 @@
     UITextView *todayForecastTV;
     UITextView *nextDayForecastTV;
 }
-@property (nonatomic, retain) Course* courseObj;
-
-@property (nonatomic, retain) NSString* text;
-@property (nonatomic, retain) NSString* courseName;
-@property (nonatomic, retain) NSString* courseLoc;
-@property (nonatomic, retain) NSString* WOEID;
-
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *actIndicator;
 
 @property (nonatomic, retain) IBOutlet UITextView *curWeatherTV;
@@ -48,6 +41,13 @@
 @property (nonatomic, retain) IBOutlet UILabel *courseDetailsLbl;
 @property (nonatomic, retain) IBOutlet UIButton *favstarBtn;
 @property (nonatomic, retain) IBOutlet UIView *errorView;
+
+@property (nonatomic, retain) Course* courseObj;
+
+@property (nonatomic, retain) NSString* text;
+@property (nonatomic, retain) NSString* courseName;
+@property (nonatomic, retain) NSString* courseLoc;
+@property (nonatomic, retain) NSString* WOEID;
 
 - (IBAction)favstarPressed:(id)sender;
 

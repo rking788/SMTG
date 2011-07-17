@@ -62,9 +62,6 @@ enum{
 - (void) allSwitchesOnOff: (BOOL) on;
 - (void) toggleMOEWithStateAbbr: (NSString*) abbr ToState: (BOOL) on;
 
-- (NSString*) stateNameWithAbbr: (NSString*) abbr;
-- (NSString*) stateAbbrWithName: (NSString*) name;
-
 // Methods for Navigation bar button actions
 - (void) cancel;
 - (void) save;

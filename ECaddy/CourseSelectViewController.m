@@ -12,9 +12,6 @@
 #import "ECaddyAppDelegate.h"
 #import "CustomCourseViewController.h"
 
-#pragma mark - TODO Fill active course for table view
-#pragma mark - TODO Check to make sure a state name is found in the abbreviation dictionary, if one is not then just use the abbreviated version, this may be the case if a custom course is added.
-
 @implementation CourseSelectViewController
 
 @synthesize arrayOfChars, coursesDict;
@@ -26,6 +23,7 @@
 @synthesize tableV;
 @synthesize blackView;
 @synthesize searching;
+@synthesize appDel;
 @synthesize courseSelectDelegate;
 @synthesize modal;
 
@@ -48,6 +46,7 @@
     [longStateName release];
     [favoriteNames release];
     [favoriteLocs release];
+    [appDel release];
     [super dealloc];
     
 }
@@ -66,6 +65,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    // Set the app delegate to find if there is an active course or not
+    [self setAppDel: [ECaddyAppDelegate sharedAppDelegate]];
     
     // Set the title in the navigation bar
     if(self.selectedState)
@@ -131,6 +133,7 @@
     [self setCoursesDict: nil];
     [self setArrayOfChars: nil];
     [self setLongStateName: nil];
+    [self setAppDel: nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -189,11 +192,6 @@
 
 - (void) fillNamesAndLocs
 {
-    if(!self.selectedState){
-        // Do something here to handle the case where an invalid state may 
-        // have been selected (not sure why that would happen 
-    }
-        
     NSFetchRequest* fetchrequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext:self.manObjCon];
     [fetchrequest setEntity:entity];
@@ -222,7 +220,6 @@
             tmpArr = nil;
             
             nameStr = [manObj valueForKey: @"coursename"];
-            //locStr = [manObj valueForKey: @"address"];
             locStr = [[manObj valueForKey: @"address"] stringByTrimmingCharactersInSet:
                       [NSCharacterSet characterSetWithCharactersInString:@" ,"]];
             combinedStr = [nameStr stringByAppendingFormat: @";%@", locStr];
@@ -264,8 +261,8 @@
 {
     NSString* retStr = nil;
     NSInteger newSection = section;
-    BOOL isActives = NO;
-    BOOL isFavs = ([favoriteNames count] == 0) ? NO : YES;
+    BOOL isActives = (self.appDel.curCourse) ? YES : NO;
+    BOOL isFavs = ([favoriteNames count] != 0) ? YES : NO;
     
     if(self.searching){
         retStr = @"";
@@ -281,9 +278,10 @@
         newSection--;
         
         if(section == 1)
-            retStr = @"Active Course";
+            retStr = @"Active";
     }
-    else if(isFavs){
+    
+    if(isFavs){
         newSection--;
         
         if((section == 1) && (!isActives))
@@ -299,13 +297,11 @@
     return retStr;
 }
 
-#pragma mark - TODO Return the number of letters in the alphabet that are in the course names
-
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
     NSInteger retInt = 1;
-    BOOL isActives = NO;
-    BOOL isFavs = ([favoriteNames count] == 0) ? NO : YES;
+    BOOL isActives = (self.appDel.curCourse) ? YES : NO;
+    BOOL isFavs = ([favoriteNames count] != 0) ? YES : NO;
     
     if(self.searching)
         return 1;
@@ -317,7 +313,7 @@
     
     if(isActives)
         retInt++;
-    else if(isFavs)
+    if(isFavs)
         retInt++;
     
     return retInt;
@@ -326,8 +322,8 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     NSInteger num = -1;
-    BOOL isActives = NO;
-    BOOL isFavs = ([self.favoriteNames count] == 0) ? NO : YES;
+    BOOL isActives = (self.appDel.curCourse) ? YES : NO;
+    BOOL isFavs = ([self.favoriteNames count] != 0) ? YES : NO;
     NSInteger newSection = section;
     
     // Always subtract one for the new course section
@@ -337,13 +333,15 @@
         num = [self.nameSearch count];
         return num;
     }
-    else if(isActives){
+    
+    if(isActives){
         newSection--;
         
         if(section == 1)
             num = 1;
     }
-    else if(isFavs){
+    
+    if(isFavs){
         newSection--;
         
         if((section == 1) && (!isActives))
@@ -420,7 +418,7 @@
 {
     static NSString* NewCourseCellIdentifier = @"NewCourseTableCell";
     static NSString *CellIdentifier = @"CourseTableCell";
-    BOOL isActives = NO;
+    BOOL isActives = (self.appDel.curCourse) ? YES : NO;
     BOOL isFavs = ([favoriteNames count] == 0) ? NO : YES;
     BOOL isSpecial = NO;
     NSInteger section = indexPath.section;
@@ -463,8 +461,8 @@
         [lbl setText: @"Add a new course"];
     }
     else if(isActives && (indexPath.section == 1)){
-        [lbl setText: @"Active Course"];
-        [lbl2 setText: @"Active Course Location"];
+        [lbl setText: [self.appDel.curCourse coursename]];
+        [lbl2 setText: [self.appDel.curCourse valueForKey: @"address"]];
     }
     else if(isFavs && (((section == 1) && (!isActives)) || ((section == 2) && (isActives)))){
         [lbl setText: [self.favoriteNames objectAtIndex: indexPath.row]];
@@ -614,36 +612,17 @@
     [tmpArr release];
 }
 
-#pragma  mark - TODO If the tableview is somewhat scrolled then the blackView doesn't cover the table view completely
 - (void) searchBarTextDidBeginEditing:(UISearchBar *)theSearchBar 
 {
     self.searching = YES;
     
-    //self.blackView.alpha = 0.5;
     [UIView beginAnimations:nil context:NULL];
     self.blackView.alpha = 0.7;
     [UIView commitAnimations];
-    //self.tableV.scrollEnabled = NO;
     
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
                                                initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                target:self action:@selector(doneSearching_Clicked:)] autorelease];
-}
-
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar 
-{
-  //  searchBar.showsScopeBar = YES;
-  //  [searchBar sizeToFit];
-    
-    return YES;
-}
-
-- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar 
-{
-  //  searchBar.showsScopeBar = NO;
-  //  [searchBar sizeToFit];
-    
-    return YES;
 }
 
 - (void) doneSearching_Clicked:(id)sender 
@@ -674,9 +653,7 @@
 }
 
 - (void) courseCreateModal
-{
-    NSLog(@"Presenting the course create view modally");
-    
+{ 
     CustomCourseViewController* ccvc = [[CustomCourseViewController alloc] initWithNibName: @"CustomCourseView" bundle: nil];
     
     [self presentModalViewController: ccvc animated: YES];

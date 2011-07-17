@@ -45,6 +45,8 @@ NSString* const DBFILENAME = @"ECaddy.sqlite";
     self.curCourse = nil;
     self.curScorecard = nil;
     
+    [self findActiveScorecard];
+    
     _FB = nil;
     
     return YES;
@@ -78,6 +80,7 @@ NSString* const DBFILENAME = @"ECaddy.sqlite";
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
+    [self findActiveScorecard];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

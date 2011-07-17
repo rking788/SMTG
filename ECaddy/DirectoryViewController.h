@@ -10,6 +10,8 @@
 #import <CoreData/CoreData.h>
 #import "CourseSelectViewController.h"
 
+@class ECaddyAppDelegate;
+
 @interface DirectoryViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
  
     NSSet* stateSet;
@@ -24,7 +26,10 @@
   
     BOOL modal;
     
+    ECaddyAppDelegate* appDel;
+    
     id<CourseSelectDelegate> courseSelectDelegate;
+   
     UITableView *theTable;
     
     // Property used to determine what field to pick in settings tab
@@ -37,6 +42,9 @@
 @property (nonatomic, retain) NSDictionary* abbrsDict;
 @property (nonatomic, retain) NSDictionary* stateArrDict;
 @property (nonatomic, retain) NSManagedObjectContext* manObjCon;
+
+@property (nonatomic, retain) ECaddyAppDelegate* appDel;
+
 @property (nonatomic, assign) id<CourseSelectDelegate> courseSelectDelegate;
 
 @property (nonatomic, retain) IBOutlet UITableView *theTable;

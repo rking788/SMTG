@@ -9,8 +9,7 @@
 #import "ScorecardViewController.h"
 #import "NewRoundViewController.h"
 #import "ScorecardTableViewController.h"
-
-# pragma mark - TODO Need to shrink the content view so that the buttons are still in the middle of the screen.
+#import "Course.h"
 
 @implementation ScorecardViewController
 

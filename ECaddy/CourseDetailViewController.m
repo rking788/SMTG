@@ -8,6 +8,7 @@
 
 #import "CourseDetailViewController.h"
 #import "ECaddyAppDelegate.h"
+#import "Course.h"
 
 @implementation CourseDetailViewController
 
@@ -83,21 +84,16 @@
 - (void) populateCourseDetails
 {
     NSCharacterSet* charSet = [NSCharacterSet characterSetWithCharactersInString: @" ,"];
-    NSString* name = nil;
-    NSString* phone = nil;
-    NSString* website = nil;
-    NSString* address = nil;
-    NSString* state = nil;
     NSString* detailText = nil;
     
-    name = [self.courseObj coursename];
-    phone = [self.courseObj phone];
-    website = [self.courseObj website];
+    NSString* name = self.courseObj.coursename;
+    NSString* phone = self.courseObj.phone;
+    NSString* website = self.courseObj.website;
     
     // These need to be valueForKeys because they are Location Entities
-    address = [self.courseObj valueForKey: @"address"];
+    NSString* address = [self.courseObj valueForKey: @"address"];
     address = [address stringByTrimmingCharactersInSet: charSet];
-    state = [self.courseObj valueForKey: @"state"];
+    NSString* state = [self.courseObj valueForKey: @"state"];
     
     detailText = [NSString stringWithFormat: @"%@\n%@, %@\n%@", name, address, state, phone];
     
@@ -106,7 +102,6 @@
     }
     
     [self.cdTV setText: detailText];
-    
 }
 
 - (IBAction)startRoundClicked:(id)sender {
@@ -117,7 +112,6 @@
     [navCont popToRootViewControllerAnimated: NO];
     [[[navCont viewControllers] objectAtIndex: 0] viewDidAppear: YES];
     
-    NSLog(@"Class: %@",[[[navCont viewControllers] objectAtIndex: 0] class]);
     return;
 }
 

@@ -262,7 +262,12 @@
         NSString* countryStr = [[self.stateArrDict allKeys] objectAtIndex: (indexPath.section - 1)];
         NSString* stateStr =  [[[self.stateArrDict objectForKey: countryStr] allObjects] objectAtIndex: indexPath.row];
         
-        [lbl setText: [self.abbrsDict valueForKey: stateStr]];
+        NSString* longState = [self.abbrsDict valueForKey: stateStr];
+        
+        if(longState)
+            [lbl setText: longState];
+        else
+            [lbl setText: stateStr];
         
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"state == %@", stateStr];  
         NSMutableArray* tmpArr = [NSMutableArray arrayWithArray: self.locObjs];
@@ -323,19 +328,6 @@
     }
 
     [tv reloadData];
-}
-
-#pragma mark - TODO IMPLEMENT THESE FUNCTIONS
-- (NSString*) stateNameWithAbbr: (NSString*) abbr
-{
-
-    return nil;
-}
-
-- (NSString*) stateAbbrWithName: (NSString*) name
-{
-    
-    return nil;
 }
 
 @end

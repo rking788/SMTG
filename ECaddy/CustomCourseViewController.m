@@ -13,6 +13,7 @@
 @implementation CustomCourseViewController
 @synthesize courseNameTF;
 @synthesize phoneTF;
+@synthesize numHolesTF;
 @synthesize addressTF;
 @synthesize cityTF;
 @synthesize stateTF;
@@ -73,6 +74,7 @@
     [self setUploadSeg:nil];
     [self setUploadingView:nil];
     [self setUploadingInd:nil];
+    [self setNumHolesTF:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -96,6 +98,7 @@
     [uploadSeg release];
     [uploadingView release];
     [uploadingInd release];
+    [numHolesTF release];
     [super dealloc];
 }
 
@@ -128,7 +131,6 @@
     return YES;
 }
 
-#pragma mark - TODO: Uncomment the part where it actually saves to the persistent store also implement the part where it fills the number of holes on the course
 - (void) save
 {
     BOOL isValid = YES;
@@ -136,6 +138,10 @@
 
     if([[self.courseNameTF text] length] == 0){
         errStr = [errStr stringByAppendingString: @"Course Name must not be empty\n"];
+        isValid = NO;
+    }
+    if([[self.numHolesTF text] length] == 0){
+        errStr = [errStr stringByAppendingString: @"Number of holes must not be empty\n"];
         isValid = NO;
     }
     if([[self.cityTF text] length] == 0){
@@ -231,12 +237,17 @@
     NSString* woeid = [CustomCourseViewController getWOEIDWithCity: [self.cityTF text] AndState:[newCourse valueForKey: @"state"]];
     [newCourse setWoeid: woeid];
     
-    // TODO: This should actually be implemented in the view somehow no just a constant
     // Number of holes
-    [newCourse setNumholes: [NSNumber numberWithInt: 18]];
+    NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+    [f setNumberStyle:NSNumberFormatterDecimalStyle];
+    NSNumber * holesNum = [f numberFromString: [self.numHolesTF text]];
+    if(!holesNum)
+        holesNum = [NSNumber numberWithInt: 18];
+    
+    [newCourse setNumholes: holesNum];
+    [f release];
     
     // Save the newly added golf course in the managed object context
-    // TODO: This should be uncommented when we actually want to save it
     //[[ECaddyAppDelegate sharedAppDelegate] saveContext];
     
     // Try uploading the course information to the server
@@ -349,8 +360,7 @@
     NSURLResponse* resp = nil;
     NSError* err = nil;
     
-    // TODO: Probably don't want to print the description it has a lot of core data
-    // information that isn't really needed
+    // Add the course information into the POST request content
     NSURL* url = [NSURL URLWithString:@"http://mainelyapps.com/SMTG/NewCourse.php"];
     NSString* content = [NSString stringWithFormat:
                             @"cn=%@&p=%@&addr=%@&st=%@&c=%@&web=%@&woeid=%@&nh=%@", 

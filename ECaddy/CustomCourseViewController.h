@@ -23,9 +23,11 @@
     UISegmentedControl *uploadSeg;
     UIView *uploadingView;
     UIActivityIndicatorView *uploadingInd;
+    UITextField *numHolesTF;
 }
 @property (nonatomic, retain) IBOutlet UITextField *courseNameTF;
 @property (nonatomic, retain) IBOutlet UITextField *phoneTF;
+@property (nonatomic, retain) IBOutlet UITextField *numHolesTF;
 @property (nonatomic, retain) IBOutlet UITextField *addressTF;
 @property (nonatomic, retain) IBOutlet UITextField *cityTF;
 @property (nonatomic, retain) IBOutlet UITextField *stateTF;
