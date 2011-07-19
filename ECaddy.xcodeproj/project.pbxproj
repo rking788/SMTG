@@ -11,6 +11,7 @@
 		AE38B0B813BE4C6900D7F9FA /* scorecard_tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE38B0B613BE4C6900D7F9FA /* scorecard_tab@2x.png */; };
 		AE3D287413B99CB10054903D /* ScorecardTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D287213B99CB00054903D /* ScorecardTableViewController.m */; };
 		AE3D287513B99CB10054903D /* ScorecardTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE3D287313B99CB00054903D /* ScorecardTableView.xib */; };
+		AE5287AB13D52657004D4370 /* wind_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = AE5287AA13D52657004D4370 /* wind_arrow.png */; };
 		AE7F932813835FC9003CCD57 /* stateabbrs.txt in Resources */ = {isa = PBXBuildFile; fileRef = AE7F932713835FC9003CCD57 /* stateabbrs.txt */; };
 		AE7F932B13836621003CCD57 /* StateDirView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7F932A13836621003CCD57 /* StateDirView.xib */; };
 		AE816DC1137B7E140023F5D7 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AE816DBE137B7E140023F5D7 /* NSDataAdditions.m */; };
@@ -30,7 +31,6 @@
 		AE85D7621368E34400CDA534 /* CourseSelectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7601368E34400CDA534 /* CourseSelectView.xib */; };
 		AE85D7741368E75700CDA534 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7721368E75700CDA534 /* MapViewController.m */; };
 		AE85D7751368E75700CDA534 /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7731368E75700CDA534 /* MapView.xib */; };
-		AE85D77A1368E84700CDA534 /* WeatherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7781368E84600CDA534 /* WeatherView.xib */; };
 		AE85D7841368EC5200CDA534 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7831368EC5200CDA534 /* CoreLocation.framework */; };
 		AE85D7861368EC5900CDA534 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7851368EC5900CDA534 /* MapKit.framework */; };
 		AE85D7921369298E00CDA534 /* WeatherDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7901369298E00CDA534 /* WeatherDetails.m */; };
@@ -86,6 +86,7 @@
 		AE3D287113B99CAF0054903D /* ScorecardTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScorecardTableViewController.h; sourceTree = "<group>"; };
 		AE3D287213B99CB00054903D /* ScorecardTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScorecardTableViewController.m; sourceTree = "<group>"; };
 		AE3D287313B99CB00054903D /* ScorecardTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScorecardTableView.xib; sourceTree = "<group>"; };
+		AE5287AA13D52657004D4370 /* wind_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wind_arrow.png; sourceTree = "<group>"; };
 		AE7F932713835FC9003CCD57 /* stateabbrs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stateabbrs.txt; sourceTree = "<group>"; };
 		AE7F932A13836621003CCD57 /* StateDirView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StateDirView.xib; sourceTree = "<group>"; };
 		AE816DBD137B7E140023F5D7 /* NSDataAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataAdditions.h; sourceTree = "<group>"; };
@@ -115,7 +116,6 @@
 		AE85D7711368E75700CDA534 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		AE85D7721368E75700CDA534 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		AE85D7731368E75700CDA534 /* MapView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapView.xib; sourceTree = "<group>"; };
-		AE85D7781368E84600CDA534 /* WeatherView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherView.xib; sourceTree = "<group>"; };
 		AE85D7831368EC5200CDA534 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		AE85D7851368EC5900CDA534 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		AE85D78F1369298E00CDA534 /* WeatherDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherDetails.h; sourceTree = "<group>"; };
@@ -305,7 +305,6 @@
 				AEA35AE71384CE7600111BAA /* CourseDetailView.xib */,
 				AE7F932A13836621003CCD57 /* StateDirView.xib */,
 				AE85D7731368E75700CDA534 /* MapView.xib */,
-				AE85D7781368E84600CDA534 /* WeatherView.xib */,
 				AE85D7911369298E00CDA534 /* WeatherDetails.xib */,
 				AE8E2C19139886630098A426 /* NewRoundView.xib */,
 				AE90069F13A9C6B3008247BF /* SettingsView.xib */,
@@ -325,6 +324,7 @@
 				AE8832FA13BE4FFA0040FAE9 /* directory_tab@2x.png */,
 				AE38B0B513BE4C6900D7F9FA /* scorecard_tab.png */,
 				AE38B0B613BE4C6900D7F9FA /* scorecard_tab@2x.png */,
+				AE5287AA13D52657004D4370 /* wind_arrow.png */,
 				AED0778913CD58B600290053 /* ECaddy.sqlite */,
 				AE85D7491368E34400CDA534 /* Supporting Files */,
 			);
@@ -436,7 +436,6 @@
 				AE85D75F1368E34400CDA534 /* ScorecardView.xib in Resources */,
 				AE85D7621368E34400CDA534 /* CourseSelectView.xib in Resources */,
 				AE85D7751368E75700CDA534 /* MapView.xib in Resources */,
-				AE85D77A1368E84700CDA534 /* WeatherView.xib in Resources */,
 				AE85D7931369298E00CDA534 /* WeatherDetails.xib in Resources */,
 				AED1EA091374F950008365D5 /* green.png in Resources */,
 				AED1EA0C1374F959008365D5 /* tee.png in Resources */,
@@ -461,6 +460,7 @@
 				AEEE90BD13C1650100B8BBD8 /* FBDialog.bundle in Resources */,
 				AEE5301013C394DC003C866C /* CustomCourseView.xib in Resources */,
 				AED0778A13CD58B600290053 /* ECaddy.sqlite in Resources */,
+				AE5287AB13D52657004D4370 /* wind_arrow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

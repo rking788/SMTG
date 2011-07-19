@@ -17,7 +17,7 @@
 // Facebook app ID constant string
 static NSString* kAppId = @"142876775786876";
 
-#pragma mark - TODO The scores aren't being properly loaded. Like when there is more than one player and going in and out of this view
+#pragma mark - TODO CRITICAL The scores aren't being properly loaded / restored. Like when there is more than one player and going in and out of this view
 
 @implementation ScoreTrackerViewController
 
