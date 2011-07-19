@@ -329,6 +329,9 @@ static NSString* kAppId = @"142876775786876";
     
     // Update the keys in the scorecardDict
     NSMutableArray* copyValue = [self.scorecardDict objectForKey: oldName];
+    if(!copyValue)
+        return;
+    
     [self.scorecardDict setObject:copyValue forKey:newName];
     [self.scorecardDict removeObjectForKey: oldName];
     
