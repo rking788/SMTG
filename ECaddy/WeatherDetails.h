@@ -16,35 +16,51 @@
     NSString* courseName;
     NSString* courseLoc;
     NSString* WOEID;
+    
+    UINavigationBar *navBar;
     UIActivityIndicatorView *actIndicator;
+    
+    // Top level views with borders
     UIView *titleView;
     UIView *ywiView;
     UIView *currentView;
     UIView *todayView;
     UIView *tomView;
+    
+    // Title view
+    UILabel *courseDetailsLbl;
+    UIButton *favstarBtn;
+    
+    // Current weather view
     UILabel *curWind;
     UILabel *curText;
     UILabel *tempLbl;
     UILabel *sunriseLbl;
     UILabel *sunsetLbl;
-    
-    UINavigationBar *navBar;
-    
+    UIImageView *windArrowImg;
     UIImageView *weatherPic;
     
-    UILabel *courseDetailsLbl;
-    UIButton *favstarBtn;
-    UIView *errorView;
-    UIImageView *yahooWeatherImg;
-    UIImageView *windArrowImg;
-    
+    // Today's forecast
     UILabel *todayText;
     UILabel *todayHigh;
     UILabel *todayLow;
+    
+    // Tomorrow's forecast
     UILabel *tomText;
     UILabel *tomHigh;
     UILabel *tomLow;
+    
+    UIView *errorView;
+    UIImageView *yahooWeatherImg;
 }
+@property (nonatomic, retain) Course* courseObj;
+
+@property (nonatomic, retain) NSString* text;
+@property (nonatomic, retain) NSString* courseName;
+@property (nonatomic, retain) NSString* courseLoc;
+@property (nonatomic, retain) NSString* WOEID;
+
+@property (nonatomic, retain) IBOutlet UINavigationBar *navBar;
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView *actIndicator;
 
 // Top Level Views (with borders)
@@ -77,16 +93,8 @@
 @property (nonatomic, retain) IBOutlet UILabel *tomHigh;
 @property (nonatomic, retain) IBOutlet UILabel *tomLow;
 
-@property (nonatomic, retain) IBOutlet UINavigationBar *navBar;
 @property (nonatomic, retain) IBOutlet UIView *errorView;
 @property (nonatomic, retain) IBOutlet UIImageView *yahooWeatherImg;
-
-@property (nonatomic, retain) Course* courseObj;
-
-@property (nonatomic, retain) NSString* text;
-@property (nonatomic, retain) NSString* courseName;
-@property (nonatomic, retain) NSString* courseLoc;
-@property (nonatomic, retain) NSString* WOEID;
 
 - (IBAction)favstarPressed:(id)sender;
 

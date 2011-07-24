@@ -8,6 +8,7 @@
 
 #import "dbinit.h"
 
+#pragma mark - TODO CRITICAL Fix it so if the value is '\N' then nil is assigned instead
 
 @implementation dbinit
 
@@ -148,6 +149,8 @@
             
             if([website isEqualToString:@"NULL"])
                 website = nil;
+            if([website isEqualToString: @"\\N"])
+                website = nil;
             
             if([enabled isEqualToString:@"1"])
                 isEnabled = YES;
@@ -179,7 +182,7 @@
                 womensPars = [tmpWomensPars componentsSeparatedByString: @","];
             }
             
-            NSRange stringRange = [tmpTeeCoordsStr rangeOfString: @"\N"];
+            NSRange stringRange = [tmpTeeCoordsStr rangeOfString: @"\\N"];
             if(stringRange.length > 0){
                 teeCoords = nil;
             }
@@ -187,7 +190,7 @@
                 teeCoords = [tmpTeeCoordsStr componentsSeparatedByString: @"*"];
             }
 
-            stringRange = [tmpGreenCoordsStr rangeOfString: @"\N"];
+            stringRange = [tmpGreenCoordsStr rangeOfString: @"\\N"];
             if(stringRange.length > 0){
                 greenCoords = nil;
             }

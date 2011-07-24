@@ -11,39 +11,42 @@
 #import "TBXML.h"
 #import "ECaddyAppDelegate.h"
 
+#pragma mark - TODO CRITICAL Make a better error view when weather info is not available
+
 @implementation WeatherDetails
 
 #define BORDER_WIDTH    3.0f
 
 @synthesize courseObj;
 @synthesize text;
+@synthesize courseName;
+@synthesize courseLoc;
+@synthesize WOEID;
+@synthesize navBar;
 @synthesize actIndicator;
 @synthesize titleView;
 @synthesize ywiView;
 @synthesize currentView;
 @synthesize todayView;
 @synthesize tomView;
+@synthesize courseDetailsLbl;
+@synthesize favstarBtn;
 @synthesize curWind;
 @synthesize curText;
 @synthesize tempLbl;
 @synthesize sunriseLbl;
 @synthesize sunsetLbl;
+@synthesize windArrowImg;
+@synthesize weatherPic;
 @synthesize todayText;
 @synthesize todayHigh;
 @synthesize todayLow;
 @synthesize tomText;
 @synthesize tomHigh;
 @synthesize tomLow;
-@synthesize navBar;
-@synthesize weatherPic;
-@synthesize courseDetailsLbl;
-@synthesize favstarBtn;
 @synthesize errorView;
 @synthesize yahooWeatherImg;
-@synthesize windArrowImg;
-@synthesize courseName;
-@synthesize courseLoc;
-@synthesize WOEID;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -56,7 +59,7 @@
 
 - (void)dealloc
 {
-//    [navBar release];
+    [navBar release];
     [weatherPic release];
     [courseDetailsLbl release];
     [actIndicator release];
@@ -143,7 +146,7 @@
 
 - (void)viewDidUnload
 {
-//    [self setNavBar:nil];
+    [self setNavBar:nil];
     [self setWeatherPic:nil];
     [self setCourseDetailsLbl:nil];
     [self setActIndicator:nil];
