@@ -13,6 +13,7 @@ typedef enum _tagsectitleind
 {
     kUSER_SEC = 0,
     kCOURSE_SEC,
+    kCONTACT_SEC,
     numSectTitles
 } sectitleind;
 
@@ -37,12 +38,20 @@ typedef enum _tagdictindexes
     numDictValueSize
 } dictindexes;
 
-@interface SettingsViewController : UITableViewController <CourseSelectDelegate>{
+typedef enum _tagcontactprefs
+{
+    kEMAIL = 0,
+    kWEBSITE,
+    numContactPrefs
+} contactprefs;
+
+@interface SettingsViewController : UITableViewController <CourseSelectDelegate, UIActionSheetDelegate>{
     NSUserDefaults* defs;
     
     NSMutableArray* sectionTitles;
     NSMutableDictionary* userPrefsDict;
     NSMutableDictionary* coursePrefsDict;
+    NSMutableArray* contactPrefsArr;
     
     NSInteger selectedSettingsDetail;
 }
@@ -51,6 +60,7 @@ typedef enum _tagdictindexes
 @property (nonatomic, retain) NSMutableArray* sectionTitles;
 @property (nonatomic, retain) NSMutableDictionary* userPrefsDict;
 @property (nonatomic, retain) NSMutableDictionary* coursePrefsDict;
+@property (nonatomic, retain) NSMutableArray* contactPrefsArr;
 
 @property (nonatomic, assign) NSInteger selectedSettingsDetail;
 
@@ -58,6 +68,7 @@ typedef enum _tagdictindexes
 - (void) setupSectionTitles;
 - (void) setupUserPrefs;
 - (void) setupCoursePrefs;
+- (void) setupContactPrefs;
 
 // Helper functions
 - (NSString*) keyForIndex: (NSInteger) index InSection:(NSInteger) sec;

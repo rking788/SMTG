@@ -11,12 +11,16 @@
 #import "SettingsDetailsViewController.h"
 #import "DirectoryViewController.h"
 
+static NSString* CONTACTEMAIL = @"admin@mainelyapps.com";
+static NSString* CONTACTSITE = @"http://mainelyapps.com";
+
 @implementation SettingsViewController
 
 @synthesize defs;
 @synthesize sectionTitles;
 @synthesize userPrefsDict;
 @synthesize coursePrefsDict;
+@synthesize contactPrefsArr;
 @synthesize selectedSettingsDetail;
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -34,6 +38,7 @@
     [sectionTitles release];
     [userPrefsDict release];
     [coursePrefsDict release];
+    [contactPrefsArr release];
     [super dealloc];
     
 }
@@ -65,6 +70,7 @@
 
     [self setupUserPrefs];
     [self setupCoursePrefs];
+    [self setupContactPrefs];
 }
 
 - (void)viewDidUnload
@@ -75,6 +81,7 @@
     self.sectionTitles = nil;
     self.userPrefsDict = nil;
     self.coursePrefsDict = nil;
+    self.contactPrefsArr = nil;
     self.defs = nil;
 }
 
@@ -127,6 +134,8 @@
         ret = numUserPrefs;
     else if(section == kCOURSE_SEC)
         ret = numCoursePrefs;
+    else if(section == kCONTACT_SEC)
+        ret = numContactPrefs;
     
     return ret;
 }
@@ -155,6 +164,9 @@
             dictObj = [self.coursePrefsDict objectForKey: [self keyForIndex: indexPath.row InSection:kCOURSE_SEC]];
             [lbl setText: [dictObj objectAtIndex: kTITLE]];
             [lbl2 setText: [dictObj objectAtIndex: kDEF_VALUE]];
+            break;
+        case kCONTACT_SEC:
+            [lbl setText: [self.contactPrefsArr objectAtIndex: indexPath.row]];
             break;
         default:
             [lbl setText: @"Default"];
@@ -233,6 +245,24 @@
         [sdvc release];
         [self setSelectedSettingsDetail: kNAME_EDIT];
     }
+    else if(indexPath.section == kCONTACT_SEC){
+        NSString* titleStr = nil;
+        NSString* buttonTitleStr = nil;
+        
+        if(indexPath.row == kEMAIL){
+            titleStr = CONTACTEMAIL;
+            buttonTitleStr = @"Open Mail";
+        }
+        else if(indexPath.row == kWEBSITE){
+            titleStr = CONTACTSITE;
+            buttonTitleStr = @"Open Browser";
+        }
+        
+        UIActionSheet* actSheet = [[UIActionSheet alloc] initWithTitle: titleStr delegate: self cancelButtonTitle: @"Cancel" destructiveButtonTitle: nil otherButtonTitles: buttonTitleStr, nil];
+        actSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+        [actSheet showFromTabBar: self.tabBarController.tabBar];
+        [actSheet release];
+    }
     else if((indexPath.section == kCOURSE_SEC) && (indexPath.row == kCOURSE)){
         DirectoryViewController* dvc = [[DirectoryViewController alloc] initWithNibName:@"StateDirView" bundle:nil];
         UINavigationController* uinc = [[UINavigationController alloc] initWithRootViewController: dvc];
@@ -292,6 +322,15 @@
     
     [self.sectionTitles insertObject: @"User Information" atIndex: kUSER_SEC];
     [self.sectionTitles insertObject: @"Course Information" atIndex: kCOURSE_SEC];
+    [self.sectionTitles insertObject: @"Contact" atIndex: kCONTACT_SEC];
+}
+
+- (void) setupContactPrefs
+{
+    self.contactPrefsArr = [[NSMutableArray alloc] initWithCapacity: numContactPrefs];
+   
+    [self.contactPrefsArr insertObject: @"Email" atIndex: kEMAIL];
+    [self.contactPrefsArr insertObject: @"Website" atIndex: kWEBSITE];
 }
 
 - (void) setupUserPrefs
@@ -440,6 +479,24 @@
     
     [self.tableView reloadData];
     [self dismissModalViewControllerAnimated: YES];
+}
+
+#pragma mark - UIActionSheetDelegate Method
+- (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString* urlStr = nil;
+    NSString* btnTitle = [actionSheet buttonTitleAtIndex: buttonIndex];
+    
+    if( [btnTitle isEqualToString: @"Open Mail"]){
+        NSString* subjectStr = @"Regarding%20Show%20Me%20the%20Green";
+        urlStr = [NSString stringWithFormat: @"mailto:%@?subject=%@", CONTACTEMAIL, subjectStr];
+    }
+    else if([btnTitle isEqualToString: @"Open Browser"]){
+        urlStr = CONTACTSITE;
+    }
+    
+    NSURL* url = [NSURL URLWithString: urlStr];
+    [[UIApplication sharedApplication] openURL: url];
 }
 
 @end

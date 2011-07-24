@@ -68,6 +68,8 @@
     // Set up borders for the top level views
     self.titleView.layer.borderColor = [UIColor colorWithRed:0 green:0.5 blue:0 alpha:1.0].CGColor;
     self.titleView.layer.borderWidth = BORDER_WIDTH;
+    self.tableV.layer.borderColor = [UIColor colorWithRed:0 green:0.5 blue:0 alpha:1.0].CGColor;
+    self.tableV.layer.borderWidth = BORDER_WIDTH;
     
     // Add the buttons to the footer view
     self.tableV.tableFooterView = self.footView;
@@ -188,11 +190,6 @@
 
     // Save the managed object context to save the favorite change
     [appDel saveContext];
-}
-
-- (IBAction)mapBtnPressed:(id)sender
-{
-    
 }
 
 #pragma mark - Table view data source delegate methods

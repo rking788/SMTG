@@ -48,7 +48,6 @@ enum
 
 - (IBAction) startRoundClicked:(id)sender;
 - (IBAction) mapBtnPressed:(id)sender;
-- (IBAction) favstarPressed: (id) sender;
 
 - (void) populateCourseDetails;
 
