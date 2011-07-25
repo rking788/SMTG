@@ -31,6 +31,7 @@ enum{
 - (void) addFooterColumnsForNumPlayers: (NSUInteger) numPlayers;
 - (NSString*) stringOfPlayers;
 - (NSString*) stringForNameInCol: (NSUInteger) col;
+- (void) setPlayers: (NSArray*) names;
 
 - (void) setTotalsWithScoreDict: (NSMutableDictionary*) scoreDict;
 

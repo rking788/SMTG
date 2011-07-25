@@ -17,7 +17,6 @@
 // Facebook app ID constant string
 static NSString* kAppId = @"142876775786876";
 
-#pragma mark - TODO CRITICAL The scores aren't being properly loaded / restored. Like when there is more than one player and going in and out of this view
 
 @implementation ScoreTrackerViewController
 
@@ -161,8 +160,10 @@ static NSString* kAppId = @"142876775786876";
     // Load the players scores from the current scorecard object
     
     NSMutableDictionary* scoresdict = self.scorecard.scores;
-    if(scoresdict)
+    if(scoresdict){
         self.scorecardDict = (NSMutableDictionary*) self.scorecard.scores;
+        [self.scoreHeaderView setPlayers: [self.scorecardDict allKeys]];
+    }
     
     // Update the totals in the footer view
     [self.scoreFooterView setTotalsWithScoreDict: self.scorecardDict];

@@ -11,9 +11,6 @@
 #import "Course.h"
 #import <QuartzCore/QuartzCore.h>
 
-# pragma mark - TODO CRITICAL The websites are sometimes showing up as '\N' which is bad
-# pragma mark - TODO CRITICAL The phone number should also be formatted with hyphens
-
 @implementation CourseDetailViewController
 
 #define BORDER_WIDTH    3.0f

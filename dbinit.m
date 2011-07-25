@@ -8,8 +8,6 @@
 
 #import "dbinit.h"
 
-#pragma mark - TODO CRITICAL Fix it so if the value is '\N' then nil is assigned instead
-
 @implementation dbinit
 
 @synthesize manObjCon;

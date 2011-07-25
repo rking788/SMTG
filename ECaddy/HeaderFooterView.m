@@ -254,11 +254,26 @@
     return [self.playerNamesArr objectAtIndex: col];
 }
 
+- (void) setPlayers: (NSArray*) names
+{
+    NSLog(@"Setting the names %@", names);
+    NSInteger i = 0;
+    
+    for (NSString* name in names){
+        UITextField* tf = (UITextField*) [self viewWithTag: kPAR_TAG + (i + 1)];
+        [tf setText: name];
+        i++;
+    }
+    
+    [self setPlayerNamesArr: names];
+}
+
 - (void)dealloc
 {
     [playerNamesArr release];
     [headerOrFooter release];
     [super dealloc];
 }
+
 
 @end

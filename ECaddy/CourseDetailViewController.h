@@ -47,7 +47,6 @@ enum
 @property (nonatomic, retain) NSManagedObjectContext* manObjCon;
 
 - (IBAction) startRoundClicked:(id)sender;
-- (IBAction) mapBtnPressed:(id)sender;
 
 - (void) populateCourseDetails;
 
