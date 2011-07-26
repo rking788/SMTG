@@ -15,6 +15,7 @@
     UIImage* image;
     NSNumber* latitude;
     NSNumber* longitude;
+    NSString* ThisNumber;
     
     BOOL draggable;
 }

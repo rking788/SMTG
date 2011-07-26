@@ -410,6 +410,9 @@
 /* Begin PBXProject section */
 		AE85D7351368E34400CDA534 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = AE85D7381368E34400CDA534 /* Build configuration list for PBXProject "ECaddy" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
