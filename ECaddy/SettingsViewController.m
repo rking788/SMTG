@@ -240,7 +240,8 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
         [sdvc setDelVC: self];
         [sdvc setDelTV: tableView];
         [sdvc setDetailType: kNAME_EDIT];
-        [sdvc setCurName: [[[tableView cellForRowAtIndexPath: indexPath] detailTextLabel] text]]; 
+        [sdvc setCurName: [[[tableView cellForRowAtIndexPath: indexPath] detailTextLabel] text]];
+        
         [self presentModalViewController: sdvc animated: YES];
         [sdvc release];
         [self setSelectedSettingsDetail: kNAME_EDIT];
@@ -267,6 +268,8 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
         DirectoryViewController* dvc = [[DirectoryViewController alloc] initWithNibName:@"StateDirView" bundle:nil];
         UINavigationController* uinc = [[UINavigationController alloc] initWithRootViewController: dvc];
         
+        [uinc.navigationBar setTintColor: [UIColor colorWithRed:(0.0/255.0) green:(77.0/255.0) blue:(45.0/255.0) alpha:1.0]];
+        
         // Need to provide the managed object context to the directory 
         // to find the available courses and stuff
         NSManagedObjectContext* manObjCon = [[ECaddyAppDelegate sharedAppDelegate] managedObjectContext];
@@ -286,6 +289,8 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
     else if((indexPath.section == kCOURSE_SEC) && (indexPath.row == kSTATE)){
         DirectoryViewController* dvc = [[DirectoryViewController alloc] initWithNibName:@"StateDirView" bundle:nil];
         UINavigationController* uinc = [[UINavigationController alloc] initWithRootViewController: dvc];
+        
+        [uinc.navigationBar setTintColor: [UIColor colorWithRed:(0.0/255.0) green:(77.0/255.0) blue:(45.0/255.0) alpha:1.0]];
         
         // Need to provide the managed object context to the directory 
         // to find the available courses and stuff

@@ -75,7 +75,7 @@
     [button setTitle:@"Begin Round" forState:UIControlStateNormal];
     [button.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
     [button setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
-    [button setBackgroundColor:[UIColor yellowColor]];
+    [button setBackgroundColor:[UIColor clearColor]];
 
     //set action of the button
     [button addTarget:self action:@selector(beginClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -248,7 +248,7 @@
         DirectoryViewController* dvc = [[DirectoryViewController alloc] initWithNibName:@"StateDirView" bundle:nil];
         UINavigationController* uinc = [[UINavigationController alloc] initWithRootViewController: dvc];
         
-        [uinc.navigationBar setBarStyle: UIBarStyleBlack];
+        [uinc.navigationBar setTintColor: [UIColor colorWithRed:(0.0/255.0) green:(77.0/255.0) blue:(45.0/255.0) alpha:1.0]];
         
         // Need to provide the managed object context to the directory 
         // to find the available courses and stuff

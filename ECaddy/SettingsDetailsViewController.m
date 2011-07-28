@@ -57,6 +57,8 @@
 
     UINavigationBar* navBar = (UINavigationBar*)[self.view viewWithTag: kNAVBAR_TAG];
     
+    [navBar setTintColor: [UIColor colorWithRed:(0.0/255.0) green:(77.0/255.0) blue:(45.0/255.0) alpha:1.0]];
+    
     // Add save and cancel buttons to the navigation bar
     [navBar.topItem setRightBarButtonItem: [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target: self action: @selector(cancel)] autorelease]];
     

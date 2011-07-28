@@ -37,7 +37,6 @@
 }
 */
 
-#pragma mark - TODO The way the default player is inserted is really messed up it should be done correctly
 - (void) addHeaderColumnsForNumPlayers: (NSUInteger) numPlayers
 {
     CGFloat constColSize = 45;
@@ -111,7 +110,6 @@
         [nameTF release];
     }
     
-    // TODO: This is really fudged right now. Should be done correctly
     // Check for a default player name
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSString* defaultFirstPlayer = [defaults objectForKey: @"name"];
