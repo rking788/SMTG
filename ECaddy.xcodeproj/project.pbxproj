@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		965DC22D13E4C36F001E0404 /* greenicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 965DC22C13E4C36F001E0404 /* greenicon@2x.png */; };
+		965DC23313E4F9B7001E0404 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 965DC23213E4F9B7001E0404 /* Default.png */; };
+		965DC23713E4FBF1001E0404 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 965DC23613E4FBF1001E0404 /* Default@2x.png */; };
+		965DC23B13E5087E001E0404 /* sadweather.png in Resources */ = {isa = PBXBuildFile; fileRef = 965DC23A13E5087E001E0404 /* sadweather.png */; };
+		968C661313E4BDC80021FE73 /* greenicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 968C661213E4BDC80021FE73 /* greenicon.png */; };
 		96DF437A13E0ECB6009D568B /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF435F13E0ECB6009D568B /* Facebook.m */; };
 		96DF437B13E0ECB6009D568B /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96DF436213E0ECB6009D568B /* FBDialog.bundle */; };
 		96DF437C13E0ECB6009D568B /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436413E0ECB6009D568B /* FBDialog.m */; };
@@ -59,7 +64,6 @@
 		AE8E13B813D9172E00FED436 /* dbinit.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB0722C137DB51600BE3C37 /* dbinit.m */; };
 		AE8E2C1A139886630098A426 /* NewRoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8E2C18139886630098A426 /* NewRoundViewController.m */; };
 		AE8E2C1B139886630098A426 /* NewRoundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE8E2C19139886630098A426 /* NewRoundView.xib */; };
-		AE8F3D3E13A6D3B000C9DB74 /* sadweather.png in Resources */ = {isa = PBXBuildFile; fileRef = AE8F3D3D13A6D3B000C9DB74 /* sadweather.png */; };
 		AE8FE58E1384A96900EE8E66 /* CourseSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8FE58C1384A96900EE8E66 /* CourseSelectViewController.m */; };
 		AE9006A013A9C6B3008247BF /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE90069E13A9C6B3008247BF /* SettingsViewController.m */; };
 		AE9006A113A9C6B3008247BF /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE90069F13A9C6B3008247BF /* SettingsView.xib */; };
@@ -92,6 +96,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		965DC22C13E4C36F001E0404 /* greenicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "greenicon@2x.png"; path = "../greenicon@2x.png"; sourceTree = "<group>"; };
+		965DC23213E4F9B7001E0404 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
+		965DC23613E4FBF1001E0404 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
+		965DC23A13E5087E001E0404 /* sadweather.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sadweather.png; sourceTree = "<group>"; };
+		968C661213E4BDC80021FE73 /* greenicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = greenicon.png; path = ../greenicon.png; sourceTree = "<group>"; };
 		96DF435B13E0ECB6009D568B /* facebook-ios-sdk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "facebook-ios-sdk.xcodeproj"; sourceTree = "<group>"; };
 		96DF435E13E0ECB6009D568B /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
 		96DF435F13E0ECB6009D568B /* Facebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Facebook.m; sourceTree = "<group>"; };
@@ -173,7 +182,6 @@
 		AE8E2C17139886630098A426 /* NewRoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewRoundViewController.h; sourceTree = "<group>"; };
 		AE8E2C18139886630098A426 /* NewRoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewRoundViewController.m; sourceTree = "<group>"; };
 		AE8E2C19139886630098A426 /* NewRoundView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewRoundView.xib; sourceTree = "<group>"; };
-		AE8F3D3D13A6D3B000C9DB74 /* sadweather.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sadweather.png; sourceTree = "<group>"; };
 		AE8FE58B1384A96900EE8E66 /* CourseSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseSelectViewController.h; sourceTree = "<group>"; };
 		AE8FE58C1384A96900EE8E66 /* CourseSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseSelectViewController.m; sourceTree = "<group>"; };
 		AE90069D13A9C6B3008247BF /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -368,24 +376,28 @@
 				AE85D7731368E75700CDA534 /* MapView.xib */,
 				AE85D7911369298E00CDA534 /* WeatherDetails.xib */,
 				AE8E2C19139886630098A426 /* NewRoundView.xib */,
-				AE90069F13A9C6B3008247BF /* SettingsView.xib */,
 				AE8DD06713B033ED00D7FCB3 /* NameEditView.xib */,
+				AE90069F13A9C6B3008247BF /* SettingsView.xib */,
 				AE8DD06F13B05EB900D7FCB3 /* HideStateView.xib */,
 				AE3D287313B99CB00054903D /* ScorecardTableView.xib */,
 				AEE5300F13C394DC003C866C /* CustomCourseView.xib */,
 				AEFE6F131381BB60002B1AA3 /* coursemodel.xcdatamodeld */,
+				965DC23213E4F9B7001E0404 /* Default.png */,
+				965DC23613E4FBF1001E0404 /* Default@2x.png */,
+				968C661213E4BDC80021FE73 /* greenicon.png */,
+				965DC22C13E4C36F001E0404 /* greenicon@2x.png */,
 				AED1EA081374F950008365D5 /* green.png */,
 				AED1EA0B1374F959008365D5 /* tee.png */,
 				AED1EA1513750ECC008365D5 /* teeandgreen.png */,
 				AED1EA1713750ED4008365D5 /* teeandgreen_ret.png */,
 				AE90A58213A5C1D100F87850 /* favstar_selected.png */,
 				AE90A58513A5C37000F87850 /* favstar_deselected.png */,
-				AE8F3D3D13A6D3B000C9DB74 /* sadweather.png */,
 				AE8832F913BE4FFA0040FAE9 /* directory_tab.png */,
 				AE8832FA13BE4FFA0040FAE9 /* directory_tab@2x.png */,
 				AE38B0B513BE4C6900D7F9FA /* scorecard_tab.png */,
 				AE38B0B613BE4C6900D7F9FA /* scorecard_tab@2x.png */,
 				AE5287AA13D52657004D4370 /* wind_arrow.png */,
+				965DC23A13E5087E001E0404 /* sadweather.png */,
 				AE8CFE7913DB9DE2007D1BF5 /* ECaddy.sqlite */,
 				AE85D7491368E34400CDA534 /* Supporting Files */,
 			);
@@ -488,7 +500,6 @@
 				AEA9932B139DBF8800DD723C /* ScoreTrackerView.xib in Resources */,
 				AE90A58313A5C1D100F87850 /* favstar_selected.png in Resources */,
 				AE90A58613A5C37000F87850 /* favstar_deselected.png in Resources */,
-				AE8F3D3E13A6D3B000C9DB74 /* sadweather.png in Resources */,
 				AE9006A113A9C6B3008247BF /* SettingsView.xib in Resources */,
 				AE8DD06813B033ED00D7FCB3 /* NameEditView.xib in Resources */,
 				AE8DD07013B05EB900D7FCB3 /* HideStateView.xib in Resources */,
@@ -501,6 +512,11 @@
 				AE5287AB13D52657004D4370 /* wind_arrow.png in Resources */,
 				AE8CFE7A13DB9DE2007D1BF5 /* ECaddy.sqlite in Resources */,
 				96DF437B13E0ECB6009D568B /* FBDialog.bundle in Resources */,
+				968C661313E4BDC80021FE73 /* greenicon.png in Resources */,
+				965DC22D13E4C36F001E0404 /* greenicon@2x.png in Resources */,
+				965DC23313E4F9B7001E0404 /* Default.png in Resources */,
+				965DC23713E4FBF1001E0404 /* Default@2x.png in Resources */,
+				965DC23B13E5087E001E0404 /* sadweather.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

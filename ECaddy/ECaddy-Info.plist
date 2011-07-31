@@ -14,9 +14,9 @@
 	<string></string>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>teeandgreen.png</string>
-		<string>teeandgreen_ret.png</string>
-		<string>teeandgreen.png</string>
+		<string>appicon.png</string>
+		<string>greenicon@2x.png</string>
+		<string>greenicon.png</string>
 		<string>teeandgreen_ret.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
@@ -34,12 +34,12 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleURLName</key>
+			<string></string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb142876775786876</string>
 			</array>
-			<key>CFBundleURLName</key>
-			<string></string>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>

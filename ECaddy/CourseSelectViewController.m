@@ -244,6 +244,7 @@
         NSLog(@"Error fetching course names and locations");
     }
     
+    [propArr release];
     [sortDescript release];
     [sdArr release];
     [fetchrequest release];

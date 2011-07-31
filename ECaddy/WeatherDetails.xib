@@ -80,7 +80,7 @@
 							<object class="IBUIImageView" id="678678175">
 								<reference key="NSNextResponder" ref="690505240"/>
 								<int key="NSvFlags">274</int>
-								<string key="NSFrame">{{8, 9}, {304, 290}}</string>
+								<string key="NSFrame">{{60, 50}, {200, 200}}</string>
 								<reference key="NSSuperview" ref="690505240"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="469864453"/>
@@ -94,7 +94,7 @@
 							<object class="IBUILabel" id="469864453">
 								<reference key="NSNextResponder" ref="690505240"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{4, 288}, {308, 77}}</string>
+								<string key="NSFrame">{{4, 270}, {308, 77}}</string>
 								<reference key="NSSuperview" ref="690505240"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="542969145"/>
@@ -115,14 +115,14 @@
 								<int key="IBUITextAlignment">1</int>
 								<int key="IBUILineBreakMode">0</int>
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
-									<string key="name">Helvetica</string>
-									<string key="family">Helvetica</string>
+									<string key="name">Georgia</string>
+									<string key="family">Georgia</string>
 									<int key="traits">0</int>
-									<double key="pointSize">17</double>
+									<double key="pointSize">19</double>
 								</object>
 								<object class="NSFont" key="IBUIFont">
-									<string key="NSName">Helvetica</string>
-									<double key="NSSize">17</double>
+									<string key="NSName">Georgia</string>
+									<double key="NSSize">19</double>
 									<int key="NSfFlags">16</int>
 								</object>
 							</object>
@@ -133,7 +133,7 @@
 						<reference key="NSNextKeyView" ref="678678175"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xNDczNzA5NDQ0IDAuMjM2NzM1NTQ4NCAwLjQ4OTc5NTkxODQAA</bytes>
+							<bytes key="NSRGB">MC43MjMyNTM1NDgxIDAuOTY1NjEzNDg0NCAwLjY2NjkyNDc3NDYAA</bytes>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
@@ -992,24 +992,6 @@
 						<reference key="parent" ref="542969145"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">52</int>
-						<reference key="object" ref="310809148"/>
-						<object class="NSMutableArray" key="children">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="640336063"/>
-							<reference ref="275737489"/>
-							<reference ref="40233368"/>
-							<reference ref="270478928"/>
-							<reference ref="448981407"/>
-							<reference ref="542862206"/>
-							<reference ref="1004253455"/>
-							<reference ref="819372045"/>
-							<reference ref="924666154"/>
-							<reference ref="338188291"/>
-						</object>
-						<reference key="parent" ref="191373211"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">53</int>
 						<reference key="object" ref="415403884"/>
 						<object class="NSMutableArray" key="children">
@@ -1046,56 +1028,6 @@
 						<int key="objectID">56</int>
 						<reference key="object" ref="914683453"/>
 						<reference key="parent" ref="415403884"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">58</int>
-						<reference key="object" ref="640336063"/>
-						<reference key="parent" ref="310809148"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">60</int>
-						<reference key="object" ref="275737489"/>
-						<reference key="parent" ref="310809148"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">61</int>
-						<reference key="object" ref="40233368"/>
-						<reference key="parent" ref="310809148"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">65</int>
-						<reference key="object" ref="448981407"/>
-						<reference key="parent" ref="310809148"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">67</int>
-						<reference key="object" ref="542862206"/>
-						<reference key="parent" ref="310809148"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">76</int>
-						<reference key="object" ref="270478928"/>
-						<reference key="parent" ref="310809148"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">78</int>
-						<reference key="object" ref="1004253455"/>
-						<reference key="parent" ref="310809148"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">79</int>
-						<reference key="object" ref="338188291"/>
-						<reference key="parent" ref="310809148"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">80</int>
-						<reference key="object" ref="819372045"/>
-						<reference key="parent" ref="310809148"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">81</int>
-						<reference key="object" ref="924666154"/>
-						<reference key="parent" ref="310809148"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">90</int>
@@ -1157,6 +1089,74 @@
 						<int key="objectID">50</int>
 						<reference key="object" ref="678678175"/>
 						<reference key="parent" ref="690505240"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">52</int>
+						<reference key="object" ref="310809148"/>
+						<object class="NSMutableArray" key="children">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<reference ref="640336063"/>
+							<reference ref="275737489"/>
+							<reference ref="40233368"/>
+							<reference ref="270478928"/>
+							<reference ref="448981407"/>
+							<reference ref="542862206"/>
+							<reference ref="1004253455"/>
+							<reference ref="819372045"/>
+							<reference ref="924666154"/>
+							<reference ref="338188291"/>
+						</object>
+						<reference key="parent" ref="191373211"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">79</int>
+						<reference key="object" ref="338188291"/>
+						<reference key="parent" ref="310809148"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">81</int>
+						<reference key="object" ref="924666154"/>
+						<reference key="parent" ref="310809148"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">80</int>
+						<reference key="object" ref="819372045"/>
+						<reference key="parent" ref="310809148"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">78</int>
+						<reference key="object" ref="1004253455"/>
+						<reference key="parent" ref="310809148"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">67</int>
+						<reference key="object" ref="542862206"/>
+						<reference key="parent" ref="310809148"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">65</int>
+						<reference key="object" ref="448981407"/>
+						<reference key="parent" ref="310809148"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">76</int>
+						<reference key="object" ref="270478928"/>
+						<reference key="parent" ref="310809148"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">61</int>
+						<reference key="object" ref="40233368"/>
+						<reference key="parent" ref="310809148"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">60</int>
+						<reference key="object" ref="275737489"/>
+						<reference key="parent" ref="310809148"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">58</int>
+						<reference key="object" ref="640336063"/>
+						<reference key="parent" ref="310809148"/>
 					</object>
 				</object>
 			</object>
@@ -1492,7 +1492,7 @@
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{128, 128}</string>
-				<string>{304, 290}</string>
+				<string>{202, 202}</string>
 				<string>{49, 49}</string>
 			</object>
 		</object>
