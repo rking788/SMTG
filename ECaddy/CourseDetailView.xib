@@ -88,7 +88,7 @@
 							<object class="IBUIButton" id="580662269">
 								<reference key="NSNextResponder" ref="341082237"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{276, 16}, {39, 37}}</string>
+								<string key="NSFrame">{{276, 16}, {35, 35}}</string>
 								<reference key="NSSuperview" ref="341082237"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="470346596"/>
@@ -110,7 +110,7 @@
 								</object>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">favstar_deselected.png</string>
+									<string key="NSResourceName">favstarreleased.png</string>
 								</object>
 								<object class="IBUIFontDescription" key="IBUIFontDescription" id="1052641706">
 									<string key="name">Helvetica-Bold</string>
@@ -141,6 +141,7 @@
 						<string key="NSFrame">{{0, 70}, {320, 297}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">10</int>
 							<object class="NSImage" key="NSImage">
@@ -563,8 +564,8 @@ AAgACAAIAAEAAQABAAE</bytes>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">favstar_deselected.png</string>
-			<string key="NS.object.0">{128, 128}</string>
+			<string key="NS.key.0">favstarreleased.png</string>
+			<string key="NS.object.0">{100, 99}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">894</string>
 	</data>

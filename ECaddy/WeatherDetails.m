@@ -124,8 +124,8 @@
     //courseDetailsLbl.layer.borderWidth = 2.0;
     
     // Set the initial state of the favorite star
-    [self.favstarBtn setImage: [UIImage imageNamed: ([[self.courseObj favorite] boolValue] ? @"favstar_selected.png" : 
-                                                     @"favstar_deselected.png")] forState: UIControlStateNormal];
+    [self.favstarBtn setImage: [UIImage imageNamed: ([[self.courseObj favorite] boolValue] ? @"favstarpressed.png" : 
+                                                     @"favstarreleased.png")] forState: UIControlStateNormal];
 
 }
 
@@ -189,8 +189,8 @@
     BOOL fav = [[self.courseObj favorite] boolValue];
     
     fav = !fav;
-    [self.favstarBtn setImage: [UIImage imageNamed: (fav ? @"favstar_selected.png" : 
-                                                     @"favstar_deselected.png")] forState: UIControlStateNormal];
+    [self.favstarBtn setImage: [UIImage imageNamed: (fav ? @"favstarpressed.png" : 
+                                                     @"favstarreleased.png")] forState: UIControlStateNormal];
     
     [self.courseObj setFavorite: [NSNumber numberWithBool: fav]];
     

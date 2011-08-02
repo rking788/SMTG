@@ -107,8 +107,8 @@
     
     // Set the inital state of the favorite star
     BOOL isFav = [[self.courseObj favorite] boolValue];
-    [self.favstarBtn setImage: [UIImage imageNamed: (isFav ? @"favstar_selected.png" : 
-                                    @"favstar_deselected.png")] forState:UIControlStateNormal];
+    [self.favstarBtn setImage: [UIImage imageNamed: (isFav ? @"favstarpressed.png" : 
+                                    @"favstarreleased.png")] forState:UIControlStateNormal];
     
     self.manObjCon = nil;
 }
@@ -180,8 +180,8 @@
     BOOL fav = [[self.courseObj favorite] boolValue];
  
     fav = !fav;
-    [self.favstarBtn setImage: [UIImage imageNamed: (fav ? @"favstar_selected.png" : 
-                                    @"favstar_deselected.png")] forState: UIControlStateNormal];
+    [self.favstarBtn setImage: [UIImage imageNamed: (fav ? @"favstarpressed.png" : 
+                                    @"favstarreleased.png")] forState: UIControlStateNormal];
     
     [self.courseObj setFavorite: [NSNumber numberWithBool: fav]];
 

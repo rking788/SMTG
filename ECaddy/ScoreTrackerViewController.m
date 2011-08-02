@@ -103,7 +103,7 @@ static NSString* kAppId = @"142876775786876";
         
         [dateF release];
         
-        [self.favstarBtn setImage: [UIImage imageNamed: ([[self.scorecard.course favorite] boolValue] ? @"favstar_selected.png" : @"favstar_deselected.png")] forState: UIControlStateNormal];
+        [self.favstarBtn setImage: [UIImage imageNamed: ([[self.scorecard.course favorite] boolValue] ? @"favstarpressed.png" : @"favstarreleased.png")] forState: UIControlStateNormal];
         
         NSUInteger num = [[self.scorecard numplayers] unsignedIntegerValue];
         
@@ -400,8 +400,8 @@ static NSString* kAppId = @"142876775786876";
     BOOL fav = [[self.scorecard.course favorite] boolValue];
     
     fav = !fav;
-    [self.favstarBtn setImage: [UIImage imageNamed: (fav ? @"favstar_selected.png" : 
-                                                     @"favstar_deselected.png")] forState: UIControlStateNormal];
+    [self.favstarBtn setImage: [UIImage imageNamed: (fav ? @"favstarpressed.png" : 
+                                                     @"favstarreleased.png")] forState: UIControlStateNormal];
     
     [self.scorecard.course setFavorite: [NSNumber numberWithBool: fav]];
     

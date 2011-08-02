@@ -177,7 +177,7 @@
 							<object class="IBUIButton" id="742083628">
 								<reference key="NSNextResponder" ref="542969145"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{276, 16}, {39, 37}}</string>
+								<string key="NSFrame">{{276, 16}, {35, 35}}</string>
 								<reference key="NSSuperview" ref="542969145"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="310809148"/>
@@ -199,7 +199,7 @@
 								</object>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">favstar_deselected.png</string>
+									<string key="NSResourceName">favstarreleased.png</string>
 								</object>
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
 									<string key="name">Helvetica-Bold</string>
@@ -612,6 +612,7 @@
 								<string key="NSFrame">{{20, 99}, {120, 21}}</string>
 								<reference key="NSSuperview" ref="759083108"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
@@ -1485,13 +1486,13 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>favstar_deselected.png</string>
+				<string>favstarreleased.png</string>
 				<string>sadweather.png</string>
 				<string>wind_arrow.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>{128, 128}</string>
+				<string>{100, 99}</string>
 				<string>{202, 202}</string>
 				<string>{49, 49}</string>
 			</object>
