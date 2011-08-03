@@ -69,10 +69,12 @@
     }
     else if(self.detailType == kSTATE_VISIBILITY){
         // Initialize abbreviation dictionary
-        
+    
         UITableView* visTable = (UITableView*)[[self view] viewWithTag: kVISTABLE_TAG];
         [visTable setDelegate: self];
         [visTable setDataSource: self];
+    
+        [visTable setBackgroundColor: [UIColor clearColor]];
         
         NSString* stateAbbrsPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"stateabbrs.txt"];
         self.abbrsDict = [[NSDictionary alloc] initWithContentsOfFile: stateAbbrsPath];

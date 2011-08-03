@@ -252,11 +252,8 @@
             [lbl2 setText: @""];
             break;
     }
-    
-    if(indexPath.section == kADDR_SECT)
-        [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
-    else
-        [cell setSelectionStyle: UITableViewCellSelectionStyleBlue];
+
+    [cell setSelectionStyle: UITableViewCellSelectionStyleBlue];
     
     return cell;
 }

@@ -16,6 +16,7 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
 
 @implementation SettingsViewController
 
+@synthesize tableView;
 @synthesize defs;
 @synthesize sectionTitles;
 @synthesize userPrefsDict;
@@ -39,6 +40,7 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
     [userPrefsDict release];
     [coursePrefsDict release];
     [contactPrefsArr release];
+    [tableView release];
     [super dealloc];
     
 }
@@ -63,6 +65,8 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    self.tableView.backgroundColor = [UIColor clearColor];
+    
     self.defs = [NSUserDefaults standardUserDefaults];
     
     // Load the default section titles
@@ -75,6 +79,7 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
 
 - (void)viewDidUnload
 {
+    [self setTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

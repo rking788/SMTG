@@ -14,6 +14,7 @@
 
 @implementation NewRoundViewController
 
+@synthesize tableView;
 @synthesize actSheet;
 @synthesize curCourse;
 @synthesize curScorecard;
@@ -31,6 +32,7 @@
 {
     [curCourse release];
     [curScorecard release];
+    [tableView release];
     [super dealloc];
 }
 
@@ -54,6 +56,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
+    self.tableView.backgroundColor = [UIColor clearColor];
     self.navigationItem.title = @"New Round";
     
     if(self.curCourse)
@@ -74,7 +77,7 @@
     //set title, font size and font color
     [button setTitle:@"Begin Round" forState:UIControlStateNormal];
     [button.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
-    [button setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithRed:(0.0/255) green:(77.0/255.0) blue:(45.0/255.0) alpha:1.0] forState:UIControlStateNormal];
     [button setBackgroundColor:[UIColor clearColor]];
 
     //set action of the button
@@ -102,6 +105,7 @@
 }
 - (void)viewDidUnload
 {
+    [self setTableView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

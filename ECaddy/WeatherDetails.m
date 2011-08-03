@@ -291,18 +291,18 @@
     // Forecast information
     NSString* todayDesc = [TBXML valueOfAttributeNamed: @"text" forElement: TODAYFORECAST];
     NSString* todayL = [TBXML valueOfAttributeNamed: @"low" forElement: TODAYFORECAST];
-    todayL = [todayL stringByAppendingString: tempUnits];
+    todayL = [todayL stringByAppendingFormat: @" %@", tempUnits];
     NSString* todayH = [TBXML valueOfAttributeNamed: @"high" forElement: TODAYFORECAST];
-    todayH = [todayH stringByAppendingString: tempUnits];
+    todayH = [todayH stringByAppendingFormat: @" %@", tempUnits];
     //NSString* todayDay = [TBXML valueOfAttributeNamed: @"day" forElement: TODAYFORECAST];
     //NSString* todayDate = [TBXML valueOfAttributeNamed: @"date" forElement: TODAYFORECAST];
     
     
     NSString* tomDesc = [TBXML valueOfAttributeNamed: @"text" forElement: TOMFORECAST];
     NSString* tomL = [TBXML valueOfAttributeNamed: @"low" forElement: TOMFORECAST];
-    tomL = [tomL stringByAppendingString: tempUnits];
+    tomL = [tomL stringByAppendingFormat: @" %@", tempUnits];
     NSString* tomH = [TBXML valueOfAttributeNamed: @"high" forElement: TOMFORECAST];
-    tomH = [tomH stringByAppendingString: tempUnits];
+    tomH = [tomH stringByAppendingFormat: @" %@", tempUnits];
     //NSString* tomDay = [TBXML valueOfAttributeNamed: @"day" forElement: TOMFORECAST];
     //NSString* tomDate = [TBXML valueOfAttributeNamed: @"date" forElement: TOMFORECAST];
     

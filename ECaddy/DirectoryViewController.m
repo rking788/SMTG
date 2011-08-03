@@ -49,6 +49,8 @@
     // Fill state and country sets
     [self fillStatesCountries];
     
+    self.theTable.backgroundColor = [UIColor clearColor];
+    
     [self.navigationItem setTitle: @"State Select"];
 
     // If the view controller is presented modally we want to provide a 

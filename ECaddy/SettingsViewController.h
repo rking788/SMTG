@@ -45,7 +45,7 @@ typedef enum _tagcontactprefs
     numContactPrefs
 } contactprefs;
 
-@interface SettingsViewController : UITableViewController <CourseSelectDelegate, UIActionSheetDelegate>{
+@interface SettingsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, CourseSelectDelegate, UIActionSheetDelegate>{
     NSUserDefaults* defs;
     
     NSMutableArray* sectionTitles;
@@ -54,7 +54,10 @@ typedef enum _tagcontactprefs
     NSMutableArray* contactPrefsArr;
     
     NSInteger selectedSettingsDetail;
+    UITableView *tableView;
 }
+@property (retain, nonatomic) IBOutlet UITableView *tableView;
+
 @property (nonatomic, retain) NSUserDefaults* defs;
 
 @property (nonatomic, retain) NSMutableArray* sectionTitles;

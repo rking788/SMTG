@@ -18,12 +18,14 @@ typedef enum _tagTableRows
     numTableRows
 } TableRows;
 
-@interface NewRoundViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate, CourseSelectDelegate, UIAlertViewDelegate> {
+@interface NewRoundViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, CourseSelectDelegate, UIAlertViewDelegate> {
     UIActionSheet* actSheet;
     Course* curCourse;
     Scorecard* curScorecard;
+    UITableView *tableView;
 }
 
+@property (retain, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, retain) UIActionSheet* actSheet;
 @property (nonatomic, retain) Course* curCourse;
 @property (nonatomic, retain) Scorecard* curScorecard;

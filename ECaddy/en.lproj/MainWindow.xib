@@ -260,6 +260,10 @@
 						<string key="IBUITitle">Map</string>
 						<object class="IBUITabBarItem" key="IBUITabBarItem" id="689761767">
 							<string key="IBUITitle">Map</string>
+							<object class="NSCustomResource" key="IBUIImage">
+								<string key="NSClassName">NSImage</string>
+								<string key="NSResourceName">maptabicon.png</string>
+							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
 						<reference key="IBUIParentViewController" ref="1034742383"/>
@@ -683,6 +687,7 @@
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>directorytab.png</string>
+				<string>maptabicon.png</string>
 				<string>scorecard_tab.png</string>
 				<string>settingstab.png</string>
 				<string>weathertab.png</string>
@@ -690,6 +695,7 @@
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{30, 26}</string>
+				<string>{28, 28}</string>
 				<string>{33, 33}</string>
 				<string>{28, 28}</string>
 				<string>{31, 30}</string>
