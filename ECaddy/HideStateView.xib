@@ -47,14 +47,13 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrameSize">{320, 460}</string>
 						<reference key="NSSuperview" ref="442174504"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="413250153"/>
 						<string key="NSReuseIdentifierKey">_NS:363</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">examplebackground2.png</string>
+							<string key="NSResourceName">background_pat.png</string>
 						</object>
 					</object>
 					<object class="IBUITableView" id="23335030">
@@ -62,7 +61,6 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{0, 44}, {320, 416}}</string>
 						<reference key="NSSuperview" ref="442174504"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -85,11 +83,14 @@
 						<int key="NSvFlags">290</int>
 						<string key="NSFrameSize">{320, 44}</string>
 						<reference key="NSSuperview" ref="442174504"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="23335030"/>
 						<int key="IBUITag">70</int>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIBarStyle">1</int>
+						<object class="NSColor" key="IBUITintColor">
+							<int key="NSColorSpace">2</int>
+							<bytes key="NSRGB">MCAwLjMwMTk2MDc5NjEgMC4xNzY0NzA1OTI2AA</bytes>
+						</object>
 						<object class="NSArray" key="IBUIItems">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUINavigationItem" id="811767306">
@@ -102,7 +103,6 @@
 				</object>
 				<string key="NSFrameSize">{320, 460}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="40339456"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -182,6 +182,7 @@
 						<int key="objectID">10</int>
 						<reference key="object" ref="40339456"/>
 						<reference key="parent" ref="442174504"/>
+						<string key="objectName">Image View - examplebackground2.png</string>
 					</object>
 				</object>
 			</object>
@@ -236,7 +237,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">examplebackground2.png</string>
+			<string key="NS.key.0">background_pat.png</string>
 			<string key="NS.object.0">{320, 480}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">894</string>

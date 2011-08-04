@@ -54,9 +54,9 @@ typedef enum _tagcontactprefs
     NSMutableArray* contactPrefsArr;
     
     NSInteger selectedSettingsDetail;
-    UITableView *tableView;
+    UITableView *tableV;
 }
-@property (retain, nonatomic) IBOutlet UITableView *tableView;
+@property (retain, nonatomic) IBOutlet UITableView *tableV;
 
 @property (nonatomic, retain) NSUserDefaults* defs;
 

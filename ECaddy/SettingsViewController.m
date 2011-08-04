@@ -16,7 +16,7 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
 
 @implementation SettingsViewController
 
-@synthesize tableView;
+@synthesize tableV;
 @synthesize defs;
 @synthesize sectionTitles;
 @synthesize userPrefsDict;
@@ -40,7 +40,7 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
     [userPrefsDict release];
     [coursePrefsDict release];
     [contactPrefsArr release];
-    [tableView release];
+    [tableV release];
     [super dealloc];
     
 }
@@ -65,7 +65,7 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableV.backgroundColor = [UIColor clearColor];
     
     self.defs = [NSUserDefaults standardUserDefaults];
     
@@ -79,7 +79,7 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
 
 - (void)viewDidUnload
 {
-    [self setTableView:nil];
+    [self setTableV:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -123,6 +123,29 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
 {
     // Return the number of sections.
     return numSectTitles;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 40;
+}
+
+- (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UILabel* lbl = [[[UILabel alloc] init] autorelease];
+    
+    lbl.frame = CGRectMake( 15, 0, 300, 40);
+    [lbl setText: [self tableView: tableView titleForHeaderInSection: section]];
+    [lbl setTextColor: [UIColor whiteColor]];
+    [lbl setBackgroundColor: [UIColor clearColor]];
+    [lbl setFont: [UIFont fontWithName: @"Georgia Bold" size: 20.0]];
+    lbl.shadowColor = [UIColor blackColor];
+    lbl.shadowOffset = CGSizeMake(0.0, 1.0);
+    
+    UIView* view = [[[UIView alloc] init] autorelease];
+    [view addSubview: (UIView*) lbl];
+    
+    return view;
 }
 
 - (NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -456,7 +479,7 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
     [self.defs setObject: state forKey:@"state"];
     [self.defs synchronize];
 
-    [self.tableView reloadData];
+    [self.tableV reloadData];
     [self dismissModalViewControllerAnimated: YES];
 }
 
@@ -487,7 +510,7 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
         [self.defs setObject: [golfCourse valueForKey:@"state"] forKey:@"state"];
     }
     
-    [self.tableView reloadData];
+    [self.tableV reloadData];
     [self dismissModalViewControllerAnimated: YES];
 }
 

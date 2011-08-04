@@ -205,6 +205,36 @@
     return retInt;
 }
 
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if([self tableView: tableView viewForHeaderInSection: section] == nil)
+        return 0;
+    else
+        return 40;
+}
+
+- (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UILabel* lbl = [[[UILabel alloc] init] autorelease];
+    
+    if([self tableView: tableView titleForHeaderInSection: section] == nil)
+        return nil;
+    
+    lbl.frame = CGRectMake( 15, 0, 300, 40);
+    [lbl setText: [self tableView: tableView titleForHeaderInSection: section]];
+    [lbl setTextColor: [UIColor whiteColor]];
+    [lbl setBackgroundColor: [UIColor clearColor]];
+    [lbl setFont: [UIFont fontWithName: @"Georgia Bold" size: 20.0]];
+    lbl.shadowColor = [UIColor blackColor];
+    lbl.shadowOffset = CGSizeMake(0.0, 1.0);
+    
+    UIView* view = [[[UIView alloc] init] autorelease];
+    [view addSubview: (UIView*) lbl];
+    
+    return view;
+}
+
+
 - (NSString*) tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section 
 {
     NSString* retStr = nil;
