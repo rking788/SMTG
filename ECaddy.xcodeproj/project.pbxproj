@@ -13,6 +13,7 @@
 		9605CD3913E8EFF8004128D9 /* background_pat.png in Resources */ = {isa = PBXBuildFile; fileRef = 9605CD3813E8EFF8004128D9 /* background_pat.png */; };
 		9608A9A513E8FF610059BBA4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 9608A9A313E8FF610059BBA4 /* Default.png */; };
 		9608A9A613E8FF610059BBA4 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9608A9A413E8FF610059BBA4 /* Default@2x.png */; };
+		963A524F13EB7B8000253B12 /* ECaddy.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 963A524E13EB7B8000253B12 /* ECaddy.sqlite */; };
 		965DC23B13E5087E001E0404 /* sadweather.png in Resources */ = {isa = PBXBuildFile; fileRef = 965DC23A13E5087E001E0404 /* sadweather.png */; };
 		9679EAFF13E7844A001F3872 /* directorytab.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EAFE13E7844A001F3872 /* directorytab.png */; };
 		9679EB0113E7896B001F3872 /* directorytab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EB0013E7896B001F3872 /* directorytab@2x.png */; };
@@ -67,11 +68,9 @@
 		AE886D651370E2490056BDF4 /* POIAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = AE886D641370E2490056BDF4 /* POIAnnotation.m */; };
 		AE8A215213BABA8C001F4F3C /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8A215113BABA8C001F4F3C /* iAd.framework */; };
 		AE8B65B413B24995005EFFE7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8B65B313B24995005EFFE7 /* QuartzCore.framework */; };
-		AE8CFE7A13DB9DE2007D1BF5 /* ECaddy.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = AE8CFE7913DB9DE2007D1BF5 /* ECaddy.sqlite */; };
 		AE8DD06813B033ED00D7FCB3 /* NameEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE8DD06713B033ED00D7FCB3 /* NameEditView.xib */; };
 		AE8DD06D13B034A700D7FCB3 /* SettingsDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8DD06B13B034A700D7FCB3 /* SettingsDetailsViewController.m */; };
 		AE8DD07013B05EB900D7FCB3 /* HideStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE8DD06F13B05EB900D7FCB3 /* HideStateView.xib */; };
-		AE8E13B813D9172E00FED436 /* dbinit.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB0722C137DB51600BE3C37 /* dbinit.m */; };
 		AE8E2C1A139886630098A426 /* NewRoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8E2C18139886630098A426 /* NewRoundViewController.m */; };
 		AE8E2C1B139886630098A426 /* NewRoundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE8E2C19139886630098A426 /* NewRoundView.xib */; };
 		AE8FE58E1384A96900EE8E66 /* CourseSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8FE58C1384A96900EE8E66 /* CourseSelectViewController.m */; };
@@ -110,6 +109,7 @@
 		9605CD3813E8EFF8004128D9 /* background_pat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background_pat.png; sourceTree = "<group>"; };
 		9608A9A313E8FF610059BBA4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		9608A9A413E8FF610059BBA4 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		963A524E13EB7B8000253B12 /* ECaddy.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = ECaddy.sqlite; sourceTree = "<group>"; };
 		965DC23A13E5087E001E0404 /* sadweather.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sadweather.png; sourceTree = "<group>"; };
 		9679EAFE13E7844A001F3872 /* directorytab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = directorytab.png; sourceTree = "<group>"; };
 		9679EB0013E7896B001F3872 /* directorytab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "directorytab@2x.png"; sourceTree = "<group>"; };
@@ -192,7 +192,6 @@
 		AE886D641370E2490056BDF4 /* POIAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = POIAnnotation.m; sourceTree = "<group>"; };
 		AE8A215113BABA8C001F4F3C /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		AE8B65B313B24995005EFFE7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		AE8CFE7913DB9DE2007D1BF5 /* ECaddy.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = ECaddy.sqlite; sourceTree = "<group>"; };
 		AE8DD06713B033ED00D7FCB3 /* NameEditView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NameEditView.xib; sourceTree = "<group>"; };
 		AE8DD06A13B034A700D7FCB3 /* SettingsDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsDetailsViewController.h; sourceTree = "<group>"; };
 		AE8DD06B13B034A700D7FCB3 /* SettingsDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsDetailsViewController.m; sourceTree = "<group>"; };
@@ -398,6 +397,7 @@
 				AE3D287313B99CB00054903D /* ScorecardTableView.xib */,
 				AEE5300F13C394DC003C866C /* CustomCourseView.xib */,
 				AEFE6F131381BB60002B1AA3 /* coursemodel.xcdatamodeld */,
+				963A524E13EB7B8000253B12 /* ECaddy.sqlite */,
 				9608A9A313E8FF610059BBA4 /* Default.png */,
 				9608A9A413E8FF610059BBA4 /* Default@2x.png */,
 				96FA1A6513E77206001C9163 /* greenicon@2x.png */,
@@ -422,7 +422,6 @@
 				965DC23A13E5087E001E0404 /* sadweather.png */,
 				9605CD3813E8EFF8004128D9 /* background_pat.png */,
 				9605CC5A13E8EE9A004128D9 /* background.png */,
-				AE8CFE7913DB9DE2007D1BF5 /* ECaddy.sqlite */,
 				AE85D7491368E34400CDA534 /* Supporting Files */,
 			);
 			path = ECaddy;
@@ -530,7 +529,6 @@
 				AE38B0B813BE4C6900D7F9FA /* scorecard_tab@2x.png in Resources */,
 				AEE5301013C394DC003C866C /* CustomCourseView.xib in Resources */,
 				AE5287AB13D52657004D4370 /* wind_arrow.png in Resources */,
-				AE8CFE7A13DB9DE2007D1BF5 /* ECaddy.sqlite in Resources */,
 				96DF437B13E0ECB6009D568B /* FBDialog.bundle in Resources */,
 				965DC23B13E5087E001E0404 /* sadweather.png in Resources */,
 				96FA1A6413E771F4001C9163 /* greenicon.png in Resources */,
@@ -549,6 +547,7 @@
 				9605CD3913E8EFF8004128D9 /* background_pat.png in Resources */,
 				9608A9A513E8FF610059BBA4 /* Default.png in Resources */,
 				9608A9A613E8FF610059BBA4 /* Default@2x.png in Resources */,
+				963A524F13EB7B8000253B12 /* ECaddy.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -559,7 +558,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE8E13B813D9172E00FED436 /* dbinit.m in Sources */,
 				AE816DC2137B7E140023F5D7 /* TBXML.m in Sources */,
 				AE85D7501368E34400CDA534 /* main.m in Sources */,
 				AE85D7531368E34400CDA534 /* ECaddyAppDelegate.m in Sources */,

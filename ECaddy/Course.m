@@ -20,6 +20,8 @@
 @dynamic favorite;
 @dynamic pending;
 @dynamic scorecards;
+@dynamic teeCoords;
+@dynamic greenCoords;
 
 - (void)addScorecardsObject:(NSManagedObject *)value {    
     NSSet *changedObjects = [[NSSet alloc] initWithObjects:&value count:1];

@@ -90,7 +90,7 @@
         return;
     }
         
-    NSString* fileContents = [[NSString alloc] initWithContentsOfFile: @"/Users/teacher/Desktop/CourseDirectory.csv"];
+    NSString* fileContents = [[NSString alloc] initWithContentsOfFile: @"/Users/rking/Desktop/CourseDirectory.csv"];
     
     NSError* err = nil;
     NSArray* lines = [fileContents componentsSeparatedByString:@"\n"];
@@ -169,11 +169,17 @@
             if([tmpMensPars length] == 0){
                 mensPars = nil;
             }
+            else if([tmpMensPars isEqualToString: @"NULL"]){
+                
+            }
             else{
                 mensPars = [tmpMensPars componentsSeparatedByString: @","];
             }
             
             if([tmpWomensPars length] == 0){
+                womensPars = nil;
+            }
+            else if([tmpWomensPars isEqualToString: @"NULL"]){
                 womensPars = nil;
             }
             else{
@@ -184,12 +190,18 @@
             if(stringRange.length > 0){
                 teeCoords = nil;
             }
+            else if([tmpTeeCoordsStr isEqualToString: @"NULL"]){
+                teeCoords = nil;
+            }
             else{
                 teeCoords = [tmpTeeCoordsStr componentsSeparatedByString: @"*"];
             }
 
             stringRange = [tmpGreenCoordsStr rangeOfString: @"\\N"];
             if(stringRange.length > 0){
+                greenCoords = nil;
+            }
+            else if([tmpGreenCoordsStr isEqualToString: @"NULL"]){
                 greenCoords = nil;
             }
             else{

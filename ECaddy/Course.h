@@ -22,5 +22,7 @@
 @property (nonatomic, retain) NSNumber * favorite;
 @property (nonatomic, retain) NSNumber* pending;
 @property (nonatomic, retain) NSSet* scorecards;
+@property (nonatomic, retain) NSArray* greenCoords;
+@property (nonatomic, retain) NSArray* teeCoords;
 
 @end

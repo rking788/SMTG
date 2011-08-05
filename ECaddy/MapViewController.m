@@ -333,7 +333,6 @@
     // Find the distance between the two points
     CLLocationDistance distanceToGreen = [loc2 distanceFromLocation: loc1] * 1.0936133;
     CLLocationDistance distanceToPin = [midloc distanceFromLocation: loc1] * 1.0935133;
-    NSLog(@"Distance calculated to be %lf yards", distanceToPin);
     
     // Set the distance label
     [self.distLbl setText: [NSString stringWithFormat: @"Tee to Pin: %d yd", (int)distanceToPin]];
@@ -437,7 +436,6 @@
     // Find the distance between the two points
     CLLocationDistance distanceToGreen = [loc2 distanceFromLocation: loc1] * 1.0936133;
     CLLocationDistance distanceToPin = [midloc distanceFromLocation: loc1] * 1.0935133;
-    NSLog(@"Distance calculated to be %lf yards", distanceToPin);
     
     // Set the distance label
     [self.distLbl setText: [NSString stringWithFormat: @"Tee to Pin: %d yd", (int)distanceToPin]];
@@ -594,8 +592,6 @@
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState
 {
-    NSLog(@"Changing Drag State to: %d", newState);
-    
     if(newState == MKAnnotationViewDragStateEnding){
         POIAnnotation* annot = annotationView.annotation;
         
@@ -632,7 +628,6 @@
         // Find the distance between the two points
         CLLocationDistance distanceToGreen = [loc2 distanceFromLocation: loc1] * 1.0936133;
         CLLocationDistance distanceToPin = [midloc distanceFromLocation: loc1] * 1.0935133;
-        NSLog(@"Distance calculated to be %lf yards", distanceToPin);
         
         // Set the distance label
         [self.distLbl setText: [NSString stringWithFormat: @"Tee to Pin: %d yd", (int)distanceToPin]];
