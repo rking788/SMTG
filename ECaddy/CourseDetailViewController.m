@@ -189,7 +189,6 @@
     [appDel saveContext];
 }
 
-#pragma mark - Table view data source delegate methods
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 1;

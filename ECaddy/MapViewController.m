@@ -18,7 +18,9 @@
 @implementation MapViewController
 
 @synthesize manObjCon;
-@synthesize distLbl;
+@synthesize distanceContainer;
+@synthesize t2dLbl;
+@synthesize d2gLbl;
 @synthesize mapView;
 @synthesize holeAnnotations;
 @synthesize distanceAnnotations;
@@ -39,6 +41,11 @@
     
     // TODO: If there is no current course then we should NOT do anything here
     // maybe display another view like in the weather details when an internet connection is not available
+    
+    // Color the distance label container view
+    [self.distanceContainer setBackgroundColor: [UIColor colorWithRed: 0.870588243 green: 0.862745106 blue:0.0 alpha:1.0]];
+    self.distanceContainer.layer.borderColor = [UIColor colorWithRed: 0.219607845 green: 0.521568656 blue:0 alpha:1.0].CGColor;
+    self.distanceContainer.layer.borderWidth = 2.0;
     
     self.manObjCon = [[ECaddyAppDelegate sharedAppDelegate] managedObjectContext];
     
@@ -102,9 +109,11 @@
     [self setDistanceAnnotations:nil];
     [self setTeeCoords: nil];
     [self setGreenCoords: nil];
-    [self setDistLbl:nil];
+    [self setT2dLbl:nil];
     [self setLocManager: nil];
     [self setUserLoc: nil];
+    [self setDistanceContainer:nil];
+    [self setD2gLbl:nil];
     [super viewDidUnload];
     
     // Release any retained subviews of the main view.
@@ -117,12 +126,14 @@
     [mapView release];
     [holeAnnotations release];
     [distanceAnnotations release];
-    [distLbl release];
+    [t2dLbl release];
     [teeCoords release];
     [greenCoords release];
     [manObjCon release];
     [locManager release];
     [userLoc release];
+    [distanceContainer release];
+    [d2gLbl release];
     [super dealloc];
 }
 
@@ -331,19 +342,17 @@
     [self.mapView addOverlay: [self holeLine]];
     
     // Find the distance between the two points
-    CLLocationDistance distanceToGreen = [loc2 distanceFromLocation: loc1] * 1.0936133;
+    CLLocationDistance distanceToGreen = [loc2 distanceFromLocation: midloc] * 1.0936133;
     CLLocationDistance distanceToPin = [midloc distanceFromLocation: loc1] * 1.0935133;
+    CLLocationDistance distanceOverall = [loc2 distanceFromLocation: loc1] * 1.0935133;
     
     // Set the distance label
-    [self.distLbl setText: [NSString stringWithFormat: @"Tee to Pin: %d yd", (int)distanceToPin]];
-    [self.distLbl setTextColor: [UIColor colorWithRed: 0.219607845 green: 0.521568656 blue:0 alpha:1.0]];
-    [self.distLbl setBackgroundColor: [UIColor colorWithRed: 0.870588243 green: 0.862745106 blue:0.0 alpha:1.0]];
-    self.distLbl.layer.borderColor = [UIColor colorWithRed: 0.219607845 green: 0.521568656 blue:0 alpha:1.0].CGColor;
-    self.distLbl.layer.borderWidth = 2.0;
+    [self.t2dLbl setText: [NSString stringWithFormat: @"%d yd", (int)distanceToPin]];
+    [self.d2gLbl setText: [NSString stringWithFormat: @"%d yd", (int)distanceToGreen]];
     
     // Set the title for the annotation equal to the distance to that annotation from the tee
     [[self.distanceAnnotations objectAtIndex:0] setTitle: [NSString stringWithFormat: @"%d yd", (int) distanceToPin]];
-    [[self.holeAnnotations objectAtIndex: greenAnnotationIndex] setTitle: [NSString stringWithFormat: @"%d yd", (int) distanceToGreen]];
+    [[self.holeAnnotations objectAtIndex: greenAnnotationIndex] setTitle: [NSString stringWithFormat: @"%d yd", (int) distanceOverall]];
     
     // Free up memory
     free((void*) pointArray);
@@ -434,19 +443,17 @@
     free((void*) pointArray);
     
     // Find the distance between the two points
-    CLLocationDistance distanceToGreen = [loc2 distanceFromLocation: loc1] * 1.0936133;
+    CLLocationDistance distanceToGreen = [loc2 distanceFromLocation: midloc] * 1.0936133;
     CLLocationDistance distanceToPin = [midloc distanceFromLocation: loc1] * 1.0935133;
+    CLLocationDistance distanceOverall = [loc2 distanceFromLocation: loc1] * 1.0935133;
     
     // Set the distance label
-    [self.distLbl setText: [NSString stringWithFormat: @"Tee to Pin: %d yd", (int)distanceToPin]];
-    [self.distLbl setTextColor: [UIColor colorWithRed: 0.219607845 green: 0.521568656 blue:0 alpha:1.0]];
-    [self.distLbl setBackgroundColor: [UIColor colorWithRed: 0.870588243 green: 0.862745106 blue:0.0 alpha:1.0]];
-    self.distLbl.layer.borderColor = [UIColor colorWithRed: 0.219607845 green: 0.521568656 blue:0 alpha:1.0].CGColor;
-    self.distLbl.layer.borderWidth = 2.0;
+    [self.t2dLbl setText: [NSString stringWithFormat: @"%d yd", (int)distanceToPin]];
+    [self.d2gLbl setText: [NSString stringWithFormat:@" %d yd", (int) distanceToGreen]];
 
     // Set the title for the annotation equal to the distance to that annotation from the tee
     [draggable1 setTitle: [NSString stringWithFormat: @"%d yd", (int) distanceToPin]];
-    [greenAnnot setTitle: [NSString stringWithFormat: @"%d yd", (int) distanceToGreen]];
+    [greenAnnot setTitle: [NSString stringWithFormat: @"%d yd", (int) distanceOverall]];
         
     [teeAnnot release];
     [greenAnnot release];
@@ -511,11 +518,12 @@
         [self.mapView dequeueReusableAnnotationViewWithIdentifier:POIDraggableAnnotationID];
         if (!pinView)
         {
-            MKPinAnnotationView* customPinView = [[[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier: POIDraggableAnnotationID] autorelease];
+            MKAnnotationView* customPinView = [[[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier: POIDraggableAnnotationID] autorelease];
             
             [customPinView setCanShowCallout: YES];
             [customPinView setDraggable: YES];
-            [customPinView setPinColor: MKPinAnnotationColorPurple];
+            [customPinView setImage: [UIImage imageNamed: @"maptabicon@2x.png"]];
+            //[customPinView setPinColor: MKPinAnnotationColorPurple];
             
             return customPinView;
         }
@@ -626,19 +634,17 @@
         
         // Recalculate the distance from the tee to the distance annotation
         // Find the distance between the two points
-        CLLocationDistance distanceToGreen = [loc2 distanceFromLocation: loc1] * 1.0936133;
+        CLLocationDistance distanceToGreen = [loc2 distanceFromLocation: midloc] * 1.0936133;
         CLLocationDistance distanceToPin = [midloc distanceFromLocation: loc1] * 1.0935133;
+        CLLocationDistance distanceOverall = [loc2 distanceFromLocation: loc1] * 1.0935133;
         
         // Set the distance label
-        [self.distLbl setText: [NSString stringWithFormat: @"Tee to Pin: %d yd", (int)distanceToPin]];
-        [self.distLbl setTextColor: [UIColor colorWithRed: 0.219607845 green: 0.521568656 blue:0 alpha:1.0]];
-        [self.distLbl setBackgroundColor: [UIColor colorWithRed: 0.870588243 green: 0.862745106 blue:0.0 alpha:1.0]];
-        self.distLbl.layer.borderColor = [UIColor colorWithRed: 0.219607845 green: 0.521568656 blue:0 alpha:1.0].CGColor;
-        self.distLbl.layer.borderWidth = 2.0;
+        [self.t2dLbl setText: [NSString stringWithFormat: @"%d yd", (int)distanceToPin]];
+        [self.d2gLbl setText: [NSString stringWithFormat: @"%d yd", (int)distanceToGreen]];
         
         // Set the title for the annotation equal to the distance to that annotation from the tee
         [annot setTitle: [NSString stringWithFormat: @"%d yd", (int) distanceToPin]];
-        [(POIAnnotation*) [self.holeAnnotations objectAtIndex: greenAnnotationIndex] setTitle: [NSString stringWithFormat: @"%d yd", (int) distanceToGreen]];
+        [(POIAnnotation*) [self.holeAnnotations objectAtIndex: greenAnnotationIndex] setTitle: [NSString stringWithFormat: @"%d yd", (int) distanceOverall]];
         
         
         [self setHoleLine: [MKPolyline polylineWithPoints: pointArray count: 3]];

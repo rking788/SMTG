@@ -32,15 +32,19 @@
     MKPolyline* holeLine;
     MKPolylineView* holeLineView;
    
-    UILabel *distLbl;
+    UILabel *t2dLbl;
+    UILabel *d2gLbl;
 
     CLLocationManager* locManager;
     CLLocation* userLoc;
     BOOL userLocEnabled;
+    UIView *distanceContainer;
 }
 
 // Properties
-@property (nonatomic, retain) IBOutlet UILabel *distLbl;
+@property (retain, nonatomic) IBOutlet UIView *distanceContainer;
+@property (nonatomic, retain) IBOutlet UILabel *t2dLbl;
+@property (retain, nonatomic) IBOutlet UILabel *d2gLbl;
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 
 @property (nonatomic, retain) NSManagedObjectContext* manObjCon;
