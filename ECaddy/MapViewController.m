@@ -522,7 +522,7 @@
             
             [customPinView setCanShowCallout: YES];
             [customPinView setDraggable: YES];
-            [customPinView setImage: [UIImage imageNamed: @"maptabicon@2x.png"]];
+            [customPinView setImage: [UIImage imageNamed: @"mapdraggable.png"]];
             //[customPinView setPinColor: MKPinAnnotationColorPurple];
             
             return customPinView;
@@ -561,19 +561,19 @@
             // the map when the bubble is displayed this value will need to be diferent
             // if the green is on the left (x will have to be +20)
             CGPoint calloutpoint = [customPinView calloutOffset];
-            calloutpoint.x -= 20;
+            calloutpoint.x -= 10;
             
             [customPinView setCalloutOffset: calloutpoint];
             [customPinView setCanShowCallout: YES];
             
             // TODO: Probably remove this offset once new images are used
-            [customPinView setCenterOffset: CGPointMake(0, -20)];
+            [customPinView setCenterOffset: CGPointMake(0, -16)];
             
             if([customPinView.annotation isEqual: [self.holeAnnotations objectAtIndex: teeAnnotationIndex]]){
-                [customPinView setImage: [UIImage imageNamed: @"tee.png"]];
+                [customPinView setImage: [UIImage imageNamed: @"golftee.png"]];
             }
             else if([customPinView.annotation isEqual: [self.holeAnnotations objectAtIndex:greenAnnotationIndex]]){
-                [customPinView setImage: [UIImage imageNamed: @"green.png"]];
+                [customPinView setImage: [UIImage imageNamed: @"greenflag.png"]];
             }
             
             return customPinView;
@@ -583,10 +583,10 @@
         }
         
         if([pinView.annotation isEqual: [self.holeAnnotations objectAtIndex: teeAnnotationIndex]]){
-            [pinView setImage: [UIImage imageNamed: @"tee.png"]];
+            [pinView setImage: [UIImage imageNamed: @"golftee.png"]];
         }
         else if([pinView.annotation isEqual: [self.holeAnnotations objectAtIndex:greenAnnotationIndex]]){
-            [pinView setImage: [UIImage imageNamed: @"green.png"]];
+            [pinView setImage: [UIImage imageNamed: @"greenflag.png"]];
         }
         
         return pinView;
