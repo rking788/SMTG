@@ -23,7 +23,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //[self createAdBannerView];
+    
+#ifdef LITE
+    NSLog(@"Setting up the ad view because this is the free version");
+    [self createAdBannerView];
+#endif
+    
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -38,7 +43,9 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
+#ifdef LITE
     [self fixupAdView: self.interfaceOrientation];
+#endif
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -53,7 +60,9 @@
         ret = YES;
     }
     
+#ifdef LITE
     [self fixupAdView: interfaceOrientation];
+#endif
     
     //return ret;
     return YES;
@@ -120,7 +129,8 @@
     [nrvc release];    
 }
 
-#pragma mark iAd methods
+#pragma mark - iAd methods
+#ifdef LITE
 - (int)getBannerHeight:(UIInterfaceOrientation)orientation {
     if (UIInterfaceOrientationIsLandscape(orientation)) {
         return 32;
@@ -211,5 +221,6 @@
         [self fixupAdView: self.interfaceOrientation];
     }
 }
+#endif
 
 @end

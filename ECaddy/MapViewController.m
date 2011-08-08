@@ -25,6 +25,7 @@
 @synthesize d2gLbl;
 @synthesize mapView;
 @synthesize curLocationBtn;
+@synthesize contentView;
 @synthesize holeAnnotations;
 @synthesize distanceAnnotations;
 @synthesize curHole;
@@ -36,11 +37,19 @@
 @synthesize locManager;
 @synthesize userLoc;
 @synthesize userLocEnabled;
+@synthesize adView;
+@synthesize adVisible;
 
+#pragma mark - View Lifecycle methods
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+#ifdef LITE
+    NSLog(@"Setting up the ad view because this is the free version");
+    [self createAdBannerView];
+#endif
     
     // Color the distance label container view
     //[self.distanceContainer setBackgroundColor: [UIColor colorWithRed: 0.870588243 green: 0.862745106 blue:0.0 alpha:1.0]];
@@ -70,6 +79,11 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
+    
+#ifdef LITE
+    [self fixupAdView: self.interfaceOrientation];
+#endif
+    
     Course* curCourse = (Course*) [[SMTGAppDelegate sharedAppDelegate] curCourse];
     NSString* errStr = nil;
 
@@ -121,6 +135,10 @@
         ret = YES;
     }
     
+#ifdef LITE
+    [self fixupAdView: interfaceOrientation];
+#endif
+    
     //return ret;
     return YES;
 }
@@ -149,6 +167,8 @@
     [self setDistanceContainer:nil];
     [self setD2gLbl:nil];
     [self setCurLocationBtn:nil];
+    [self setContentView:nil];
+    [self setAdView: nil];
     [super viewDidUnload];
     
     // Release any retained subviews of the main view.
@@ -170,6 +190,8 @@
     [distanceContainer release];
     [d2gLbl release];
     [curLocationBtn release];
+    [contentView release];
+    [adView release];
     [super dealloc];
 }
 
@@ -652,7 +674,7 @@
     return nil;
 }
 
-# pragma mark - TODO replace a lot of this code with [self drawMapLine]
+# pragma mark - TODO CRITICAL replace a lot of this code with [self drawMapLine]
 # pragma mark - TODO The annotation distances are not being recalculated after the draggable annotation is moved
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState
@@ -733,5 +755,100 @@
     [navCont popToRootViewControllerAnimated: NO];
     [[[navCont viewControllers] objectAtIndex: 0] viewDidAppear: YES];
 }
+
+#pragma mark - iAd methods
+#ifdef LITE
+- (int)getBannerHeight:(UIInterfaceOrientation)orientation {
+    if (UIInterfaceOrientationIsLandscape(orientation)) {
+        return 32;
+    } else {
+        return 50;
+    }
+}
+
+- (int)getBannerHeight {
+    return [self getBannerHeight: self.interfaceOrientation];
+}
+
+- (void)createAdBannerView {
+    Class classAdBannerView = NSClassFromString(@"ADBannerView");
+    if (classAdBannerView != nil) {
+        self.adView = [[[classAdBannerView alloc] 
+                        initWithFrame:CGRectZero] autorelease];
+        [adView setRequiredContentSizeIdentifiers:[NSSet setWithObjects: 
+                                                   ADBannerContentSizeIdentifierPortrait, 
+                                                   ADBannerContentSizeIdentifierLandscape, nil]];
+        if (UIInterfaceOrientationIsLandscape([UIDevice currentDevice].orientation)) {
+            [adView setCurrentContentSizeIdentifier:
+             ADBannerContentSizeIdentifierLandscape];
+        } else {
+            [adView setCurrentContentSizeIdentifier:
+             ADBannerContentSizeIdentifierPortrait];            
+        }
+        [adView setFrame:CGRectOffset([adView frame], 0, -[self getBannerHeight])];
+        [adView setDelegate:self];
+        
+        [self.view addSubview:adView];        
+    }
+}
+
+- (void)fixupAdView:(UIInterfaceOrientation)toInterfaceOrientation {
+    if (adView != nil) {        
+        if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+            [adView setCurrentContentSizeIdentifier:
+             ADBannerContentSizeIdentifierLandscape];
+        } else {
+            [adView setCurrentContentSizeIdentifier:
+             ADBannerContentSizeIdentifierPortrait];
+        }          
+        [UIView beginAnimations:@"fixupViews" context:nil];
+        if (adVisible) {
+            CGRect adBannerViewFrame = [adView frame];
+            adBannerViewFrame.origin.x = 0;
+            adBannerViewFrame.origin.y = 0;
+            [adView setFrame:adBannerViewFrame];
+            CGRect contentViewFrame = contentView.frame;
+            contentViewFrame.origin.y = 
+            [self getBannerHeight:toInterfaceOrientation];
+            contentViewFrame.size.height = self.view.frame.size.height - 
+            [self getBannerHeight:toInterfaceOrientation];
+            contentView.frame = contentViewFrame;
+        } else {
+            CGRect adBannerViewFrame = [adView frame];
+            adBannerViewFrame.origin.x = 0;
+            adBannerViewFrame.origin.y = -[self getBannerHeight:toInterfaceOrientation];
+            [adView setFrame:adBannerViewFrame];
+            CGRect contentViewFrame = contentView.frame;
+            contentViewFrame.origin.y = 0;
+            contentViewFrame.size.height = self.view.frame.size.height;
+            contentView.frame = contentViewFrame;            
+        }
+        [UIView commitAnimations];
+    }   
+}
+
+#pragma mark ADBannerViewDelegate Methods
+
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner
+{
+    NSLog(@"A Banner was loaded");
+    
+    if (!adVisible){                
+        adVisible = YES;
+        [self fixupAdView: self.interfaceOrientation];
+    }
+}
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
+    NSLog(@"Failed to load a banner");
+    
+    if (adVisible){        
+        adVisible = NO;
+        [self fixupAdView: self.interfaceOrientation];
+    }
+}
+#endif
+
 
 @end

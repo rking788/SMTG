@@ -26,6 +26,94 @@
 		9679EB0D13E79B81001F3872 /* settingstab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EB0C13E79B81001F3872 /* settingstab@2x.png */; };
 		9679EB0F13E7A1D6001F3872 /* favstarpressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EB0E13E7A1D6001F3872 /* favstarpressed.png */; };
 		9679EB1113E7A1E2001F3872 /* favstarreleased.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EB1013E7A1E2001F3872 /* favstarreleased.png */; };
+		96AC66ED13F00A9200D614E0 /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = AE816DC0137B7E140023F5D7 /* TBXML.m */; };
+		96AC66EE13F00A9200D614E0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D74F1368E34400CDA534 /* main.m */; };
+		96AC66EF13F00A9200D614E0 /* SMTGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7521368E34400CDA534 /* SMTGAppDelegate.m */; };
+		96AC66F013F00A9200D614E0 /* ScorecardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7581368E34400CDA534 /* ScorecardViewController.m */; };
+		96AC66F113F00A9200D614E0 /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D75B1368E34400CDA534 /* DirectoryViewController.m */; };
+		96AC66F213F00A9200D614E0 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7721368E75700CDA534 /* MapViewController.m */; };
+		96AC66F313F00A9200D614E0 /* WeatherDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7901369298E00CDA534 /* WeatherDetails.m */; };
+		96AC66F413F00A9200D614E0 /* POIAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = AE886D641370E2490056BDF4 /* POIAnnotation.m */; };
+		96AC66F513F00A9200D614E0 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AE816DBE137B7E140023F5D7 /* NSDataAdditions.m */; };
+		96AC66F613F00A9200D614E0 /* coursemodel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AEFE6F131381BB60002B1AA3 /* coursemodel.xcdatamodeld */; };
+		96AC66F713F00A9200D614E0 /* CourseSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8FE58C1384A96900EE8E66 /* CourseSelectViewController.m */; };
+		96AC66F813F00A9200D614E0 /* CourseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA35AE61384CE7600111BAA /* CourseDetailViewController.m */; };
+		96AC66F913F00A9200D614E0 /* NewRoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8E2C18139886630098A426 /* NewRoundViewController.m */; };
+		96AC66FA13F00A9200D614E0 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9177F4139AC17300AC5706 /* Course.m */; };
+		96AC66FB13F00A9200D614E0 /* Scorecard.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9177F7139AC17400AC5706 /* Scorecard.m */; };
+		96AC66FC13F00A9200D614E0 /* ScoreTrackerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA99328139DBF8700DD723C /* ScoreTrackerViewController.m */; };
+		96AC66FD13F00A9200D614E0 /* HeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE880E6813A1ACBE00824DF6 /* HeaderFooterView.m */; };
+		96AC66FE13F00A9200D614E0 /* ScorecardTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE834A7E13A3F6AC00EFF1DB /* ScorecardTableCell.m */; };
+		96AC66FF13F00A9200D614E0 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE90069E13A9C6B3008247BF /* SettingsViewController.m */; };
+		96AC670013F00A9200D614E0 /* SettingsDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8DD06B13B034A700D7FCB3 /* SettingsDetailsViewController.m */; };
+		96AC670113F00A9200D614E0 /* ScorecardTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D287213B99CB00054903D /* ScorecardTableViewController.m */; };
+		96AC670213F00A9200D614E0 /* CustomCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE5301313C39AE3003C866C /* CustomCourseViewController.m */; };
+		96AC670313F00A9200D614E0 /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF435F13E0ECB6009D568B /* Facebook.m */; };
+		96AC670413F00A9200D614E0 /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436413E0ECB6009D568B /* FBDialog.m */; };
+		96AC670513F00A9200D614E0 /* FBLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436613E0ECB6009D568B /* FBLoginDialog.m */; };
+		96AC670613F00A9200D614E0 /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436813E0ECB6009D568B /* FBRequest.m */; };
+		96AC670713F00A9200D614E0 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436C13E0ECB6009D568B /* NSObject+SBJSON.m */; };
+		96AC670813F00A9200D614E0 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436E13E0ECB6009D568B /* NSString+SBJSON.m */; };
+		96AC670913F00A9200D614E0 /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437013E0ECB6009D568B /* SBJSON.m */; };
+		96AC670A13F00A9200D614E0 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437213E0ECB6009D568B /* SBJsonBase.m */; };
+		96AC670B13F00A9200D614E0 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437413E0ECB6009D568B /* SBJsonParser.m */; };
+		96AC670C13F00A9200D614E0 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437613E0ECB6009D568B /* SBJsonWriter.m */; };
+		96AC670D13F00A9200D614E0 /* MapErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F2B37F13EF257A005BE308 /* MapErrorViewController.m */; };
+		96AC670F13F00A9200D614E0 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8A215113BABA8C001F4F3C /* iAd.framework */; };
+		96AC671013F00A9200D614E0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8B65B313B24995005EFFE7 /* QuartzCore.framework */; };
+		96AC671113F00A9200D614E0 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9427CD13821ABF0047EBA4 /* CoreData.framework */; };
+		96AC671213F00A9200D614E0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7851368EC5900CDA534 /* MapKit.framework */; };
+		96AC671313F00A9200D614E0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7831368EC5200CDA534 /* CoreLocation.framework */; };
+		96AC671413F00A9200D614E0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7421368E34400CDA534 /* UIKit.framework */; };
+		96AC671513F00A9200D614E0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7441368E34400CDA534 /* Foundation.framework */; };
+		96AC671613F00A9200D614E0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7461368E34400CDA534 /* CoreGraphics.framework */; };
+		96AC671713F00A9200D614E0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AE816DC3137B7E670023F5D7 /* libz.dylib */; };
+		96AC671913F00A9200D614E0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE85D74B1368E34400CDA534 /* InfoPlist.strings */; };
+		96AC671A13F00A9200D614E0 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7541368E34400CDA534 /* MainWindow.xib */; };
+		96AC671B13F00A9200D614E0 /* ScorecardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D75D1368E34400CDA534 /* ScorecardView.xib */; };
+		96AC671C13F00A9200D614E0 /* CourseSelectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7601368E34400CDA534 /* CourseSelectView.xib */; };
+		96AC671D13F00A9200D614E0 /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7731368E75700CDA534 /* MapView.xib */; };
+		96AC671E13F00A9200D614E0 /* WeatherDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7911369298E00CDA534 /* WeatherDetails.xib */; };
+		96AC671F13F00A9200D614E0 /* stateabbrs.txt in Resources */ = {isa = PBXBuildFile; fileRef = AE7F932713835FC9003CCD57 /* stateabbrs.txt */; };
+		96AC672013F00A9200D614E0 /* StateDirView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7F932A13836621003CCD57 /* StateDirView.xib */; };
+		96AC672113F00A9200D614E0 /* CourseDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA35AE71384CE7600111BAA /* CourseDetailView.xib */; };
+		96AC672213F00A9200D614E0 /* NewRoundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE8E2C19139886630098A426 /* NewRoundView.xib */; };
+		96AC672313F00A9200D614E0 /* ScoreTrackerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA99329139DBF8800DD723C /* ScoreTrackerView.xib */; };
+		96AC672413F00A9200D614E0 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE90069F13A9C6B3008247BF /* SettingsView.xib */; };
+		96AC672513F00A9200D614E0 /* NameEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE8DD06713B033ED00D7FCB3 /* NameEditView.xib */; };
+		96AC672613F00A9200D614E0 /* HideStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE8DD06F13B05EB900D7FCB3 /* HideStateView.xib */; };
+		96AC672713F00A9200D614E0 /* ScorecardTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE3D287313B99CB00054903D /* ScorecardTableView.xib */; };
+		96AC672813F00A9200D614E0 /* scorecard_tab.png in Resources */ = {isa = PBXBuildFile; fileRef = AE38B0B513BE4C6900D7F9FA /* scorecard_tab.png */; };
+		96AC672913F00A9200D614E0 /* scorecard_tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE38B0B613BE4C6900D7F9FA /* scorecard_tab@2x.png */; };
+		96AC672A13F00A9200D614E0 /* CustomCourseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEE5300F13C394DC003C866C /* CustomCourseView.xib */; };
+		96AC672B13F00A9200D614E0 /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96DF436213E0ECB6009D568B /* FBDialog.bundle */; };
+		96AC672C13F00A9200D614E0 /* sadweather.png in Resources */ = {isa = PBXBuildFile; fileRef = 965DC23A13E5087E001E0404 /* sadweather.png */; };
+		96AC672D13F00A9200D614E0 /* greenicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 96FA1A6313E771F4001C9163 /* greenicon.png */; };
+		96AC672E13F00A9200D614E0 /* greenicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96FA1A6513E77206001C9163 /* greenicon@2x.png */; };
+		96AC672F13F00A9200D614E0 /* directorytab.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EAFE13E7844A001F3872 /* directorytab.png */; };
+		96AC673013F00A9200D614E0 /* directorytab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EB0013E7896B001F3872 /* directorytab@2x.png */; };
+		96AC673113F00A9200D614E0 /* weathertab.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EB0413E79041001F3872 /* weathertab.png */; };
+		96AC673213F00A9200D614E0 /* weathertab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EB0613E7910B001F3872 /* weathertab@2x.png */; };
+		96AC673313F00A9200D614E0 /* settingstab.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EB0A13E79B0A001F3872 /* settingstab.png */; };
+		96AC673413F00A9200D614E0 /* settingstab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EB0C13E79B81001F3872 /* settingstab@2x.png */; };
+		96AC673513F00A9200D614E0 /* favstarpressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EB0E13E7A1D6001F3872 /* favstarpressed.png */; };
+		96AC673613F00A9200D614E0 /* favstarreleased.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EB1013E7A1E2001F3872 /* favstarreleased.png */; };
+		96AC673713F00A9200D614E0 /* maptabicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9605CC5613E8DFAB004128D9 /* maptabicon.png */; };
+		96AC673813F00A9200D614E0 /* maptabicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9605CC5813E8E046004128D9 /* maptabicon@2x.png */; };
+		96AC673913F00A9200D614E0 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 9605CC5A13E8EE9A004128D9 /* background.png */; };
+		96AC673A13F00A9200D614E0 /* background_pat.png in Resources */ = {isa = PBXBuildFile; fileRef = 9605CD3813E8EFF8004128D9 /* background_pat.png */; };
+		96AC673B13F00A9200D614E0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 9608A9A313E8FF610059BBA4 /* Default.png */; };
+		96AC673C13F00A9200D614E0 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9608A9A413E8FF610059BBA4 /* Default@2x.png */; };
+		96AC673D13F00A9200D614E0 /* SMTG.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 963A524E13EB7B8000253B12 /* SMTG.sqlite */; };
+		96AC673E13F00A9200D614E0 /* locationenabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 96EE27C213ECEE4F00170A52 /* locationenabled.png */; };
+		96AC673F13F00A9200D614E0 /* mapdraggable.png in Resources */ = {isa = PBXBuildFile; fileRef = 96086CFD13EE3EFC00041D0E /* mapdraggable.png */; };
+		96AC674013F00A9200D614E0 /* greenflag.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B599CA13EE559500142A36 /* greenflag.png */; };
+		96AC674113F00A9200D614E0 /* golftee.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B599D413EE5E1600142A36 /* golftee.png */; };
+		96AC674213F00A9200D614E0 /* examplebackground3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9612402B13EE66430028A940 /* examplebackground3.png */; };
+		96AC674313F00A9200D614E0 /* curlocbtn-enabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D021D513EF207400BC0A4F /* curlocbtn-enabled.png */; };
+		96AC674413F00A9200D614E0 /* curlocbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D021D613EF207400BC0A4F /* curlocbtn.png */; };
+		96AC674513F00A9200D614E0 /* MapErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96F2B38013EF257A005BE308 /* MapErrorView.xib */; };
+		96AC674613F00A9200D614E0 /* windarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 961BA18E13EF760C0046B850 /* windarrow.png */; };
 		96B599CB13EE559500142A36 /* greenflag.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B599CA13EE559500142A36 /* greenflag.png */; };
 		96B599D513EE5E1600142A36 /* golftee.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B599D413EE5E1600142A36 /* golftee.png */; };
 		96D021D713EF207400BC0A4F /* curlocbtn-enabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D021D513EF207400BC0A4F /* curlocbtn-enabled.png */; };
@@ -127,6 +215,8 @@
 		9679EB0C13E79B81001F3872 /* settingstab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settingstab@2x.png"; sourceTree = "<group>"; };
 		9679EB0E13E7A1D6001F3872 /* favstarpressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favstarpressed.png; sourceTree = "<group>"; };
 		9679EB1013E7A1E2001F3872 /* favstarreleased.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favstarreleased.png; sourceTree = "<group>"; };
+		96AC674A13F00A9200D614E0 /* SMTGLite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SMTGLite.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		96AC674C13F00A9200D614E0 /* SMTGLite-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "SMTGLite-Info.plist"; path = "/Users/rking/dev/ios/ECaddy/SMTGLite-Info.plist"; sourceTree = "<absolute>"; };
 		96B599CA13EE559500142A36 /* greenflag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenflag.png; sourceTree = "<group>"; };
 		96B599D413EE5E1600142A36 /* golftee.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = golftee.png; sourceTree = "<group>"; };
 		96D021D513EF207400BC0A4F /* curlocbtn-enabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "curlocbtn-enabled.png"; sourceTree = "<group>"; };
@@ -239,6 +329,22 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		96AC670E13F00A9200D614E0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96AC670F13F00A9200D614E0 /* iAd.framework in Frameworks */,
+				96AC671013F00A9200D614E0 /* QuartzCore.framework in Frameworks */,
+				96AC671113F00A9200D614E0 /* CoreData.framework in Frameworks */,
+				96AC671213F00A9200D614E0 /* MapKit.framework in Frameworks */,
+				96AC671313F00A9200D614E0 /* CoreLocation.framework in Frameworks */,
+				96AC671413F00A9200D614E0 /* UIKit.framework in Frameworks */,
+				96AC671513F00A9200D614E0 /* Foundation.framework in Frameworks */,
+				96AC671613F00A9200D614E0 /* CoreGraphics.framework in Frameworks */,
+				96AC671713F00A9200D614E0 /* libz.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AE85D73B1368E34400CDA534 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -333,6 +439,7 @@
 			isa = PBXGroup;
 			children = (
 				AE85D73E1368E34400CDA534 /* SMTG.app */,
+				96AC674A13F00A9200D614E0 /* SMTGLite.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -450,6 +557,7 @@
 			children = (
 				AE7F932713835FC9003CCD57 /* stateabbrs.txt */,
 				AE85D74A1368E34400CDA534 /* SMTG-Info.plist */,
+				96AC674C13F00A9200D614E0 /* SMTGLite-Info.plist */,
 				AE85D74B1368E34400CDA534 /* InfoPlist.strings */,
 				AE85D74E1368E34400CDA534 /* SMTG-Prefix.pch */,
 				AE85D74F1368E34400CDA534 /* main.m */,
@@ -461,6 +569,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		96AC66EB13F00A9200D614E0 /* SMTGLite */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96AC674713F00A9200D614E0 /* Build configuration list for PBXNativeTarget "SMTGLite" */;
+			buildPhases = (
+				96AC66EC13F00A9200D614E0 /* Sources */,
+				96AC670E13F00A9200D614E0 /* Frameworks */,
+				96AC671813F00A9200D614E0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SMTGLite;
+			productName = ECaddy;
+			productReference = 96AC674A13F00A9200D614E0 /* SMTGLite.app */;
+			productType = "com.apple.product-type.application";
+		};
 		AE85D73D1368E34400CDA534 /* SMTG */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AE85D7651368E34400CDA534 /* Build configuration list for PBXNativeTarget "SMTG" */;
@@ -505,6 +630,7 @@
 			projectRoot = "";
 			targets = (
 				AE85D73D1368E34400CDA534 /* SMTG */,
+				96AC66EB13F00A9200D614E0 /* SMTGLite */,
 			);
 		};
 /* End PBXProject section */
@@ -520,6 +646,59 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		96AC671813F00A9200D614E0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96AC671913F00A9200D614E0 /* InfoPlist.strings in Resources */,
+				96AC671A13F00A9200D614E0 /* MainWindow.xib in Resources */,
+				96AC671B13F00A9200D614E0 /* ScorecardView.xib in Resources */,
+				96AC671C13F00A9200D614E0 /* CourseSelectView.xib in Resources */,
+				96AC671D13F00A9200D614E0 /* MapView.xib in Resources */,
+				96AC671E13F00A9200D614E0 /* WeatherDetails.xib in Resources */,
+				96AC671F13F00A9200D614E0 /* stateabbrs.txt in Resources */,
+				96AC672013F00A9200D614E0 /* StateDirView.xib in Resources */,
+				96AC672113F00A9200D614E0 /* CourseDetailView.xib in Resources */,
+				96AC672213F00A9200D614E0 /* NewRoundView.xib in Resources */,
+				96AC672313F00A9200D614E0 /* ScoreTrackerView.xib in Resources */,
+				96AC672413F00A9200D614E0 /* SettingsView.xib in Resources */,
+				96AC672513F00A9200D614E0 /* NameEditView.xib in Resources */,
+				96AC672613F00A9200D614E0 /* HideStateView.xib in Resources */,
+				96AC672713F00A9200D614E0 /* ScorecardTableView.xib in Resources */,
+				96AC672813F00A9200D614E0 /* scorecard_tab.png in Resources */,
+				96AC672913F00A9200D614E0 /* scorecard_tab@2x.png in Resources */,
+				96AC672A13F00A9200D614E0 /* CustomCourseView.xib in Resources */,
+				96AC672B13F00A9200D614E0 /* FBDialog.bundle in Resources */,
+				96AC672C13F00A9200D614E0 /* sadweather.png in Resources */,
+				96AC672D13F00A9200D614E0 /* greenicon.png in Resources */,
+				96AC672E13F00A9200D614E0 /* greenicon@2x.png in Resources */,
+				96AC672F13F00A9200D614E0 /* directorytab.png in Resources */,
+				96AC673013F00A9200D614E0 /* directorytab@2x.png in Resources */,
+				96AC673113F00A9200D614E0 /* weathertab.png in Resources */,
+				96AC673213F00A9200D614E0 /* weathertab@2x.png in Resources */,
+				96AC673313F00A9200D614E0 /* settingstab.png in Resources */,
+				96AC673413F00A9200D614E0 /* settingstab@2x.png in Resources */,
+				96AC673513F00A9200D614E0 /* favstarpressed.png in Resources */,
+				96AC673613F00A9200D614E0 /* favstarreleased.png in Resources */,
+				96AC673713F00A9200D614E0 /* maptabicon.png in Resources */,
+				96AC673813F00A9200D614E0 /* maptabicon@2x.png in Resources */,
+				96AC673913F00A9200D614E0 /* background.png in Resources */,
+				96AC673A13F00A9200D614E0 /* background_pat.png in Resources */,
+				96AC673B13F00A9200D614E0 /* Default.png in Resources */,
+				96AC673C13F00A9200D614E0 /* Default@2x.png in Resources */,
+				96AC673D13F00A9200D614E0 /* SMTG.sqlite in Resources */,
+				96AC673E13F00A9200D614E0 /* locationenabled.png in Resources */,
+				96AC673F13F00A9200D614E0 /* mapdraggable.png in Resources */,
+				96AC674013F00A9200D614E0 /* greenflag.png in Resources */,
+				96AC674113F00A9200D614E0 /* golftee.png in Resources */,
+				96AC674213F00A9200D614E0 /* examplebackground3.png in Resources */,
+				96AC674313F00A9200D614E0 /* curlocbtn-enabled.png in Resources */,
+				96AC674413F00A9200D614E0 /* curlocbtn.png in Resources */,
+				96AC674513F00A9200D614E0 /* MapErrorView.xib in Resources */,
+				96AC674613F00A9200D614E0 /* windarrow.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AE85D73C1368E34400CDA534 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -576,6 +755,46 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		96AC66EC13F00A9200D614E0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96AC66ED13F00A9200D614E0 /* TBXML.m in Sources */,
+				96AC66EE13F00A9200D614E0 /* main.m in Sources */,
+				96AC66EF13F00A9200D614E0 /* SMTGAppDelegate.m in Sources */,
+				96AC66F013F00A9200D614E0 /* ScorecardViewController.m in Sources */,
+				96AC66F113F00A9200D614E0 /* DirectoryViewController.m in Sources */,
+				96AC66F213F00A9200D614E0 /* MapViewController.m in Sources */,
+				96AC66F313F00A9200D614E0 /* WeatherDetails.m in Sources */,
+				96AC66F413F00A9200D614E0 /* POIAnnotation.m in Sources */,
+				96AC66F513F00A9200D614E0 /* NSDataAdditions.m in Sources */,
+				96AC66F613F00A9200D614E0 /* coursemodel.xcdatamodeld in Sources */,
+				96AC66F713F00A9200D614E0 /* CourseSelectViewController.m in Sources */,
+				96AC66F813F00A9200D614E0 /* CourseDetailViewController.m in Sources */,
+				96AC66F913F00A9200D614E0 /* NewRoundViewController.m in Sources */,
+				96AC66FA13F00A9200D614E0 /* Course.m in Sources */,
+				96AC66FB13F00A9200D614E0 /* Scorecard.m in Sources */,
+				96AC66FC13F00A9200D614E0 /* ScoreTrackerViewController.m in Sources */,
+				96AC66FD13F00A9200D614E0 /* HeaderFooterView.m in Sources */,
+				96AC66FE13F00A9200D614E0 /* ScorecardTableCell.m in Sources */,
+				96AC66FF13F00A9200D614E0 /* SettingsViewController.m in Sources */,
+				96AC670013F00A9200D614E0 /* SettingsDetailsViewController.m in Sources */,
+				96AC670113F00A9200D614E0 /* ScorecardTableViewController.m in Sources */,
+				96AC670213F00A9200D614E0 /* CustomCourseViewController.m in Sources */,
+				96AC670313F00A9200D614E0 /* Facebook.m in Sources */,
+				96AC670413F00A9200D614E0 /* FBDialog.m in Sources */,
+				96AC670513F00A9200D614E0 /* FBLoginDialog.m in Sources */,
+				96AC670613F00A9200D614E0 /* FBRequest.m in Sources */,
+				96AC670713F00A9200D614E0 /* NSObject+SBJSON.m in Sources */,
+				96AC670813F00A9200D614E0 /* NSString+SBJSON.m in Sources */,
+				96AC670913F00A9200D614E0 /* SBJSON.m in Sources */,
+				96AC670A13F00A9200D614E0 /* SBJsonBase.m in Sources */,
+				96AC670B13F00A9200D614E0 /* SBJsonParser.m in Sources */,
+				96AC670C13F00A9200D614E0 /* SBJsonWriter.m in Sources */,
+				96AC670D13F00A9200D614E0 /* MapErrorViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AE85D73A1368E34400CDA534 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -654,6 +873,41 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		96AC674813F00A9200D614E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ECaddy/SMTG-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					DEBUG,
+					LITE,
+				);
+				INFOPLIST_FILE = "SMTGLite-Info.plist";
+				PRODUCT_NAME = SMTGLite;
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		96AC674913F00A9200D614E0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ECaddy/SMTG-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = LITE;
+				INFOPLIST_FILE = "SMTGLite-Info.plist";
+				PRODUCT_NAME = SMTGLite;
+				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		AE85D7631368E34400CDA534 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -700,6 +954,10 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ECaddy/SMTG-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					DEBUG,
+					PAID,
+				);
 				INFOPLIST_FILE = "ECaddy/SMTG-Info.plist";
 				PRODUCT_NAME = SMTG;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -714,6 +972,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ECaddy/SMTG-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = PAID;
 				INFOPLIST_FILE = "ECaddy/SMTG-Info.plist";
 				PRODUCT_NAME = SMTG;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -725,6 +984,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		96AC674713F00A9200D614E0 /* Build configuration list for PBXNativeTarget "SMTGLite" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96AC674813F00A9200D614E0 /* Debug */,
+				96AC674913F00A9200D614E0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		AE85D7381368E34400CDA534 /* Build configuration list for PBXProject "SMTG" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

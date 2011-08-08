@@ -9,16 +9,18 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <CoreData/CoreData.h>
+#import "iAd/ADBannerView.h"
 
 @class POIAnnotation;
 
 
-@interface MapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate> {
+@interface MapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, ADBannerViewDelegate> {
     
     NSManagedObjectContext* manObjCon;
     
     MKMapView *mapView;
     UIButton *curLocationBtn;
+    UIView *contentView;
    
     NSMutableArray* holeAnnotations;
     NSMutableArray* distanceAnnotations;
@@ -40,6 +42,9 @@
     CLLocation* userLoc;
     BOOL userLocEnabled;
     UIView *distanceContainer;
+    
+    id adView;
+    BOOL adVisible;
 }
 
 // Properties
@@ -48,6 +53,7 @@
 @property (retain, nonatomic) IBOutlet UILabel *d2gLbl;
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 @property (retain, nonatomic) IBOutlet UIButton *curLocationBtn;
+@property (retain, nonatomic) IBOutlet UIView *contentView;
 
 @property (nonatomic, retain) NSManagedObjectContext* manObjCon;
 
@@ -68,6 +74,9 @@
 @property (nonatomic, retain) CLLocation* userLoc;
 @property (nonatomic, assign, getter = isUserLocEnabled) BOOL userLocEnabled;
 
+@property (nonatomic, retain) id adView;
+@property (nonatomic) BOOL adVisible;
+
 // Methods
 - (void)zoomToFitMapAnnotations:(MKMapView*)mapV;
 - (void) holeAnnotsTeeCoords: (NSArray*) tee greenLat:(NSArray*) green;
@@ -86,6 +95,9 @@
 - (IBAction)toggleLocationOnOff:(id)sender;
 
 - (void) startNewRound;
+
+- (void)createAdBannerView;
+- (void)fixupAdView:(UIInterfaceOrientation)toInterfaceOrientation;
 
 enum
 {
