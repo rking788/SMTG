@@ -1,6 +1,6 @@
 //
 //  SettingsDetailsViewController.m
-//  ECaddy
+//  SMTG
 //
 //  Created by RKing on 6/20/11.
 //  Copyright 2011 RPKing. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import "SettingsDetailsViewController.h"
 #import "SettingsViewController.h"
-#import "ECaddyAppDelegate.h"
+#import "SMTGAppDelegate.h"
 
 @implementation SettingsDetailsViewController
 
@@ -78,7 +78,7 @@
         
         NSString* stateAbbrsPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"stateabbrs.txt"];
         self.abbrsDict = [[NSDictionary alloc] initWithContentsOfFile: stateAbbrsPath];
-        self.manObjCon = [[ECaddyAppDelegate sharedAppDelegate] managedObjectContext];
+        self.manObjCon = [[SMTGAppDelegate sharedAppDelegate] managedObjectContext];
         
         self.locObjs = [[NSMutableArray alloc] init];
         self.stateArrDict = [[NSMutableDictionary alloc] init];

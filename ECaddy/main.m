@@ -1,6 +1,6 @@
 //
 //  main.m
-//  ECaddy
+//  SMTG
 //
 //  Created by RKing on 4/27/11.
 //  Copyright 2011 RPKing. All rights reserved.

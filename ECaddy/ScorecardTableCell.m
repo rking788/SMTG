@@ -1,6 +1,6 @@
 //
 //  ScorecardTableCell.m
-//  ECaddy
+//  SMTG
 //
 //  Created by RKing on 6/11/11.
 //  Copyright 2011 RPKing. All rights reserved.

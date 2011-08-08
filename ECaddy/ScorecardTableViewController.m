@@ -1,6 +1,6 @@
 //
 //  ScorecardTableViewController.m
-//  ECaddy
+//  SMTG
 //
 //  Created by RKing on 6/28/11.
 //  Copyright 2011 RPKing. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import "ScorecardTableViewController.h"
 #import "CoreData/CoreData.h"
-#import "ECaddyAppDelegate.h"
+#import "SMTGAppDelegate.h"
 #import "Scorecard.h"
 #import "ScoreTrackerViewController.h"
 
@@ -53,7 +53,7 @@
     [super viewDidLoad];
     
     // Set the managed object context
-    self.manObjCon = [[ECaddyAppDelegate sharedAppDelegate] managedObjectContext];
+    self.manObjCon = [[SMTGAppDelegate sharedAppDelegate] managedObjectContext];
     
     // Allocate the dates dictionary (key => course name, value => dateplayed)
     self.courseNameDict = [[NSMutableDictionary alloc] init];
@@ -86,7 +86,7 @@
 {
     [super viewWillAppear:animated];
     
-    self.actScorecard = [[ECaddyAppDelegate sharedAppDelegate] findActiveScorecard];
+    self.actScorecard = [[SMTGAppDelegate sharedAppDelegate] findActiveScorecard];
     if(self.actScorecard)
         self.actives = YES;
 }
@@ -325,7 +325,7 @@
     [self.manObjCon deleteObject: self.selScorecard];
     
     // Save the changes in the managed object context through the app delegate
-    [[ECaddyAppDelegate sharedAppDelegate] saveContext];
+    [[SMTGAppDelegate sharedAppDelegate] saveContext];
     
     // Remove the object from the array
     [[self.courseNameDict objectForKey: nameStr] removeObjectAtIndex: indexPath.row];

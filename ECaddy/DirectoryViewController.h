@@ -1,6 +1,6 @@
 //
 //  DirectoryViewController.h
-//  ECaddy
+//  SMTG
 //
 //  Created by RKing on 4/27/11.
 //  Copyright 2011 RPKing. All rights reserved.
@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "CourseSelectViewController.h"
 
-@class ECaddyAppDelegate;
+@class SMTGAppDelegate;
 
 @interface DirectoryViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
  
@@ -26,7 +26,7 @@
   
     BOOL modal;
     
-    ECaddyAppDelegate* appDel;
+    SMTGAppDelegate* appDel;
     
     id<CourseSelectDelegate> courseSelectDelegate;
    
@@ -43,7 +43,7 @@
 @property (nonatomic, retain) NSDictionary* stateArrDict;
 @property (nonatomic, retain) NSManagedObjectContext* manObjCon;
 
-@property (nonatomic, retain) ECaddyAppDelegate* appDel;
+@property (nonatomic, retain) SMTGAppDelegate* appDel;
 
 @property (nonatomic, assign) id<CourseSelectDelegate> courseSelectDelegate;
 

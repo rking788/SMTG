@@ -1,6 +1,6 @@
 //
 //  DirectoryViewController.m
-//  ECaddy
+//  SMTG
 //
 //  Created by RKing on 4/27/11.
 //  Copyright 2011 RPKing. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import "DirectoryViewController.h"
 #import "CourseSelectViewController.h"
-#import "ECaddyAppDelegate.h"
+#import "SMTGAppDelegate.h"
 #import "Course.h"
 #import "CourseDetailViewController.h"
 #import "WeatherDetails.h"
@@ -33,10 +33,10 @@
     [super viewDidLoad];
 
     // Get the app delegate to find an active course or not
-    self.appDel = [ECaddyAppDelegate sharedAppDelegate];
+    self.appDel = [SMTGAppDelegate sharedAppDelegate];
     
     // Get the managed object context from the app delegate
-    self.manObjCon = [(ECaddyAppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    self.manObjCon = [(SMTGAppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
     
     // Initialize abbreviation dictionary
     NSString* stateAbbrsPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"stateabbrs.txt"];
@@ -408,7 +408,7 @@
                                 InContext: self.manObjCon];
         
         UITableViewCell* tVC = [tableView cellForRowAtIndexPath: indexPath];
-        UITabBarController* tbc = [[ECaddyAppDelegate sharedAppDelegate] tabBarController];
+        UITabBarController* tbc = [[SMTGAppDelegate sharedAppDelegate] tabBarController];
         UITabBarItem* tbi = [[tbc tabBar] selectedItem];
         NSString* tabItemTitle = [tbi title];
         

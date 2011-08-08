@@ -1,6 +1,6 @@
 //
 //  NewRoundViewController.m
-//  ECaddy
+//  SMTG
 //
 //  Created by RKing on 6/2/11.
 //  Copyright 2011 RPKing. All rights reserved.
@@ -9,7 +9,7 @@
 
 #import "NewRoundViewController.h"
 #import "DirectoryViewController.h"
-#import "ECaddyAppDelegate.h"
+#import "SMTGAppDelegate.h"
 #import "ScoreTrackerViewController.h"
 
 @implementation NewRoundViewController
@@ -116,7 +116,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    ECaddyAppDelegate* del = [ECaddyAppDelegate sharedAppDelegate];
+    SMTGAppDelegate* del = [SMTGAppDelegate sharedAppDelegate];
     
     if(del.curScorecard){
         self.curScorecard = del.curScorecard;
@@ -256,7 +256,7 @@
         
         // Need to provide the managed object context to the directory 
         // to find the available courses and stuff
-        NSManagedObjectContext* manObjCon = [[ECaddyAppDelegate sharedAppDelegate] managedObjectContext];
+        NSManagedObjectContext* manObjCon = [[SMTGAppDelegate sharedAppDelegate] managedObjectContext];
      
         [dvc setManObjCon: manObjCon];
         [dvc setCourseSelectDelegate: self];
@@ -385,7 +385,7 @@
     NSNumberFormatter* numFormat = [[NSNumberFormatter alloc] init];
     [numFormat setNumberStyle: NSNumberFormatterNoStyle];
     
-    ECaddyAppDelegate* appDelegate = [ECaddyAppDelegate sharedAppDelegate];
+    SMTGAppDelegate* appDelegate = [SMTGAppDelegate sharedAppDelegate];
     Scorecard* newScorecard = [appDelegate startNewRoundWithCourse: self.curCourse
                                withNPlayers: [numFormat numberFromString: [numPlayersLbl text]]];
 
@@ -420,7 +420,7 @@
     
     // Should probably use the name of the default course here
     // Or at least the default state. A random golf course would be weird.
-    NSManagedObjectContext* manObjCon = [[ECaddyAppDelegate sharedAppDelegate] managedObjectContext];
+    NSManagedObjectContext* manObjCon = [[SMTGAppDelegate sharedAppDelegate] managedObjectContext];
     
     NSFetchRequest* fetchrequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext: manObjCon];
@@ -470,7 +470,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     self.curScorecard.active = [NSNumber numberWithBool: NO];
-    ECaddyAppDelegate* del = [ECaddyAppDelegate sharedAppDelegate];
+    SMTGAppDelegate* del = [SMTGAppDelegate sharedAppDelegate];
     [del saveContext];
     
     if([[alertView buttonTitleAtIndex: buttonIndex] isEqualToString: @"Continue"]){

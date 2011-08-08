@@ -1,6 +1,6 @@
 //
 //  MapViewController.h
-//  ECaddy
+//  SMTG
 //
 //  Created by RKing on 4/27/11.
 //  Copyright 2011 RPKing. All rights reserved.
@@ -18,6 +18,7 @@
     NSManagedObjectContext* manObjCon;
     
     MKMapView *mapView;
+    UIButton *curLocationBtn;
    
     NSMutableArray* holeAnnotations;
     NSMutableArray* distanceAnnotations;
@@ -46,6 +47,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *t2dLbl;
 @property (retain, nonatomic) IBOutlet UILabel *d2gLbl;
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
+@property (retain, nonatomic) IBOutlet UIButton *curLocationBtn;
 
 @property (nonatomic, retain) NSManagedObjectContext* manObjCon;
 

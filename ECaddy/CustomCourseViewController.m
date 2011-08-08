@@ -1,6 +1,6 @@
 //
 //  CustomCourseViewController.m
-//  ECaddy
+//  SMTG
 //
 //  Created by RKing on 7/5/11.
 //  Copyright 2011 RPKing. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import "CustomCourseViewController.h"
 #import "Course.h"
-#import "ECaddyAppDelegate.h"
+#import "SMTGAppDelegate.h"
 
 @implementation CustomCourseViewController
 @synthesize courseNameTF;
@@ -166,7 +166,7 @@
     }
     
     // Set the course information and add it to the managed object context
-    Course* newCourse = [NSEntityDescription insertNewObjectForEntityForName: @"Course" inManagedObjectContext: [[ECaddyAppDelegate sharedAppDelegate] managedObjectContext]];
+    Course* newCourse = [NSEntityDescription insertNewObjectForEntityForName: @"Course" inManagedObjectContext: [[SMTGAppDelegate sharedAppDelegate] managedObjectContext]];
     
     // Course Name (Required)
     [newCourse setCoursename: [self.courseNameTF text]];
@@ -248,7 +248,7 @@
     [f release];
     
     // Save the newly added golf course in the managed object context
-    //[[ECaddyAppDelegate sharedAppDelegate] saveContext];
+    //[[SMTGAppDelegate sharedAppDelegate] saveContext];
     
     // Try uploading the course information to the server
     if([self.uploadSeg selectedSegmentIndex] == 0){
@@ -280,7 +280,7 @@
     
     // Should probably use the name of the default course here
     // Or at least the default state. A random golf course would be weird.
-    NSManagedObjectContext* manObjCon = [[ECaddyAppDelegate sharedAppDelegate] managedObjectContext];
+    NSManagedObjectContext* manObjCon = [[SMTGAppDelegate sharedAppDelegate] managedObjectContext];
     
     NSFetchRequest* fetchrequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Location" inManagedObjectContext: manObjCon];
@@ -346,7 +346,7 @@
 - (void) dismiss: (NSNumber*) shouldSave
 {
     if([shouldSave boolValue])
-        [[ECaddyAppDelegate sharedAppDelegate] saveContext];
+        [[SMTGAppDelegate sharedAppDelegate] saveContext];
     
     [self dismissModalViewControllerAnimated: YES];
 }
@@ -398,7 +398,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
    /* self.curScorecard.active = [NSNumber numberWithBool: NO];
-    ECaddyAppDelegate* del = [ECaddyAppDelegate sharedAppDelegate];
+    SMTGAppDelegate* del = [SMTGAppDelegate sharedAppDelegate];
     [del saveContext];
     
     if([[alertView buttonTitleAtIndex: buttonIndex] isEqualToString: @"Continue"]){

@@ -1,6 +1,6 @@
 //
 //  ScoreTrackerViewController.h
-//  ECaddy
+//  SMTG
 //
 //  Created by RKing on 6/6/11.
 //  Copyright 2011 RPKing. All rights reserved.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FBConnect.h"
 
-@class ECaddyAppDelegate;
+@class SMTGAppDelegate;
 @class Course;
 @class Scorecard;
 @class HeaderFooterView;
@@ -22,7 +22,7 @@
     UIButton *favstarBtn;
     UITableView *tableV;
     
-    ECaddyAppDelegate* appDel;
+    SMTGAppDelegate* appDel;
     Scorecard* scorecard;
     
     NSMutableDictionary* scorecardDict;
@@ -44,7 +44,7 @@ enum{
 @property (nonatomic, retain) IBOutlet UIButton *favstarBtn;
 @property (nonatomic, retain) IBOutlet UITableView *tableV;
 
-@property (nonatomic, retain) ECaddyAppDelegate* appDel;
+@property (nonatomic, retain) SMTGAppDelegate* appDel;
 @property (nonatomic, retain) Scorecard* scorecard;
 
 @property (nonatomic, assign) UITextField* activeField;

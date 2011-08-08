@@ -1,6 +1,6 @@
 //
 //  MapErrorViewController.m
-//  ECaddy
+//  SMTG
 //
 //  Created by Robert King on 8/7/11.
 //  Copyright (c) 2011 University of Maine. All rights reserved.

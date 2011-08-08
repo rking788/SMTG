@@ -1,6 +1,6 @@
 //
 //  MapViewController.m
-//  ECaddy
+//  SMTG
 //
 //  Created by RKing on 4/27/11.
 //  Copyright 2011 RPKing. All rights reserved.
@@ -13,7 +13,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <QuartzCore/QuartzCore.h>
 #import "POIAnnotation.h"
-#import "ECaddyAppDelegate.h"
+#import "SMTGAppDelegate.h"
 #import "Course.h"
 #import "MapErrorViewController.h"
 
@@ -24,6 +24,7 @@
 @synthesize t2dLbl;
 @synthesize d2gLbl;
 @synthesize mapView;
+@synthesize curLocationBtn;
 @synthesize holeAnnotations;
 @synthesize distanceAnnotations;
 @synthesize curHole;
@@ -41,15 +42,12 @@
 {
     [super viewDidLoad];
     
-    // TODO: If there is no current course then we should NOT do anything here
-    // maybe display another view like in the weather details when an internet connection is not available
-    
     // Color the distance label container view
     //[self.distanceContainer setBackgroundColor: [UIColor colorWithRed: 0.870588243 green: 0.862745106 blue:0.0 alpha:1.0]];
     self.distanceContainer.layer.borderColor = [UIColor colorWithRed: 0.219607845 green: 0.521568656 blue:0 alpha:1.0].CGColor;
     self.distanceContainer.layer.borderWidth = 2.0;
     
-    self.manObjCon = [[ECaddyAppDelegate sharedAppDelegate] managedObjectContext];
+    self.manObjCon = [[SMTGAppDelegate sharedAppDelegate] managedObjectContext];
     
     // Initialize the hole annotation size to 2 (tee and green)
     self.holeAnnotations = [[NSMutableArray alloc] initWithCapacity: 2];
@@ -72,7 +70,7 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    Course* curCourse = (Course*) [[ECaddyAppDelegate sharedAppDelegate] curCourse];
+    Course* curCourse = (Course*) [[SMTGAppDelegate sharedAppDelegate] curCourse];
     NSString* errStr = nil;
 
     if(!curCourse){
@@ -150,6 +148,7 @@
     [self setUserLoc: nil];
     [self setDistanceContainer:nil];
     [self setD2gLbl:nil];
+    [self setCurLocationBtn:nil];
     [super viewDidUnload];
     
     // Release any retained subviews of the main view.
@@ -170,6 +169,7 @@
     [userLoc release];
     [distanceContainer release];
     [d2gLbl release];
+    [curLocationBtn release];
     [super dealloc];
 }
 
@@ -271,7 +271,7 @@
 
 - (void) populateHoleCoords
 {
-    Course* curCourse = (Course*) [[ECaddyAppDelegate sharedAppDelegate] curCourse];
+    Course* curCourse = (Course*) [[SMTGAppDelegate sharedAppDelegate] curCourse];
     
     self.teeCoords = [curCourse valueForKey: @"teeCoords"];
     self.greenCoords = [curCourse valueForKey: @"greenCoords"];
@@ -304,16 +304,27 @@
     
     if([self isUserLocEnabled]){
         // User location is disabled so add the tee back on and redraw the line
+        [self.curLocationBtn setImage: [UIImage imageNamed: @"curlocbtn.png"] forState: UIControlStateNormal];
+        
         [self.locManager stopUpdatingLocation];
         [self.mapView setShowsUserLocation: NO];
         self.userLocEnabled = NO;
         
-        [self.mapView addAnnotation: [self.holeAnnotations objectAtIndex: teeAnnotationIndex]];
-        [self drawMapLine];
+        // Only do this if coordinates are available
+        if(self.coordsAvailable){
+            [self.mapView addAnnotation: [self.holeAnnotations objectAtIndex: teeAnnotationIndex]];
+            [self drawMapLine];
+        }
     }
     else{
         if([CLLocationManager locationServicesEnabled]){
+            // User location is enabled
+            [self.curLocationBtn setImage: [UIImage imageNamed: @"curlocbtn-enabled.png"] forState: UIControlStateNormal];
+            
             [self.locManager startUpdatingLocation];
+            
+            self.userLocEnabled = YES;
+            [self.mapView setShowsUserLocation: YES];
         }     
     }
 }
@@ -322,11 +333,21 @@
 {
     if(!self.userLoc){
         self.userLoc = [[CLLocation alloc] initWithLatitude: newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];
+        
+        // set the center of the map to the user location
+        MKCoordinateRegion region;
+        MKCoordinateSpan span;
+        span.latitudeDelta=0.02 / 10; // zoom level
+        span.longitudeDelta=0.02 / 10;
+        
+        region.span=span;
+        region.center = self.userLoc.coordinate;
+        
+        [mapView setRegion:region animated:TRUE];
+        [mapView regionThatFits:region];
     }
     
     if(![self isUserLocEnabled]){
-        self.userLocEnabled = YES;
-        [self.mapView setShowsUserLocation: YES];
         
         if([self isCoordsAvailable]){
             // Remove the tee annotation and show the user annotation
@@ -705,7 +726,7 @@
 
 - (void) startNewRound
 {
-    Course* curCourse = (Course*) [[ECaddyAppDelegate sharedAppDelegate] curCourse];
+    Course* curCourse = (Course*) [[SMTGAppDelegate sharedAppDelegate] curCourse];
     [self.tabBarController setSelectedViewController: [self.tabBarController.viewControllers objectAtIndex: 0]];
     UINavigationController* navCont = (UINavigationController*) self.tabBarController.selectedViewController;
     [[[navCont viewControllers] objectAtIndex: 0] setCourseObj: curCourse];

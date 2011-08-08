@@ -1,13 +1,13 @@
 //
 //  CourseDetailViewController.m
-//  ECaddy
+//  SMTG
 //
 //  Created by RKing on 5/19/11.
 //  Copyright 2011 RPKing. All rights reserved.
 //
 
 #import "CourseDetailViewController.h"
-#import "ECaddyAppDelegate.h"
+#import "SMTGAppDelegate.h"
 #import "Course.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -171,7 +171,7 @@
 
 - (IBAction) favstarPressed:(id)sender
 {
-   ECaddyAppDelegate* appDel = [ECaddyAppDelegate sharedAppDelegate];
+   SMTGAppDelegate* appDel = [SMTGAppDelegate sharedAppDelegate];
   
     if(!self.manObjCon){
         self.manObjCon = [appDel managedObjectContext];

@@ -1,6 +1,6 @@
 //
 //  Course.h
-//  ECaddy
+//  SMTG
 //
 //  Created by RKing on 6/4/11.
 //  Copyright (c) 2011 RPKing. All rights reserved.

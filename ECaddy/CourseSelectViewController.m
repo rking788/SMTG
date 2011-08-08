@@ -1,6 +1,6 @@
 //
 //  CourseSelectViewController.m
-//  ECaddy
+//  SMTG
 //
 //  Created by RKing on 5/18/11.
 //  Copyright 2011 RPKing. All rights reserved.
@@ -9,7 +9,7 @@
 #import "CourseSelectViewController.h"
 #import "CourseDetailViewController.h"
 #import "WeatherDetails.h"
-#import "ECaddyAppDelegate.h"
+#import "SMTGAppDelegate.h"
 #import "CustomCourseViewController.h"
 
 @implementation CourseSelectViewController
@@ -67,7 +67,7 @@
     // Do any additional setup after loading the view from its nib.
     
     // Set the app delegate to find if there is an active course or not
-    [self setAppDel: [ECaddyAppDelegate sharedAppDelegate]];
+    [self setAppDel: [SMTGAppDelegate sharedAppDelegate]];
     
     // Set the title in the navigation bar
     if(self.selectedState)
@@ -365,7 +365,7 @@
     [tableView deselectRowAtIndexPath: indexPath animated:NO];
     
     UITableViewCell* tVC = [tableView cellForRowAtIndexPath: indexPath];
-    UITabBarController* tbc = [[ECaddyAppDelegate sharedAppDelegate] tabBarController];
+    UITabBarController* tbc = [[SMTGAppDelegate sharedAppDelegate] tabBarController];
     UITabBarItem* tbi = [[tbc tabBar] selectedItem];
     NSString* tabItemTitle = [tbi title];
     

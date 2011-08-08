@@ -1,6 +1,6 @@
 //
 //  POIAnnotation.m
-//  ECaddy
+//  SMTG
 //
 //  Created by RKing on 5/3/11.
 //  Copyright 2011 RPKing. All rights reserved.

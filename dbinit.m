@@ -1,6 +1,6 @@
 //
 //  dbinit.m
-//  ECaddy
+//  SMTG
 //
 //  Created by RKing on 5/13/11.
 //  Copyright 2011 RPKing. All rights reserved.

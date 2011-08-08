@@ -1,6 +1,6 @@
 //
 //  CourseDetailViewController.h
-//  ECaddy
+//  SMTG
 //
 //  Created by RKing on 5/19/11.
 //  Copyright 2011 RPKing. All rights reserved.

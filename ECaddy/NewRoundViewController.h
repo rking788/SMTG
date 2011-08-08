@@ -1,6 +1,6 @@
 //
 //  NewRoundViewController.h
-//  ECaddy
+//  SMTG
 //
 //  Created by RKing on 6/2/11.
 //  Copyright 2011 RPKing. All rights reserved.

@@ -1,13 +1,13 @@
 //
 //  SettingsViewController.m
-//  ECaddy
+//  SMTG
 //
 //  Created by RKing on 6/16/11.
 //  Copyright 2011 RPKing. All rights reserved.
 //
 
 #import "SettingsViewController.h"
-#import "ECaddyAppDelegate.h"
+#import "SMTGAppDelegate.h"
 #import "SettingsDetailsViewController.h"
 #import "DirectoryViewController.h"
 
@@ -300,7 +300,7 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
         
         // Need to provide the managed object context to the directory 
         // to find the available courses and stuff
-        NSManagedObjectContext* manObjCon = [[ECaddyAppDelegate sharedAppDelegate] managedObjectContext];
+        NSManagedObjectContext* manObjCon = [[SMTGAppDelegate sharedAppDelegate] managedObjectContext];
         
         [dvc setManObjCon: manObjCon];
         [dvc setCourseSelectDelegate: self];
@@ -322,7 +322,7 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
         
         // Need to provide the managed object context to the directory 
         // to find the available courses and stuff
-        NSManagedObjectContext* manObjCon = [[ECaddyAppDelegate sharedAppDelegate] managedObjectContext];
+        NSManagedObjectContext* manObjCon = [[SMTGAppDelegate sharedAppDelegate] managedObjectContext];
         
         [dvc setManObjCon: manObjCon];
         [dvc setCourseSelectDelegate: self];

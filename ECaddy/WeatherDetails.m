@@ -1,6 +1,6 @@
 //
 //  WeatherDetails.m
-//  ECaddy
+//  SMTG
 //
 //  Created by RKing on 4/28/11.
 //  Copyright 2011 RPKing. All rights reserved.
@@ -9,13 +9,13 @@
 #import "WeatherDetails.h"
 #import <QuartzCore/QuartzCore.h>
 #import "TBXML.h"
-#import "ECaddyAppDelegate.h"
+#import "SMTGAppDelegate.h"
 
 #pragma mark - TODO CRITICAL Make a better error view when weather info is not available
 
 @implementation WeatherDetails
 
-#define BORDER_WIDTH    3.0f
+#define BORDER_WIDTH    2.0f
 
 @synthesize courseObj;
 @synthesize text;
@@ -104,15 +104,15 @@
     self.navBar.topItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemCancel target:self action:@selector(cancel)] autorelease];
 
     // Set the borders on the view groups
-    self.currentView.layer.borderColor = [UIColor colorWithRed:0 green:0.5 blue:0 alpha:1.0].CGColor;
+    self.currentView.layer.borderColor = [UIColor colorWithRed:0 green:0.3 blue:0 alpha:1.0].CGColor;
     self.currentView.layer.borderWidth = BORDER_WIDTH;
-    self.ywiView.layer.borderColor = [UIColor colorWithRed:0 green:0.5 blue:0 alpha:1.0].CGColor;
+    self.ywiView.layer.borderColor = [UIColor colorWithRed:0 green:0.3 blue:0 alpha:1.0].CGColor;
     self.ywiView.layer.borderWidth = BORDER_WIDTH;
-    self.titleView.layer.borderColor = [UIColor colorWithRed:0 green:0.5 blue:0 alpha:1.0].CGColor;
+    self.titleView.layer.borderColor = [UIColor colorWithRed:0 green:0.3 blue:0 alpha:1.0].CGColor;
     self.titleView.layer.borderWidth = BORDER_WIDTH;
-    self.todayView.layer.borderColor = [UIColor colorWithRed:0 green:0.5 blue:0 alpha:1.0].CGColor;
+    self.todayView.layer.borderColor = [UIColor colorWithRed:0 green:0.3 blue:0 alpha:1.0].CGColor;
     self.todayView.layer.borderWidth = BORDER_WIDTH;
-    self.tomView.layer.borderColor = [UIColor colorWithRed:0 green:0.5 blue:0 alpha:1.0].CGColor;
+    self.tomView.layer.borderColor = [UIColor colorWithRed:0 green:0.3 blue:0 alpha:1.0].CGColor;
     self.tomView.layer.borderWidth = BORDER_WIDTH;
     
     
@@ -184,7 +184,7 @@
 }
 
 - (IBAction)favstarPressed:(id)sender {
-    ECaddyAppDelegate* appDel = [ECaddyAppDelegate sharedAppDelegate];
+    SMTGAppDelegate* appDel = [SMTGAppDelegate sharedAppDelegate];
     
     BOOL fav = [[self.courseObj favorite] boolValue];
     
@@ -339,7 +339,7 @@
     NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
     [f setNumberStyle:NSNumberFormatterDecimalStyle];
     NSNumber* windDirDegs = [f numberFromString: windDir];
-    NSLog(@"Degrees: %@", windDirDegs);
+
     CGFloat rads = [windDirDegs floatValue] * 3.1416 / 180;
     windArrowImg.transform = CGAffineTransformMakeRotation(rads);
     [f release];

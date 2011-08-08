@@ -1,6 +1,6 @@
 //
 //  ScoreTrackerViewController.m
-//  ECaddy
+//  SMTG
 //
 //  Created by RKing on 6/6/11.
 //  Copyright 2011 RPKing. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import "ScoreTrackerViewController.h"
 #import "ScorecardTableCell.h"
-#import "ECaddyAppDelegate.h"
+#import "SMTGAppDelegate.h"
 #import "Scorecard.h"
 #import "Course.h"
 #import "HeaderFooterView.h"
@@ -70,7 +70,7 @@ static NSString* kAppId = @"142876775786876";
 {
     [super viewDidLoad];
     
-    self.appDel = [ECaddyAppDelegate sharedAppDelegate];
+    self.appDel = [SMTGAppDelegate sharedAppDelegate];
     
     // Register listeners for keyboard notifications
     [self registerForKeyboardNotifications];
@@ -83,7 +83,7 @@ static NSString* kAppId = @"142876775786876";
     // Create the Facebook instance
     self.FBLoggedIn = NO;
     _FB = [[Facebook alloc] initWithAppId:kAppId];
-    [[ECaddyAppDelegate sharedAppDelegate] setFBInstance: self.FB];
+    [[SMTGAppDelegate sharedAppDelegate] setFBInstance: self.FB];
     
     if(self.scorecard){
         NSString* name;

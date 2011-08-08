@@ -1,6 +1,6 @@
 //
 //  CourseSelectViewController.h
-//  ECaddy
+//  SMTG
 //
 //  Created by RKing on 5/18/11.
 //  Copyright 2011 RPKing. All rights reserved.
@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "Course.h"
 
-@class ECaddyAppDelegate;
+@class SMTGAppDelegate;
 
 enum{
     kNAME_SCOPE_INDEX,
@@ -41,7 +41,7 @@ enum{
     UITableView *tableV;
     UIView *blackView;
     
-    ECaddyAppDelegate* appDel;
+    SMTGAppDelegate* appDel;
     
     id<CourseSelectDelegate> courseSelectDelegate;
     
@@ -61,7 +61,7 @@ enum{
 @property (nonatomic, retain) NSMutableArray* favoriteNames;
 @property (nonatomic, retain) NSMutableArray* favoriteLocs;
 
-@property (nonatomic, retain) ECaddyAppDelegate* appDel;
+@property (nonatomic, retain) SMTGAppDelegate* appDel;
 
 @property (nonatomic, assign) id<CourseSelectDelegate> courseSelectDelegate;
 
