@@ -7,6 +7,7 @@
 //
 
 #pragma mark - TODOS: Need to figure out what to do if the player goes to the next hole while their current location is already active.
+#pragma mark - TODO: Maybe use an instance property of curCourse, the app delegate curcourse object is accessed a few times
 
 #import "MapViewController.h"
 #import <CoreLocation/CoreLocation.h>
@@ -14,6 +15,7 @@
 #import "POIAnnotation.h"
 #import "ECaddyAppDelegate.h"
 #import "Course.h"
+#import "MapErrorViewController.h"
 
 @implementation MapViewController
 
@@ -43,7 +45,7 @@
     // maybe display another view like in the weather details when an internet connection is not available
     
     // Color the distance label container view
-    [self.distanceContainer setBackgroundColor: [UIColor colorWithRed: 0.870588243 green: 0.862745106 blue:0.0 alpha:1.0]];
+    //[self.distanceContainer setBackgroundColor: [UIColor colorWithRed: 0.870588243 green: 0.862745106 blue:0.0 alpha:1.0]];
     self.distanceContainer.layer.borderColor = [UIColor colorWithRed: 0.219607845 green: 0.521568656 blue:0 alpha:1.0].CGColor;
     self.distanceContainer.layer.borderWidth = 2.0;
     
@@ -66,13 +68,47 @@
                                         target:self 
                                         action: @selector(goToPrevHole:)];
     self.navigationItem.leftBarButtonItem = prevButton;
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    Course* curCourse = (Course*) [[ECaddyAppDelegate sharedAppDelegate] curCourse];
+    NSString* errStr = nil;
+
+    if(!curCourse){
+        errStr = @"NoActiveCourse";
+    }
     
-    // Fill the coordinate arrays
-    [self populateHoleCoords];
+    if((!errStr) && (!self.coordsAvailable)){
+        // Fill the coordinate arrays
+        [self populateHoleCoords];
+        
+        // Start on hole 0 because gotonexthole will increment this value
+        self.curHole = 0;
+        [self goToNextHole: nil];
+    }
     
-    // Start on hole 0 because gotonexthole will increment this value
-    self.curHole = 0;
-    [self goToNextHole: nil];
+    if(!errStr && !self.coordsAvailable){
+        errStr = @"NoCoordsAvailable";
+    }
+    
+    if(errStr){
+        // Display the modal view controller
+        MapErrorViewController* mevc = [[MapErrorViewController alloc] init];
+        
+        NSString* addr = [curCourse valueForKey: @"address"];
+        NSString* state = [curCourse valueForKey: @"state"];
+        NSString* country = [curCourse valueForKey: @"country"];
+        
+        [mevc setCaller: self];
+        [mevc setErr: errStr];
+        [mevc setCoursename: [curCourse coursename]];
+        [mevc setCourselocation: [NSString stringWithFormat: @"%@ %@ %@", addr, state, country]];
+        [mevc setModalTransitionStyle: UIModalTransitionStyleCoverVertical];
+     
+        [self presentModalViewController: mevc animated: YES];
+        [mevc release];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -665,6 +701,16 @@
     
     // Select the green annotation to display the yardage bubble
    // [self.mapView selectAnnotation: [self.holeAnnotations objectAtIndex:greenAnnotationIndex]animated: YES];
+}
+
+- (void) startNewRound
+{
+    Course* curCourse = (Course*) [[ECaddyAppDelegate sharedAppDelegate] curCourse];
+    [self.tabBarController setSelectedViewController: [self.tabBarController.viewControllers objectAtIndex: 0]];
+    UINavigationController* navCont = (UINavigationController*) self.tabBarController.selectedViewController;
+    [[[navCont viewControllers] objectAtIndex: 0] setCourseObj: curCourse];
+    [navCont popToRootViewControllerAnimated: NO];
+    [[[navCont viewControllers] objectAtIndex: 0] viewDidAppear: YES];
 }
 
 @end

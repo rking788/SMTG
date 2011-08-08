@@ -14,7 +14,7 @@
 		96086CFE13EE3EFC00041D0E /* mapdraggable.png in Resources */ = {isa = PBXBuildFile; fileRef = 96086CFD13EE3EFC00041D0E /* mapdraggable.png */; };
 		9608A9A513E8FF610059BBA4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 9608A9A313E8FF610059BBA4 /* Default.png */; };
 		9608A9A613E8FF610059BBA4 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9608A9A413E8FF610059BBA4 /* Default@2x.png */; };
-		9609759113EE63F70087EA4C /* curlocbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 9609759013EE63F70087EA4C /* curlocbtn.png */; };
+		9612402C13EE66430028A940 /* examplebackground3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9612402B13EE66430028A940 /* examplebackground3.png */; };
 		963A524F13EB7B8000253B12 /* ECaddy.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 963A524E13EB7B8000253B12 /* ECaddy.sqlite */; };
 		965DC23B13E5087E001E0404 /* sadweather.png in Resources */ = {isa = PBXBuildFile; fileRef = 965DC23A13E5087E001E0404 /* sadweather.png */; };
 		9679EAFF13E7844A001F3872 /* directorytab.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EAFE13E7844A001F3872 /* directorytab.png */; };
@@ -27,6 +27,8 @@
 		9679EB1113E7A1E2001F3872 /* favstarreleased.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EB1013E7A1E2001F3872 /* favstarreleased.png */; };
 		96B599CB13EE559500142A36 /* greenflag.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B599CA13EE559500142A36 /* greenflag.png */; };
 		96B599D513EE5E1600142A36 /* golftee.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B599D413EE5E1600142A36 /* golftee.png */; };
+		96D021D713EF207400BC0A4F /* curlocbtn-enabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D021D513EF207400BC0A4F /* curlocbtn-enabled.png */; };
+		96D021D813EF207400BC0A4F /* curlocbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D021D613EF207400BC0A4F /* curlocbtn.png */; };
 		96DF437A13E0ECB6009D568B /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF435F13E0ECB6009D568B /* Facebook.m */; };
 		96DF437B13E0ECB6009D568B /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96DF436213E0ECB6009D568B /* FBDialog.bundle */; };
 		96DF437C13E0ECB6009D568B /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436413E0ECB6009D568B /* FBDialog.m */; };
@@ -39,6 +41,8 @@
 		96DF438313E0ECB6009D568B /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437413E0ECB6009D568B /* SBJsonParser.m */; };
 		96DF438413E0ECB6009D568B /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437613E0ECB6009D568B /* SBJsonWriter.m */; };
 		96EE27C313ECEE4F00170A52 /* locationenabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 96EE27C213ECEE4F00170A52 /* locationenabled.png */; };
+		96F2B38113EF257A005BE308 /* MapErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F2B37F13EF257A005BE308 /* MapErrorViewController.m */; };
+		96F2B38213EF257A005BE308 /* MapErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96F2B38013EF257A005BE308 /* MapErrorView.xib */; };
 		96FA1A6413E771F4001C9163 /* greenicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 96FA1A6313E771F4001C9163 /* greenicon.png */; };
 		96FA1A6613E77206001C9163 /* greenicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96FA1A6513E77206001C9163 /* greenicon@2x.png */; };
 		AE38B0B713BE4C6900D7F9FA /* scorecard_tab.png in Resources */ = {isa = PBXBuildFile; fileRef = AE38B0B513BE4C6900D7F9FA /* scorecard_tab.png */; };
@@ -115,7 +119,7 @@
 		96086CFD13EE3EFC00041D0E /* mapdraggable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapdraggable.png; sourceTree = "<group>"; };
 		9608A9A313E8FF610059BBA4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		9608A9A413E8FF610059BBA4 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		9609759013EE63F70087EA4C /* curlocbtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = curlocbtn.png; sourceTree = "<group>"; };
+		9612402B13EE66430028A940 /* examplebackground3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = examplebackground3.png; sourceTree = "<group>"; };
 		963A524E13EB7B8000253B12 /* ECaddy.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = ECaddy.sqlite; sourceTree = "<group>"; };
 		965DC23A13E5087E001E0404 /* sadweather.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sadweather.png; sourceTree = "<group>"; };
 		9679EAFE13E7844A001F3872 /* directorytab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = directorytab.png; sourceTree = "<group>"; };
@@ -128,6 +132,8 @@
 		9679EB1013E7A1E2001F3872 /* favstarreleased.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favstarreleased.png; sourceTree = "<group>"; };
 		96B599CA13EE559500142A36 /* greenflag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenflag.png; sourceTree = "<group>"; };
 		96B599D413EE5E1600142A36 /* golftee.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = golftee.png; sourceTree = "<group>"; };
+		96D021D513EF207400BC0A4F /* curlocbtn-enabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "curlocbtn-enabled.png"; sourceTree = "<group>"; };
+		96D021D613EF207400BC0A4F /* curlocbtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = curlocbtn.png; sourceTree = "<group>"; };
 		96DF435B13E0ECB6009D568B /* facebook-ios-sdk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "facebook-ios-sdk.xcodeproj"; sourceTree = "<group>"; };
 		96DF435E13E0ECB6009D568B /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
 		96DF435F13E0ECB6009D568B /* Facebook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Facebook.m; sourceTree = "<group>"; };
@@ -154,6 +160,9 @@
 		96DF437513E0ECB6009D568B /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		96DF437613E0ECB6009D568B /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		96EE27C213ECEE4F00170A52 /* locationenabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationenabled.png; sourceTree = "<group>"; };
+		96F2B37E13EF257A005BE308 /* MapErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapErrorViewController.h; sourceTree = "<group>"; };
+		96F2B37F13EF257A005BE308 /* MapErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapErrorViewController.m; sourceTree = "<group>"; };
+		96F2B38013EF257A005BE308 /* MapErrorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapErrorView.xib; sourceTree = "<group>"; };
 		96FA1A6313E771F4001C9163 /* greenicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = greenicon.png; path = ../greenicon.png; sourceTree = "<group>"; };
 		96FA1A6513E77206001C9163 /* greenicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "greenicon@2x.png"; path = "../greenicon@2x.png"; sourceTree = "<group>"; };
 		AE38B0B513BE4C6900D7F9FA /* scorecard_tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scorecard_tab.png; sourceTree = "<group>"; };
@@ -354,7 +363,7 @@
 		AE85D7481368E34400CDA534 /* ECaddy */ = {
 			isa = PBXGroup;
 			children = (
-				9609759013EE63F70087EA4C /* curlocbtn.png */,
+				9612402B13EE66430028A940 /* examplebackground3.png */,
 				AEB0722B137DB51600BE3C37 /* dbinit.h */,
 				AEB0722C137DB51600BE3C37 /* dbinit.m */,
 				AE9177F6139AC17400AC5706 /* Scorecard.h */,
@@ -393,6 +402,8 @@
 				AE8DD06B13B034A700D7FCB3 /* SettingsDetailsViewController.m */,
 				AEE5301213C39AE3003C866C /* CustomCourseViewController.h */,
 				AEE5301313C39AE3003C866C /* CustomCourseViewController.m */,
+				96F2B37E13EF257A005BE308 /* MapErrorViewController.h */,
+				96F2B37F13EF257A005BE308 /* MapErrorViewController.m */,
 				AEA99329139DBF8800DD723C /* ScoreTrackerView.xib */,
 				AE85D7541368E34400CDA534 /* MainWindow.xib */,
 				AE85D75D1368E34400CDA534 /* ScorecardView.xib */,
@@ -407,6 +418,7 @@
 				AE8DD06F13B05EB900D7FCB3 /* HideStateView.xib */,
 				AE3D287313B99CB00054903D /* ScorecardTableView.xib */,
 				AEE5300F13C394DC003C866C /* CustomCourseView.xib */,
+				96F2B38013EF257A005BE308 /* MapErrorView.xib */,
 				AEFE6F131381BB60002B1AA3 /* coursemodel.xcdatamodeld */,
 				963A524E13EB7B8000253B12 /* ECaddy.sqlite */,
 				9608A9A313E8FF610059BBA4 /* Default.png */,
@@ -437,6 +449,8 @@
 				96086CFD13EE3EFC00041D0E /* mapdraggable.png */,
 				96B599D413EE5E1600142A36 /* golftee.png */,
 				96B599CA13EE559500142A36 /* greenflag.png */,
+				96D021D613EF207400BC0A4F /* curlocbtn.png */,
+				96D021D513EF207400BC0A4F /* curlocbtn-enabled.png */,
 				AE85D7491368E34400CDA534 /* Supporting Files */,
 			);
 			path = ECaddy;
@@ -567,7 +581,10 @@
 				96086CFE13EE3EFC00041D0E /* mapdraggable.png in Resources */,
 				96B599CB13EE559500142A36 /* greenflag.png in Resources */,
 				96B599D513EE5E1600142A36 /* golftee.png in Resources */,
-				9609759113EE63F70087EA4C /* curlocbtn.png in Resources */,
+				9612402C13EE66430028A940 /* examplebackground3.png in Resources */,
+				96D021D713EF207400BC0A4F /* curlocbtn-enabled.png in Resources */,
+				96D021D813EF207400BC0A4F /* curlocbtn.png in Resources */,
+				96F2B38213EF257A005BE308 /* MapErrorView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -610,6 +627,7 @@
 				96DF438213E0ECB6009D568B /* SBJsonBase.m in Sources */,
 				96DF438313E0ECB6009D568B /* SBJsonParser.m in Sources */,
 				96DF438413E0ECB6009D568B /* SBJsonWriter.m in Sources */,
+				96F2B38113EF257A005BE308 /* MapErrorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

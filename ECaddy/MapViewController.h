@@ -83,6 +83,8 @@
 
 - (IBAction)toggleLocationOnOff:(id)sender;
 
+- (void) startNewRound;
+
 enum
 {
     teeAnnotationIndex = 0,
