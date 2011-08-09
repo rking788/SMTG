@@ -13,6 +13,7 @@
 #import "Course.h"
 #import "HeaderFooterView.h"
 #import "FBConnect.h"
+#import <QuartzCore/QuartzCore.h>
 
 // Facebook app ID constant string
 static NSString* kAppId = @"142876775786876";
@@ -29,6 +30,7 @@ static NSString* kAppId = @"142876775786876";
 @synthesize favstarBtn;
 @synthesize scorecardDict;
 @synthesize tableV;
+@synthesize backgroundImageView;
 @synthesize activeField;
 @synthesize FB = _FB;
 @synthesize FBpermissions;
@@ -55,6 +57,7 @@ static NSString* kAppId = @"142876775786876";
     [tableV release];
     [FBpermissions release];
     [dateLbl release];
+    [backgroundImageView release];
     [super dealloc];
 }
 
@@ -145,6 +148,7 @@ static NSString* kAppId = @"142876775786876";
 {
     [self setTableV:nil];
     [self setDateLbl:nil];
+    [self setBackgroundImageView:nil];
     [super viewDidUnload];
     [self setAppDel: nil];
     [self setScorecard: nil];
@@ -505,6 +509,33 @@ static NSString* kAppId = @"142876775786876";
     [UIView commitAnimations];
 }
 
+#pragma mark - Methods to export view to PNG
+
++(void) savePNGForView:(UIView *)targetView rect:(CGRect)rect fileName:(NSString *)fileName
+{
+    UIImage *image;
+    CGPoint pt = rect.origin;
+    
+    
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextConcatCTM(context, CGAffineTransformMakeTranslation(-(int)pt.x, -(int)pt.y));
+    [targetView.layer renderInContext:context];
+    image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+ 
+    NSData *data = UIImagePNGRepresentation(image);
+    NSString* documentsDir = [[SMTGAppDelegate sharedAppDelegate] applicationDocumentsDirectory];
+    NSString *filePath =  [documentsDir stringByAppendingPathComponent: fileName];
+    
+    if ([data writeToFile:filePath atomically:YES]) {
+        NSLog(@"Save OK");
+    } else {
+        NSLog(@"Save Error");
+    }    
+}
+
+
 #pragma mark - Facebook Methods
 
 - (void) login
@@ -524,7 +555,39 @@ static NSString* kAppId = @"142876775786876";
         self.FBLoggedIn = YES;
     }
     else{
-        [self uploadPhoto];
+        NSNumber* x = self.scorecard.course.numholes;
+        CGFloat height = self.tableV.rowHeight * [x doubleValue];
+        NSLog(@"Button Clicked");
+        CGRect rect = self.tableV.frame;
+        CGRect origrect = rect;
+        rect.size.height = height;
+        self.tableV.frame = rect;
+        
+        // Change the origin of the footer view
+        CGRect frame = self.scoreFooterView.frame;
+        CGRect originalframe = frame;
+        
+        frame.origin.y = self.tableV.frame.origin.y + height;
+        self.scoreFooterView.frame = frame;
+        
+        CGRect backgroundRect = self.backgroundImageView.frame;
+        CGRect origBackgroundRect = backgroundRect;
+        backgroundRect.size.height = frame.origin.y + frame.size.height;
+        self.backgroundImageView.frame = backgroundRect;
+        
+        
+        [ScoreTrackerViewController savePNGForView: (UIView*) self.view rect:CGRectMake(0, 0, 640, 920) fileName: @"Screenshot.png"];
+        
+        // Restore the size of the table view
+        self.tableV.frame = origrect;
+        
+        // Restore the origin of the footer view
+        self.scoreFooterView.frame = originalframe;
+        
+        // Restore the size of the background view
+        self.backgroundImageView.frame = origBackgroundRect;
+        
+        //[self uploadPhoto];
         //[self logout];
     }
 }
@@ -589,7 +652,10 @@ static NSString* kAppId = @"142876775786876";
 {
     NSString *path = @"http://king.eece.maine.edu/fenway.png";
     NSURL *url = [NSURL URLWithString:path];
-    NSData *data = [NSData dataWithContentsOfURL:url];
+    //NSData *data = [NSData dataWithContentsOfURL:url];
+    NSString* documentsDir = [[SMTGAppDelegate sharedAppDelegate] applicationDocumentsDirectory];
+    NSString *filePath =  [documentsDir stringByAppendingPathComponent: @"Screenshot.png"];
+    NSData* data = [NSData dataWithContentsOfFile: filePath];
     UIImage *img  = [[UIImage alloc] initWithData:data];
     
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:

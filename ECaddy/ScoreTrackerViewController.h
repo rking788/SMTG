@@ -22,6 +22,7 @@
     UILabel *dateLbl;
     UIButton *favstarBtn;
     UITableView *tableV;
+    UIImageView *backgroundImageView;
     
     SMTGAppDelegate* appDel;
     Scorecard* scorecard;
@@ -45,6 +46,7 @@ enum{
 @property (retain, nonatomic) IBOutlet UILabel *dateLbl;
 @property (nonatomic, retain) IBOutlet UIButton *favstarBtn;
 @property (nonatomic, retain) IBOutlet UITableView *tableV;
+@property (nonatomic, retain) IBOutlet UIImageView *backgroundImageView;
 
 @property (nonatomic, retain) SMTGAppDelegate* appDel;
 @property (nonatomic, retain) Scorecard* scorecard;
@@ -68,6 +70,8 @@ enum{
 + (NSArray*) rowAndColFromTag: (NSUInteger) tag;
 
 - (void)registerForKeyboardNotifications;
+
++(void) savePNGForView:(UIView *)targetView rect:(CGRect)rect fileName:(NSString *)fileName;
 
 // Facebook Methods
 - (void) login;
