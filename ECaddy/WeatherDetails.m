@@ -46,6 +46,7 @@
 @synthesize tomLow;
 @synthesize errorView;
 @synthesize yahooWeatherImg;
+@synthesize backgroundImg;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -84,6 +85,7 @@
     [tomLow release];
     [todayView release];
     [tomView release];
+    [backgroundImg release];
     [super dealloc];
 }
 
@@ -171,6 +173,7 @@
     [self setTomLow:nil];
     [self setTodayView:nil];
     [self setTomView:nil];
+    [self setBackgroundImg:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -230,8 +233,14 @@
         [self.actIndicator stopAnimating];
         [self.actIndicator setHidden: YES];
         
+        for(UIView* view in self.view.subviews){
+            [view setHidden: YES];
+        }
+        
         [self.view bringSubviewToFront: self.errorView];
         [self.errorView setHidden: NO];
+        [self.backgroundImg setHidden: NO];
+        [self.navBar setHidden: NO];
         
         return;
     }

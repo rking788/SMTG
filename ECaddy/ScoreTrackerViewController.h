@@ -18,7 +18,8 @@
 @interface ScoreTrackerViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, FBSessionDelegate, FBDialogDelegate, FBRequestDelegate> {
     HeaderFooterView *scoreHeaderView;
     HeaderFooterView *scoreFooterView;
-    UITextView *titleTextView;
+    UILabel *titleTextView;
+    UILabel *dateLbl;
     UIButton *favstarBtn;
     UITableView *tableV;
     
@@ -40,7 +41,8 @@ enum{
 
 @property (nonatomic, retain) IBOutlet HeaderFooterView *scoreHeaderView;
 @property (nonatomic, retain) IBOutlet HeaderFooterView *scoreFooterView;
-@property (nonatomic, retain) IBOutlet UITextView *titleTextView;
+@property (nonatomic, retain) IBOutlet UILabel *titleTextView;
+@property (retain, nonatomic) IBOutlet UILabel *dateLbl;
 @property (nonatomic, retain) IBOutlet UIButton *favstarBtn;
 @property (nonatomic, retain) IBOutlet UITableView *tableV;
 

@@ -13,7 +13,7 @@
 
 @implementation CourseDetailViewController
 
-#define BORDER_WIDTH    3.0f
+#define BORDER_WIDTH    2.0f
 
 @synthesize tableV;
 @synthesize titleView;

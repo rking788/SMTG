@@ -105,6 +105,10 @@
     }
     
     if(errStr){
+        // Disable the next and previous buttons
+        [self.navigationItem.leftBarButtonItem setEnabled: NO];
+        [self.navigationItem.rightBarButtonItem setEnabled: NO];
+        
         // Display the modal view controller
         MapErrorViewController* mevc = [[MapErrorViewController alloc] init];
         

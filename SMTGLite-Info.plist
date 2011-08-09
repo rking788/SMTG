@@ -20,7 +20,7 @@
 		<string>teeandgreen_ret.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>RPKing2.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>org.mainelyapps.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

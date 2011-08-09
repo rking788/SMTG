@@ -52,6 +52,7 @@
     
     UIView *errorView;
     UIImageView *yahooWeatherImg;
+    UIImageView *backgroundImg;
 }
 @property (nonatomic, retain) Course* courseObj;
 
@@ -95,6 +96,7 @@
 
 @property (nonatomic, retain) IBOutlet UIView *errorView;
 @property (nonatomic, retain) IBOutlet UIImageView *yahooWeatherImg;
+@property (retain, nonatomic) IBOutlet UIImageView *backgroundImg;
 
 - (IBAction)favstarPressed:(id)sender;
 

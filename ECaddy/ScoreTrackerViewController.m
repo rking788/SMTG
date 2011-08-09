@@ -25,6 +25,7 @@ static NSString* kAppId = @"142876775786876";
 @synthesize scoreHeaderView;
 @synthesize scoreFooterView;
 @synthesize titleTextView;
+@synthesize dateLbl;
 @synthesize favstarBtn;
 @synthesize scorecardDict;
 @synthesize tableV;
@@ -53,6 +54,7 @@ static NSString* kAppId = @"142876775786876";
     [favstarBtn release];
     [tableV release];
     [FBpermissions release];
+    [dateLbl release];
     [super dealloc];
 }
 
@@ -95,7 +97,8 @@ static NSString* kAppId = @"142876775786876";
         [dateF setDateFormat: @"MM/dd/yyyy hh:mm"];
         
         date = [dateF stringFromDate: [self.scorecard dateplayed]];
-        [self.titleTextView setText: [NSString stringWithFormat: @"%@\n%@", name, date]];
+        [self.titleTextView setText: name];
+        [self.dateLbl setText: date];
  
         // Give the header and footer views a reference to us to alert us of changes
         [self.scoreHeaderView setScoreTracker: (ScoreTrackerViewController*) self];
@@ -141,6 +144,7 @@ static NSString* kAppId = @"142876775786876";
 - (void)viewDidUnload
 {
     [self setTableV:nil];
+    [self setDateLbl:nil];
     [super viewDidUnload];
     [self setAppDel: nil];
     [self setScorecard: nil];
@@ -205,14 +209,28 @@ static NSString* kAppId = @"142876775786876";
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
 {
-    static NSString *CellIdentifier = @"CourseTableCell";
+    static NSString *CellIdentifierEven = @"CourseTableCellEven";
+    static NSString *CellIdentifierOdd = @"CourseTableCellOdd";
     static const NSUInteger constColWidth = 45;
     UILabel* label;
     
-    ScorecardTableCell *cell = (ScorecardTableCell*) [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    NSString* cellID = nil;
+    UIColor* bgColor = nil;
+    if((indexPath.row % 2) == 0){
+        cellID = CellIdentifierEven;
+        //bgColor = [UIColor colorWithRed:0.59 green:0.75 blue:0.63 alpha:1.0];
+        bgColor = [UIColor colorWithRed:0.8 green:1.0 blue:0.82 alpha:1.0];
+    }
+    else{
+        cellID = CellIdentifierOdd;
+        //bgColor = [UIColor colorWithRed:0.79 green:1.0 blue:0.84 alpha:1.0];
+        bgColor = [UIColor colorWithRed:0.49 green:0.8 blue:0.52 alpha:1.0];
+    }
+    
+    ScorecardTableCell *cell = (ScorecardTableCell*) [tableView dequeueReusableCellWithIdentifier: cellID];
     if (cell == nil) {
         //cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
-        cell = [[[ScorecardTableCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[ScorecardTableCell alloc] initWithFrame:CGRectZero reuseIdentifier: cellID] autorelease];
         
         [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
         
@@ -223,6 +241,7 @@ static NSString* kAppId = @"142876775786876";
         label.font = [UIFont systemFontOfSize: 17.0];
         label.textAlignment = UITextAlignmentCenter;
         label.textColor = [UIColor blackColor];
+        label.backgroundColor = bgColor;
         label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
         [cell.contentView addSubview: label];
     
@@ -233,6 +252,7 @@ static NSString* kAppId = @"142876775786876";
         label.font = [UIFont systemFontOfSize: 17.0];
         label.textAlignment = UITextAlignmentCenter;
         label.textColor = [UIColor blackColor];
+        label.backgroundColor = bgColor;
         label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
         [cell.contentView addSubview: label];
         
@@ -285,10 +305,13 @@ static NSString* kAppId = @"142876775786876";
     UITextField* field;
     NSUInteger col = 0;
     for(UIView* view in cell.subviews){
-        if(view.tag == HOLENUM_TAG || view.tag == PAR_TAG)
+        view.backgroundColor = bgColor;
+        if(view.tag == HOLENUM_TAG || view.tag == PAR_TAG){
             continue;
-        if(view.tag == 0)
+        }
+        if(view.tag == 0){
             continue;
+        }
 
         field = (UITextField*) view;
         field.tag = [ScoreTrackerViewController tagFromRow: indexPath.row AndCol: col];

@@ -330,7 +330,14 @@
 }
 
 - (NSInteger) pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    return 9;
+    
+#ifdef LITE
+    NSInteger ret = 2;
+#else
+    NSInteger ret = 5;
+#endif
+    
+    return ret;
 }
 
 - (NSString*) pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{

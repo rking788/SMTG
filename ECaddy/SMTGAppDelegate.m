@@ -9,6 +9,8 @@
 #import "SMTGAppDelegate.h"
 #import "DirectoryViewController.h"
 
+#pragma mark - TODO APPWIDE: Provide better support for different device orientations
+
 // Include this to initliaze the database
 //#import "dbinit.h"
 

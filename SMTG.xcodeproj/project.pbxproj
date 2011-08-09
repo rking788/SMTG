@@ -14,7 +14,7 @@
 		96086CFE13EE3EFC00041D0E /* mapdraggable.png in Resources */ = {isa = PBXBuildFile; fileRef = 96086CFD13EE3EFC00041D0E /* mapdraggable.png */; };
 		9608A9A513E8FF610059BBA4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 9608A9A313E8FF610059BBA4 /* Default.png */; };
 		9608A9A613E8FF610059BBA4 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9608A9A413E8FF610059BBA4 /* Default@2x.png */; };
-		9612402C13EE66430028A940 /* examplebackground3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9612402B13EE66430028A940 /* examplebackground3.png */; };
+		9612402C13EE66430028A940 /* lightbackground_pat.png in Resources */ = {isa = PBXBuildFile; fileRef = 9612402B13EE66430028A940 /* lightbackground_pat.png */; };
 		961BA18F13EF760C0046B850 /* windarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 961BA18E13EF760C0046B850 /* windarrow.png */; };
 		963A524F13EB7B8000253B12 /* SMTG.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 963A524E13EB7B8000253B12 /* SMTG.sqlite */; };
 		965DC23B13E5087E001E0404 /* sadweather.png in Resources */ = {isa = PBXBuildFile; fileRef = 965DC23A13E5087E001E0404 /* sadweather.png */; };
@@ -109,7 +109,7 @@
 		96AC673F13F00A9200D614E0 /* mapdraggable.png in Resources */ = {isa = PBXBuildFile; fileRef = 96086CFD13EE3EFC00041D0E /* mapdraggable.png */; };
 		96AC674013F00A9200D614E0 /* greenflag.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B599CA13EE559500142A36 /* greenflag.png */; };
 		96AC674113F00A9200D614E0 /* golftee.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B599D413EE5E1600142A36 /* golftee.png */; };
-		96AC674213F00A9200D614E0 /* examplebackground3.png in Resources */ = {isa = PBXBuildFile; fileRef = 9612402B13EE66430028A940 /* examplebackground3.png */; };
+		96AC674213F00A9200D614E0 /* lightbackground_pat.png in Resources */ = {isa = PBXBuildFile; fileRef = 9612402B13EE66430028A940 /* lightbackground_pat.png */; };
 		96AC674313F00A9200D614E0 /* curlocbtn-enabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D021D513EF207400BC0A4F /* curlocbtn-enabled.png */; };
 		96AC674413F00A9200D614E0 /* curlocbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D021D613EF207400BC0A4F /* curlocbtn.png */; };
 		96AC674513F00A9200D614E0 /* MapErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96F2B38013EF257A005BE308 /* MapErrorView.xib */; };
@@ -203,7 +203,7 @@
 		96086CFD13EE3EFC00041D0E /* mapdraggable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mapdraggable.png; sourceTree = "<group>"; };
 		9608A9A313E8FF610059BBA4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		9608A9A413E8FF610059BBA4 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		9612402B13EE66430028A940 /* examplebackground3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = examplebackground3.png; sourceTree = "<group>"; };
+		9612402B13EE66430028A940 /* lightbackground_pat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightbackground_pat.png; sourceTree = "<group>"; };
 		961BA18E13EF760C0046B850 /* windarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = windarrow.png; sourceTree = "<group>"; };
 		963A524E13EB7B8000253B12 /* SMTG.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = SMTG.sqlite; sourceTree = "<group>"; };
 		965DC23A13E5087E001E0404 /* sadweather.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sadweather.png; sourceTree = "<group>"; };
@@ -215,7 +215,7 @@
 		9679EB0C13E79B81001F3872 /* settingstab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settingstab@2x.png"; sourceTree = "<group>"; };
 		9679EB0E13E7A1D6001F3872 /* favstarpressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favstarpressed.png; sourceTree = "<group>"; };
 		9679EB1013E7A1E2001F3872 /* favstarreleased.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favstarreleased.png; sourceTree = "<group>"; };
-		96AC674A13F00A9200D614E0 /* SMTGLite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SMTGLite.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		96AC674A13F00A9200D614E0 /* SMTG Lite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SMTG Lite.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96AC674C13F00A9200D614E0 /* SMTGLite-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "SMTGLite-Info.plist"; path = "/Users/rking/dev/ios/ECaddy/SMTGLite-Info.plist"; sourceTree = "<absolute>"; };
 		96B599CA13EE559500142A36 /* greenflag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenflag.png; sourceTree = "<group>"; };
 		96B599D413EE5E1600142A36 /* golftee.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = golftee.png; sourceTree = "<group>"; };
@@ -439,7 +439,7 @@
 			isa = PBXGroup;
 			children = (
 				AE85D73E1368E34400CDA534 /* SMTG.app */,
-				96AC674A13F00A9200D614E0 /* SMTGLite.app */,
+				96AC674A13F00A9200D614E0 /* SMTG Lite.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -462,7 +462,6 @@
 		AE85D7481368E34400CDA534 /* SMTG */ = {
 			isa = PBXGroup;
 			children = (
-				9612402B13EE66430028A940 /* examplebackground3.png */,
 				AEB0722B137DB51600BE3C37 /* dbinit.h */,
 				AEB0722C137DB51600BE3C37 /* dbinit.m */,
 				AE9177F6139AC17400AC5706 /* Scorecard.h */,
@@ -538,7 +537,6 @@
 				9679EB1013E7A1E2001F3872 /* favstarreleased.png */,
 				9679EB0E13E7A1D6001F3872 /* favstarpressed.png */,
 				965DC23A13E5087E001E0404 /* sadweather.png */,
-				9605CD3813E8EFF8004128D9 /* background_pat.png */,
 				9605CC5A13E8EE9A004128D9 /* background.png */,
 				96EE27C213ECEE4F00170A52 /* locationenabled.png */,
 				96086CFD13EE3EFC00041D0E /* mapdraggable.png */,
@@ -546,6 +544,8 @@
 				96B599CA13EE559500142A36 /* greenflag.png */,
 				96D021D613EF207400BC0A4F /* curlocbtn.png */,
 				96D021D513EF207400BC0A4F /* curlocbtn-enabled.png */,
+				9605CD3813E8EFF8004128D9 /* background_pat.png */,
+				9612402B13EE66430028A940 /* lightbackground_pat.png */,
 				AE85D7491368E34400CDA534 /* Supporting Files */,
 			);
 			name = SMTG;
@@ -583,7 +583,7 @@
 			);
 			name = SMTGLite;
 			productName = ECaddy;
-			productReference = 96AC674A13F00A9200D614E0 /* SMTGLite.app */;
+			productReference = 96AC674A13F00A9200D614E0 /* SMTG Lite.app */;
 			productType = "com.apple.product-type.application";
 		};
 		AE85D73D1368E34400CDA534 /* SMTG */ = {
@@ -691,7 +691,7 @@
 				96AC673F13F00A9200D614E0 /* mapdraggable.png in Resources */,
 				96AC674013F00A9200D614E0 /* greenflag.png in Resources */,
 				96AC674113F00A9200D614E0 /* golftee.png in Resources */,
-				96AC674213F00A9200D614E0 /* examplebackground3.png in Resources */,
+				96AC674213F00A9200D614E0 /* lightbackground_pat.png in Resources */,
 				96AC674313F00A9200D614E0 /* curlocbtn-enabled.png in Resources */,
 				96AC674413F00A9200D614E0 /* curlocbtn.png in Resources */,
 				96AC674513F00A9200D614E0 /* MapErrorView.xib in Resources */,
@@ -744,7 +744,7 @@
 				96086CFE13EE3EFC00041D0E /* mapdraggable.png in Resources */,
 				96B599CB13EE559500142A36 /* greenflag.png in Resources */,
 				96B599D513EE5E1600142A36 /* golftee.png in Resources */,
-				9612402C13EE66430028A940 /* examplebackground3.png in Resources */,
+				9612402C13EE66430028A940 /* lightbackground_pat.png in Resources */,
 				96D021D713EF207400BC0A4F /* curlocbtn-enabled.png in Resources */,
 				96D021D813EF207400BC0A4F /* curlocbtn.png in Resources */,
 				96F2B38213EF257A005BE308 /* MapErrorView.xib in Resources */,
@@ -886,7 +886,7 @@
 					LITE,
 				);
 				INFOPLIST_FILE = "SMTGLite-Info.plist";
-				PRODUCT_NAME = SMTGLite;
+				PRODUCT_NAME = "SMTG Lite";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -901,7 +901,7 @@
 				GCC_PREFIX_HEADER = "ECaddy/SMTG-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = LITE;
 				INFOPLIST_FILE = "SMTGLite-Info.plist";
-				PRODUCT_NAME = SMTGLite;
+				PRODUCT_NAME = "SMTG Lite";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

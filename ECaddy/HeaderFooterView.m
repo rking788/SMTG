@@ -41,33 +41,39 @@
 {
     CGFloat constColSize = 45;
     NSUInteger i = 0;
-    NSString* fontStr = @"Helvetica";
+    NSString* fontStr = @"Helvetica Bold";
     NSMutableArray* playerNames = [[NSMutableArray alloc] initWithCapacity: numPlayers];
     
     // Set up two constant columns for the "Hole #" and "Par" values
     CGRect rect1 = CGRectMake(0, 0, constColSize, self.bounds.size.height);
     UITextField* holeTF = [[UITextField alloc] initWithFrame: rect1];
     [holeTF setText: @"Hole #"];
-    [holeTF setFont: [UIFont fontWithName: fontStr size: 14.0]];
+    [holeTF setTextColor: [UIColor whiteColor]];
+    [holeTF setFont: [UIFont fontWithName: fontStr size: 16.0]];
     [holeTF setContentHorizontalAlignment: UIControlContentHorizontalAlignmentCenter];
     [holeTF setTextAlignment: UITextAlignmentCenter];
     [holeTF setContentVerticalAlignment: UIControlContentVerticalAlignmentCenter];
     [holeTF setMinimumFontSize: (CGFloat) 12.0];
     [holeTF setAdjustsFontSizeToFitWidth: YES];
     [holeTF setBorderStyle: UITextBorderStyleLine];
+    [holeTF.layer setBorderWidth: 1.0];
+    [holeTF.layer setBorderColor: [UIColor colorWithRed:0 green:0.3 blue:0 alpha:1.0].CGColor];
     [holeTF setEnabled: NO];
     [holeTF setTag: kNUMHOLE_TAG];
 
     CGRect rect2 = CGRectMake((constColSize), 0, constColSize, self.bounds.size.height);
     UITextField* parTF = [[UITextField alloc] initWithFrame: rect2];
     [parTF setText: @"Par"];
-    [parTF setFont: [UIFont fontWithName: fontStr size: (CGFloat) 14.0]];
+    [parTF setTextColor: [UIColor whiteColor]];
+    [parTF setFont: [UIFont fontWithName: fontStr size: (CGFloat) 16.0]];
     [parTF setContentHorizontalAlignment: UIControlContentHorizontalAlignmentCenter];
     [parTF setTextAlignment: UITextAlignmentCenter];
     [parTF setContentVerticalAlignment: UIControlContentVerticalAlignmentCenter];
     [parTF setMinimumFontSize: (CGFloat) 12.0];
     [parTF setAdjustsFontSizeToFitWidth: YES];
     [parTF setBorderStyle: UITextBorderStyleLine];
+    [parTF.layer setBorderWidth: 1.0];
+    [parTF.layer setBorderColor: [UIColor colorWithRed:0 green:0.3 blue:0 alpha:1.0].CGColor];
     [parTF setEnabled: NO];
     [parTF setTag: kPAR_TAG];
 
@@ -100,10 +106,15 @@
         [nameTF setAdjustsFontSizeToFitWidth: YES];
         [nameTF setMinimumFontSize: 8];
         [nameTF setBorderStyle: UITextBorderStyleLine];
+        [nameTF.layer setBorderWidth: 1.0];
+        [nameTF.layer setBorderColor: [UIColor colorWithRed:0 green:0.3 blue:0 alpha:1.0].CGColor];
         [nameTF setFont: [UIFont fontWithName: fontStr size: 17.0]];
+        [nameTF setTextColor: [UIColor whiteColor]];
         [nameTF setDelegate: self];
         [nameTF setReturnKeyType: UIReturnKeyDone];
         [nameTF setTag: (kPAR_TAG + (i + 1))];
+        
+        [nameTF setAutoresizingMask: UIViewAutoresizingFlexibleWidth];
         
         [self addSubview: nameTF];
         
@@ -132,18 +143,20 @@
     CGRect rect1 = CGRectMake(0, 0, (constColSize * 2) + 1, self.bounds.size.height);
     UILabel* totalLabel = [[UILabel alloc] initWithFrame: rect1];
     [totalLabel setText: @"TOTAL"];
-    [totalLabel setFont: [UIFont fontWithName: @"Helvetica Bold" size: 14.0]];
+    [totalLabel setTextColor: [UIColor whiteColor]];
+    [totalLabel setFont: [UIFont fontWithName: @"Helvetica Bold" size: 16.0]];
   //  [totalLabel setContentHorizontalAlignment: UIControlContentHorizontalAlignmentCenter];
     [totalLabel setTextAlignment: UITextAlignmentCenter];
    // [totalLabel setContentVerticalAlignment: UIControlContentVerticalAlignmentCenter];
     [totalLabel setMinimumFontSize: (CGFloat) 12.0];
     [totalLabel setAdjustsFontSizeToFitWidth: YES];
    // [totalLabel setBorderStyle: UITextBorderStyleLine];
+    [totalLabel setBackgroundColor: [UIColor clearColor]];
     [totalLabel setEnabled: YES];
     [totalLabel setTag: kTOTAL_TAG];
     
-    totalLabel.layer.borderColor = [UIColor blackColor].CGColor;
-    totalLabel.layer.borderWidth = 1.0;
+    [totalLabel.layer setBorderWidth: 1.0];
+    [totalLabel.layer setBorderColor: [UIColor colorWithRed:0 green:0.3 blue:0 alpha:1.0].CGColor];
     
     // Add the constant columns as subviews
     [self addSubview: totalLabel];
@@ -163,11 +176,14 @@
         
         // Set up the text field to be entered in the header
         [playerTotTF setText: @"-"];
+        [playerTotTF setTextColor: [UIColor whiteColor]];
         [playerTotTF setTextAlignment: UITextAlignmentCenter];
         [playerTotTF setContentVerticalAlignment: UIControlContentVerticalAlignmentCenter];
         [playerTotTF setAdjustsFontSizeToFitWidth: YES];
         [playerTotTF setMinimumFontSize: 8];
         [playerTotTF setBorderStyle: UITextBorderStyleLine];
+        [playerTotTF.layer setBorderWidth: 1.0];
+        [playerTotTF.layer setBorderColor: [UIColor colorWithRed:0 green:0.3 blue:0 alpha:1.0].CGColor];
         [playerTotTF setFont: [UIFont fontWithName: fontStr size: 17.0]];
         [playerTotTF setDelegate: self];
         [playerTotTF setReturnKeyType: UIReturnKeyDone];
