@@ -9,14 +9,18 @@
 #import "ScorecardViewController.h"
 #import "NewRoundViewController.h"
 #import "ScorecardTableViewController.h"
+#import "SMTGAppDelegate.h"
 #import "Course.h"
 
 @implementation ScorecardViewController
 
+@synthesize uploadingView;
 @synthesize contentView;
+@synthesize uploadingInd;
 @synthesize adView;
 @synthesize courseObj;
 @synthesize adVisible;
+@synthesize pendingCourses;
 
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -29,6 +33,7 @@
     [self createAdBannerView];
 #endif
     
+    [self checkForPending];
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -82,6 +87,9 @@
 {
     [self setContentView: nil];
     [self setAdView:nil];
+    [self setPendingCourses: nil];
+    [self setUploadingView:nil];
+    [self setUploadingInd:nil];
     [super viewDidUnload];
 
     // Release any retained subviews of the main view.
@@ -93,6 +101,9 @@
 {
     [contentView release];
     [adView release];
+    [pendingCourses release];
+    [uploadingView release];
+    [uploadingInd release];
     [super dealloc];
 }
 
@@ -127,6 +138,116 @@
     
     [self.navigationController pushViewController:nrvc animated:YES];
     [nrvc release];    
+}
+
+- (void) checkForPending
+{
+    NSManagedObjectContext* manObjCon = [[SMTGAppDelegate sharedAppDelegate] managedObjectContext];
+    
+    NSFetchRequest* fetchrequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext: manObjCon];
+    [fetchrequest setEntity:entity];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"pending == %@", [NSNumber numberWithBool: YES]];
+    [fetchrequest setPredicate:predicate];
+    
+    NSSortDescriptor* sortDescript = [[NSSortDescriptor alloc] initWithKey:@"coursename" ascending:YES];
+    NSArray* sdArr = [[NSArray alloc] initWithObjects: sortDescript, nil];
+    [fetchrequest setSortDescriptors: sdArr];
+    
+    NSError *error = nil;
+    self.pendingCourses = [[manObjCon executeFetchRequest:fetchrequest error:&error] mutableCopy];
+    if (self.pendingCourses != nil) {
+        if([self.pendingCourses count] != 0){
+            // Display the alert view and wait to see if they want to upload the courses now
+            NSString* messageStr = @"Courses still need to be uploaded, would you like to upload them now?";
+            UIAlertView* av = [[[UIAlertView alloc] initWithTitle: @"Upload Courses" message: messageStr delegate:self cancelButtonTitle:nil otherButtonTitles: @"Dismiss", @"Upload", nil] autorelease];
+            
+            [av show];
+        }
+    }
+    else {
+        // Deal with error.
+        NSLog(@"Error fetching lots");
+    }
+    
+    [sortDescript release];
+    [sdArr release];
+    [fetchrequest release];   
+}
+
+- (void) uploadCourseToServer:(Course *)course
+{
+    BOOL pending = YES;
+    NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+    NSURLResponse* resp = nil;
+    NSError* err = nil;
+    
+    // Add the course information into the POST request content
+    NSURL* url = [NSURL URLWithString:@"http://mainelyapps.com/SMTG/NewCourse.php"];
+    NSString* content = [NSString stringWithFormat:
+                         @"cn=%@&p=%@&addr=%@&st=%@&c=%@&web=%@&woeid=%@&nh=%@", 
+                         [course coursename], [course phone], [course valueForKey: @"address"], 
+                         [course valueForKey:@"state"], [course valueForKey:@"country"], 
+                         [course website], [course woeid], [course numholes]];
+    
+    NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL: url];
+    
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody: [content dataUsingEncoding: NSUTF8StringEncoding]];
+    
+    // TODO: This should probably be an asynchronous request to not hold up the UI
+    NSData* ret = [NSURLConnection sendSynchronousRequest: request returningResponse: &resp error: &err];
+    
+    // This return value is used to set the pending value of the course
+    if((!ret) || (err))
+        pending = YES;
+    else
+        pending = NO;
+    
+    [course setPending: [NSNumber numberWithBool: pending]];
+    
+    // Hide the uploading view
+    //[self.uploadingInd stopAnimating];
+    //[self.uploadingView setHidden: YES];
+
+    [pool release];
+
+}
+
+- (void) uploadCourses
+{
+    // Upload all of the courses to the server
+    for(Course* gc in self.pendingCourses){
+        [self uploadCourseToServer: gc];
+    }
+    
+    // Signal the main thread that we are done getting the weather
+    [self performSelectorOnMainThread:@selector(doneUploading) 
+                           withObject: nil waitUntilDone: YES];
+}
+
+- (void) doneUploading
+{
+    [[SMTGAppDelegate sharedAppDelegate] saveContext];
+    
+    // Stop the uploading indicator and hide the views
+    [self.uploadingInd stopAnimating];
+    [self.uploadingInd setHidden: YES];
+    [self.uploadingView setHidden: YES];
+}
+
+#pragma mark - UIAlertViewDelegate Methods
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if([[alertView buttonTitleAtIndex: buttonIndex] isEqualToString: @"Upload"]){
+        [self.uploadingView setHidden: NO];
+        [self.uploadingInd setHidden: NO];
+        [self.uploadingInd startAnimating];
+        
+        [NSThread detachNewThreadSelector: @selector(uploadCourses) 
+                                 toTarget: self withObject: nil];
+    }
 }
 
 #pragma mark - iAd methods

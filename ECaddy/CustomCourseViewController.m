@@ -261,8 +261,8 @@
     }
     else{
         [newCourse setPending: [NSNumber numberWithBool: YES]];
-        [abbrsDict release];
         [self dismiss: [NSNumber numberWithBool: YES]];
+        
     }
     
     [abbrsDict release];

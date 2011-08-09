@@ -11,15 +11,21 @@
 
 @class Course;
 
-@interface ScorecardViewController : UIViewController <ADBannerViewDelegate> {
+@interface ScorecardViewController : UIViewController <ADBannerViewDelegate, UIAlertViewDelegate> {
     UIView* contentView;
+    UIActivityIndicatorView *uploadingInd;
     
-    Course* courseObj;    
+    NSMutableArray* pendingCourses;
+    Course* courseObj;
     id adView;
     BOOL adVisible;
+    UIView *uploadingView;
 }
+@property (nonatomic, retain) IBOutlet UIView *uploadingView;
+@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *uploadingInd;
 @property (nonatomic, retain) IBOutlet UIView* contentView;
 
+@property (nonatomic, retain) NSMutableArray* pendingCourses;
 @property (nonatomic, retain) Course* courseObj;
 @property (nonatomic, retain) id adView;
 @property (nonatomic) BOOL adVisible;
@@ -30,7 +36,14 @@
 
 - (void) startNewRoundWithCourseOrNil: (Course*) course;
 
+#ifdef LITE
 - (void)createAdBannerView;
 - (void)fixupAdView:(UIInterfaceOrientation)toInterfaceOrientation;
+#endif
+
+- (void) checkForPending;
+- (void) uploadCourses;
+- (void) uploadCourseToServer: (Course*) course;
+- (void) doneUploading;
 
 @end
