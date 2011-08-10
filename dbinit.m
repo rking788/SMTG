@@ -57,9 +57,6 @@
                 range3.length = range2.location - (range1.location+range1.length);
                 NSString* str2 = [str substringWithRange:range3];
                 
-                NSLog(@"woeid = %@", str2);
-                
-                NSLog(@"City = %@", city);
                 NSMutableArray* arrtemp = [[NSMutableArray alloc] initWithArray:lineFields];
                 [arrtemp insertObject:str2 atIndex:4];
                 outputStr = [outputStr stringByAppendingString: [arrtemp componentsJoinedByString:@";"]];

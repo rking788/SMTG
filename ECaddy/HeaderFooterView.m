@@ -272,10 +272,12 @@
 {
     NSInteger i = 0;
     
-    for (NSString* name in names){
-        UITextField* tf = (UITextField*) [self viewWithTag: kPAR_TAG + (i + 1)];
-        [tf setText: name];
-        i++;
+    if([self.headerOrFooter isEqualToString: @"Header"]){
+        for (NSString* name in names){
+            UITextField* tf = (UITextField*) [self viewWithTag: kPAR_TAG + (i + 1)];
+            [tf setText: name];
+            i++;
+        }
     }
     
     [self setPlayerNamesArr: names];

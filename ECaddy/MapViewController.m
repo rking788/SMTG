@@ -47,7 +47,6 @@
     [super viewDidLoad];
     
 #ifdef LITE
-    NSLog(@"Setting up the ad view because this is the free version");
     [self createAdBannerView];
 #endif
     
@@ -743,7 +742,6 @@
 
 - (void)mapViewDidFinishLoadingMap:(MKMapView *)mapView
 {
-    //NSLog(@"Done");
     // TODO: This doesn't work very well. It is not called reliably
     
     // Select the green annotation to display the yardage bubble

@@ -25,6 +25,7 @@ static NSString* kAppId = @"142876775786876";
 @synthesize scorecard;
 @synthesize scoreHeaderView;
 @synthesize scoreFooterView;
+@synthesize titleView;
 @synthesize titleTextView;
 @synthesize dateLbl;
 @synthesize favstarBtn;
@@ -35,6 +36,7 @@ static NSString* kAppId = @"142876775786876";
 @synthesize FB = _FB;
 @synthesize FBpermissions;
 @synthesize FBLoggedIn;
+@synthesize pendingFBAction;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -58,6 +60,7 @@ static NSString* kAppId = @"142876775786876";
     [FBpermissions release];
     [dateLbl release];
     [backgroundImageView release];
+    [titleView release];
     [super dealloc];
 }
 
@@ -84,6 +87,8 @@ static NSString* kAppId = @"142876775786876";
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
                                                initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                target:self action:@selector(actionButtonClicked:)] autorelease];
+    
+    self.navigationItem.title = @"Scorecard";
     
     // Create the Facebook instance
     self.FBLoggedIn = NO;
@@ -149,6 +154,7 @@ static NSString* kAppId = @"142876775786876";
     [self setTableV:nil];
     [self setDateLbl:nil];
     [self setBackgroundImageView:nil];
+    [self setTitleView:nil];
     [super viewDidUnload];
     [self setAppDel: nil];
     [self setScorecard: nil];
@@ -167,26 +173,23 @@ static NSString* kAppId = @"142876775786876";
     [super viewWillAppear: animated];
     // Load the players scores from the current scorecard object
     
-    NSMutableDictionary* scoresdict = self.scorecard.scores;
+    NSMutableDictionary* scoresdict = [self.scorecard.scores mutableCopy];
     if(scoresdict){
-        self.scorecardDict = (NSMutableDictionary*) self.scorecard.scores;
+        self.scorecardDict = scoresdict;
         [self.scoreHeaderView setPlayers: [self.scorecardDict allKeys]];
         [self.scoreFooterView setPlayers: [self.scorecardDict allKeys]];
     }
     
     // Update the totals in the footer view
     [self.scoreFooterView setTotalsWithScoreDict: self.scorecardDict];
-    
-    [self.appDel saveContext];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear: animated];
     // Save the players scores to the sqlite store
-    self.scorecard.scores = self.scorecardDict;
-
-    [self.appDel saveContext];
+    [self.appDel saveCurScorecard: self.scorecardDict];
+    
     // Maybe Use a seperate thread to keep from being sluggish
 }
 
@@ -420,6 +423,9 @@ static NSString* kAppId = @"142876775786876";
     // Update the totals in the footer view
     [self.scoreFooterView setTotalsWithScoreDict: self.scorecardDict];
     
+    // Update the scorecard managed object
+    [self.appDel saveCurScorecard: self.scorecardDict];
+    
     [rowCol release];
     [f release];
 }
@@ -512,7 +518,7 @@ static NSString* kAppId = @"142876775786876";
 
 - (void) actionButtonClicked: (id) sender
 {
-    UIActionSheet* actSheet = [[UIActionSheet alloc] initWithTitle: nil delegate: self cancelButtonTitle: @"Cancel" destructiveButtonTitle: @"Finish Round" otherButtonTitles: @"Upload to Facebok", nil];
+    UIActionSheet* actSheet = [[UIActionSheet alloc] initWithTitle: nil delegate: self cancelButtonTitle: @"Cancel" destructiveButtonTitle: @"Finish Round" otherButtonTitles: @"Upload to Facebook", nil];
     actSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     [actSheet showFromTabBar: self.tabBarController.tabBar];
     [actSheet release];  
@@ -523,17 +529,24 @@ static NSString* kAppId = @"142876775786876";
 {
     NSString* selTitle = [actionSheet buttonTitleAtIndex: buttonIndex];
     if([selTitle isEqualToString: @"Upload to Facebook"]){
+#ifdef LITE
+        UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"Sorry" message: @"Sorry, this feature is only available in the Full version." delegate:self cancelButtonTitle:nil otherButtonTitles: @"Dismiss", nil];
+        
+        [av show];
+#else
+        [self saveScorecardImg];
         [self uploadSCToFB];
+#endif
     }
     else if([selTitle isEqualToString: @"Finish Round"]){
         // Set the scorecard active to NO and go back to the root view controller.
         self.scorecard.active = [NSNumber numberWithBool: NO];
-        self.scorecard.scores = self.scorecardDict;
-        [[SMTGAppDelegate sharedAppDelegate] saveContext];
+        
+        [self.appDel saveCurScorecard: self.scorecardDict];
         
         self.scorecard = nil;
-        [[SMTGAppDelegate sharedAppDelegate] setCurCourse: nil];
-        [[SMTGAppDelegate sharedAppDelegate] setCurScorecard: nil];
+        [self.appDel setCurCourse: nil];
+        [self.appDel setCurScorecard: nil];
         
         [self.navigationController popToRootViewControllerAnimated: YES];
     }
@@ -541,11 +554,118 @@ static NSString* kAppId = @"142876775786876";
 
 #pragma mark - Methods to export view to PNG
 
-+(void) savePNGForView:(UIView *)targetView rect:(CGRect)rect fileName:(NSString *)fileName
+- (void) saveScorecardImg
+{
+    NSUInteger numHoles = [self.scorecard.course.numholes unsignedIntValue];
+    BOOL isExtended = NO;
+    if(numHoles >= 10){
+        isExtended = YES;
+    }
+    else{
+        isExtended = NO;
+    }
+    
+    CGFloat tableHeight = self.tableV.rowHeight * 9;
+    CGRect newTVF = self.tableV.frame;
+    CGRect originalTVF = newTVF;
+    newTVF.size.height = tableHeight;
+    self.tableV.frame = newTVF;
+    
+    // Change the origin of the footer view
+    CGRect footerVframe = self.scoreFooterView.frame;
+    CGRect originalFVF = footerVframe;
+    
+    footerVframe.origin.y = self.tableV.frame.origin.y + tableHeight;
+    self.scoreFooterView.frame = footerVframe;
+    
+    CGFloat overall_width = self.tableV.frame.size.width*2;
+    if (isExtended) {
+        overall_width = self.tableV.frame.size.width * 2;
+    }
+    else{
+        overall_width = self.tableV.frame.size.width;
+    }
+    CGFloat overall_height = footerVframe.origin.y + footerVframe.size.height;
+    
+    CGRect backgroundRect = self.backgroundImageView.frame;
+    CGRect origBackgroundRect = backgroundRect;
+    backgroundRect.size.height = overall_height;
+    backgroundRect.size.width = overall_width;
+    self.backgroundImageView.frame = backgroundRect;
+    
+    NSIndexPath* fip = [NSIndexPath indexPathForRow:0 inSection:0];
+    [self.tableV scrollToRowAtIndexPath: fip atScrollPosition: UITableViewScrollPositionTop animated: NO];
+    
+    // ONLY FOR 18 holes
+    UITableView* tabv = nil;
+    HeaderFooterView* secondHeader = nil;
+    HeaderFooterView* secondFooter = nil;
+    CGRect originalTitleRect = self.titleView.frame;
+    if(isExtended){
+        CGRect f = self.tableV.frame;
+        f.origin.x = self.tableV.frame.size.width;
+        tabv = [[UITableView alloc] initWithFrame:f  style:UITableViewStylePlain];
+        [self.view addSubview: tabv];
+        tabv.dataSource = self;
+        tabv.delegate = self;
+        NSIndexPath* ip = [NSIndexPath indexPathForRow:10 inSection:0];
+        [tabv scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionTop animated:NO];
+        
+        CGRect shFrame = self.scoreHeaderView.frame;
+        shFrame.origin.x = self.scoreHeaderView.frame.size.width;
+        secondHeader = [[HeaderFooterView alloc] initWithFrame: shFrame];
+        [secondHeader setScoreTracker: (ScoreTrackerViewController*) self];
+        [secondHeader addHeaderColumnsForNumPlayers: [[self.scorecard numplayers] unsignedIntValue]];
+        [secondHeader setHeaderOrFooter: @"Header"];
+        [secondHeader setPlayers: [self.scorecardDict allKeys]];
+        [self.view addSubview: secondHeader];
+        
+       /* CGRect sfFrame = self.scoreFooterView.frame;
+        sfFrame.origin.x = self.scoreFooterView.frame.size.width;
+        sfFrame.origin.y = footerVframe.origin.y;
+        secondFooter = [[HeaderFooterView alloc] initWithFrame: sfFrame];
+        [secondFooter setScoreTracker: (ScoreTrackerViewController*) self];
+        [secondFooter addFooterColumnsForNumPlayers: [[self.scorecard numplayers]unsignedIntValue]];
+        [secondFooter setHeaderOrFooter: @"Footer"];    
+        [secondFooter setPlayers: [self.scorecardDict allKeys]];
+        [secondFooter setTotalsWithScoreDict: self.scorecardDict];
+        [self.view addSubview: secondFooter];
+        */
+        footerVframe.origin.x = self.scoreFooterView.frame.size.width;
+        self.scoreFooterView.frame = footerVframe;
+        
+        CGFloat newTitlex = originalTitleRect.origin.x + overall_width / 4;
+        CGRect newTitleFrame = originalTitleRect;
+        newTitleFrame.origin.x = newTitlex;
+        self.titleView.frame = newTitleFrame;
+    }
+    
+    [ScoreTrackerViewController savePNGForView: (UIView*) self.view rect:CGRectMake(0, 0, overall_width, overall_height) fileName: @"Screenshot.png"];
+
+    // Restore the size of the table view
+    self.tableV.frame = originalTVF;
+    
+    // Restore the origin of the footer view
+    self.scoreFooterView.frame = originalFVF;
+    
+    // Restore the size of the background view
+    self.backgroundImageView.frame = origBackgroundRect;
+    
+    // ONLY FOR 18 HOLES
+    if(isExtended){
+        self.titleView.frame = originalTitleRect;
+        
+        [tabv release];
+        [secondHeader release];
+       // [secondFooter release];
+    }
+}
+
++ (BOOL) savePNGForView:(UIView *)targetView rect:(CGRect)rect fileName:(NSString *)fileName
 {
     UIImage *image;
     CGPoint pt = rect.origin;
-    
+    BOOL ret = NO;
     
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -560,9 +680,14 @@ static NSString* kAppId = @"142876775786876";
     
     if ([data writeToFile:filePath atomically:YES]) {
         NSLog(@"Save OK");
+        ret = YES;
+        
     } else {
         NSLog(@"Save Error");
+        ret = NO;
     }    
+    
+    return ret;
 }
 
 
@@ -583,13 +708,16 @@ static NSString* kAppId = @"142876775786876";
  */
 - (void)fbDidLogin {
     self.FBLoggedIn = YES;
-    [self uploadPhoto];
+    if([self.pendingFBAction isEqualToString: @"photo"]){
+        [self uploadPhoto];
+    }
 }
 
 /**
  * Called when the user canceled the authorization dialog.
  */
 -(void)fbDidNotLogin:(BOOL)cancelled {
+    self.FBLoggedIn = NO;
     NSLog(@"Failed logging in to Facebook");
 }
 
@@ -605,42 +733,10 @@ static NSString* kAppId = @"142876775786876";
     if(![self isFBLoggedIn]){
         [self login];
         self.FBLoggedIn = YES;
+        self.pendingFBAction = @"photo";
     }
     else{
-        NSNumber* x = self.scorecard.course.numholes;
-        CGFloat height = self.tableV.rowHeight * [x doubleValue];
-        NSLog(@"Button Clicked");
-        CGRect rect = self.tableV.frame;
-        CGRect origrect = rect;
-        rect.size.height = height;
-        self.tableV.frame = rect;
-        
-        // Change the origin of the footer view
-        CGRect frame = self.scoreFooterView.frame;
-        CGRect originalframe = frame;
-        
-        frame.origin.y = self.tableV.frame.origin.y + height;
-        self.scoreFooterView.frame = frame;
-        
-        CGRect backgroundRect = self.backgroundImageView.frame;
-        CGRect origBackgroundRect = backgroundRect;
-        backgroundRect.size.height = frame.origin.y + frame.size.height;
-        self.backgroundImageView.frame = backgroundRect;
-        
-        
-        [ScoreTrackerViewController savePNGForView: (UIView*) self.view rect:CGRectMake(0, 0, 640, 920) fileName: @"Screenshot.png"];
-        
-        // Restore the size of the table view
-        self.tableV.frame = origrect;
-        
-        // Restore the origin of the footer view
-        self.scoreFooterView.frame = originalframe;
-        
-        // Restore the size of the background view
-        self.backgroundImageView.frame = origBackgroundRect;
-        
-        //[self uploadPhoto];
-        //[self logout];
+        [self uploadPhoto];
     }
 }
 
@@ -648,6 +744,7 @@ static NSString* kAppId = @"142876775786876";
  * Open an inline dialog that allows the logged in user to publish a story to his or
  * her wall.
  */
+#if 0
 - (void)publishStream
 {
     
@@ -674,15 +771,13 @@ static NSString* kAppId = @"142876775786876";
             andParams:params
           andDelegate:self];
 }
+#endif
 
 /**
  * Upload a photo.
  */
 - (void)uploadPhoto
 {
-    NSString *path = @"http://king.eece.maine.edu/fenway.png";
-    NSURL *url = [NSURL URLWithString:path];
-    //NSData *data = [NSData dataWithContentsOfURL:url];
     NSString* documentsDir = [[SMTGAppDelegate sharedAppDelegate] applicationDocumentsDirectory];
     NSString *filePath =  [documentsDir stringByAppendingPathComponent: @"Screenshot.png"];
     NSData* data = [NSData dataWithContentsOfFile: filePath];
@@ -723,6 +818,10 @@ static NSString* kAppId = @"142876775786876";
  *      didReceiveResponse:(NSURLResponse *)response
  */
 - (void)request:(FBRequest *)request didLoad:(id)result {
+    UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"Success" message: @"Successfully uploaded scorecard to Facebook" delegate:self cancelButtonTitle:nil otherButtonTitles: @"Dismiss", nil];
+    
+    [av show];
+    
     if ([result isKindOfClass:[NSArray class]]) {
         result = [result objectAtIndex:0];
     }
@@ -738,6 +837,9 @@ static NSString* kAppId = @"142876775786876";
  * successfully.
  */
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
+    UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"Error" message: @"An error occurred uploading the scorecard.\nPlease try again later." delegate:self cancelButtonTitle:nil otherButtonTitles: @"Dismiss", nil];
+    
+    [av show];
     NSLog(@"Request Failed: %@", [error localizedDescription]);
     NSLog(@"Error Details: %@", [error description]);
 };

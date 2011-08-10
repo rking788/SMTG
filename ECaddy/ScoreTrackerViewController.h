@@ -16,9 +16,11 @@
 @class Facebook;
 
 @interface ScoreTrackerViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, 
-                                                            UIActionSheetDelegate ,FBSessionDelegate, FBDialogDelegate, FBRequestDelegate> {
+                                                            UIActionSheetDelegate, UIAlertViewDelegate, FBSessionDelegate, 
+                                                            FBDialogDelegate, FBRequestDelegate>{
     HeaderFooterView *scoreHeaderView;
     HeaderFooterView *scoreFooterView;
+                                                                UIView *titleView;
     UILabel *titleTextView;
     UILabel *dateLbl;
     UIButton *favstarBtn;
@@ -43,6 +45,7 @@ enum{
 
 @property (nonatomic, retain) IBOutlet HeaderFooterView *scoreHeaderView;
 @property (nonatomic, retain) IBOutlet HeaderFooterView *scoreFooterView;
+@property (nonatomic, retain) IBOutlet UIView *titleView;
 @property (nonatomic, retain) IBOutlet UILabel *titleTextView;
 @property (retain, nonatomic) IBOutlet UILabel *dateLbl;
 @property (nonatomic, retain) IBOutlet UIButton *favstarBtn;
@@ -60,6 +63,7 @@ enum{
 @property (readonly) Facebook* FB; 
 @property (nonatomic, retain) NSArray* FBpermissions;
 @property (nonatomic, getter = isFBLoggedIn) BOOL FBLoggedIn;
+@property (nonatomic, retain) NSString* pendingFBAction;
 
 - (IBAction)favstarPressed:(id)sender;
 
@@ -74,13 +78,17 @@ enum{
 
 - (void) actionButtonClicked: (id) sender;
 
-+(void) savePNGForView:(UIView *)targetView rect:(CGRect)rect fileName:(NSString *)fileName;
+- (void) saveScorecardImg;
+
++ (BOOL) savePNGForView:(UIView *)targetView rect:(CGRect)rect fileName:(NSString *)fileName;
 
 // Facebook Methods
 - (void) login;
 - (void) logout;
 - (void) uploadSCToFB;
+#if 0
 - (void)publishStream;
+#endif
 - (void)uploadPhoto;
 
 

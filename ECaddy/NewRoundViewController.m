@@ -365,8 +365,6 @@
     if(!golfCourse)
         return;
     
-    NSLog(@"Selected course: %@", [golfCourse coursename]);
-    
     self.curCourse = golfCourse;
     
     NSIndexPath* indPath = [NSIndexPath indexPathForRow: kCourseName inSection: 0];

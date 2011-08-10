@@ -29,7 +29,6 @@
     [super viewDidLoad];
     
 #ifdef LITE
-    NSLog(@"Setting up the ad view because this is the free version");
     [self createAdBannerView];
 #endif
 }

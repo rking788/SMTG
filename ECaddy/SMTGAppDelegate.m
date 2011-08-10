@@ -68,6 +68,7 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
      */
+    [self saveContext];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -238,7 +239,7 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
 
 - (void) saveContext
 {
-    NSError* err;
+    NSError* err = nil;
     
     if(![self.managedObjectContext save:&err]){
         // Handle the error here
@@ -280,6 +281,18 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
         self.curCourse = self.curScorecard.course;
     
     return self.curScorecard;
+}
+
+- (void) saveCurScorecard:(NSMutableDictionary *)sc
+{
+    if(!sc){
+        return ;
+    }
+    
+    NSDictionary* newScores = [[NSDictionary alloc] initWithObjects: [sc allValues] forKeys: [sc allKeys]];
+    self.curScorecard.scores = newScores;
+    
+    [self saveContext];
 }
 
 + (SMTGAppDelegate*) sharedAppDelegate

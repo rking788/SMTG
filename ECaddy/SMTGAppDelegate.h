@@ -45,6 +45,7 @@
 
 - (void) saveContext;
 
+- (void) saveCurScorecard: (NSMutableDictionary*) sc;
 + (SMTGAppDelegate*) sharedAppDelegate;
 
 #ifdef LITE
