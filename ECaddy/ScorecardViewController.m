@@ -32,12 +32,12 @@
     NSLog(@"Setting up the ad view because this is the free version");
     [self createAdBannerView];
 #endif
-    
-    [self checkForPending];
 }
 
 - (void) viewDidAppear:(BOOL)animated
 {
+    [self checkForPending];
+    
     if(self.courseObj){
         [self startNewRoundWithCourseOrNil: self.courseObj];
     }

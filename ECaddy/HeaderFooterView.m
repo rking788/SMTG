@@ -270,7 +270,6 @@
 
 - (void) setPlayers: (NSArray*) names
 {
-    NSLog(@"Setting the names %@", names);
     NSInteger i = 0;
     
     for (NSString* name in names){

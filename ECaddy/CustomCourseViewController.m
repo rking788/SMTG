@@ -11,6 +11,8 @@
 #import "SMTGAppDelegate.h"
 
 @implementation CustomCourseViewController
+@synthesize scrollView;
+@synthesize activeField;
 @synthesize courseNameTF;
 @synthesize phoneTF;
 @synthesize numHolesTF;
@@ -47,6 +49,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    // Register for keyboard notifications to scoll up the text fields
+    [self registerForKeyboardNotifications];
+    
     // Add save and cancel buttons to the navigation bar
     [self.navBar.topItem setLeftBarButtonItem: [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target: self action: @selector(cancel)] autorelease]];
     [self.navBar.topItem setRightBarButtonItem: [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target: self action: @selector(save)] autorelease]];
@@ -63,6 +69,7 @@
 
 - (void)viewDidUnload
 {
+    [self setActiveField: nil];
     [self setCourseNameTF:nil];
     [self setPhoneTF:nil];
     [self setAddressTF:nil];
@@ -75,6 +82,7 @@
     [self setUploadingView:nil];
     [self setUploadingInd:nil];
     [self setNumHolesTF:nil];
+    [self setScrollView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -87,6 +95,7 @@
 }
 
 - (void)dealloc {
+    [activeField release];
     [courseNameTF release];
     [phoneTF release];
     [addressTF release];
@@ -99,7 +108,18 @@
     [uploadingView release];
     [uploadingInd release];
     [numHolesTF release];
+    [scrollView release];
     [super dealloc];
+}
+
+- (void) textFieldDidBeginEditing:(UITextField *)textField
+{
+    self.activeField = textField;
+}
+
+- (void) textFieldDidEndEditing:(UITextField *)textField
+{
+    self.activeField = nil;
 }
 
 - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
@@ -404,6 +424,49 @@
     if([[alertView buttonTitleAtIndex: buttonIndex] isEqualToString: @"Continue"]){
         [self beginRound];
     }*/
+}
+
+#pragma mark - Keyboard methods so the text fields aren't hidden by the keyboard
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+    
+}
+
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, kbSize.height, 0.0);
+    scrollView.contentInset = contentInsets;
+    scrollView.scrollIndicatorInsets = contentInsets;
+    
+    CGRect tfFrame = activeField.frame;
+    tfFrame.origin.y += self.scrollView.frame.origin.y + 88;
+    
+    // If active text field is hidden by keyboard, scroll it so it's visible
+    CGRect aRect = self.scrollView.frame;
+    aRect.size.height -= kbSize.height;
+    if (!CGRectContainsPoint(aRect, tfFrame.origin) ) {
+        CGPoint scrollPoint = CGPointMake(0.0, tfFrame.origin.y-kbSize.height);
+        [scrollView setContentOffset:scrollPoint animated:YES];
+    }
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
 }
 
 @end

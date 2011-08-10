@@ -12,6 +12,8 @@
 #import "Scorecard.h"
 #import "ScoreTrackerViewController.h"
 
+#pragma mark - TODO: If clearing all scorecards from a course, the section title stays behind which isn't really good.
+
 @implementation ScorecardTableViewController
 
 @synthesize manObjCon;

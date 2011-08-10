@@ -83,7 +83,7 @@ static NSString* kAppId = @"142876775786876";
     // TODO: Finish implementing this to provide actions like posting to facebook and finishing a round
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
                                                initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                               target:self action:@selector(FBButtonClicked:)] autorelease];
+                                               target:self action:@selector(actionButtonClicked:)] autorelease];
     
     // Create the Facebook instance
     self.FBLoggedIn = NO;
@@ -171,6 +171,7 @@ static NSString* kAppId = @"142876775786876";
     if(scoresdict){
         self.scorecardDict = (NSMutableDictionary*) self.scorecard.scores;
         [self.scoreHeaderView setPlayers: [self.scorecardDict allKeys]];
+        [self.scoreFooterView setPlayers: [self.scorecardDict allKeys]];
     }
     
     // Update the totals in the footer view
@@ -509,6 +510,35 @@ static NSString* kAppId = @"142876775786876";
     [UIView commitAnimations];
 }
 
+- (void) actionButtonClicked: (id) sender
+{
+    UIActionSheet* actSheet = [[UIActionSheet alloc] initWithTitle: nil delegate: self cancelButtonTitle: @"Cancel" destructiveButtonTitle: @"Finish Round" otherButtonTitles: @"Upload to Facebok", nil];
+    actSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+    [actSheet showFromTabBar: self.tabBarController.tabBar];
+    [actSheet release];  
+}
+
+#pragma mark - UIActionSheetDelegate Method
+- (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString* selTitle = [actionSheet buttonTitleAtIndex: buttonIndex];
+    if([selTitle isEqualToString: @"Upload to Facebook"]){
+        [self uploadSCToFB];
+    }
+    else if([selTitle isEqualToString: @"Finish Round"]){
+        // Set the scorecard active to NO and go back to the root view controller.
+        self.scorecard.active = [NSNumber numberWithBool: NO];
+        self.scorecard.scores = self.scorecardDict;
+        [[SMTGAppDelegate sharedAppDelegate] saveContext];
+        
+        self.scorecard = nil;
+        [[SMTGAppDelegate sharedAppDelegate] setCurCourse: nil];
+        [[SMTGAppDelegate sharedAppDelegate] setCurScorecard: nil];
+        
+        [self.navigationController popToRootViewControllerAnimated: YES];
+    }
+}
+
 #pragma mark - Methods to export view to PNG
 
 +(void) savePNGForView:(UIView *)targetView rect:(CGRect)rect fileName:(NSString *)fileName
@@ -548,7 +578,29 @@ static NSString* kAppId = @"142876775786876";
     [self.FB logout: self];
 }
 
-- (void) FBButtonClicked: (id) sender
+/**
+ * Called when the user has logged in successfully.
+ */
+- (void)fbDidLogin {
+    self.FBLoggedIn = YES;
+    [self uploadPhoto];
+}
+
+/**
+ * Called when the user canceled the authorization dialog.
+ */
+-(void)fbDidNotLogin:(BOOL)cancelled {
+    NSLog(@"Failed logging in to Facebook");
+}
+
+/**
+ * Called when the request logout has succeeded.
+ */
+- (void)fbDidLogout {
+    self.FBLoggedIn = NO;
+}
+
+- (void) uploadSCToFB
 {
     if(![self isFBLoggedIn]){
         [self login];
@@ -590,28 +642,6 @@ static NSString* kAppId = @"142876775786876";
         //[self uploadPhoto];
         //[self logout];
     }
-}
-
-/**
- * Called when the user has logged in successfully.
- */
-- (void)fbDidLogin {
-    self.FBLoggedIn = YES;
-    [self uploadPhoto];
-}
-
-/**
- * Called when the user canceled the authorization dialog.
- */
--(void)fbDidNotLogin:(BOOL)cancelled {
-    NSLog(@"Failed logging in to Facebook");
-}
-
-/**
- * Called when the request logout has succeeded.
- */
-- (void)fbDidLogout {
-    self.FBLoggedIn = NO;
 }
 
 /**

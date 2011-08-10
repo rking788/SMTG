@@ -12,6 +12,7 @@
 
 @interface CustomCourseViewController : UIViewController <UITextFieldDelegate, UIAlertViewDelegate> {
     
+    UITextField* activeField;
     UITextField *courseNameTF;
     UITextField *phoneTF;
     UITextField *addressTF;
@@ -24,7 +25,10 @@
     UIView *uploadingView;
     UIActivityIndicatorView *uploadingInd;
     UITextField *numHolesTF;
+    UIScrollView *scrollView;
 }
+@property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, retain) UITextField* activeField;
 @property (nonatomic, retain) IBOutlet UITextField *courseNameTF;
 @property (nonatomic, retain) IBOutlet UITextField *phoneTF;
 @property (nonatomic, retain) IBOutlet UITextField *numHolesTF;
@@ -42,6 +46,8 @@
 - (void) cancel;
 - (void) writeCourseToServer: (Course*) course;
 - (void) dismiss: (NSNumber*) shouldSave;
+
+- (void)registerForKeyboardNotifications;
 
 + (BOOL) stateEnabled: (NSString*) state;
 + (NSString*) getWOEIDWithCity: (NSString*) city AndState: (NSString*) state;

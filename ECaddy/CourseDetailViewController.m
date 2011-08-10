@@ -62,6 +62,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
+    [self.tableV setBackgroundColor: [UIColor clearColor]];
+    
     // Set up borders for the top level views
     self.titleView.layer.borderColor = [UIColor colorWithRed:0 green:0.5 blue:0 alpha:1.0].CGColor;
     self.titleView.layer.borderWidth = BORDER_WIDTH;
@@ -251,7 +253,7 @@
             [lbl2 setText: @""];
             break;
     }
-
+    
     [cell setSelectionStyle: UITableViewCellSelectionStyleBlue];
     
     return cell;

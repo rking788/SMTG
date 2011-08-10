@@ -15,7 +15,8 @@
 @class HeaderFooterView;
 @class Facebook;
 
-@interface ScoreTrackerViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, FBSessionDelegate, FBDialogDelegate, FBRequestDelegate> {
+@interface ScoreTrackerViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, 
+                                                            UIActionSheetDelegate ,FBSessionDelegate, FBDialogDelegate, FBRequestDelegate> {
     HeaderFooterView *scoreHeaderView;
     HeaderFooterView *scoreFooterView;
     UILabel *titleTextView;
@@ -71,12 +72,14 @@ enum{
 
 - (void)registerForKeyboardNotifications;
 
+- (void) actionButtonClicked: (id) sender;
+
 +(void) savePNGForView:(UIView *)targetView rect:(CGRect)rect fileName:(NSString *)fileName;
 
 // Facebook Methods
 - (void) login;
 - (void) logout;
-- (void) FBButtonClicked: (id) sender;
+- (void) uploadSCToFB;
 - (void)publishStream;
 - (void)uploadPhoto;
 

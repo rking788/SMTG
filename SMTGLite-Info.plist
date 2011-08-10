@@ -15,8 +15,8 @@
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>appicon.png</string>
-		<string>greenicon@2x.png</string>
-		<string>greenicon.png</string>
+		<string>greenicon-lite@2x.png</string>
+		<string>greenicon-lite.png</string>
 		<string>teeandgreen_ret.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>

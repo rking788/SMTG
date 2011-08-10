@@ -26,6 +26,8 @@
 		9679EB0D13E79B81001F3872 /* settingstab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EB0C13E79B81001F3872 /* settingstab@2x.png */; };
 		9679EB0F13E7A1D6001F3872 /* favstarpressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EB0E13E7A1D6001F3872 /* favstarpressed.png */; };
 		9679EB1113E7A1E2001F3872 /* favstarreleased.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EB1013E7A1E2001F3872 /* favstarreleased.png */; };
+		96A3AA2913F1CCFD001D5BAC /* greenicon-lite.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A3AA2813F1CCFD001D5BAC /* greenicon-lite.png */; };
+		96A3AA2B13F1CD0D001D5BAC /* greenicon-lite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A3AA2A13F1CD0D001D5BAC /* greenicon-lite@2x.png */; };
 		96AC66ED13F00A9200D614E0 /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = AE816DC0137B7E140023F5D7 /* TBXML.m */; };
 		96AC66EE13F00A9200D614E0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D74F1368E34400CDA534 /* main.m */; };
 		96AC66EF13F00A9200D614E0 /* SMTGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7521368E34400CDA534 /* SMTGAppDelegate.m */; };
@@ -215,6 +217,8 @@
 		9679EB0C13E79B81001F3872 /* settingstab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settingstab@2x.png"; sourceTree = "<group>"; };
 		9679EB0E13E7A1D6001F3872 /* favstarpressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favstarpressed.png; sourceTree = "<group>"; };
 		9679EB1013E7A1E2001F3872 /* favstarreleased.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favstarreleased.png; sourceTree = "<group>"; };
+		96A3AA2813F1CCFD001D5BAC /* greenicon-lite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "greenicon-lite.png"; path = "../greenicon-lite.png"; sourceTree = "<group>"; };
+		96A3AA2A13F1CD0D001D5BAC /* greenicon-lite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "greenicon-lite@2x.png"; path = "../greenicon-lite@2x.png"; sourceTree = "<group>"; };
 		96AC674A13F00A9200D614E0 /* SMTG Lite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SMTG Lite.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96AC674C13F00A9200D614E0 /* SMTGLite-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "SMTGLite-Info.plist"; path = "/Users/rking/dev/ios/ECaddy/SMTGLite-Info.plist"; sourceTree = "<absolute>"; };
 		96B599CA13EE559500142A36 /* greenflag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenflag.png; sourceTree = "<group>"; };
@@ -521,8 +525,10 @@
 				963A524E13EB7B8000253B12 /* SMTG.sqlite */,
 				9608A9A313E8FF610059BBA4 /* Default.png */,
 				9608A9A413E8FF610059BBA4 /* Default@2x.png */,
-				96FA1A6513E77206001C9163 /* greenicon@2x.png */,
 				96FA1A6313E771F4001C9163 /* greenicon.png */,
+				96FA1A6513E77206001C9163 /* greenicon@2x.png */,
+				96A3AA2813F1CCFD001D5BAC /* greenicon-lite.png */,
+				96A3AA2A13F1CD0D001D5BAC /* greenicon-lite@2x.png */,
 				961BA18E13EF760C0046B850 /* windarrow.png */,
 				AE38B0B513BE4C6900D7F9FA /* scorecard_tab.png */,
 				AE38B0B613BE4C6900D7F9FA /* scorecard_tab@2x.png */,
@@ -696,6 +702,8 @@
 				96AC674413F00A9200D614E0 /* curlocbtn.png in Resources */,
 				96AC674513F00A9200D614E0 /* MapErrorView.xib in Resources */,
 				96AC674613F00A9200D614E0 /* windarrow.png in Resources */,
+				96A3AA2913F1CCFD001D5BAC /* greenicon-lite.png in Resources */,
+				96A3AA2B13F1CD0D001D5BAC /* greenicon-lite@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
