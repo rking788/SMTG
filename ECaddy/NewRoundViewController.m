@@ -14,6 +14,7 @@
 
 @implementation NewRoundViewController
 
+@synthesize liteMessage;
 @synthesize tableView;
 @synthesize actSheet;
 @synthesize curCourse;
@@ -33,6 +34,7 @@
     [curCourse release];
     [curScorecard release];
     [tableView release];
+    [liteMessage release];
     [super dealloc];
 }
 
@@ -50,6 +52,10 @@
 {
     [super viewDidLoad];
 
+#ifdef PAID
+    [self.liteMessage setHidden: YES];
+#endif
+     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -106,6 +112,7 @@
 - (void)viewDidUnload
 {
     [self setTableView:nil];
+    [self setLiteMessage:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -382,6 +389,17 @@
         return;
     }
     
+#ifdef LITE
+    SMTGAppDelegate* del = [SMTGAppDelegate sharedAppDelegate];
+    NSUInteger numSCs = [del findNumSCs];
+    if (numSCs >= 3) {
+        UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"Warning" message: @"The Lite version only allows 3 scorecards, the Full version does not have a limit. Would you like to continue and remove the oldest scorecard?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+        
+        [av show];
+        return;
+    }
+#endif
+    
     [self beginRound];
 }
 
@@ -481,6 +499,21 @@
     [del saveContext];
     
     if([[alertView buttonTitleAtIndex: buttonIndex] isEqualToString: @"Continue"]){
+#ifdef LITE
+        SMTGAppDelegate* del = [SMTGAppDelegate sharedAppDelegate];
+        NSUInteger numSCs = [del findNumSCs];
+        if (numSCs >= 3) {
+            UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"Warning" message: @"The Lite version only allows 3 scorecards, the Full version does not have a limit. Would you like to continue and remove the oldest scorecard?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Yes", nil];
+            
+            [av show];
+            return;
+        }
+#endif
+        
+        [self beginRound];
+    }
+    else if([[alertView buttonTitleAtIndex: buttonIndex] isEqualToString: @"Yes"]){
+        [[SMTGAppDelegate sharedAppDelegate] removeOldestSC];
         [self beginRound];
     }
 }

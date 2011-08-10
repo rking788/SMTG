@@ -88,9 +88,9 @@
 {
     [super viewWillAppear:animated];
     
-    self.actScorecard = [[SMTGAppDelegate sharedAppDelegate] findActiveScorecard];
-    if(self.actScorecard)
-        self.actives = YES;
+//    self.actScorecard = [[SMTGAppDelegate sharedAppDelegate] findActiveScorecard];
+//    if(self.actScorecard)
+//        self.actives = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -121,8 +121,8 @@
     // Return the number of elements in the course name set
     NSInteger count = [[courseNameDict allKeys] count];
     
-    if([self isActives])
-        count++;
+    //if([self isActives])
+     //   count++;
     
     return count;
 }
@@ -132,11 +132,11 @@
     NSString* title = nil;
     NSArray* nameArr = [[self.courseNameDict allKeys] sortedArrayUsingSelector: @selector(caseInsensitiveCompare:)];
     
-    if([self isActives] && (section == 0))
-        title = @"Active Course";
-    else if([self isActives])
-        title = [nameArr objectAtIndex: (section - 1)];
-    else
+   // if([self isActives] && (section == 0))
+    //    title = @"Active Course";
+    //else if([self isActives])
+     //   title = [nameArr objectAtIndex: (section - 1)];
+   // else
         title = [nameArr objectAtIndex: section];
     
     return title;
@@ -149,12 +149,12 @@
     // Return the number of rows in the section.
     NSString* nameStr;
     
-    if([self isActives] && (section == 0))
-        count = 1;
-    else{
+//  if([self isActives] && (section == 0))
+//      count = 1;
+//  else{
         nameStr = [self tableView: tableView titleForHeaderInSection: section];
         count = [[self.courseNameDict objectForKey: nameStr] count];
-    }
+//  }
     
     return count;
 }
@@ -176,15 +176,15 @@
     NSString* courseName = nil;
     NSDate* date = nil;
     
-    if([self isActives] && (indexPath.section == 0)){
-        courseName = self.actScorecard.course.coursename;
-        date = self.actScorecard.dateplayed;
-    }
-    else{
+//    if([self isActives] && (indexPath.section == 0)){
+//        courseName = self.actScorecard.course.coursename;
+//        date = self.actScorecard.dateplayed;
+//    }
+//    else{
         courseName = [self tableView: tableView titleForHeaderInSection: indexPath.section];
         NSMutableArray* tmpArr = [self.courseNameDict objectForKey: courseName];
         date = [tmpArr objectAtIndex: indexPath.row];
-    }
+//    }
     
     dateF = [[NSDateFormatter alloc] init];
     [dateF setDateFormat: @"MM/dd/yyyy hh:mm"];
@@ -290,14 +290,14 @@
     NSString* nameStr;
     NSDate* date;
     
-    if([self isActives] && (indexPath.section == 0)){
-        nameStr = self.actScorecard.course.coursename;
-        date = self.actScorecard.dateplayed;
-    }
-    else{
+//    if([self isActives] && (indexPath.section == 0)){
+//        nameStr = self.actScorecard.course.coursename;
+//        date = self.actScorecard.dateplayed;
+//    }
+//    else{
         nameStr = [self tableView: tableView titleForHeaderInSection: indexPath.section];
         date = [[self.courseNameDict objectForKey: nameStr] objectAtIndex: indexPath.row];
-    }
+//    }
 
     self.selScorecard = [self scorecardWithName: nameStr AndDate: date];
     [stvc setScorecard: self.selScorecard];
@@ -313,16 +313,20 @@
     NSString* nameStr;
     NSDate* date;
    
-    if([self isActives] && (indexPath.section == 0)){
-        nameStr = self.actScorecard.course.coursename;
-        date = self.actScorecard.dateplayed;
-    }
-    else{
+//    if([self isActives] && (indexPath.section == 0)){
+//        nameStr = self.actScorecard.course.coursename;
+//        date = self.actScorecard.dateplayed;
+//    }
+//    else{
         nameStr = [self tableView: tableView titleForHeaderInSection: indexPath.section];
         date = [[self.courseNameDict objectForKey: nameStr] objectAtIndex: indexPath.row];
-    }
+//    }
     
     self.selScorecard = [self scorecardWithName: nameStr AndDate: date];
+//    if ([self.selScorecard.active isEqualToNumber: [NSNumber numberWithBool: YES]]) {
+//        [[SMTGAppDelegate sharedAppDelegate] setCurScorecard: nil];
+//        [[SMTGAppDelegate sharedAppDelegate] setCurCourse: nil];
+//    }
     
     [self.manObjCon deleteObject: self.selScorecard];
     

@@ -47,6 +47,11 @@
 
 + (SMTGAppDelegate*) sharedAppDelegate;
 
+#ifdef LITE
+- (NSUInteger) findNumSCs;
+- (void) removeOldestSC;
+#endif
+
 - (void) setFBInstance: (Facebook*) fb;
 
 @end

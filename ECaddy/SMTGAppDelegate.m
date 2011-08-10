@@ -287,6 +287,63 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
     return (SMTGAppDelegate*) [[UIApplication sharedApplication] delegate];
 }
 
+#ifdef LITE
+- (NSUInteger) findNumSCs
+{
+    NSUInteger ret = 0;
+    
+    NSFetchRequest* fetchrequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Scorecard" inManagedObjectContext: self.managedObjectContext];
+    [fetchrequest setEntity:entity];
+    
+    NSError *error = nil;
+    NSArray *array = [self.managedObjectContext executeFetchRequest:fetchrequest error:&error];
+    if (array != nil) {
+        ret = [array count];
+    }
+    else {
+        // Deal with error.
+        NSLog(@"Error fetching lots");
+    }
+    
+    [fetchrequest release];
+
+    return ret;
+}
+
+- (void) removeOldestSC
+{
+    NSFetchRequest* fetchrequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Scorecard" inManagedObjectContext: self.managedObjectContext];
+    [fetchrequest setEntity:entity];
+    
+    [fetchrequest setFetchLimit: 1];
+    
+    NSSortDescriptor* sortDescript = [[NSSortDescriptor alloc] initWithKey:@"dateplayed" ascending:YES];
+    NSArray* sdArr = [[NSArray alloc] initWithObjects: sortDescript, nil];
+    [fetchrequest setSortDescriptors: sdArr];
+    
+    NSError *error = nil;
+    NSArray *array = [self.managedObjectContext executeFetchRequest:fetchrequest error:&error];
+    if (array != nil) {
+        if([array count] != 0){
+            [self.managedObjectContext deleteObject: [array objectAtIndex: 0]];
+            [self saveContext];
+        }
+    }
+    else {
+        // Deal with error.
+        NSLog(@"Error fetching lots");
+    }
+    
+    [sdArr release];
+    [sortDescript release];
+    [fetchrequest release];
+}
+
+#endif
+
+#pragma mark - Facebook methods
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     return [self.FB handleOpenURL:url];
 }
