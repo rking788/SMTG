@@ -76,7 +76,6 @@
 		96AC671C13F00A9200D614E0 /* CourseSelectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7601368E34400CDA534 /* CourseSelectView.xib */; };
 		96AC671D13F00A9200D614E0 /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7731368E75700CDA534 /* MapView.xib */; };
 		96AC671E13F00A9200D614E0 /* WeatherDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7911369298E00CDA534 /* WeatherDetails.xib */; };
-		96AC671F13F00A9200D614E0 /* stateabbrs.txt in Resources */ = {isa = PBXBuildFile; fileRef = AE7F932713835FC9003CCD57 /* stateabbrs.txt */; };
 		96AC672013F00A9200D614E0 /* StateDirView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7F932A13836621003CCD57 /* StateDirView.xib */; };
 		96AC672113F00A9200D614E0 /* CourseDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEA35AE71384CE7600111BAA /* CourseDetailView.xib */; };
 		96AC672213F00A9200D614E0 /* NewRoundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE8E2C19139886630098A426 /* NewRoundView.xib */; };
@@ -116,6 +115,95 @@
 		96AC674413F00A9200D614E0 /* curlocbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D021D613EF207400BC0A4F /* curlocbtn.png */; };
 		96AC674513F00A9200D614E0 /* MapErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96F2B38013EF257A005BE308 /* MapErrorView.xib */; };
 		96AC674613F00A9200D614E0 /* windarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 961BA18E13EF760C0046B850 /* windarrow.png */; };
+		96AD854313FC151B0018B03D /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = AE816DC0137B7E140023F5D7 /* TBXML.m */; };
+		96AD854413FC151B0018B03D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D74F1368E34400CDA534 /* main.m */; };
+		96AD854513FC151B0018B03D /* SMTGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7521368E34400CDA534 /* SMTGAppDelegate.m */; };
+		96AD854613FC151B0018B03D /* ScorecardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7581368E34400CDA534 /* ScorecardViewController.m */; };
+		96AD854713FC151B0018B03D /* DirectoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D75B1368E34400CDA534 /* DirectoryViewController.m */; };
+		96AD854813FC151B0018B03D /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7721368E75700CDA534 /* MapViewController.m */; };
+		96AD854913FC151B0018B03D /* WeatherDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7901369298E00CDA534 /* WeatherDetails.m */; };
+		96AD854A13FC151B0018B03D /* POIAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = AE886D641370E2490056BDF4 /* POIAnnotation.m */; };
+		96AD854B13FC151B0018B03D /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AE816DBE137B7E140023F5D7 /* NSDataAdditions.m */; };
+		96AD854C13FC151B0018B03D /* coursemodel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AEFE6F131381BB60002B1AA3 /* coursemodel.xcdatamodeld */; };
+		96AD854D13FC151B0018B03D /* CourseSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8FE58C1384A96900EE8E66 /* CourseSelectViewController.m */; };
+		96AD854E13FC151B0018B03D /* CourseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA35AE61384CE7600111BAA /* CourseDetailViewController.m */; };
+		96AD854F13FC151B0018B03D /* NewRoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8E2C18139886630098A426 /* NewRoundViewController.m */; };
+		96AD855013FC151B0018B03D /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9177F4139AC17300AC5706 /* Course.m */; };
+		96AD855113FC151B0018B03D /* Scorecard.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9177F7139AC17400AC5706 /* Scorecard.m */; };
+		96AD855213FC151B0018B03D /* ScoreTrackerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA99328139DBF8700DD723C /* ScoreTrackerViewController.m */; };
+		96AD855313FC151B0018B03D /* HeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE880E6813A1ACBE00824DF6 /* HeaderFooterView.m */; };
+		96AD855413FC151B0018B03D /* ScorecardTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE834A7E13A3F6AC00EFF1DB /* ScorecardTableCell.m */; };
+		96AD855513FC151B0018B03D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE90069E13A9C6B3008247BF /* SettingsViewController.m */; };
+		96AD855613FC151B0018B03D /* SettingsDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8DD06B13B034A700D7FCB3 /* SettingsDetailsViewController.m */; };
+		96AD855713FC151B0018B03D /* ScorecardTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D287213B99CB00054903D /* ScorecardTableViewController.m */; };
+		96AD855813FC151B0018B03D /* CustomCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE5301313C39AE3003C866C /* CustomCourseViewController.m */; };
+		96AD855913FC151B0018B03D /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF435F13E0ECB6009D568B /* Facebook.m */; };
+		96AD855A13FC151B0018B03D /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436413E0ECB6009D568B /* FBDialog.m */; };
+		96AD855B13FC151B0018B03D /* FBLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436613E0ECB6009D568B /* FBLoginDialog.m */; };
+		96AD855C13FC151B0018B03D /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436813E0ECB6009D568B /* FBRequest.m */; };
+		96AD855D13FC151B0018B03D /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436C13E0ECB6009D568B /* NSObject+SBJSON.m */; };
+		96AD855E13FC151B0018B03D /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436E13E0ECB6009D568B /* NSString+SBJSON.m */; };
+		96AD855F13FC151B0018B03D /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437013E0ECB6009D568B /* SBJSON.m */; };
+		96AD856013FC151B0018B03D /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437213E0ECB6009D568B /* SBJsonBase.m */; };
+		96AD856113FC151B0018B03D /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437413E0ECB6009D568B /* SBJsonParser.m */; };
+		96AD856213FC151B0018B03D /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437613E0ECB6009D568B /* SBJsonWriter.m */; };
+		96AD856313FC151B0018B03D /* MapErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F2B37F13EF257A005BE308 /* MapErrorViewController.m */; };
+		96AD856513FC151B0018B03D /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8A215113BABA8C001F4F3C /* iAd.framework */; };
+		96AD856613FC151B0018B03D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE8B65B313B24995005EFFE7 /* QuartzCore.framework */; };
+		96AD856713FC151B0018B03D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9427CD13821ABF0047EBA4 /* CoreData.framework */; };
+		96AD856813FC151B0018B03D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7851368EC5900CDA534 /* MapKit.framework */; };
+		96AD856913FC151B0018B03D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7831368EC5200CDA534 /* CoreLocation.framework */; };
+		96AD856A13FC151B0018B03D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7421368E34400CDA534 /* UIKit.framework */; };
+		96AD856B13FC151B0018B03D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7441368E34400CDA534 /* Foundation.framework */; };
+		96AD856C13FC151B0018B03D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7461368E34400CDA534 /* CoreGraphics.framework */; };
+		96AD856D13FC151B0018B03D /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AE816DC3137B7E670023F5D7 /* libz.dylib */; };
+		96AD856F13FC151B0018B03D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE85D74B1368E34400CDA534 /* InfoPlist.strings */; };
+		96AD857E13FC151B0018B03D /* scorecard_tab.png in Resources */ = {isa = PBXBuildFile; fileRef = AE38B0B513BE4C6900D7F9FA /* scorecard_tab.png */; };
+		96AD857F13FC151B0018B03D /* scorecard_tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE38B0B613BE4C6900D7F9FA /* scorecard_tab@2x.png */; };
+		96AD858113FC151B0018B03D /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96DF436213E0ECB6009D568B /* FBDialog.bundle */; };
+		96AD858213FC151B0018B03D /* sadweather.png in Resources */ = {isa = PBXBuildFile; fileRef = 965DC23A13E5087E001E0404 /* sadweather.png */; };
+		96AD858313FC151B0018B03D /* greenicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 96FA1A6313E771F4001C9163 /* greenicon.png */; };
+		96AD858413FC151B0018B03D /* greenicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96FA1A6513E77206001C9163 /* greenicon@2x.png */; };
+		96AD858513FC151B0018B03D /* directorytab.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EAFE13E7844A001F3872 /* directorytab.png */; };
+		96AD858613FC151B0018B03D /* directorytab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EB0013E7896B001F3872 /* directorytab@2x.png */; };
+		96AD858713FC151B0018B03D /* weathertab.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EB0413E79041001F3872 /* weathertab.png */; };
+		96AD858813FC151B0018B03D /* weathertab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EB0613E7910B001F3872 /* weathertab@2x.png */; };
+		96AD858913FC151B0018B03D /* settingstab.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EB0A13E79B0A001F3872 /* settingstab.png */; };
+		96AD858A13FC151B0018B03D /* settingstab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EB0C13E79B81001F3872 /* settingstab@2x.png */; };
+		96AD858B13FC151B0018B03D /* favstarpressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EB0E13E7A1D6001F3872 /* favstarpressed.png */; };
+		96AD858C13FC151B0018B03D /* favstarreleased.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EB1013E7A1E2001F3872 /* favstarreleased.png */; };
+		96AD858D13FC151B0018B03D /* maptabicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9605CC5613E8DFAB004128D9 /* maptabicon.png */; };
+		96AD858E13FC151B0018B03D /* maptabicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9605CC5813E8E046004128D9 /* maptabicon@2x.png */; };
+		96AD858F13FC151B0018B03D /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 9605CC5A13E8EE9A004128D9 /* background.png */; };
+		96AD859013FC151B0018B03D /* background_pat.png in Resources */ = {isa = PBXBuildFile; fileRef = 9605CD3813E8EFF8004128D9 /* background_pat.png */; };
+		96AD859113FC151B0018B03D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 9608A9A313E8FF610059BBA4 /* Default.png */; };
+		96AD859213FC151B0018B03D /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9608A9A413E8FF610059BBA4 /* Default@2x.png */; };
+		96AD859313FC151B0018B03D /* SMTG.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 963A524E13EB7B8000253B12 /* SMTG.sqlite */; };
+		96AD859413FC151B0018B03D /* locationenabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 96EE27C213ECEE4F00170A52 /* locationenabled.png */; };
+		96AD859513FC151B0018B03D /* mapdraggable.png in Resources */ = {isa = PBXBuildFile; fileRef = 96086CFD13EE3EFC00041D0E /* mapdraggable.png */; };
+		96AD859613FC151B0018B03D /* greenflag.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B599CA13EE559500142A36 /* greenflag.png */; };
+		96AD859713FC151B0018B03D /* golftee.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B599D413EE5E1600142A36 /* golftee.png */; };
+		96AD859813FC151B0018B03D /* lightbackground_pat.png in Resources */ = {isa = PBXBuildFile; fileRef = 9612402B13EE66430028A940 /* lightbackground_pat.png */; };
+		96AD859913FC151B0018B03D /* curlocbtn-enabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D021D513EF207400BC0A4F /* curlocbtn-enabled.png */; };
+		96AD859A13FC151B0018B03D /* curlocbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D021D613EF207400BC0A4F /* curlocbtn.png */; };
+		96AD859C13FC151B0018B03D /* windarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 961BA18E13EF760C0046B850 /* windarrow.png */; };
+		96AD859D13FC151B0018B03D /* greenicon-lite.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A3AA2813F1CCFD001D5BAC /* greenicon-lite.png */; };
+		96AD859E13FC151B0018B03D /* greenicon-lite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A3AA2A13F1CD0D001D5BAC /* greenicon-lite@2x.png */; };
+		96AD85BA13FC15290018B03D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96AD85A813FC15290018B03D /* MainWindow.xib */; };
+		96AD85BB13FC15290018B03D /* ScorecardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96AD85AA13FC15290018B03D /* ScorecardView.xib */; };
+		96AD85BC13FC15290018B03D /* CourseSelectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96AD85AC13FC15290018B03D /* CourseSelectView.xib */; };
+		96AD85BD13FC15290018B03D /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96AD85AE13FC15290018B03D /* MapView.xib */; };
+		96AD85BE13FC15290018B03D /* WeatherDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96AD85AF13FC15290018B03D /* WeatherDetails.xib */; };
+		96AD85BF13FC15290018B03D /* StateDirView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96AD85B013FC15290018B03D /* StateDirView.xib */; };
+		96AD85C013FC15290018B03D /* CourseDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96AD85B113FC15290018B03D /* CourseDetailView.xib */; };
+		96AD85C113FC15290018B03D /* NewRoundView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96AD85B213FC15290018B03D /* NewRoundView.xib */; };
+		96AD85C213FC15290018B03D /* ScoreTrackerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96AD85B313FC15290018B03D /* ScoreTrackerView.xib */; };
+		96AD85C313FC15290018B03D /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96AD85B413FC15290018B03D /* SettingsView.xib */; };
+		96AD85C413FC15290018B03D /* NameEditView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96AD85B513FC15290018B03D /* NameEditView.xib */; };
+		96AD85C513FC15290018B03D /* HideStateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96AD85B613FC15290018B03D /* HideStateView.xib */; };
+		96AD85C613FC15290018B03D /* ScorecardTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96AD85B713FC15290018B03D /* ScorecardTableView.xib */; };
+		96AD85C713FC15290018B03D /* CustomCourseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96AD85B813FC15290018B03D /* CustomCourseView.xib */; };
+		96AD85C813FC15290018B03D /* MapErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96AD85B913FC15290018B03D /* MapErrorView.xib */; };
 		96B599CB13EE559500142A36 /* greenflag.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B599CA13EE559500142A36 /* greenflag.png */; };
 		96B599D513EE5E1600142A36 /* golftee.png in Resources */ = {isa = PBXBuildFile; fileRef = 96B599D413EE5E1600142A36 /* golftee.png */; };
 		96D021D713EF207400BC0A4F /* curlocbtn-enabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D021D513EF207400BC0A4F /* curlocbtn-enabled.png */; };
@@ -131,6 +219,9 @@
 		96DF438213E0ECB6009D568B /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437213E0ECB6009D568B /* SBJsonBase.m */; };
 		96DF438313E0ECB6009D568B /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437413E0ECB6009D568B /* SBJsonParser.m */; };
 		96DF438413E0ECB6009D568B /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437613E0ECB6009D568B /* SBJsonWriter.m */; };
+		96DF7D7B1409E2BA005BA340 /* stateabbrs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 96DF7D7A1409E2BA005BA340 /* stateabbrs.txt */; };
+		96DF7D7C1409E2BA005BA340 /* stateabbrs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 96DF7D7A1409E2BA005BA340 /* stateabbrs.txt */; };
+		96DF7D7D1409E2BA005BA340 /* stateabbrs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 96DF7D7A1409E2BA005BA340 /* stateabbrs.txt */; };
 		96EE27C313ECEE4F00170A52 /* locationenabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 96EE27C213ECEE4F00170A52 /* locationenabled.png */; };
 		96F2B38113EF257A005BE308 /* MapErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F2B37F13EF257A005BE308 /* MapErrorViewController.m */; };
 		96F2B38213EF257A005BE308 /* MapErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96F2B38013EF257A005BE308 /* MapErrorView.xib */; };
@@ -140,7 +231,6 @@
 		AE38B0B813BE4C6900D7F9FA /* scorecard_tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE38B0B613BE4C6900D7F9FA /* scorecard_tab@2x.png */; };
 		AE3D287413B99CB10054903D /* ScorecardTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D287213B99CB00054903D /* ScorecardTableViewController.m */; };
 		AE3D287513B99CB10054903D /* ScorecardTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE3D287313B99CB00054903D /* ScorecardTableView.xib */; };
-		AE7F932813835FC9003CCD57 /* stateabbrs.txt in Resources */ = {isa = PBXBuildFile; fileRef = AE7F932713835FC9003CCD57 /* stateabbrs.txt */; };
 		AE7F932B13836621003CCD57 /* StateDirView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7F932A13836621003CCD57 /* StateDirView.xib */; };
 		AE816DC1137B7E140023F5D7 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AE816DBE137B7E140023F5D7 /* NSDataAdditions.m */; };
 		AE816DC2137B7E140023F5D7 /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = AE816DC0137B7E140023F5D7 /* TBXML.m */; };
@@ -159,7 +249,7 @@
 		AE85D7621368E34400CDA534 /* CourseSelectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7601368E34400CDA534 /* CourseSelectView.xib */; };
 		AE85D7741368E75700CDA534 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7721368E75700CDA534 /* MapViewController.m */; };
 		AE85D7751368E75700CDA534 /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7731368E75700CDA534 /* MapView.xib */; };
-		AE85D7841368EC5200CDA534 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7831368EC5200CDA534 /* CoreLocation.framework */; };
+		AE85D7841368EC5200CDA534 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7831368EC5200CDA534 /* CoreLocation.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		AE85D7861368EC5900CDA534 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE85D7851368EC5900CDA534 /* MapKit.framework */; };
 		AE85D7921369298E00CDA534 /* WeatherDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7901369298E00CDA534 /* WeatherDetails.m */; };
 		AE85D7931369298E00CDA534 /* WeatherDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7911369298E00CDA534 /* WeatherDetails.xib */; };
@@ -221,6 +311,23 @@
 		96A3AA2A13F1CD0D001D5BAC /* greenicon-lite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "greenicon-lite@2x.png"; path = "../greenicon-lite@2x.png"; sourceTree = "<group>"; };
 		96AC674A13F00A9200D614E0 /* SMTG Lite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SMTG Lite.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96AC674C13F00A9200D614E0 /* SMTGLite-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "SMTGLite-Info.plist"; path = "/Users/rking/dev/ios/ECaddy/SMTGLite-Info.plist"; sourceTree = "<absolute>"; };
+		96AD85A213FC151B0018B03D /* SMTG Lite-iPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SMTG Lite-iPad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		96AD85A713FC151C0018B03D /* SMTG Lite copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "SMTG Lite copy-Info.plist"; path = "/Users/rking/dev/ios/ECaddy/SMTG Lite copy-Info.plist"; sourceTree = "<absolute>"; };
+		96AD85A913FC15290018B03D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "Resources-iPad/ECaddy/en.lproj/MainWindow.xib"; sourceTree = "<group>"; };
+		96AD85AB13FC15290018B03D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "Resources-iPad/ECaddy/en.lproj/ScorecardView.xib"; sourceTree = "<group>"; };
+		96AD85AD13FC15290018B03D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "Resources-iPad/ECaddy/en.lproj/CourseSelectView.xib"; sourceTree = "<group>"; };
+		96AD85AE13FC15290018B03D /* MapView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MapView.xib; path = "Resources-iPad/ECaddy/MapView.xib"; sourceTree = "<group>"; };
+		96AD85AF13FC15290018B03D /* WeatherDetails.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = WeatherDetails.xib; path = "Resources-iPad/ECaddy/WeatherDetails.xib"; sourceTree = "<group>"; };
+		96AD85B013FC15290018B03D /* StateDirView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = StateDirView.xib; path = "Resources-iPad/ECaddy/StateDirView.xib"; sourceTree = "<group>"; };
+		96AD85B113FC15290018B03D /* CourseDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CourseDetailView.xib; path = "Resources-iPad/ECaddy/CourseDetailView.xib"; sourceTree = "<group>"; };
+		96AD85B213FC15290018B03D /* NewRoundView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = NewRoundView.xib; path = "Resources-iPad/ECaddy/NewRoundView.xib"; sourceTree = "<group>"; };
+		96AD85B313FC15290018B03D /* ScoreTrackerView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ScoreTrackerView.xib; path = "Resources-iPad/ECaddy/ScoreTrackerView.xib"; sourceTree = "<group>"; };
+		96AD85B413FC15290018B03D /* SettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SettingsView.xib; path = "Resources-iPad/ECaddy/SettingsView.xib"; sourceTree = "<group>"; };
+		96AD85B513FC15290018B03D /* NameEditView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = NameEditView.xib; path = "Resources-iPad/ECaddy/NameEditView.xib"; sourceTree = "<group>"; };
+		96AD85B613FC15290018B03D /* HideStateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HideStateView.xib; path = "Resources-iPad/ECaddy/HideStateView.xib"; sourceTree = "<group>"; };
+		96AD85B713FC15290018B03D /* ScorecardTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ScorecardTableView.xib; path = "Resources-iPad/ECaddy/ScorecardTableView.xib"; sourceTree = "<group>"; };
+		96AD85B813FC15290018B03D /* CustomCourseView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = CustomCourseView.xib; path = "Resources-iPad/ECaddy/CustomCourseView.xib"; sourceTree = "<group>"; };
+		96AD85B913FC15290018B03D /* MapErrorView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MapErrorView.xib; path = "Resources-iPad/ECaddy/MapErrorView.xib"; sourceTree = "<group>"; };
 		96B599CA13EE559500142A36 /* greenflag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenflag.png; sourceTree = "<group>"; };
 		96B599D413EE5E1600142A36 /* golftee.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = golftee.png; sourceTree = "<group>"; };
 		96D021D513EF207400BC0A4F /* curlocbtn-enabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "curlocbtn-enabled.png"; sourceTree = "<group>"; };
@@ -250,6 +357,7 @@
 		96DF437413E0ECB6009D568B /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
 		96DF437513E0ECB6009D568B /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		96DF437613E0ECB6009D568B /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		96DF7D7A1409E2BA005BA340 /* stateabbrs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stateabbrs.txt; sourceTree = "<group>"; };
 		96EE27C213ECEE4F00170A52 /* locationenabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationenabled.png; sourceTree = "<group>"; };
 		96F2B37E13EF257A005BE308 /* MapErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapErrorViewController.h; sourceTree = "<group>"; };
 		96F2B37F13EF257A005BE308 /* MapErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapErrorViewController.m; sourceTree = "<group>"; };
@@ -261,7 +369,6 @@
 		AE3D287113B99CAF0054903D /* ScorecardTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScorecardTableViewController.h; sourceTree = "<group>"; };
 		AE3D287213B99CB00054903D /* ScorecardTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScorecardTableViewController.m; sourceTree = "<group>"; };
 		AE3D287313B99CB00054903D /* ScorecardTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScorecardTableView.xib; sourceTree = "<group>"; };
-		AE7F932713835FC9003CCD57 /* stateabbrs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stateabbrs.txt; sourceTree = "<group>"; };
 		AE7F932A13836621003CCD57 /* StateDirView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StateDirView.xib; sourceTree = "<group>"; };
 		AE816DBD137B7E140023F5D7 /* NSDataAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataAdditions.h; sourceTree = "<group>"; };
 		AE816DBE137B7E140023F5D7 /* NSDataAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataAdditions.m; sourceTree = "<group>"; };
@@ -349,6 +456,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		96AD856413FC151B0018B03D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96AD856513FC151B0018B03D /* iAd.framework in Frameworks */,
+				96AD856613FC151B0018B03D /* QuartzCore.framework in Frameworks */,
+				96AD856713FC151B0018B03D /* CoreData.framework in Frameworks */,
+				96AD856813FC151B0018B03D /* MapKit.framework in Frameworks */,
+				96AD856913FC151B0018B03D /* CoreLocation.framework in Frameworks */,
+				96AD856A13FC151B0018B03D /* UIKit.framework in Frameworks */,
+				96AD856B13FC151B0018B03D /* Foundation.framework in Frameworks */,
+				96AD856C13FC151B0018B03D /* CoreGraphics.framework in Frameworks */,
+				96AD856D13FC151B0018B03D /* libz.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AE85D73B1368E34400CDA534 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -368,6 +491,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		96AD85A613FC151B0018B03D /* Resources-iPad */ = {
+			isa = PBXGroup;
+			children = (
+				96AD85A813FC15290018B03D /* MainWindow.xib */,
+				96AD85AA13FC15290018B03D /* ScorecardView.xib */,
+				96AD85AC13FC15290018B03D /* CourseSelectView.xib */,
+				96AD85AE13FC15290018B03D /* MapView.xib */,
+				96AD85AF13FC15290018B03D /* WeatherDetails.xib */,
+				96AD85B013FC15290018B03D /* StateDirView.xib */,
+				96AD85B113FC15290018B03D /* CourseDetailView.xib */,
+				96AD85B213FC15290018B03D /* NewRoundView.xib */,
+				96AD85B313FC15290018B03D /* ScoreTrackerView.xib */,
+				96AD85B413FC15290018B03D /* SettingsView.xib */,
+				96AD85B513FC15290018B03D /* NameEditView.xib */,
+				96AD85B613FC15290018B03D /* HideStateView.xib */,
+				96AD85B713FC15290018B03D /* ScorecardTableView.xib */,
+				96AD85B813FC15290018B03D /* CustomCourseView.xib */,
+				96AD85B913FC15290018B03D /* MapErrorView.xib */,
+			);
+			name = "Resources-iPad";
+			sourceTree = "<group>";
+		};
 		96DF435A13E0ECB6009D568B /* FBConnect */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,11 +576,13 @@
 		AE85D7331368E34400CDA534 = {
 			isa = PBXGroup;
 			children = (
+				96AD85A613FC151B0018B03D /* Resources-iPad */,
 				AE85D7481368E34400CDA534 /* SMTG */,
 				AE85D7411368E34400CDA534 /* Frameworks */,
 				AE816DBB137B7DB50023F5D7 /* TBXML */,
 				96DF435A13E0ECB6009D568B /* FBConnect */,
 				AE85D73F1368E34400CDA534 /* Products */,
+				96AD85A713FC151C0018B03D /* SMTG Lite copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -444,6 +591,7 @@
 			children = (
 				AE85D73E1368E34400CDA534 /* SMTG.app */,
 				96AC674A13F00A9200D614E0 /* SMTG Lite.app */,
+				96AD85A213FC151B0018B03D /* SMTG Lite-iPad.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -561,7 +709,7 @@
 		AE85D7491368E34400CDA534 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				AE7F932713835FC9003CCD57 /* stateabbrs.txt */,
+				96DF7D7A1409E2BA005BA340 /* stateabbrs.txt */,
 				AE85D74A1368E34400CDA534 /* SMTG-Info.plist */,
 				96AC674C13F00A9200D614E0 /* SMTGLite-Info.plist */,
 				AE85D74B1368E34400CDA534 /* InfoPlist.strings */,
@@ -575,9 +723,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		96AC66EB13F00A9200D614E0 /* SMTGLite */ = {
+		96AC66EB13F00A9200D614E0 /* SMTG Lite */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 96AC674713F00A9200D614E0 /* Build configuration list for PBXNativeTarget "SMTGLite" */;
+			buildConfigurationList = 96AC674713F00A9200D614E0 /* Build configuration list for PBXNativeTarget "SMTG Lite" */;
 			buildPhases = (
 				96AC66EC13F00A9200D614E0 /* Sources */,
 				96AC670E13F00A9200D614E0 /* Frameworks */,
@@ -587,9 +735,26 @@
 			);
 			dependencies = (
 			);
-			name = SMTGLite;
+			name = "SMTG Lite";
 			productName = ECaddy;
 			productReference = 96AC674A13F00A9200D614E0 /* SMTG Lite.app */;
+			productType = "com.apple.product-type.application";
+		};
+		96AD854113FC151B0018B03D /* SMTG Lite-iPad */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 96AD859F13FC151B0018B03D /* Build configuration list for PBXNativeTarget "SMTG Lite-iPad" */;
+			buildPhases = (
+				96AD854213FC151B0018B03D /* Sources */,
+				96AD856413FC151B0018B03D /* Frameworks */,
+				96AD856E13FC151B0018B03D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SMTG Lite-iPad";
+			productName = ECaddy;
+			productReference = 96AD85A213FC151B0018B03D /* SMTG Lite-iPad.app */;
 			productType = "com.apple.product-type.application";
 		};
 		AE85D73D1368E34400CDA534 /* SMTG */ = {
@@ -636,7 +801,8 @@
 			projectRoot = "";
 			targets = (
 				AE85D73D1368E34400CDA534 /* SMTG */,
-				96AC66EB13F00A9200D614E0 /* SMTGLite */,
+				96AC66EB13F00A9200D614E0 /* SMTG Lite */,
+				96AD854113FC151B0018B03D /* SMTG Lite-iPad */,
 			);
 		};
 /* End PBXProject section */
@@ -662,7 +828,6 @@
 				96AC671C13F00A9200D614E0 /* CourseSelectView.xib in Resources */,
 				96AC671D13F00A9200D614E0 /* MapView.xib in Resources */,
 				96AC671E13F00A9200D614E0 /* WeatherDetails.xib in Resources */,
-				96AC671F13F00A9200D614E0 /* stateabbrs.txt in Resources */,
 				96AC672013F00A9200D614E0 /* StateDirView.xib in Resources */,
 				96AC672113F00A9200D614E0 /* CourseDetailView.xib in Resources */,
 				96AC672213F00A9200D614E0 /* NewRoundView.xib in Resources */,
@@ -704,6 +869,62 @@
 				96AC674613F00A9200D614E0 /* windarrow.png in Resources */,
 				96A3AA2913F1CCFD001D5BAC /* greenicon-lite.png in Resources */,
 				96A3AA2B13F1CD0D001D5BAC /* greenicon-lite@2x.png in Resources */,
+				96DF7D7C1409E2BA005BA340 /* stateabbrs.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		96AD856E13FC151B0018B03D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96AD856F13FC151B0018B03D /* InfoPlist.strings in Resources */,
+				96AD857E13FC151B0018B03D /* scorecard_tab.png in Resources */,
+				96AD857F13FC151B0018B03D /* scorecard_tab@2x.png in Resources */,
+				96AD858113FC151B0018B03D /* FBDialog.bundle in Resources */,
+				96AD858213FC151B0018B03D /* sadweather.png in Resources */,
+				96AD858313FC151B0018B03D /* greenicon.png in Resources */,
+				96AD858413FC151B0018B03D /* greenicon@2x.png in Resources */,
+				96AD858513FC151B0018B03D /* directorytab.png in Resources */,
+				96AD858613FC151B0018B03D /* directorytab@2x.png in Resources */,
+				96AD858713FC151B0018B03D /* weathertab.png in Resources */,
+				96AD858813FC151B0018B03D /* weathertab@2x.png in Resources */,
+				96AD858913FC151B0018B03D /* settingstab.png in Resources */,
+				96AD858A13FC151B0018B03D /* settingstab@2x.png in Resources */,
+				96AD858B13FC151B0018B03D /* favstarpressed.png in Resources */,
+				96AD858C13FC151B0018B03D /* favstarreleased.png in Resources */,
+				96AD858D13FC151B0018B03D /* maptabicon.png in Resources */,
+				96AD858E13FC151B0018B03D /* maptabicon@2x.png in Resources */,
+				96AD858F13FC151B0018B03D /* background.png in Resources */,
+				96AD859013FC151B0018B03D /* background_pat.png in Resources */,
+				96AD859113FC151B0018B03D /* Default.png in Resources */,
+				96AD859213FC151B0018B03D /* Default@2x.png in Resources */,
+				96AD859313FC151B0018B03D /* SMTG.sqlite in Resources */,
+				96AD859413FC151B0018B03D /* locationenabled.png in Resources */,
+				96AD859513FC151B0018B03D /* mapdraggable.png in Resources */,
+				96AD859613FC151B0018B03D /* greenflag.png in Resources */,
+				96AD859713FC151B0018B03D /* golftee.png in Resources */,
+				96AD859813FC151B0018B03D /* lightbackground_pat.png in Resources */,
+				96AD859913FC151B0018B03D /* curlocbtn-enabled.png in Resources */,
+				96AD859A13FC151B0018B03D /* curlocbtn.png in Resources */,
+				96AD859C13FC151B0018B03D /* windarrow.png in Resources */,
+				96AD859D13FC151B0018B03D /* greenicon-lite.png in Resources */,
+				96AD859E13FC151B0018B03D /* greenicon-lite@2x.png in Resources */,
+				96AD85BA13FC15290018B03D /* MainWindow.xib in Resources */,
+				96AD85BB13FC15290018B03D /* ScorecardView.xib in Resources */,
+				96AD85BC13FC15290018B03D /* CourseSelectView.xib in Resources */,
+				96AD85BD13FC15290018B03D /* MapView.xib in Resources */,
+				96AD85BE13FC15290018B03D /* WeatherDetails.xib in Resources */,
+				96AD85BF13FC15290018B03D /* StateDirView.xib in Resources */,
+				96AD85C013FC15290018B03D /* CourseDetailView.xib in Resources */,
+				96AD85C113FC15290018B03D /* NewRoundView.xib in Resources */,
+				96AD85C213FC15290018B03D /* ScoreTrackerView.xib in Resources */,
+				96AD85C313FC15290018B03D /* SettingsView.xib in Resources */,
+				96AD85C413FC15290018B03D /* NameEditView.xib in Resources */,
+				96AD85C513FC15290018B03D /* HideStateView.xib in Resources */,
+				96AD85C613FC15290018B03D /* ScorecardTableView.xib in Resources */,
+				96AD85C713FC15290018B03D /* CustomCourseView.xib in Resources */,
+				96AD85C813FC15290018B03D /* MapErrorView.xib in Resources */,
+				96DF7D7D1409E2BA005BA340 /* stateabbrs.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -717,7 +938,6 @@
 				AE85D7621368E34400CDA534 /* CourseSelectView.xib in Resources */,
 				AE85D7751368E75700CDA534 /* MapView.xib in Resources */,
 				AE85D7931369298E00CDA534 /* WeatherDetails.xib in Resources */,
-				AE7F932813835FC9003CCD57 /* stateabbrs.txt in Resources */,
 				AE7F932B13836621003CCD57 /* StateDirView.xib in Resources */,
 				AEA35AE91384CE7600111BAA /* CourseDetailView.xib in Resources */,
 				AE8E2C1B139886630098A426 /* NewRoundView.xib in Resources */,
@@ -757,6 +977,7 @@
 				96D021D813EF207400BC0A4F /* curlocbtn.png in Resources */,
 				96F2B38213EF257A005BE308 /* MapErrorView.xib in Resources */,
 				961BA18F13EF760C0046B850 /* windarrow.png in Resources */,
+				96DF7D7B1409E2BA005BA340 /* stateabbrs.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -803,6 +1024,46 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		96AD854213FC151B0018B03D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				96AD854313FC151B0018B03D /* TBXML.m in Sources */,
+				96AD854413FC151B0018B03D /* main.m in Sources */,
+				96AD854513FC151B0018B03D /* SMTGAppDelegate.m in Sources */,
+				96AD854613FC151B0018B03D /* ScorecardViewController.m in Sources */,
+				96AD854713FC151B0018B03D /* DirectoryViewController.m in Sources */,
+				96AD854813FC151B0018B03D /* MapViewController.m in Sources */,
+				96AD854913FC151B0018B03D /* WeatherDetails.m in Sources */,
+				96AD854A13FC151B0018B03D /* POIAnnotation.m in Sources */,
+				96AD854B13FC151B0018B03D /* NSDataAdditions.m in Sources */,
+				96AD854C13FC151B0018B03D /* coursemodel.xcdatamodeld in Sources */,
+				96AD854D13FC151B0018B03D /* CourseSelectViewController.m in Sources */,
+				96AD854E13FC151B0018B03D /* CourseDetailViewController.m in Sources */,
+				96AD854F13FC151B0018B03D /* NewRoundViewController.m in Sources */,
+				96AD855013FC151B0018B03D /* Course.m in Sources */,
+				96AD855113FC151B0018B03D /* Scorecard.m in Sources */,
+				96AD855213FC151B0018B03D /* ScoreTrackerViewController.m in Sources */,
+				96AD855313FC151B0018B03D /* HeaderFooterView.m in Sources */,
+				96AD855413FC151B0018B03D /* ScorecardTableCell.m in Sources */,
+				96AD855513FC151B0018B03D /* SettingsViewController.m in Sources */,
+				96AD855613FC151B0018B03D /* SettingsDetailsViewController.m in Sources */,
+				96AD855713FC151B0018B03D /* ScorecardTableViewController.m in Sources */,
+				96AD855813FC151B0018B03D /* CustomCourseViewController.m in Sources */,
+				96AD855913FC151B0018B03D /* Facebook.m in Sources */,
+				96AD855A13FC151B0018B03D /* FBDialog.m in Sources */,
+				96AD855B13FC151B0018B03D /* FBLoginDialog.m in Sources */,
+				96AD855C13FC151B0018B03D /* FBRequest.m in Sources */,
+				96AD855D13FC151B0018B03D /* NSObject+SBJSON.m in Sources */,
+				96AD855E13FC151B0018B03D /* NSString+SBJSON.m in Sources */,
+				96AD855F13FC151B0018B03D /* SBJSON.m in Sources */,
+				96AD856013FC151B0018B03D /* SBJsonBase.m in Sources */,
+				96AD856113FC151B0018B03D /* SBJsonParser.m in Sources */,
+				96AD856213FC151B0018B03D /* SBJsonWriter.m in Sources */,
+				96AD856313FC151B0018B03D /* MapErrorViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AE85D73A1368E34400CDA534 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -846,6 +1107,30 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		96AD85A813FC15290018B03D /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				96AD85A913FC15290018B03D /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		96AD85AA13FC15290018B03D /* ScorecardView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				96AD85AB13FC15290018B03D /* en */,
+			);
+			name = ScorecardView.xib;
+			sourceTree = "<group>";
+		};
+		96AD85AC13FC15290018B03D /* CourseSelectView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				96AD85AD13FC15290018B03D /* en */,
+			);
+			name = CourseSelectView.xib;
+			sourceTree = "<group>";
+		};
 		AE85D74B1368E34400CDA534 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -894,7 +1179,9 @@
 					LITE,
 				);
 				INFOPLIST_FILE = "SMTGLite-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "SMTG Lite";
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -909,8 +1196,47 @@
 				GCC_PREFIX_HEADER = "ECaddy/SMTG-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = LITE;
 				INFOPLIST_FILE = "SMTGLite-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "SMTG Lite";
 				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		96AD85A013FC151B0018B03D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ECaddy/SMTG-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					DEBUG,
+					LITE,
+				);
+				INFOPLIST_FILE = "SMTG Lite copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				PRODUCT_NAME = "SMTG Lite-iPad";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		96AD85A113FC151B0018B03D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ECaddy/SMTG-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = LITE;
+				INFOPLIST_FILE = "SMTG Lite copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
+				PRODUCT_NAME = "SMTG Lite-iPad";
+				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
 			};
@@ -932,7 +1258,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PROVISIONING_PROFILE = "2F7D09D7-F4A8-43EF-B877-C3E8D49ADD35";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2F7D09D7-F4A8-43EF-B877-C3E8D49ADD35";
-				SDKROOT = iphoneos;
+				SDKROOT = iphonesimulator4.0;
 			};
 			name = Debug;
 		};
@@ -967,7 +1293,9 @@
 					PAID,
 				);
 				INFOPLIST_FILE = "ECaddy/SMTG-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = SMTG;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -982,6 +1310,7 @@
 				GCC_PREFIX_HEADER = "ECaddy/SMTG-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = PAID;
 				INFOPLIST_FILE = "ECaddy/SMTG-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = SMTG;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
@@ -992,11 +1321,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		96AC674713F00A9200D614E0 /* Build configuration list for PBXNativeTarget "SMTGLite" */ = {
+		96AC674713F00A9200D614E0 /* Build configuration list for PBXNativeTarget "SMTG Lite" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				96AC674813F00A9200D614E0 /* Debug */,
 				96AC674913F00A9200D614E0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		96AD859F13FC151B0018B03D /* Build configuration list for PBXNativeTarget "SMTG Lite-iPad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				96AD85A013FC151B0018B03D /* Debug */,
+				96AD85A113FC151B0018B03D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

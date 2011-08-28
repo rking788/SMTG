@@ -104,7 +104,7 @@
     self.numSects = 1;
     if(self.courseObj.phone)
         self.numSects++;
-    if(self.courseObj.website)
+    if(self.courseObj.website && (![self.courseObj.website isEqualToString: @""]))
         self.numSects++;
     
     // Set the inital state of the favorite star
@@ -135,29 +135,6 @@
     // Return YES for supported orientations
     //return (interfaceOrientation == UIInterfaceOrientationPortrait);
     return YES;
-}
-
-- (void) populateCourseDetails
-{
-    NSCharacterSet* charSet = [NSCharacterSet characterSetWithCharactersInString: @" ,"];
-    NSString* detailText = nil;
-    
-    NSString* name = self.courseObj.coursename;
-    NSString* phone = self.courseObj.phone;
-    NSString* website = self.courseObj.website;
-    
-    // These need to be valueForKeys because they are Location Entities
-    NSString* address = [self.courseObj valueForKey: @"address"];
-    address = [address stringByTrimmingCharactersInSet: charSet];
-    NSString* state = [self.courseObj valueForKey: @"state"];
-    
-    detailText = [NSString stringWithFormat: @"%@\n%@, %@\n%@", name, address, state, phone];
-    
-    if(website){
-        detailText = [detailText stringByAppendingFormat: @"\n%@", website];
-    }
-    
-    [self.courseNameLbl setText: name];
 }
 
 - (IBAction)startRoundClicked:(id)sender {

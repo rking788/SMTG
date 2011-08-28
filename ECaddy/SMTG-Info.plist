@@ -14,10 +14,8 @@
 	<string></string>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>appicon.png</string>
 		<string>greenicon@2x.png</string>
 		<string>greenicon.png</string>
-		<string>teeandgreen_ret.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
 	<string>org.mainelyapps.${PRODUCT_NAME:rfc1034identifier}</string>
@@ -28,7 +26,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -43,7 +41,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMainNibFile</key>

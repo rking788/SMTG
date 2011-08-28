@@ -8,6 +8,7 @@
 
 #import "SMTGAppDelegate.h"
 #import "DirectoryViewController.h"
+#import "Course.h"
 
 #pragma mark - TODO APPWIDE: Provide better support for different device orientations
 
@@ -23,6 +24,8 @@
 @synthesize managedObjectModel, managedObjectContext, persistentStoreCoordinator;
 @synthesize curCourse, curScorecard;
 @synthesize FB = _FB;
+@synthesize defaultPrefs;
+@synthesize lastUpdateStr;
 
 // Constant for the database file name
 NSString* const DBFILENAME = @"SMTG.sqlite";
@@ -47,9 +50,16 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
     self.curCourse = nil;
     self.curScorecard = nil;
     
+    [self setDefaultPrefs: [NSUserDefaults standardUserDefaults]];
+    
     [self findActiveScorecard];
     
     _FB = nil;
+    
+    // Check the server for new course information
+    // Do the weather processing in another thread
+    [NSThread detachNewThreadSelector: @selector(checkServerForCourses) 
+                             toTarget: self withObject:nil];
     
     return YES;
 }
@@ -68,6 +78,7 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
      */
+    NSLog(@"Entered Background");
     [self saveContext];
 }
 
@@ -93,6 +104,7 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+    NSLog(@"Will Terminate");
 }
 
 - (void)dealloc
@@ -101,6 +113,8 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
     [_tabBarController release];
     [curCourse release];
     [curScorecard release];
+    [defaultPrefs release];
+    [lastUpdateStr release];
     [super dealloc];
 }
 
@@ -298,6 +312,246 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
 + (SMTGAppDelegate*) sharedAppDelegate
 {
     return (SMTGAppDelegate*) [[UIApplication sharedApplication] delegate];
+}
+
+- (void) checkServerForCourses
+{
+    NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+    NSDate* lastScanDate = [self.defaultPrefs objectForKey: @"LastCourseUpdate"];
+    NSDateFormatter* dateformatter = [[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat: @"yyyy-MM-dd"];
+    
+    [self setLastUpdateStr: [dateformatter stringFromDate: lastScanDate]];
+    
+    NSURLResponse* resp = nil;
+    NSError* err = nil;
+    
+    // Add the course information into the POST request content
+    NSURL* url = [NSURL URLWithString:@"http://mainelyapps.com/SMTG/FetchCourseUpdates.php"];
+    NSString* content = [NSString stringWithFormat: @"op=check&date=%@", self.lastUpdateStr];
+    
+    NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL: url];
+    
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody: [content dataUsingEncoding: NSUTF8StringEncoding]];
+    
+    // TODO: This should probably be an asynchronous request to not hold up the UI
+    NSData* ret = [NSURLConnection sendSynchronousRequest: request returningResponse: &resp error: &err];
+    NSString* retStr = [[NSString alloc] initWithData: ret encoding: NSUTF8StringEncoding];
+    
+    // Check if there were any new courses or not
+    if(![retStr isEqualToString: @"0\n"]){
+        NSString* message = [NSString stringWithFormat: @"New information for %@ courses is available. Update Now? (Will run in the background)", retStr];
+        UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"New Course Data" message: message delegate:self cancelButtonTitle:@"No" otherButtonTitles: @"Yes", nil];
+        
+        [av show];
+        [av release];
+    }
+    
+    [retStr release];
+    [request release];
+    [dateformatter release];
+    [pool release];
+}
+
+- (void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if([[alertView buttonTitleAtIndex: buttonIndex] isEqualToString: @"Yes"]){
+        // User clicked yes so go download the new course data
+        [NSThread detachNewThreadSelector: @selector(downloadCourseInfo) 
+                                 toTarget: self withObject:nil];
+    }
+}
+
+- (void) downloadCourseInfo
+{
+    // TODO: Finish implementing the code to download all of the new courses and merge them into the 
+    // SQLite store.
+    NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+    
+    NSURLResponse* resp = nil;
+    NSError* err = nil;
+    
+    // Add the course information into the POST request content
+    NSURL* url = [NSURL URLWithString:@"http://mainelyapps.com/SMTG/FetchCourseUpdates.php"];
+    NSString* content = [NSString stringWithFormat: @"op=download&date=%@", self.lastUpdateStr];
+    
+    NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL: url];
+    
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody: [content dataUsingEncoding: NSUTF8StringEncoding]];
+    
+    // TODO: This should probably be an asynchronous request to not hold up the UI
+    NSData* ret = [NSURLConnection sendSynchronousRequest: request returningResponse: &resp error: &err];
+    NSString* retStr = [[NSString alloc] initWithData: ret encoding: NSASCIIStringEncoding];
+    
+    // Check if there were any new courses or not
+    if([retStr isEqualToString: @""])
+        return;
+    
+    [request release];
+    
+    // Get an array of the new courses
+    NSArray* newCoursesArr = [retStr componentsSeparatedByString: @"\n"];
+    NSCharacterSet* badChars = [NSCharacterSet characterSetWithCharactersInString: @"*"];
+    
+    [retStr release];
+    
+    // The course lines are in the form
+    // courseName;address;phoneNumber;website;woeid;state;country;numHoles;mensPars;womensPars;teeCoords;greenCoords;\n
+    for(NSString* courseLine in newCoursesArr){
+        NSArray* cComps = [courseLine componentsSeparatedByString: @";"];
+        
+        if ([cComps count] == 1) {
+            continue;
+        }
+        
+        Course* tempCourse = [[Course alloc] initWithEntity: [NSEntityDescription entityForName:@"Course" inManagedObjectContext: self.managedObjectContext] insertIntoManagedObjectContext: nil];
+        
+        [tempCourse setCoursename: [cComps objectAtIndex: 0]];
+        [tempCourse setValue: [cComps objectAtIndex: 1] forKey: @"address"];
+        [tempCourse setPhone: [cComps objectAtIndex: 2]];
+        if([[cComps objectAtIndex: 3] isEqualToString: @"NULL"])
+            [tempCourse setWebsite: nil];
+        else
+            [tempCourse setWebsite: [cComps objectAtIndex: 3]];
+        [tempCourse setWoeid: [cComps objectAtIndex: 4]];
+        [tempCourse setValue: [cComps objectAtIndex: 5] forKey: @"state"];
+        [tempCourse setValue: [cComps objectAtIndex: 6] forKey: @"country"];
+        [tempCourse setNumholes: [NSNumber numberWithInt: [[cComps objectAtIndex: 7] intValue]]];
+        
+        NSString* tmpMenPars = [cComps objectAtIndex: 8];
+        if([tmpMenPars isEqualToString: @"NULL"] || [tmpMenPars isEqualToString: @""])
+            [tempCourse setMenpars: nil];
+        else{
+            tmpMenPars = [tmpMenPars stringByTrimmingCharactersInSet: badChars];
+            [tempCourse setMenpars: [tmpMenPars componentsSeparatedByString:@","]];
+        }
+        
+        NSString* tmpWomenPars = [cComps objectAtIndex: 9];
+        if([tmpWomenPars isEqualToString: @"NULL"] || [tmpWomenPars isEqualToString: @""])
+            [tempCourse setWomenpars: nil];
+        else{
+            tmpWomenPars = [tmpWomenPars stringByTrimmingCharactersInSet: badChars];
+            [tempCourse setWomenpars: [tmpWomenPars componentsSeparatedByString:@","]];
+        }
+        
+        NSString* tmpTeeCoords = [cComps objectAtIndex: 10];
+        if([tmpTeeCoords isEqualToString: @"NULL"] || [tmpTeeCoords isEqualToString: @""])
+            [tempCourse setTeeCoords: nil];
+        else
+            [tempCourse setTeeCoords: [tmpTeeCoords componentsSeparatedByString:@"*"]];
+        
+        NSString* tmpGreenCoords = [cComps objectAtIndex: 11];
+        if([tmpGreenCoords isEqualToString: @"NULL"] || [tmpGreenCoords isEqualToString: @""])
+            [tempCourse setGreenCoords: nil];
+        else
+            [tempCourse setGreenCoords: [tmpGreenCoords componentsSeparatedByString:@"*"]];
+        
+        [self updateOrAddCourse: tempCourse];
+        
+        [tempCourse release];
+    }
+    
+    // Just updated the courses so set the last course update as today's date
+    NSDate* lastScanDate = [NSDate date];
+    [self.defaultPrefs setObject: lastScanDate forKey: @"LastCourseUpdate"];
+    NSDateFormatter* dateformatter = [[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat: @"yyyy-MM-dd"];
+    
+    [self setLastUpdateStr: [dateformatter stringFromDate: lastScanDate]];
+    
+    [dateformatter release];
+    [pool release];
+}
+
+- (void) updateOrAddCourse:(Course *)newC
+{
+    // See if course is already on the phone
+    NSFetchRequest* fetchrequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Course" inManagedObjectContext: self.managedObjectContext];
+    [fetchrequest setEntity:entity];
+    
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"(coursename == %@) AND (state == %@) AND (country == %@)"
+                              , newC.coursename, [newC valueForKey: @"state"], [newC valueForKey: @"country"]];
+    [fetchrequest setPredicate:predicate];
+
+    [fetchrequest setFetchLimit: 1];
+    
+    NSError *error = nil;
+    Course* course = nil;
+    NSArray *array = [self.managedObjectContext executeFetchRequest:fetchrequest error:&error];
+    
+    if (array != nil) {
+        if([array count] > 0){
+            course = [array objectAtIndex: 0];
+        }
+    }
+    else {
+        // Deal with error.
+        NSLog(@"Error fetching lots");
+    }
+    
+    if(!course){
+        // Add the new course into the persistent store
+        course = [NSEntityDescription insertNewObjectForEntityForName: @"Course" inManagedObjectContext: self.managedObjectContext];
+        
+        // The enabled value needs to be set first, if it is not then the stateEnabled function will return the
+        // new course being inserted which will have a value of nil for the enabled value and consequently set 
+        // the value to NO
+        [course setValue: [NSNumber numberWithBool: [self stateEnabled: [newC valueForKey:@"state"]]] forKey: @"enabled"];
+        [course setCoursename: newC.coursename];
+        [course setValue: [newC valueForKey: @"state"] forKey: @"state"];
+        [course setValue: [newC valueForKey: @"country"] forKey: @"country"];
+        [course setFavorite: [NSNumber numberWithBool: NO]];
+        [course setPending: [NSNumber numberWithBool: NO]];
+    }
+    
+    [course setValue: [newC valueForKey: @"address"] forKey: @"address"];
+    [course setPhone: newC.phone];
+    [course setWebsite: newC.website];
+    [course setWoeid: newC.woeid];
+    [course setNumholes: newC.numholes];
+    [course setMenpars: newC.menpars];
+    [course setWomenpars: newC.womenpars];
+    [course setTeeCoords: newC.teeCoords];
+    [course setGreenCoords: newC.greenCoords];
+    
+    // Save the context
+    [self saveContext];
+    
+    [fetchrequest release];
+    
+}
+
+- (BOOL) stateEnabled:(NSString *)stateStr
+{
+    BOOL ret = YES;
+    
+    NSFetchRequest* fetchrequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Location" inManagedObjectContext: self.managedObjectContext];
+    [fetchrequest setEntity:entity];
+    
+    NSPredicate* predicate = [NSPredicate predicateWithFormat:@"state == %@", stateStr];
+    [fetchrequest setPredicate:predicate];
+    
+    [fetchrequest setFetchLimit: 1];
+    
+    NSError *error = nil;
+    NSArray *array = [self.managedObjectContext executeFetchRequest:fetchrequest error:&error];
+    if (array != nil) {
+        if([array count] > 0){
+            ret = [(NSNumber*)[[array objectAtIndex: 0] valueForKey: @"enabled"] boolValue];
+        }
+    }
+    else {
+        // Deal with error.
+        NSLog(@"Error fetching lots");
+    }
+    
+    [fetchrequest release];
+    
+    return ret;
 }
 
 #ifdef LITE

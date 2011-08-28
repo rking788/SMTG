@@ -15,7 +15,7 @@
 @implementation NewRoundViewController
 
 @synthesize liteMessage;
-@synthesize tableView;
+@synthesize tableV;
 @synthesize actSheet;
 @synthesize curCourse;
 @synthesize curScorecard;
@@ -33,7 +33,7 @@
 {
     [curCourse release];
     [curScorecard release];
-    [tableView release];
+    [tableV release];
     [liteMessage release];
     [super dealloc];
 }
@@ -62,7 +62,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
-    self.tableView.backgroundColor = [UIColor clearColor];
+    self.tableV.backgroundColor = [UIColor clearColor];
     self.navigationItem.title = @"New Round";
     
     if(self.curCourse)
@@ -111,7 +111,7 @@
 }
 - (void)viewDidUnload
 {
-    [self setTableView:nil];
+    [self setTableV:nil];
     [self setLiteMessage:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -285,7 +285,7 @@
 - (void) showPickerView{
     self.actSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil]; 
     
-    UILabel* numPlayers = [[self.tableView cellForRowAtIndexPath: [NSIndexPath indexPathForRow:kNumPlayers inSection:0]] detailTextLabel];
+    UILabel* numPlayers = [[self.tableV cellForRowAtIndexPath: [NSIndexPath indexPathForRow:kNumPlayers inSection:0]] detailTextLabel];
     NSInteger nCur = [[numPlayers text] integerValue];
     nCur = nCur - 1;
     
@@ -327,7 +327,7 @@
    
     NSInteger nSel = [picker selectedRowInComponent:0];
    
-    UILabel* numPlayers = [[self.tableView cellForRowAtIndexPath: [NSIndexPath indexPathForRow:kNumPlayers inSection:0]] detailTextLabel];
+    UILabel* numPlayers = [[self.tableV cellForRowAtIndexPath: [NSIndexPath indexPathForRow:kNumPlayers inSection:0]] detailTextLabel];
     [numPlayers setText: [NSString stringWithFormat:@"%d", (nSel+1)]];
 }
 
@@ -368,7 +368,7 @@
     self.curCourse = golfCourse;
     
     NSIndexPath* indPath = [NSIndexPath indexPathForRow: kCourseName inSection: 0];
-    UILabel* detailLbl = [[self.tableView cellForRowAtIndexPath: indPath] detailTextLabel];
+    UILabel* detailLbl = [[self.tableV cellForRowAtIndexPath: indPath] detailTextLabel];
     [detailLbl setText: [golfCourse coursename]];
 }
 
@@ -404,7 +404,7 @@
 - (void) beginRound
 {
     NSIndexPath* indPath = [NSIndexPath indexPathForRow: kNumPlayers inSection:0];
-    UILabel* numPlayersLbl = [[self.tableView cellForRowAtIndexPath: indPath] detailTextLabel];
+    UILabel* numPlayersLbl = [[self.tableV cellForRowAtIndexPath: indPath] detailTextLabel];
     NSNumberFormatter* numFormat = [[NSNumberFormatter alloc] init];
     [numFormat setNumberStyle: NSNumberFormatterNoStyle];
     
@@ -511,7 +511,9 @@
         [self beginRound];
     }
     else if([[alertView buttonTitleAtIndex: buttonIndex] isEqualToString: @"Yes"]){
+#ifdef LITE
         [[SMTGAppDelegate sharedAppDelegate] removeOldestSC];
+#endif
         [self beginRound];
     }
 }

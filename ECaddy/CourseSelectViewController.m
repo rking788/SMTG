@@ -82,7 +82,7 @@
     
     self.favoriteNames = [[NSMutableArray alloc] init];
     self.favoriteLocs = [[NSMutableArray alloc] init];
-
+    
     // Fill the favorite courses
     [self fillFavorites];
     

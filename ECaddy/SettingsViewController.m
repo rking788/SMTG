@@ -471,12 +471,13 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
     [vc dismissModalViewControllerAnimated: YES];
 }
 
-- (void) saveState: (NSString*) state
+- (void) saveState: (NSString*) state AndCountry: (NSString*) country
 {
     NSMutableArray* tmpArr = [self.coursePrefsDict objectForKey:[self keyForIndex:kSTATE InSection:kCOURSE_SEC]];
     
     [tmpArr replaceObjectAtIndex: kDEF_VALUE withObject: state];
     [self.defs setObject: state forKey:@"state"];
+    [self.defs setObject: country forKey: @"country"];
     [self.defs synchronize];
 
     [self.tableV reloadData];

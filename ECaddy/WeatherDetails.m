@@ -11,8 +11,6 @@
 #import "TBXML.h"
 #import "SMTGAppDelegate.h"
 
-#pragma mark - TODO CRITICAL Make a better error view when weather info is not available
-
 @implementation WeatherDetails
 
 #define BORDER_WIDTH    2.0f

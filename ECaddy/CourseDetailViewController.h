@@ -48,6 +48,4 @@ enum
 
 - (IBAction) startRoundClicked:(id)sender;
 
-- (void) populateCourseDetails;
-
 @end

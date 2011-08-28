@@ -14,10 +14,11 @@
 
 # pragma mark - TODO Possibly try to reduce memory footprint for the entire app
 
-@interface SMTGAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
+@interface SMTGAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate, UIAlertViewDelegate> {
     Course* curCourse;
     Scorecard* curScorecard;
     NSUserDefaults* defaultPrefs;
+    NSString* lastUpdateStr;
     
     Facebook* _FB;
 }
@@ -35,6 +36,9 @@
 @property (nonatomic, retain) Course* curCourse;
 @property (nonatomic, retain) Scorecard* curScorecard;
 
+@property (nonatomic, retain) NSUserDefaults* defaultPrefs;
+@property (nonatomic, retain) NSString* lastUpdateStr;
+
 @property (readonly) Facebook* FB;
 
 - (NSString *)applicationDocumentsDirectory;
@@ -47,6 +51,11 @@
 
 - (void) saveCurScorecard: (NSMutableDictionary*) sc;
 + (SMTGAppDelegate*) sharedAppDelegate;
+
+- (void) checkServerForCourses;
+- (void) downloadCourseInfo;
+- (void) updateOrAddCourse: (Course*) newC;
+- (BOOL) stateEnabled: (NSString*) stateStr;
 
 #ifdef LITE
 - (NSUInteger) findNumSCs;

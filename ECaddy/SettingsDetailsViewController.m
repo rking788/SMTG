@@ -296,7 +296,7 @@
         NSString* countryStr = [[self.stateArrDict allKeys] objectAtIndex: (indexPath.section - 1)];
         NSString* stateStr =  [[[self.stateArrDict objectForKey: countryStr] allObjects] objectAtIndex: indexPath.row];
         
-        NSString* longState = [self.abbrsDict valueForKey: stateStr];
+        NSString* longState = [[[self.abbrsDict valueForKey: countryStr] objectAtIndex: 1] valueForKey: stateStr];
         
         if(longState)
             [lbl setText: longState];
@@ -328,20 +328,21 @@
     UISwitch* switchView = (UISwitch*) sender;
     NSString* stateName;
     NSString* stateAbbr;
+    NSString* countryAbbr;
     NSInteger tagVal = [sender tag];
     NSInteger sect;
     NSInteger row;
     NSIndexPath* tabIndPath;
+    UITableView* tableV = (UITableView*) [[self view] viewWithTag: kVISTABLE_TAG];
     
     sect = (tagVal - (kBASECELL_TAG + 1))/10;
     row = (tagVal - (kBASECELL_TAG + 1) - (sect * 10));
     
     tabIndPath = [NSIndexPath indexPathForRow: row inSection: sect];
-    stateName = [[[(UITableView*) [[self view] viewWithTag: kVISTABLE_TAG] cellForRowAtIndexPath:tabIndPath] textLabel] text];
-    
-    NSLog(@"Toggled State: %@, Abbr: %@, Value: %@", stateName, [[self.abbrsDict allKeysForObject:stateName] objectAtIndex:0], [NSNumber numberWithBool: [switchView isOn]]);
+    stateName = [[[tableV cellForRowAtIndexPath:tabIndPath] textLabel] text];
+    countryAbbr = [self tableView: tableV titleForHeaderInSection: sect];
 
-    stateAbbr = [[self.abbrsDict allKeysForObject: stateName] objectAtIndex: 0];
+    stateAbbr = [[[[self.abbrsDict valueForKey: countryAbbr] objectAtIndex: 1] allKeysForObject: stateName] objectAtIndex: 0];
    
     [self toggleMOEWithStateAbbr: stateAbbr ToState: [switchView isOn]];
 }

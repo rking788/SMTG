@@ -190,7 +190,7 @@
                          [course valueForKey:@"state"], [course valueForKey:@"country"], 
                          [course website], [course woeid], [course numholes]];
     
-    NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL: url];
+    NSMutableURLRequest* request = [[[NSMutableURLRequest alloc] initWithURL: url] autorelease];
     
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody: [content dataUsingEncoding: NSUTF8StringEncoding]];

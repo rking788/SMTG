@@ -96,8 +96,10 @@
 
 - (void) startNewRound;
 
+#ifdef LITE
 - (void)createAdBannerView;
 - (void)fixupAdView:(UIInterfaceOrientation)toInterfaceOrientation;
+#endif
 
 enum
 {

@@ -78,7 +78,7 @@ typedef enum _tagcontactprefs
 - (NSInteger) indexForKey: (NSString*) key;
 
 // Settings Details Functions
-- (void) saveState: (NSString*) state;
+- (void) saveState: (NSString*) state AndCountry: (NSString*) country;
 - (void) saveDetailsWithTableView:(UITableView*) tv WithVC: (UIViewController*) vc;
 - (void) cancelDetailsWithVC: (UIViewController*) vc;
 

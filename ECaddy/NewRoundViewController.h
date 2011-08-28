@@ -22,12 +22,12 @@ typedef enum _tagTableRows
     UIActionSheet* actSheet;
     Course* curCourse;
     Scorecard* curScorecard;
-    UITableView *tableView;
+    UITableView *tableV;
     UITextView *liteMessage;
 }
 
 @property (nonatomic, retain) IBOutlet UITextView *liteMessage;
-@property (retain, nonatomic) IBOutlet UITableView *tableView;
+@property (retain, nonatomic) IBOutlet UITableView *tableV;
 @property (nonatomic, retain) UIActionSheet* actSheet;
 @property (nonatomic, retain) Course* curCourse;
 @property (nonatomic, retain) Scorecard* curScorecard;

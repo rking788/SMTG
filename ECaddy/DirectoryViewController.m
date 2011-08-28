@@ -62,7 +62,7 @@
     // Check for a valid default state and possibly just skip to CourseSelectVC
     NSUserDefaults* defaultPrefs = [NSUserDefaults standardUserDefaults];
     if([defaultPrefs stringForKey: @"state"] && (self.settingsDetailType != kSTATE_EDIT))
-        [self gotoCourseSelectWithState: [defaultPrefs stringForKey: @"state"] Animate: NO];
+        [self gotoCourseSelectWithState: [defaultPrefs stringForKey: @"state"] AndCountry: [defaultPrefs stringForKey: @"country"] Animate: NO];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -365,7 +365,7 @@
     
     if(retStr == nil){
         NSString* countryAbbr = [[countrySet allObjects] objectAtIndex: newSection];
-        retStr = [self.abbrsDict valueForKey: countryAbbr];
+        retStr = [[self.abbrsDict valueForKey: countryAbbr] objectAtIndex: 0];
     }
     
     return retStr; 
@@ -449,14 +449,14 @@
         if(self.settingsDetailType == kSTATE_EDIT){
             NSString* countryStr = [[countrySet allObjects] objectAtIndex: newSection];
             NSString* stateStr = [[stateArrDict valueForKey: countryStr] objectAtIndex: indexPath.row];
-            [(SettingsViewController*) self.courseSelectDelegate saveState: stateStr];
+            [(SettingsViewController*) self.courseSelectDelegate saveState: stateStr AndCountry: countryStr];
 
             return;
         }
         
         NSString* countryStr = [[self.countrySet allObjects] objectAtIndex: newSection];
         NSString* stateStr = [[self.stateArrDict valueForKey: countryStr] objectAtIndex: indexPath.row];
-        [self gotoCourseSelectWithState: stateStr Animate: YES];
+        [self gotoCourseSelectWithState: stateStr AndCountry: countryStr Animate: YES];
     }
 }
 
@@ -534,7 +534,7 @@
         NSString* countryStr = [[self.countrySet allObjects] objectAtIndex: newSection];
         NSString* stateStr = [[self.stateArrDict valueForKey: countryStr] objectAtIndex: indexPath.row];
         
-        NSString* longState = [abbrsDict valueForKey: stateStr];
+        NSString* longState = [[[self.abbrsDict valueForKey: countryStr] objectAtIndex: 1] valueForKey: stateStr];
         if(longState)
             [lbl setText: longState];
         else
@@ -554,7 +554,7 @@
     [self.courseSelectDelegate selectCourse: nil];
 }
 
-- (void) gotoCourseSelectWithState: (NSString*) stateAbbr Animate:(BOOL) animated
+- (void) gotoCourseSelectWithState: (NSString*) stateAbbr AndCountry: (NSString*) countryAbbr Animate:(BOOL) animated
 {
     // If the default state isn't enabled then we don't want to go to that course
     // select page
@@ -568,12 +568,12 @@
     else
         csvc.modal = NO;
     
-    NSString* longState = [self.abbrsDict valueForKey: stateAbbr];
+    NSString* longState = [[[self.abbrsDict valueForKey: countryAbbr] objectAtIndex: 1] valueForKey: stateAbbr];
     
     csvc.selectedState = stateAbbr;
     
     if(longState)
-        csvc.longStateName = [self.abbrsDict valueForKey: stateAbbr];
+        csvc.longStateName = longState;
     else
         csvc.longStateName = stateAbbr;
     

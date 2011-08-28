@@ -213,29 +213,7 @@
     }
 
     // State (Required)
-    // Try to use a value from the abbreviation dictionary for the state value
-    NSString* stateAbbrsPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"stateabbrs.txt"];
-    NSDictionary* abbrsDict = [[NSDictionary alloc] initWithContentsOfFile: stateAbbrsPath];
-    NSString* stateVal = [[self.stateTF text] uppercaseString];
-    NSUInteger ind = [[abbrsDict allKeys] indexOfObject: stateVal];
-    BOOL isStateSet = NO;
-    
-    if(ind != NSNotFound){
-        [newCourse setValue: stateVal forKey: @"state"];
-        isStateSet = YES;
-    }
-    else{
-        for(id key in abbrsDict){
-            NSString* val = [abbrsDict valueForKey: key];
-            if([stateVal caseInsensitiveCompare: val] == NSOrderedSame){
-                [newCourse setValue: key forKey: @"state"];
-                isStateSet = YES;
-            }
-        }
-    }
-    
-    if(!isStateSet)
-        [newCourse setValue: stateVal forKey: @"state"];
+    [newCourse setValue: [self.stateTF text] forKey: @"state"];
     
     // Country (Required)
     [newCourse setValue: [self.countryTF text] forKey: @"country"];
@@ -284,8 +262,6 @@
         [self dismiss: [NSNumber numberWithBool: YES]];
         
     }
-    
-    [abbrsDict release];
 }
 
 - (void) cancel
