@@ -28,6 +28,7 @@
 @synthesize contentView;
 @synthesize holeAnnotations;
 @synthesize distanceAnnotations;
+@synthesize curCourse;
 @synthesize curHole;
 @synthesize coordsAvailable;
 @synthesize teeCoords;
@@ -40,6 +41,9 @@
 @synthesize adView;
 @synthesize adVisible;
 
+#define SCREEN_WIDTH    320.0
+#define SCREEN_HEIGHT   480.0
+
 #pragma mark - View Lifecycle methods
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -51,7 +55,6 @@
 #endif
     
     // Color the distance label container view
-    //[self.distanceContainer setBackgroundColor: [UIColor colorWithRed: 0.870588243 green: 0.862745106 blue:0.0 alpha:1.0]];
     self.distanceContainer.layer.borderColor = [UIColor colorWithRed: 0.219607845 green: 0.521568656 blue:0 alpha:1.0].CGColor;
     self.distanceContainer.layer.borderWidth = 2.0;
     
@@ -61,7 +64,6 @@
     self.holeAnnotations = [[NSMutableArray alloc] initWithCapacity: 2];
     self.distanceAnnotations = [[NSMutableArray alloc] init];
     
-    // TODO: This needs to be changed but it is the same basic idea.
     UIBarButtonItem* nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next"                                            
         style:UIBarButtonItemStyleBordered 
         target:self 
@@ -82,11 +84,25 @@
 #ifdef LITE
     [self fixupAdView: self.interfaceOrientation];
 #endif
-    
-    Course* curCourse = (Course*) [[SMTGAppDelegate sharedAppDelegate] curCourse];
-    NSString* errStr = nil;
 
-    if(!curCourse){
+    NSString* errStr = nil;
+    Course* tempCourse = (Course*) [[SMTGAppDelegate sharedAppDelegate] curCourse];
+    if(!self.curCourse)
+        self.curCourse = tempCourse;
+    else if(![tempCourse.coursename isEqualToString: self.curCourse.coursename]){
+        // If the course has changed then we need to move to the 
+        // first hole on this new course so clear the previous coordiantes and 
+        // other information
+        self.curCourse = tempCourse;
+        
+        self.coordsAvailable = NO;
+        [self.teeCoords release];
+        self.teeCoords = nil;
+        [self.greenCoords release];
+        self.greenCoords = nil;
+    }
+    
+    if(!self.curCourse){
         errStr = @"NoActiveCourse";
     }
     
@@ -111,13 +127,13 @@
         // Display the modal view controller
         MapErrorViewController* mevc = [[MapErrorViewController alloc] init];
         
-        NSString* addr = [curCourse valueForKey: @"address"];
-        NSString* state = [curCourse valueForKey: @"state"];
-        NSString* country = [curCourse valueForKey: @"country"];
+        NSString* addr = [self.curCourse valueForKey: @"address"];
+        NSString* state = [self.curCourse valueForKey: @"state"];
+        NSString* country = [self.curCourse valueForKey: @"country"];
         
         [mevc setCaller: self];
         [mevc setErr: errStr];
-        [mevc setCoursename: [curCourse coursename]];
+        [mevc setCoursename: [self.curCourse coursename]];
         [mevc setCourselocation: [NSString stringWithFormat: @"%@ %@ %@", addr, state, country]];
         [mevc setModalTransitionStyle: UIModalTransitionStyleCoverVertical];
      
@@ -142,10 +158,14 @@
     [self fixupAdView: interfaceOrientation];
 #endif
     
+    if(interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight)
+        [self.distanceContainer viewWithTag: 30].center = CGPointMake( (SCREEN_HEIGHT / 2), self.distanceContainer.center.y);
+    else
+        [self.distanceContainer viewWithTag: 30].center = CGPointMake( (SCREEN_WIDTH / 2), self.distanceContainer.center.y);
+    
     //return ret;
     return YES;
 }
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -263,6 +283,11 @@
     else if(self.curHole > 1){
         [self.navigationItem.leftBarButtonItem setEnabled: YES];
     }
+    
+    if(self.curHole == [self.curCourse.numholes unsignedIntegerValue])
+        [self.navigationItem.rightBarButtonItem setEnabled: NO];
+    else
+        [self.navigationItem.rightBarButtonItem setEnabled: YES];
 }
 
 - (void) goToPrevHole:(id)sender
@@ -292,14 +317,17 @@
     else if(self.curHole > 1){
         [self.navigationItem.leftBarButtonItem setEnabled: YES];
     }
+    
+    if(self.curHole == [self.curCourse.numholes unsignedIntegerValue])
+        [self.navigationItem.rightBarButtonItem setEnabled: NO];
+    else
+        [self.navigationItem.rightBarButtonItem setEnabled: YES];
 }
 
 - (void) populateHoleCoords
 {
-    Course* curCourse = (Course*) [[SMTGAppDelegate sharedAppDelegate] curCourse];
-    
-    self.teeCoords = [curCourse valueForKey: @"teeCoords"];
-    self.greenCoords = [curCourse valueForKey: @"greenCoords"];
+    self.teeCoords = [self.curCourse valueForKey: @"teeCoords"];
+    self.greenCoords = [self.curCourse valueForKey: @"greenCoords"];
     
     if(self.teeCoords && self.greenCoords)
         self.coordsAvailable = YES;
@@ -678,7 +706,6 @@
 }
 
 # pragma mark - TODO CRITICAL replace a lot of this code with [self drawMapLine]
-# pragma mark - TODO The annotation distances are not being recalculated after the draggable annotation is moved
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState
 {
@@ -750,10 +777,9 @@
 
 - (void) startNewRound
 {
-    Course* curCourse = (Course*) [[SMTGAppDelegate sharedAppDelegate] curCourse];
     [self.tabBarController setSelectedViewController: [self.tabBarController.viewControllers objectAtIndex: 0]];
     UINavigationController* navCont = (UINavigationController*) self.tabBarController.selectedViewController;
-    [[[navCont viewControllers] objectAtIndex: 0] setCourseObj: curCourse];
+    [[[navCont viewControllers] objectAtIndex: 0] setCourseObj: self.curCourse];
     [navCont popToRootViewControllerAnimated: NO];
     [[[navCont viewControllers] objectAtIndex: 0] viewDidAppear: YES];
 }

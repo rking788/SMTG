@@ -54,6 +54,14 @@
 			<string>Yukon</string>
 		</dict>
 	</array>
+    <key>FR</key>
+    <array>
+        <string>France</string>
+        <dict>
+            <key>IDF</key>
+            <string>Ile de France</string>
+        </dict>
+    </array>
 	<key>UK</key>
 	<array>
 		<string>United Kingdom</string>

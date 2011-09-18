@@ -12,6 +12,7 @@
 #import "iAd/ADBannerView.h"
 
 @class POIAnnotation;
+@class Course;
 
 
 @interface MapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, ADBannerViewDelegate> {
@@ -25,6 +26,7 @@
     NSMutableArray* holeAnnotations;
     NSMutableArray* distanceAnnotations;
     
+    Course* curCourse;
     NSUInteger curHole;
     
     BOOL coordsAvailable;
@@ -60,6 +62,7 @@
 @property (nonatomic, retain) NSMutableArray* holeAnnotations;
 @property (nonatomic, retain) NSMutableArray* distanceAnnotations;
 
+@property (nonatomic, retain) Course* curCourse;
 @property (nonatomic, assign) NSUInteger curHole;
 
 @property (nonatomic, assign, getter = isCoordsAvailable) BOOL coordsAvailable;
