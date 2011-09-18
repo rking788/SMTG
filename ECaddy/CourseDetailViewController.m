@@ -242,7 +242,7 @@
     
     if(indexPath.section == kADDR_SECT){
         CGSize size = [self.addrStr sizeWithFont:[UIFont systemFontOfSize: 17.0f] constrainedToSize:CGSizeMake(268.0, 2000.0) lineBreakMode:UILineBreakModeWordWrap];
-        retVal = size.height + 10.0f;
+        retVal = size.height + 20.0f;
     }
     
     return retVal;
