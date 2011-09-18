@@ -114,6 +114,8 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
+    [self.tableV setAlwaysBounceVertical: YES];
+    
     [self.favoriteNames removeAllObjects];
     [self.favoriteLocs removeAllObjects];
     
