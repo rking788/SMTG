@@ -6,9 +6,6 @@
 //  Copyright 2011 RPKing. All rights reserved.
 //
 
-#pragma mark - TODOS: Need to figure out what to do if the player goes to the next hole while their current location is already active.
-#pragma mark - TODO: Maybe use an instance property of curCourse, the app delegate curcourse object is accessed a few times
-
 #import "MapViewController.h"
 #import <CoreLocation/CoreLocation.h>
 #import <QuartzCore/QuartzCore.h>
@@ -220,7 +217,14 @@
 
 - (void)zoomToFitMapAnnotations:(MKMapView*)mapV
 {
-    CLLocationCoordinate2D tee = [[self.holeAnnotations objectAtIndex: teeAnnotationIndex] coordinate];
+    CLLocationCoordinate2D tee;
+    
+    if (!userLocEnabled) {
+        tee = [[self.holeAnnotations objectAtIndex: teeAnnotationIndex] coordinate];
+    }
+    else{
+        tee = userLoc.coordinate;
+    }
     
     CLLocationCoordinate2D green = [[self.holeAnnotations objectAtIndex: greenAnnotationIndex] coordinate];
     
@@ -362,11 +366,14 @@
         [self.locManager stopUpdatingLocation];
         [self.mapView setShowsUserLocation: NO];
         self.userLocEnabled = NO;
+        [self.userLoc release];
+        self.userLoc = nil;
         
         // Only do this if coordinates are available
         if(self.coordsAvailable){
             [self.mapView addAnnotation: [self.holeAnnotations objectAtIndex: teeAnnotationIndex]];
             [self drawMapLine];
+            [self zoomToFitMapAnnotations: mapView];
         }
     }
     else{
@@ -384,30 +391,45 @@
 
 - (void) locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
+    BOOL shouldDrawLine = NO;
+    
     if(!self.userLoc){
         self.userLoc = [[CLLocation alloc] initWithLatitude: newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];
-        
+    
         // set the center of the map to the user location
-        MKCoordinateRegion region;
-        MKCoordinateSpan span;
-        span.latitudeDelta=0.02 / 10; // zoom level
-        span.longitudeDelta=0.02 / 10;
+        //MKCoordinateRegion region;
+        //MKCoordinateSpan span;
+        //span.latitudeDelta=0.02 / 10; // zoom level
+        //span.longitudeDelta=0.02 / 10;
         
-        region.span=span;
-        region.center = self.userLoc.coordinate;
+        //region.span=span;
+        //region.center = self.userLoc.coordinate;
         
-        [mapView setRegion:region animated:TRUE];
-        [mapView regionThatFits:region];
+        //[mapView setRegion:region animated:TRUE];
+        //[mapView regionThatFits:region];
+        
+        [self zoomToFitMapAnnotations: mapView];
+        
+        shouldDrawLine = YES;
     }
     
-    if(![self isUserLocEnabled]){
+    // The person hasn't moved so don't bother drawing the line again it will make
+    // it flash if we do
+    if(!((newLocation.coordinate.latitude == oldLocation.coordinate.latitude)
+         && (newLocation.coordinate.longitude == oldLocation.coordinate.longitude))){
+        shouldDrawLine = YES;
+    }
+        
+    if([self isUserLocEnabled]){
         
         if([self isCoordsAvailable]){
             // Remove the tee annotation and show the user annotation
             [self.mapView removeAnnotation: [self.holeAnnotations objectAtIndex: teeAnnotationIndex]];
         
-            // Draw line from user location -> draggable -> green
-            [self drawMapLine];
+            if(shouldDrawLine){
+                // Draw line from user location -> draggable -> green
+                [self drawMapLine];
+            }
         }
     }
 }
@@ -532,46 +554,10 @@
     [self.holeAnnotations insertObject:greenAnnot atIndex: greenAnnotationIndex];
     [self.distanceAnnotations addObject:draggable1];
 
-    [self.mapView addAnnotations:self.holeAnnotations];
+    [self.mapView addAnnotations: self.holeAnnotations];
     [self.mapView addAnnotations: self.distanceAnnotations];
 
-    //  Create the line from the tee to the green
-    MKMapPoint* pointArray = malloc(sizeof(CLLocationCoordinate2D) * 3);
-    
-    CLLocation* loc1 = [[CLLocation alloc] initWithLatitude: lat1 longitude:long1];
-    pointArray[0] = MKMapPointForCoordinate([loc1 coordinate]);
-    
-    CLLocation* loc2 = [[CLLocation alloc] initWithLatitude: lat2 longitude:long2];
-    pointArray[1] = MKMapPointForCoordinate([loc2 coordinate]);
-    
-    CLLocation* midloc = [[CLLocation alloc] initWithLatitude:((lat1+lat2)/2) longitude:((long1+long2)/2)];
-    pointArray[2] = MKMapPointForCoordinate([midloc coordinate]);
-    
-    [self setHoleLine: [MKPolyline polylineWithPoints: pointArray count: 3]];
-    [self.mapView addOverlay: self.holeLine];
-
-    free((void*) pointArray);
-    
-    // Find the distance between the two points
-    CLLocationDistance distanceToGreen = [loc2 distanceFromLocation: midloc] * 1.0936133;
-    CLLocationDistance distanceToPin = [midloc distanceFromLocation: loc1] * 1.0935133;
-    CLLocationDistance distanceOverall = [loc2 distanceFromLocation: loc1] * 1.0935133;
-    
-    // Set the distance label
-    [self.t2dLbl setText: [NSString stringWithFormat: @"%d yd", (int)distanceToPin]];
-    [self.d2gLbl setText: [NSString stringWithFormat:@" %d yd", (int) distanceToGreen]];
-
-    // Set the title for the annotation equal to the distance to that annotation from the tee
-    [draggable1 setTitle: [NSString stringWithFormat: @"%d yd", (int) distanceToPin]];
-    [greenAnnot setTitle: [NSString stringWithFormat: @"%d yd", (int) distanceOverall]];
-        
-    [teeAnnot release];
-    [greenAnnot release];
-    [draggable1 release];
-    
-    [loc1 release];
-    [loc2 release];
-    [midloc release];
+    [self drawMapLine];
     
     return;
 }
@@ -705,8 +691,6 @@
     return nil;
 }
 
-# pragma mark - TODO CRITICAL replace a lot of this code with [self drawMapLine]
-
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState
 {
     if(newState == MKAnnotationViewDragStateEnding){
@@ -715,55 +699,7 @@
         [self.mapView removeOverlay: self.holeLine];
         [self setHoleLineView: nil]; 
         
-        //  Create the line from the tee to the green
-        double lat1;
-        double long1;
-        
-        if([self isUserLocEnabled]){
-            lat1 = self.userLoc.coordinate.latitude;
-            long1 = self.userLoc.coordinate.longitude;
-        }
-        else{
-            lat1 = [[[self.holeAnnotations objectAtIndex: teeAnnotationIndex] latitude] doubleValue];
-            long1 = [[[self.holeAnnotations objectAtIndex:teeAnnotationIndex] longitude] doubleValue];
-        }
-        double lat2 = [[[self.holeAnnotations objectAtIndex: greenAnnotationIndex] latitude] doubleValue];
-        double long2 = [[[self.holeAnnotations objectAtIndex: greenAnnotationIndex] longitude] doubleValue];
-        
-        MKMapPoint* pointArray = malloc(sizeof(CLLocationCoordinate2D) * 3);
-        
-        CLLocation* loc1 = [[CLLocation alloc] initWithLatitude: lat1 longitude:long1];
-        pointArray[0] = MKMapPointForCoordinate([loc1 coordinate]);
-        
-        CLLocation* midloc = [[CLLocation alloc] initWithLatitude: [annot.latitude doubleValue] longitude: [annot.longitude doubleValue]];
-        pointArray[1] = MKMapPointForCoordinate([midloc coordinate]);
-        
-        CLLocation* loc2 = [[CLLocation alloc] initWithLatitude: lat2 longitude:long2];
-        pointArray[2] = MKMapPointForCoordinate([loc2 coordinate]);
-        
-        // Recalculate the distance from the tee to the distance annotation
-        // Find the distance between the two points
-        CLLocationDistance distanceToGreen = [loc2 distanceFromLocation: midloc] * 1.0936133;
-        CLLocationDistance distanceToPin = [midloc distanceFromLocation: loc1] * 1.0935133;
-        CLLocationDistance distanceOverall = [loc2 distanceFromLocation: loc1] * 1.0935133;
-        
-        // Set the distance label
-        [self.t2dLbl setText: [NSString stringWithFormat: @"%d yd", (int)distanceToPin]];
-        [self.d2gLbl setText: [NSString stringWithFormat: @"%d yd", (int)distanceToGreen]];
-        
-        // Set the title for the annotation equal to the distance to that annotation from the tee
-        [annot setTitle: [NSString stringWithFormat: @"%d yd", (int) distanceToPin]];
-        [(POIAnnotation*) [self.holeAnnotations objectAtIndex: greenAnnotationIndex] setTitle: [NSString stringWithFormat: @"%d yd", (int) distanceOverall]];
-        
-        
-        [self setHoleLine: [MKPolyline polylineWithPoints: pointArray count: 3]];
-        [self.mapView addOverlay: [self holeLine]];
-        
-        // Free up memory
-        free((void*) pointArray);
-        [loc1 release];
-        [loc2 release];
-        [midloc release];
+        [self drawMapLine];
     }
 }
 
