@@ -474,17 +474,28 @@
     [self.mapView addOverlay: [self holeLine]];
     
     // Find the distance between the two points
-    CLLocationDistance distanceToGreen = [loc2 distanceFromLocation: midloc] * 1.0936133;
-    CLLocationDistance distanceToPin = [midloc distanceFromLocation: loc1] * 1.0935133;
-    CLLocationDistance distanceOverall = [loc2 distanceFromLocation: loc1] * 1.0935133;
+    CLLocationDistance multiplier = 1.0;
+    NSString* distanceUnits = [[NSUserDefaults standardUserDefaults] objectForKey: @"distanceunits"];
+    NSString* unitsStr = @"m";
+    
+    // If the default distance units are yards then we need a multiplier in the 
+    // distance calculation, the return from the distance function is meters
+    if([distanceUnits isEqualToString: @"Yards"]){
+        multiplier = 1.0936133;
+        unitsStr = @"yd";
+    }
+    
+    CLLocationDistance distanceToGreen = [loc2 distanceFromLocation: midloc] * multiplier;
+    CLLocationDistance distanceToPin = [midloc distanceFromLocation: loc1] * multiplier;
+    CLLocationDistance distanceOverall = [loc2 distanceFromLocation: loc1] * multiplier;
     
     // Set the distance label
-    [self.t2dLbl setText: [NSString stringWithFormat: @"%d yd", (int)distanceToPin]];
-    [self.d2gLbl setText: [NSString stringWithFormat: @"%d yd", (int)distanceToGreen]];
+    [self.t2dLbl setText: [NSString stringWithFormat: @"%d %@", (int)distanceToPin, unitsStr]];
+    [self.d2gLbl setText: [NSString stringWithFormat: @"%d %@", (int)distanceToGreen, unitsStr]];
     
     // Set the title for the annotation equal to the distance to that annotation from the tee
-    [[self.distanceAnnotations objectAtIndex:0] setTitle: [NSString stringWithFormat: @"%d yd", (int) distanceToPin]];
-    [[self.holeAnnotations objectAtIndex: greenAnnotationIndex] setTitle: [NSString stringWithFormat: @"%d yd", (int) distanceOverall]];
+    [[self.distanceAnnotations objectAtIndex:0] setTitle: [NSString stringWithFormat: @"%d %@", (int) distanceToPin, unitsStr]];
+    [[self.holeAnnotations objectAtIndex: greenAnnotationIndex] setTitle: [NSString stringWithFormat: @"%d %@", (int) distanceOverall, unitsStr]];
     
     // Free up memory
     free((void*) pointArray);

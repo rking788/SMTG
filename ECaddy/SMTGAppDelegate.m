@@ -56,6 +56,21 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
     
     _FB = nil;
     
+    // Set the default units if they aren't already set
+    NSUserDefaults* defs = [NSUserDefaults standardUserDefaults];
+    NSString* td = nil;
+    td = [defs objectForKey: @"tempunits"];
+    if(!td)
+        [defs setObject: @"Fahrenheit" forKey: @"tempunits"];
+    
+    td = [defs objectForKey: @"distanceunits"];
+    if(!td)
+        [defs setObject: @"Yards" forKey: @"distanceunits"];
+    
+    td = [defs objectForKey: @"speedunits"];
+    if(!td)
+        [defs setObject: @"MPH" forKey: @"speedunits"];
+    
     // Check the server for new course information
     // Do the weather processing in another thread
     [NSThread detachNewThreadSelector: @selector(checkServerForCourses) 

@@ -20,6 +20,7 @@ typedef enum _tagsectitleind
 typedef enum _taguserprefs
 {
     kNAME = 0,
+    kDEFUNITS,
     numUserPrefs
 } usertitles;
 

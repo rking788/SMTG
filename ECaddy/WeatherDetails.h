@@ -104,4 +104,7 @@
 - (void) getWeatherInfo;
 - (void) setWeatherInfo;
 
++ (NSString*) MPHtoKMH: (NSString*) mphSpeed;
++ (NSString*) KMHtoMPH: (NSString*) kmhSpeed;
+
 @end

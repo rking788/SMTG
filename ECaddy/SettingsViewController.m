@@ -10,6 +10,7 @@
 #import "SMTGAppDelegate.h"
 #import "SettingsDetailsViewController.h"
 #import "DirectoryViewController.h"
+#import "DefaultUnitsViewController.h"
 
 static NSString* CONTACTEMAIL = @"admin@mainelyapps.com";
 static NSString* CONTACTSITE = @"http://mainelyapps.com";
@@ -262,17 +263,26 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
     [tableView deselectRowAtIndexPath: indexPath animated: YES];
     
     // Default name setting selected
-    if(indexPath.section == kUSER_SEC && indexPath.row == kNAME){
-        SettingsDetailsViewController* sdvc = [[SettingsDetailsViewController alloc] initWithNibName:@"NameEditView" bundle:nil];
+    if(indexPath.section == kUSER_SEC){
+        if(indexPath.row == kNAME){
+            SettingsDetailsViewController* sdvc = [[SettingsDetailsViewController alloc] initWithNibName:@"NameEditView" bundle:nil];
 
-        [sdvc setDelVC: self];
-        [sdvc setDelTV: tableView];
-        [sdvc setDetailType: kNAME_EDIT];
-        [sdvc setCurName: [[[tableView cellForRowAtIndexPath: indexPath] detailTextLabel] text]];
-        
-        [self presentModalViewController: sdvc animated: YES];
-        [sdvc release];
-        [self setSelectedSettingsDetail: kNAME_EDIT];
+            [sdvc setDelVC: self];
+            [sdvc setDelTV: tableView];
+            [sdvc setDetailType: kNAME_EDIT];
+            [sdvc setCurName: [[[tableView cellForRowAtIndexPath: indexPath] detailTextLabel] text]];
+            
+            [self presentModalViewController: sdvc animated: YES];
+            [sdvc release];
+            [self setSelectedSettingsDetail: kNAME_EDIT];
+        }
+        else if(indexPath.row == kDEFUNITS){
+            DefaultUnitsViewController* duvc = [[DefaultUnitsViewController alloc] initWithNibName: @"DefaultUnitsView" bundle:nil];
+            
+            [self presentModalViewController: duvc animated: YES];
+            
+            [duvc release];
+        }
     }
     else if(indexPath.section == kCONTACT_SEC){
         NSString* titleStr = nil;
@@ -382,6 +392,10 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
     else{
         [self.userPrefsDict setObject: [[NSMutableArray alloc] initWithObjects: @"Name", @"Name 1", nil] forKey: tmpKey];
     }
+
+    // Set the title for the "Default Units" row
+    tmpKey = [self keyForIndex: kDEFUNITS InSection: kUSER_SEC];
+    [self.userPrefsDict setObject: [[NSMutableArray alloc] initWithObjects: @"Default Units", @"", nil] forKey: tmpKey];
 }
 
 - (void) setupCoursePrefs
@@ -426,6 +440,9 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
         switch (index){
             case kNAME:
                 retStr = @"name";
+                break;
+            case kDEFUNITS:
+                retStr = @"defunits";
                 break;
             default:
                 break;

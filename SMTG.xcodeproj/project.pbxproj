@@ -28,6 +28,10 @@
 		9679EB1113E7A1E2001F3872 /* favstarreleased.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EB1013E7A1E2001F3872 /* favstarreleased.png */; };
 		96A3AA2913F1CCFD001D5BAC /* greenicon-lite.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A3AA2813F1CCFD001D5BAC /* greenicon-lite.png */; };
 		96A3AA2B13F1CD0D001D5BAC /* greenicon-lite@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96A3AA2A13F1CD0D001D5BAC /* greenicon-lite@2x.png */; };
+		96A86B22142656A200F9ABD0 /* DefaultUnitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A86B20142656A200F9ABD0 /* DefaultUnitsViewController.m */; };
+		96A86B23142656A200F9ABD0 /* DefaultUnitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A86B20142656A200F9ABD0 /* DefaultUnitsViewController.m */; };
+		96A86B24142656A200F9ABD0 /* DefaultUnitsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96A86B21142656A200F9ABD0 /* DefaultUnitsView.xib */; };
+		96A86B25142656A200F9ABD0 /* DefaultUnitsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96A86B21142656A200F9ABD0 /* DefaultUnitsView.xib */; };
 		96AC66ED13F00A9200D614E0 /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = AE816DC0137B7E140023F5D7 /* TBXML.m */; };
 		96AC66EE13F00A9200D614E0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D74F1368E34400CDA534 /* main.m */; };
 		96AC66EF13F00A9200D614E0 /* SMTGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7521368E34400CDA534 /* SMTGAppDelegate.m */; };
@@ -309,6 +313,9 @@
 		9679EB1013E7A1E2001F3872 /* favstarreleased.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = favstarreleased.png; sourceTree = "<group>"; };
 		96A3AA2813F1CCFD001D5BAC /* greenicon-lite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "greenicon-lite.png"; path = "../greenicon-lite.png"; sourceTree = "<group>"; };
 		96A3AA2A13F1CD0D001D5BAC /* greenicon-lite@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "greenicon-lite@2x.png"; path = "../greenicon-lite@2x.png"; sourceTree = "<group>"; };
+		96A86B1F142656A200F9ABD0 /* DefaultUnitsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultUnitsViewController.h; sourceTree = "<group>"; };
+		96A86B20142656A200F9ABD0 /* DefaultUnitsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultUnitsViewController.m; sourceTree = "<group>"; };
+		96A86B21142656A200F9ABD0 /* DefaultUnitsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultUnitsView.xib; sourceTree = "<group>"; };
 		96AC674A13F00A9200D614E0 /* SMTG Lite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SMTG Lite.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96AC674C13F00A9200D614E0 /* SMTGLite-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "SMTGLite-Info.plist"; path = "/Users/rking/dev/ios/ECaddy/SMTGLite-Info.plist"; sourceTree = "<absolute>"; };
 		96AD85A213FC151B0018B03D /* SMTG Lite-iPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SMTG Lite-iPad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -650,6 +657,8 @@
 				AE90069E13A9C6B3008247BF /* SettingsViewController.m */,
 				AE8DD06A13B034A700D7FCB3 /* SettingsDetailsViewController.h */,
 				AE8DD06B13B034A700D7FCB3 /* SettingsDetailsViewController.m */,
+				96A86B1F142656A200F9ABD0 /* DefaultUnitsViewController.h */,
+				96A86B20142656A200F9ABD0 /* DefaultUnitsViewController.m */,
 				AEE5301213C39AE3003C866C /* CustomCourseViewController.h */,
 				AEE5301313C39AE3003C866C /* CustomCourseViewController.m */,
 				96F2B37E13EF257A005BE308 /* MapErrorViewController.h */,
@@ -665,10 +674,11 @@
 				AE8E2C19139886630098A426 /* NewRoundView.xib */,
 				AE8DD06713B033ED00D7FCB3 /* NameEditView.xib */,
 				AE90069F13A9C6B3008247BF /* SettingsView.xib */,
-				AE8DD06F13B05EB900D7FCB3 /* HideStateView.xib */,
 				AE3D287313B99CB00054903D /* ScorecardTableView.xib */,
 				AEE5300F13C394DC003C866C /* CustomCourseView.xib */,
 				96F2B38013EF257A005BE308 /* MapErrorView.xib */,
+				AE8DD06F13B05EB900D7FCB3 /* HideStateView.xib */,
+				96A86B21142656A200F9ABD0 /* DefaultUnitsView.xib */,
 				AEFE6F131381BB60002B1AA3 /* coursemodel.xcdatamodeld */,
 				963A524E13EB7B8000253B12 /* SMTG.sqlite */,
 				9608A9A313E8FF610059BBA4 /* Default.png */,
@@ -870,6 +880,7 @@
 				96A3AA2913F1CCFD001D5BAC /* greenicon-lite.png in Resources */,
 				96A3AA2B13F1CD0D001D5BAC /* greenicon-lite@2x.png in Resources */,
 				96DF7D7C1409E2BA005BA340 /* stateabbrs.txt in Resources */,
+				96A86B25142656A200F9ABD0 /* DefaultUnitsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -978,6 +989,7 @@
 				96F2B38213EF257A005BE308 /* MapErrorView.xib in Resources */,
 				961BA18F13EF760C0046B850 /* windarrow.png in Resources */,
 				96DF7D7B1409E2BA005BA340 /* stateabbrs.txt in Resources */,
+				96A86B24142656A200F9ABD0 /* DefaultUnitsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1021,6 +1033,7 @@
 				96AC670B13F00A9200D614E0 /* SBJsonParser.m in Sources */,
 				96AC670C13F00A9200D614E0 /* SBJsonWriter.m in Sources */,
 				96AC670D13F00A9200D614E0 /* MapErrorViewController.m in Sources */,
+				96A86B23142656A200F9ABD0 /* DefaultUnitsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1101,6 +1114,7 @@
 				96DF438313E0ECB6009D568B /* SBJsonParser.m in Sources */,
 				96DF438413E0ECB6009D568B /* SBJsonWriter.m in Sources */,
 				96F2B38113EF257A005BE308 /* MapErrorViewController.m in Sources */,
+				96A86B22142656A200F9ABD0 /* DefaultUnitsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1256,8 +1270,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
-				PROVISIONING_PROFILE = "2F7D09D7-F4A8-43EF-B877-C3E8D49ADD35";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2F7D09D7-F4A8-43EF-B877-C3E8D49ADD35";
+				PROVISIONING_PROFILE = "0D306BCF-60C0-42C1-8FF9-9F0E28C1EE3F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0D306BCF-60C0-42C1-8FF9-9F0E28C1EE3F";
 				SDKROOT = iphonesimulator4.0;
 			};
 			name = Debug;
@@ -1266,16 +1280,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Robert KIng (PLJWL35TX2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Robert KIng (PLJWL35TX2)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "2F7D09D7-F4A8-43EF-B877-C3E8D49ADD35";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2F7D09D7-F4A8-43EF-B877-C3E8D49ADD35";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

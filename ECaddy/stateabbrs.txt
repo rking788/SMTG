@@ -54,6 +54,14 @@
 			<string>Yukon</string>
 		</dict>
 	</array>
+    <key>IT</key>
+    <array>
+        <string>Italy</string>
+        <dict>
+            <key>PD</key>
+            <string>Padova</string>
+        </dict>
+    </array>
     <key>FR</key>
     <array>
         <string>France</string>

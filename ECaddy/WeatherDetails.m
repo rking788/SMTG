@@ -181,7 +181,7 @@
 {
     // Return YES for supported orientations
     //return (interfaceOrientation == UIInterfaceOrientationPortrait);
-    return YES;
+    return NO;
 }
 
 - (IBAction)favstarPressed:(id)sender {
@@ -210,7 +210,9 @@
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
     
     // Add the woeid to the URL
-    NSURL* url2 = [NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@", self.WOEID]];
+    NSString* defTempUnits = [[NSUserDefaults standardUserDefaults] objectForKey: @"tempunits"];
+    unichar firstchar = [[defTempUnits lowercaseString] characterAtIndex: 0];
+    NSURL* url2 = [NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@&u=%C", self.WOEID, firstchar]];
     NSString* str3 = [[NSString alloc] initWithContentsOfURL:url2 encoding:NSUTF8StringEncoding error:nil];
     
     [self setText:str3];
@@ -284,7 +286,22 @@
     windChill = [windChill stringByAppendingString: tempUnits];
     NSString* windDir = [TBXML valueOfAttributeNamed: @"direction" forElement: WIND];
     NSString* windSpeed = [TBXML valueOfAttributeNamed: @"speed" forElement: WIND];
-    windSpeed = [windSpeed stringByAppendingFormat: @" %@", [speedUnits uppercaseString]];
+    NSString* defaultSpeedUnits = [[NSUserDefaults standardUserDefaults] objectForKey: @"speedunits"];
+    NSString* defaultTempUnits = [[NSUserDefaults standardUserDefaults] objectForKey: @"tempunits"];
+    
+    // Only the Fahrenheit or celsius XML files are retrieved, if they set km/h as the default 
+    // units for speed then we need to do a conversion here
+    if([defaultSpeedUnits isEqualToString: @"MPH"] && [defaultTempUnits  isEqualToString: @"Celsius"]){
+        windSpeed = [WeatherDetails KMHtoMPH: windSpeed];
+        windSpeed = [windSpeed stringByAppendingFormat: @" %@", @"MPH"];
+    }
+    else if([defaultSpeedUnits isEqualToString: @"km/h"] && [defaultTempUnits isEqualToString: @"Fahrenheit"]){
+        windSpeed = [WeatherDetails MPHtoKMH: windSpeed];
+        windSpeed = [windSpeed stringByAppendingFormat: @" %@", @"km/h"];
+    }
+    else{
+        windSpeed = [windSpeed stringByAppendingFormat: @" %@", speedUnits];
+    }
     
     // Astronomy information (sunrise/sunset)
     NSString* sunRise = [TBXML valueOfAttributeNamed: @"sunrise" forElement: AST];
@@ -362,6 +379,24 @@
     // Stop the activity indicator
     [self.actIndicator stopAnimating];
     [self.actIndicator setHidden: YES];
+}
+
++ (NSString*) MPHtoKMH:(NSString *)mphSpeed
+{
+    double dSpeed = [mphSpeed doubleValue];
+    
+    dSpeed = dSpeed * 1.609344;
+    
+    return [NSString stringWithFormat: @"%d", (int) dSpeed];
+}
+
++ (NSString*) KMHtoMPH:(NSString *)kmhSpeed
+{
+    double dSpeed = [kmhSpeed doubleValue];
+    
+    dSpeed = dSpeed * 0.621371192;
+    
+    return [NSString stringWithFormat: @"%d", (int) dSpeed];
 }
 
 @end
