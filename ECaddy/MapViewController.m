@@ -705,7 +705,6 @@
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)annotationView didChangeDragState:(MKAnnotationViewDragState)newState fromOldState:(MKAnnotationViewDragState)oldState
 {
     if(newState == MKAnnotationViewDragStateEnding){
-        POIAnnotation* annot = annotationView.annotation;
         
         [self.mapView removeOverlay: self.holeLine];
         [self setHoleLineView: nil]; 
@@ -726,7 +725,7 @@
 {
     [self.tabBarController setSelectedViewController: [self.tabBarController.viewControllers objectAtIndex: 0]];
     UINavigationController* navCont = (UINavigationController*) self.tabBarController.selectedViewController;
-    [[[navCont viewControllers] objectAtIndex: 0] setCourseObj: self.curCourse];
+    [[[navCont viewControllers] objectAtIndex: 0] setValue:self.curCourse forKey: @"courseObj"];
     [navCont popToRootViewControllerAnimated: NO];
     [[[navCont viewControllers] objectAtIndex: 0] viewDidAppear: YES];
 }

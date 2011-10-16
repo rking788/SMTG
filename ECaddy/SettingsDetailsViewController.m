@@ -318,7 +318,7 @@
         [switchview release];
     }
     if(indexPath.section != 0)
-        [cell setSelectionStyle: UITableViewCellEditingStyleNone];
+        [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
    
     return cell;
 }

@@ -25,9 +25,9 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
 @synthesize contactPrefsArr;
 @synthesize selectedSettingsDetail;
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithStyle:style];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
     }

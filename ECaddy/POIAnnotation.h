@@ -19,8 +19,8 @@
     BOOL draggable;
 }
 
-@property (retain, nonatomic) NSString* title;
-@property (retain, nonatomic) NSString* subtitle;
+@property (copy, nonatomic) NSString* title;
+@property (copy, nonatomic) NSString* subtitle;
 
 @property (nonatomic, retain) UIImage *image;
 @property (nonatomic, retain) NSNumber *latitude;

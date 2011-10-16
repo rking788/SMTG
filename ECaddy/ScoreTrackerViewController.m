@@ -14,6 +14,10 @@
 #import "HeaderFooterView.h"
 #import "FBConnect.h"
 #import <QuartzCore/QuartzCore.h>
+#import <Twitter/TWTweetComposeViewController.h>
+#import <Twitter/Twitter.h>
+
+#pragma mark - TODO CRITICAL: ADD AN INSTANCE VARIALE FOR THE CANTWEET TEST INSTEAD OF CALLING CANSENDTWEET EVERYTIME
 
 // Facebook app ID constant string
 static NSString* kAppId = @"142876775786876";
@@ -238,7 +242,7 @@ static NSString* kAppId = @"142876775786876";
     ScorecardTableCell *cell = (ScorecardTableCell*) [tableView dequeueReusableCellWithIdentifier: cellID];
     if (cell == nil) {
         //cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
-        cell = [[[ScorecardTableCell alloc] initWithFrame:CGRectZero reuseIdentifier: cellID] autorelease];
+        cell = [[[ScorecardTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID] autorelease];
         
         [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
         
@@ -518,7 +522,23 @@ static NSString* kAppId = @"142876775786876";
 
 - (void) actionButtonClicked: (id) sender
 {
-    UIActionSheet* actSheet = [[UIActionSheet alloc] initWithTitle: nil delegate: self cancelButtonTitle: @"Cancel" destructiveButtonTitle: @"Finish Round" otherButtonTitles: @"Upload to Facebook", nil];
+    UIActionSheet* actSheet;
+    
+    if([TWTweetComposeViewController canSendTweet]){
+        NSLog(@"Able to send tweet");
+        actSheet = [[UIActionSheet alloc] initWithTitle: nil delegate: self 
+                        cancelButtonTitle: @"Cancel" 
+                        destructiveButtonTitle: @"Finish Round"
+                        otherButtonTitles: @"Upload to Facebook", @"Tweet", nil];
+    }
+    else{
+        NSLog(@"Cannot Tweet");
+        actSheet = [[UIActionSheet alloc] initWithTitle: nil delegate: self 
+                        cancelButtonTitle: @"Cancel" 
+                        destructiveButtonTitle: @"Finish Round"
+                        otherButtonTitles: @"Upload to Facebook", nil];
+    }
+    
     actSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     [actSheet showFromTabBar: self.tabBarController.tabBar];
     [actSheet release];  
@@ -536,6 +556,54 @@ static NSString* kAppId = @"142876775786876";
 #else
         [self saveScorecardImg];
         [self uploadSCToFB];
+#endif
+    }
+    else if([selTitle isEqualToString: @"Tweet"]){
+#ifdef LITE
+        UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"Sorry" message: @"Sorry, this feature is only available in the Full version." delegate:self cancelButtonTitle:nil otherButtonTitles: @"Dismiss", nil];
+        
+        [av show];
+#else
+        TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
+        
+        // Set the initial tweet text. See the framework for additional properties that can be set.
+        [tweetViewController setInitialText:@"Hello. This is a test tweet from Show Me the Green (iOS 5)"];
+        
+        [self saveScorecardImg];
+        
+        NSString* documentsDir = [[SMTGAppDelegate sharedAppDelegate] applicationDocumentsDirectory];
+        NSString *filePath =  [documentsDir stringByAppendingPathComponent: @"Screenshot.png"];
+        NSData* data = [NSData dataWithContentsOfFile: filePath];
+        UIImage *img  = [[UIImage alloc] initWithData:data];
+        
+        [tweetViewController addImage: img];
+        
+        // Create the completion handler block.
+        [tweetViewController setCompletionHandler:^(TWTweetComposeViewControllerResult result) {
+            //NSString *output;
+            
+           /* switch (result) {
+                case TWTweetComposeViewControllerResultCancelled:
+                    // The cancel button was tapped.
+                    output = @"Tweet cancelled.";
+                    break;
+                case TWTweetComposeViewControllerResultDone:
+                    // The tweet was sent.
+                    output = @"Tweet done.";
+                    break;
+                default:
+                    break;
+            }*/
+            
+            [self performSelectorOnMainThread: @selector(keyboardWillBeHidden:) withObject:nil waitUntilDone: NO];
+            //[self performSelectorOnMainThread:@selector(displayText:) withObject:output waitUntilDone:NO];
+            
+            // Dismiss the tweet composition view controller.
+            [self dismissModalViewControllerAnimated:YES];
+        }];
+        
+        // Present the tweet composition view controller modally.
+        [self presentModalViewController:tweetViewController animated:YES];
 #endif
     }
     else if([selTitle isEqualToString: @"Finish Round"]){
