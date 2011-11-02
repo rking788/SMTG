@@ -69,17 +69,17 @@
     
     
     
-    UIBarButtonItem* nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next"                                            
+    UIBarButtonItem* nextButton = [[[UIBarButtonItem alloc] initWithTitle:@"Next"                                            
         style:UIBarButtonItemStyleBordered 
         target:self 
-        action: @selector(goToNextHole:)];
+        action: @selector(goToNextHole:)] autorelease];
     self.navigationItem.rightBarButtonItem = nextButton;
     
     // Add a button to the left side of the navigation bar for the prev hole button
-    UIBarButtonItem* prevButton = [[UIBarButtonItem alloc] initWithTitle:@"Previous"                                             
+    UIBarButtonItem* prevButton = [[[UIBarButtonItem alloc] initWithTitle:@"Previous"                                             
                                         style:UIBarButtonItemStylePlain 
                                         target:self 
-                                        action: @selector(goToPrevHole:)];
+                                        action: @selector(goToPrevHole:)] autorelease];
     self.navigationItem.leftBarButtonItem = prevButton;
     
     self.curHole = 1;
@@ -167,16 +167,6 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    BOOL ret = NO;
-    
-    // Return YES for supported orientations
-    if(interfaceOrientation == UIInterfaceOrientationLandscapeLeft){
-        ret = YES;
-    }
-    else if(interfaceOrientation == UIInterfaceOrientationPortrait){
-        ret = YES;
-    }
-    
 #ifdef LITE
     [self fixupAdView: interfaceOrientation];
 #endif
@@ -769,6 +759,7 @@
         [self.holeAnnotations insertObject:teeAnnot atIndex: teeAnnotationIndex];
         
         isTeeValid = YES;
+        [teeAnnot release]; teeAnnot = nil;
     }
     
     if([green count] != 0){
@@ -779,22 +770,29 @@
         [self.holeAnnotations insertObject:greenAnnot atIndex: greenAnnotationIndex];
     
         isGreenValid = YES;
+        [greenAnnot release]; greenAnnot = nil;
     }
     
     if(isTeeValid && isGreenValid){
         POIAnnotation* draggable1 = [[POIAnnotation alloc] initWithLat: ((lat1+lat2)/2) withLong:((long1+long2)/2)];
         [draggable1 setDraggable: YES];
         [self.distanceAnnotations addObject:draggable1];
+        
+        [draggable1 release]; draggable1 = nil;
     }
     else if(isTeeValid){
         POIAnnotation* draggable1 = [[POIAnnotation alloc] initWithLat: lat1 withLong: long1];
         [draggable1 setDraggable: YES];
         [self.distanceAnnotations addObject:draggable1];
+        
+        [draggable1 release]; draggable1 = nil;
     }
     else if(isGreenValid){
         POIAnnotation* draggable1 = [[POIAnnotation alloc] initWithLat: lat2 withLong: long2];
         [draggable1 setDraggable: YES];
         [self.distanceAnnotations addObject:draggable1];
+        
+        [draggable1 release]; draggable1 = nil;
     }
     
     [self.mapView addAnnotations: self.holeAnnotations];

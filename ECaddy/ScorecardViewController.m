@@ -54,15 +54,6 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    BOOL ret = NO;
-    
-    // Return YES for supported orientations
-    if(interfaceOrientation == UIInterfaceOrientationLandscapeLeft){
-        ret = YES;
-    }
-    else if(interfaceOrientation == UIInterfaceOrientationPortrait){
-        ret = YES;
-    }
     
 #ifdef LITE
     [self fixupAdView: interfaceOrientation];
@@ -172,7 +163,7 @@
     
     [sortDescript release];
     [sdArr release];
-    [fetchrequest release];   
+    [fetchrequest release];
 }
 
 - (void) uploadCourseToServer:(Course *)course

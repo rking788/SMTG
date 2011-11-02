@@ -97,7 +97,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return [[UIView alloc] init];
+    return [[[UIView alloc] init] autorelease];
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -283,7 +283,7 @@
 }
 
 - (void) showPickerView{
-    self.actSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil]; 
+    self.actSheet = [[[UIActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil] autorelease]; 
     
     UILabel* numPlayers = [[self.tableV cellForRowAtIndexPath: [NSIndexPath indexPathForRow:kNumPlayers inSection:0]] detailTextLabel];
     NSInteger nCur = [[numPlayers text] integerValue];
@@ -317,7 +317,6 @@
     [self.actSheet showInView: self.view.window];
     
     [self.actSheet setBounds:CGRectMake(0, 0, 320, 485)];
-    [self.actSheet autorelease];
 }
 
 - (void) dismissPickerView{
@@ -381,7 +380,7 @@
     
     // If there is a current scorecard then display an alert view
     if(self.curScorecard){
-        UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"Warning" message: @"You are about to begin a new round with a round already active. The active round will be overwritten." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Continue", nil];
+        UIAlertView* av = [[[UIAlertView alloc] initWithTitle: @"Warning" message: @"You are about to begin a new round with a round already active. The active round will be overwritten." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Continue", nil] autorelease];
         
         [av show];
         return;
