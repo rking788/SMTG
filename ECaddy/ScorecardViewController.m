@@ -185,10 +185,10 @@
     // Add the course information into the POST request content
     NSURL* url = [NSURL URLWithString:@"http://mainelyapps.com/SMTG/NewCourse.php"];
     NSString* content = [NSString stringWithFormat:
-                         @"cn=%@&p=%@&addr=%@&st=%@&c=%@&web=%@&woeid=%@&nh=%@", 
+                         @"cn=%@&p=%@&addr=%@&st=%@&c=%@&web=%@&woeid=%@&nh=%@&tc=%@&gc=%@", 
                          [course coursename], [course phone], [course valueForKey: @"address"], 
                          [course valueForKey:@"state"], [course valueForKey:@"country"], 
-                         [course website], [course woeid], [course numholes]];
+                         [course website], [course woeid], [course numholes], [course teeCoords], [course greenCoords]];
     
     NSMutableURLRequest* request = [[[NSMutableURLRequest alloc] initWithURL: url] autorelease];
     

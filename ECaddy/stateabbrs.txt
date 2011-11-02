@@ -76,6 +76,14 @@
 		<dict>
 			<key>GL</key>
 			<string>Greater London</string>
+            <key>ES</key>
+            <string>East Sussex</string>
+            <key>LANCS</key>
+            <string>Lancashire</string>
+            <key>SOM</key>
+            <string>Somerset</string>
+            <key>STN</key>
+            <string>St Neots</string>
 		</dict>
 	</array>
 	<key>USA</key>

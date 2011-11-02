@@ -85,6 +85,7 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
      Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
      Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
      */
+    [self saveContext];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -118,6 +119,7 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+    [self saveContext];
 }
 
 - (void)dealloc
@@ -353,7 +355,7 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
     NSString* retStr = [[NSString alloc] initWithData: ret encoding: NSUTF8StringEncoding];
     
     // Check if there were any new courses or not
-    if(![retStr isEqualToString: @"0\n"]){
+    if(![retStr isEqualToString: @"0\n"] && (!([retStr length] == 0))){
         NSString* message = [NSString stringWithFormat: @"New information for %@ courses is available. Update Now? (Will run in the background)", retStr];
         UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"New Course Data" message: message delegate:self cancelButtonTitle:@"No" otherButtonTitles: @"Yes", nil];
         

@@ -116,10 +116,11 @@ static NSString* CONTACTEMAIL = @"admin@mainelyapps.com";
 
 - (void) noCoordsAvailable
 {
-    NSString* errorStr = @"Unfortunately, coordinates are not available for this course.\n\nClick the button below to send an EMail to the administrator to request coordinates for this course.\n\nIn the future there will be a way to log the coordinates while on the course.";
+    NSString* errorStr = @"Unfortunately, coordinates are not available for this course.\n\nUse the tee and green buttons in the top left and top right corners to log the coordinates.\n\nThe coordinates will then be uploaded to MainelyApps to be sent out to other users.";
     
     [self.messageTV setText: errorStr];
-    [self.actionBtn setTitle: @"EMail Request" forState: UIControlStateNormal];
+    [self.actionBtn setHidden: YES];
+    // [self.actionBtn setTitle: @"EMail Request" forState: UIControlStateNormal];
 }
 
 - (void) doneBtnClicked

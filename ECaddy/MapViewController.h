@@ -31,8 +31,13 @@
     
     BOOL coordsAvailable;
     
+    // Coordinates to/from CoreData
     NSArray* teeCoords;
     NSArray* greenCoords;
+    
+    // Temporary coordinates array used when logging coordinates
+    NSMutableArray* tempTeeCoords;
+    NSMutableArray* tempGreenCoords;
     
     MKPolyline* holeLine;
     MKPolylineView* holeLineView;
@@ -70,6 +75,9 @@
 @property (nonatomic, retain) NSArray* teeCoords;
 @property (nonatomic, retain) NSArray* greenCoords;
 
+@property (nonatomic, retain) NSMutableArray* tempTeeCoords;
+@property (nonatomic, retain) NSMutableArray* tempGreenCoords;
+
 @property (nonatomic, retain) MKPolyline* holeLine;
 @property (nonatomic, retain) MKPolylineView* holeLineView;
 
@@ -90,12 +98,15 @@
 
 - (void) goToNextHole: (id) sender;
 - (void) goToPrevHole: (id) sender;
+- (void) goToHole: (NSUInteger) holeNum;
 
 - (void) drawMapLine;
 
 + (NSArray*) latAndLongForHole: (NSUInteger) hole FromCoords: (NSArray*) coords;
 
 - (IBAction)toggleLocationOnOff:(id)sender;
+- (IBAction)logTeeCoords:(id)sender;
+- (IBAction)logGreenCoords:(id)sender;
 
 - (void) startNewRound;
 

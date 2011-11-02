@@ -14,6 +14,8 @@
 #import "Course.h"
 #import "MapErrorViewController.h"
 
+
+#pragma mark - TODO CRITICAL Finish implementing and testing the coordinate logging features. Do we need all of these synthesized properties? "Analyze" the project and remove all memory leaks and other problems.
 @implementation MapViewController
 
 @synthesize manObjCon;
@@ -28,8 +30,8 @@
 @synthesize curCourse;
 @synthesize curHole;
 @synthesize coordsAvailable;
-@synthesize teeCoords;
-@synthesize greenCoords;
+@synthesize teeCoords, greenCoords;
+@synthesize tempTeeCoords, tempGreenCoords;
 @synthesize holeLine;
 @synthesize holeLineView;
 @synthesize locManager;
@@ -40,6 +42,10 @@
 
 #define SCREEN_WIDTH    320.0
 #define SCREEN_HEIGHT   480.0
+#define T_LOGBTN_TAG    66
+#define G_LOGBTN_TAG    67
+#define T_ACTIND_TAG    76
+#define G_ACTIND_TAG    77
 
 #pragma mark - View Lifecycle methods
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -61,6 +67,8 @@
     self.holeAnnotations = [[NSMutableArray alloc] initWithCapacity: 2];
     self.distanceAnnotations = [[NSMutableArray alloc] init];
     
+    
+    
     UIBarButtonItem* nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next"                                            
         style:UIBarButtonItemStyleBordered 
         target:self 
@@ -73,6 +81,8 @@
                                         target:self 
                                         action: @selector(goToPrevHole:)];
     self.navigationItem.leftBarButtonItem = prevButton;
+    
+    self.curHole = 1;
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -107,9 +117,7 @@
         // Fill the coordinate arrays
         [self populateHoleCoords];
         
-        // Start on hole 0 because gotonexthole will increment this value
-        self.curHole = 0;
-        [self goToNextHole: nil];
+        [self goToHole: 1];
     }
     
     if(!errStr && !self.coordsAvailable){
@@ -117,10 +125,6 @@
     }
     
     if(errStr){
-        // Disable the next and previous buttons
-        [self.navigationItem.leftBarButtonItem setEnabled: NO];
-        [self.navigationItem.rightBarButtonItem setEnabled: NO];
-        
         // Display the modal view controller
         MapErrorViewController* mevc = [[MapErrorViewController alloc] init];
         
@@ -136,6 +140,28 @@
      
         [self presentModalViewController: mevc animated: YES];
         [mevc release];
+    }
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    BOOL shouldSave = NO;
+    
+    if(self.tempTeeCoords){
+        self.curCourse.teeCoords = self.tempTeeCoords;
+        self.curCourse.pending = [NSNumber numberWithBool: YES];
+        shouldSave = YES;
+    }
+    
+    if(self.tempGreenCoords){
+        self.curCourse.greenCoords = self.tempGreenCoords;
+        self.curCourse.pending = [NSNumber numberWithBool: YES];
+        shouldSave = YES;
+    }
+    
+    // If we should save the managed object context then do it !
+    if(shouldSave){
+        [self.manObjCon save: nil];
     }
 }
 
@@ -181,6 +207,8 @@
     [self setDistanceAnnotations:nil];
     [self setTeeCoords: nil];
     [self setGreenCoords: nil];
+    [self setTempTeeCoords: nil];
+    [self setTempGreenCoords: nil];
     [self setT2dLbl:nil];
     [self setLocManager: nil];
     [self setUserLoc: nil];
@@ -204,6 +232,8 @@
     [t2dLbl release];
     [teeCoords release];
     [greenCoords release];
+    [tempTeeCoords release];
+    [tempGreenCoords release];
     [manObjCon release];
     [locManager release];
     [userLoc release];
@@ -217,17 +247,23 @@
 
 - (void)zoomToFitMapAnnotations:(MKMapView*)mapV
 {
-    CLLocationCoordinate2D tee;
+    CLLocationCoordinate2D tee, green;
+    BOOL isValidTee = NO, isValidGreen = NO;
     
-    if (!userLocEnabled) {
+    if (!self.userLocEnabled && (teeAnnotationIndex < [self.holeAnnotations count])) {
         tee = [[self.holeAnnotations objectAtIndex: teeAnnotationIndex] coordinate];
+        isValidTee = YES;
     }
-    else{
-        tee = userLoc.coordinate;
+    else if(self.userLocEnabled){
+        tee = self.userLoc.coordinate;
+        isValidTee = YES;
     }
     
-    CLLocationCoordinate2D green = [[self.holeAnnotations objectAtIndex: greenAnnotationIndex] coordinate];
-    
+    if(greenAnnotationIndex < [self.holeAnnotations count]){
+        green = [[self.holeAnnotations objectAtIndex: greenAnnotationIndex] coordinate];
+        isValidGreen = YES;
+    }
+        
     CLLocationCoordinate2D topLeftCoord;
     topLeftCoord.latitude = -90;
     topLeftCoord.longitude = 180;
@@ -236,19 +272,26 @@
     bottomRightCoord.latitude = 90;
     bottomRightCoord.longitude = -180;
     
-    // Check if tee is minimum for any of these
-    topLeftCoord.longitude = fmin(topLeftCoord.longitude, tee.longitude);
-    topLeftCoord.latitude = fmax(topLeftCoord.latitude, tee.latitude);
+    if(isValidTee){
+        // Check if tee is minimum for any of these
+        topLeftCoord.longitude = fmin(topLeftCoord.longitude, tee.longitude);
+        topLeftCoord.latitude = fmax(topLeftCoord.latitude, tee.latitude);
+        
+        bottomRightCoord.longitude = fmax(bottomRightCoord.longitude, tee.longitude);
+        bottomRightCoord.latitude = fmin(bottomRightCoord.latitude, tee.latitude);
+    }
     
-    bottomRightCoord.longitude = fmax(bottomRightCoord.longitude, tee.longitude);
-    bottomRightCoord.latitude = fmin(bottomRightCoord.latitude, tee.latitude);
+    if(isValidGreen){
+        // Check if green is minimum for any of these
+        topLeftCoord.longitude = fmin(topLeftCoord.longitude, green.longitude);
+        topLeftCoord.latitude = fmax(topLeftCoord.latitude, green.latitude);
+        
+        bottomRightCoord.longitude = fmax(bottomRightCoord.longitude, green.longitude);
+        bottomRightCoord.latitude = fmin(bottomRightCoord.latitude, green.latitude);
+    }
     
-    // Check if green is minimum for any of these
-    topLeftCoord.longitude = fmin(topLeftCoord.longitude, green.longitude);
-    topLeftCoord.latitude = fmax(topLeftCoord.latitude, green.latitude);
-    
-    bottomRightCoord.longitude = fmax(bottomRightCoord.longitude, green.longitude);
-    bottomRightCoord.latitude = fmin(bottomRightCoord.latitude, green.latitude);
+    if((!isValidTee) && (!isValidGreen))
+        return;
     
     MKCoordinateRegion region;
     region.center.latitude = topLeftCoord.latitude - (topLeftCoord.latitude - bottomRightCoord.latitude) * 0.5;
@@ -256,46 +299,28 @@
     region.span.latitudeDelta = fabs(topLeftCoord.latitude - bottomRightCoord.latitude) * 1.2; // Add a little extra space on the sides
     region.span.longitudeDelta = fabs(bottomRightCoord.longitude - topLeftCoord.longitude) * 1.2; // Add a little extra space on the sides
     
-    region = [mapV regionThatFits:region];
-    [mapV setRegion:region animated:YES];
+    region = [mapV regionThatFits: region];
+    [mapV setRegion:region animated: YES];
 }
 
 - (void) goToNextHole:(id)sender
 {
     // If we are past the last hole then display a summary view maybe
-    if(self.curHole >= [self.teeCoords count])
+    if(self.curHole >= [self.curCourse.numholes unsignedIntValue])
         return;
-    
+ 
     // Increment the current hole counter
     ++self.curHole;
     
-    if(![self isCoordsAvailable])
-        return;
+ //   if(![self isCoordsAvailable])
+ //       return;
     
-    NSArray* tee = [MapViewController latAndLongForHole:self.curHole FromCoords: self.teeCoords];
-    NSArray* green = [MapViewController latAndLongForHole:self.curHole FromCoords:self.greenCoords];
-    [self holeAnnotsTeeCoords: tee greenLat:green]; 
-    
-    [self zoomToFitMapAnnotations:mapView];
-    
-    // Set the title to the current hole
-    [self.navigationItem setTitle: [NSString stringWithFormat: @"Hole #%d", self.curHole]];
-    
-    if(self.curHole == 1){
-        [self.navigationItem.leftBarButtonItem setEnabled: NO];
-    }
-    else if(self.curHole > 1){
-        [self.navigationItem.leftBarButtonItem setEnabled: YES];
-    }
-    
-    if(self.curHole == [self.curCourse.numholes unsignedIntegerValue])
-        [self.navigationItem.rightBarButtonItem setEnabled: NO];
-    else
-        [self.navigationItem.rightBarButtonItem setEnabled: YES];
+    [self goToHole: self.curHole];
 }
 
 - (void) goToPrevHole:(id)sender
 {
+    
     // If we are past the last hole then display a summary view maybe
     if(self.curHole == 1)
         return;
@@ -303,26 +328,60 @@
     // Increment the current hole counter
     --self.curHole;
     
-    if(![self isCoordsAvailable])
-        return;
+ //   if(![self isCoordsAvailable])
+ //       return;
     
-    NSArray* tee = [MapViewController latAndLongForHole:self.curHole FromCoords: self.teeCoords];
-    NSArray* green = [MapViewController latAndLongForHole:self.curHole FromCoords:self.greenCoords];
-    [self holeAnnotsTeeCoords: tee greenLat:green]; 
+    [self goToHole: self.curHole];
+}
+
+- (void) goToHole: (NSUInteger) holeNum
+{
+    NSArray* tee = nil;
+    NSArray* green = nil;
     
-    [self zoomToFitMapAnnotations:mapView];
+    if(holeNum <= [self.teeCoords count]){
+        tee = [MapViewController latAndLongForHole: holeNum FromCoords: self.teeCoords];
+    }
+    
+    if(holeNum <= [self.greenCoords count]){
+        green = [MapViewController latAndLongForHole: holeNum FromCoords:self.greenCoords];
+    }
+    
+    [self holeAnnotsTeeCoords: tee greenLat: green]; 
+    
+    if((tee != nil) || (green != nil))
+        [self zoomToFitMapAnnotations: mapView];
+    
+    // Disable the tee or green buttons if they are already available
+    UIButton* teeBtn = (UIButton*) [self.view viewWithTag: T_LOGBTN_TAG];
+    UIButton* greenBtn = (UIButton*) [self.view viewWithTag: G_LOGBTN_TAG];
+    
+    if(tee != nil){
+        [teeBtn setHidden: YES];
+    }
+    else{
+        [teeBtn setImage: [UIImage imageNamed: @"golftee_mapbtn.png"] forState: UIControlStateNormal];
+        [teeBtn setHidden: NO];
+    }
+    if(green != nil){
+        [greenBtn setHidden: YES];
+    }
+    else{
+        [greenBtn setImage: [UIImage imageNamed: @"green_mapbtn.png"] forState: UIControlStateNormal];
+        [greenBtn setHidden: NO];
+    }
     
     // Set the title to the current hole
-    [self.navigationItem setTitle: [NSString stringWithFormat: @"Hole #%d", self.curHole]];
+    [self.navigationItem setTitle: [NSString stringWithFormat: @"Hole #%d", holeNum]];
     
-    if(self.curHole == 1){
+    if(holeNum == 1){
         [self.navigationItem.leftBarButtonItem  setEnabled: NO];
     }
-    else if(self.curHole > 1){
+    else if(holeNum > 1){
         [self.navigationItem.leftBarButtonItem setEnabled: YES];
     }
     
-    if(self.curHole == [self.curCourse.numholes unsignedIntegerValue])
+    if(holeNum == [self.curCourse.numholes unsignedIntegerValue])
         [self.navigationItem.rightBarButtonItem setEnabled: NO];
     else
         [self.navigationItem.rightBarButtonItem setEnabled: YES];
@@ -335,6 +394,7 @@
     
     if(self.teeCoords && self.greenCoords)
         self.coordsAvailable = YES;
+
 }
 
 + (NSArray*) latAndLongForHole: (NSUInteger) hole FromCoords: (NSArray*) coords
@@ -343,11 +403,17 @@
     [numFormat setNumberStyle: NSNumberFormatterNoStyle];
     
     NSString* coordsStr = [coords objectAtIndex: (hole - 1)];
+
+    if([coordsStr isEqualToString: @""])
+        return nil;
  
     NSNumber* lat = [numFormat numberFromString: [[coordsStr componentsSeparatedByString:@","] objectAtIndex: 0]];
     NSNumber* longitude = [numFormat numberFromString: [[coordsStr componentsSeparatedByString: @","] objectAtIndex: 1]];
     
     [numFormat release];
+    
+    if((!lat) || (!longitude))
+        return nil;
     
     return [NSArray arrayWithObjects:lat, longitude, nil];
 }
@@ -371,7 +437,8 @@
         
         // Only do this if coordinates are available
         if(self.coordsAvailable){
-            [self.mapView addAnnotation: [self.holeAnnotations objectAtIndex: teeAnnotationIndex]];
+            if(teeAnnotationIndex < [self.holeAnnotations count])
+                [self.mapView addAnnotation: [self.holeAnnotations objectAtIndex: teeAnnotationIndex]];
             [self drawMapLine];
             [self zoomToFitMapAnnotations: mapView];
         }
@@ -389,6 +456,112 @@
     }
 }
 
+- (IBAction)logTeeCoords:(id)sender
+{
+    if (![self isUserLocEnabled]){
+        NSString* mesg = @"Please enable your current location with the button in the bottom right corner before logging coordinates";
+        UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"Enable Location" message: mesg delegate: self cancelButtonTitle: @"Dismiss" otherButtonTitles: nil];
+        [av show];
+        [av release];
+        return;
+    }
+    
+    // Should set this background to the empty background of the button
+    // Without the tee or green icons inside of it
+    UIButton* teeBtn = (UIButton*) [self.view viewWithTag: T_LOGBTN_TAG];
+    [teeBtn setImage: [UIImage imageNamed: @"blank_mapbtn.png"] forState: UIControlStateNormal];
+    
+    UIActivityIndicatorView* actInd = (UIActivityIndicatorView*)[self.view viewWithTag: T_ACTIND_TAG];
+    [actInd startAnimating];
+    
+    if(!self.tempTeeCoords){
+        if(self.curCourse.teeCoords){
+            self.tempTeeCoords = [self.curCourse.teeCoords mutableCopy];
+        }
+        else{
+        self.tempTeeCoords = [[NSMutableArray alloc] init];
+        for(int i = 0; i < [self.curCourse.numholes intValue] ; ++i)
+            [self.tempTeeCoords addObject: @""];
+        }
+    }
+    
+    if(!self.userLoc){
+        //Set error image in the log coordinates button
+        NSLog(@"Error logging coordinates");
+        
+        [actInd stopAnimating];
+        [teeBtn setImage: [UIImage imageNamed: @"failure_mapbtn.png"] forState: UIControlStateNormal];
+        
+        return;
+    }
+    
+    CLLocationDegrees lat = self.userLoc.coordinate.latitude;
+    CLLocationDegrees lng = self.userLoc.coordinate.longitude;
+    NSString* coordStr = [NSString stringWithFormat: @"%d,%d", (int)(lat*1000000), (int)(lng*1000000)];
+    
+    [self.tempTeeCoords replaceObjectAtIndex: (self.curHole - 1) withObject: coordStr];
+    
+    self.teeCoords = self.tempTeeCoords;
+    self.curCourse.teeCoords = self.tempTeeCoords;
+    self.curCourse.pending = [NSNumber numberWithBool: YES];
+    
+    [actInd stopAnimating];
+    
+    [teeBtn setImage: [UIImage imageNamed: @"success_mapbtn.png"] forState: UIControlStateNormal];
+}
+
+- (IBAction)logGreenCoords:(id)sender
+{
+    if (![self isUserLocEnabled]){
+        NSString* mesg = @"Please enable your current location with the button in the bottom right corner before logging coordinates";
+        UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"Enable Location" message: mesg delegate: self cancelButtonTitle: @"Dismiss" otherButtonTitles: nil];
+        [av show];
+        [av release];
+        return;
+    }
+
+    // Should set this background to the empty background of the button
+    // Without the tee or green icons inside of it
+    UIButton* greenBtn = (UIButton*) [self.view viewWithTag: G_LOGBTN_TAG];
+    [greenBtn setImage: [UIImage imageNamed: @"blank_mapbtn.png"] forState: UIControlStateNormal];
+    
+    UIActivityIndicatorView* actInd = (UIActivityIndicatorView*)[self.view viewWithTag: G_ACTIND_TAG];
+    [actInd startAnimating];
+    
+    if(!self.tempGreenCoords){
+        if(self.curCourse.greenCoords){
+            self.tempGreenCoords = [self.curCourse.greenCoords mutableCopy];
+        }
+        else{
+            self.tempGreenCoords = [[NSMutableArray alloc] init];
+            for(int i = 0; i < [self.curCourse.numholes intValue] ; ++i)
+                [self.tempGreenCoords addObject: @""];
+        }
+    }
+    
+    if(!self.userLoc){
+        //Set error image in the log coordinates button
+        [actInd stopAnimating];
+        [greenBtn setImage: [UIImage imageNamed: @"failure_mapbtn.png"] forState: UIControlStateNormal];
+        
+        return;
+    }
+    
+    CLLocationDegrees lat = self.userLoc.coordinate.latitude;
+    CLLocationDegrees lng = self.userLoc.coordinate.longitude;
+    NSString* coordStr = [NSString stringWithFormat: @"%d,%d", (int)(lat*1000000), (int)(lng*1000000)];
+    
+    [self.tempGreenCoords replaceObjectAtIndex: (self.curHole - 1) withObject: coordStr];
+    
+    self.greenCoords = self.tempGreenCoords;
+    self.curCourse.greenCoords = self.tempGreenCoords;
+    self.curCourse.pending = [NSNumber numberWithBool: YES];
+    
+    [actInd stopAnimating];
+    
+    [greenBtn setImage: [UIImage imageNamed: @"success_mapbtn.png"] forState: UIControlStateNormal];
+}
+
 - (void) locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     BOOL shouldDrawLine = NO;
@@ -396,19 +569,25 @@
     if(!self.userLoc){
         self.userLoc = [[CLLocation alloc] initWithLatitude: newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];
     
-        // set the center of the map to the user location
-        //MKCoordinateRegion region;
-        //MKCoordinateSpan span;
-        //span.latitudeDelta=0.02 / 10; // zoom level
-        //span.longitudeDelta=0.02 / 10;
+        if(![self isCoordsAvailable]){
+            // No coords available so just center the map
+            // on the user's location
+            MKCoordinateRegion region;
+            MKCoordinateSpan span;
+            span.latitudeDelta=0.02 / 10; // zoom level
+            span.longitudeDelta=0.02 / 10;
         
-        //region.span=span;
-        //region.center = self.userLoc.coordinate;
+            region.span=span;
+            region.center = self.userLoc.coordinate;
         
-        //[mapView setRegion:region animated:TRUE];
-        //[mapView regionThatFits:region];
-        
-        [self zoomToFitMapAnnotations: mapView];
+            [mapView setRegion:region animated:TRUE];
+            [mapView regionThatFits:region];
+        }
+        else{
+            // If coordinates are available then we want to zoom
+            // in on all three points not just the user
+            [self zoomToFitMapAnnotations: mapView];
+        }
         
         shouldDrawLine = YES;
     }
@@ -423,9 +602,11 @@
     if([self isUserLocEnabled]){
         
         if([self isCoordsAvailable]){
-            // Remove the tee annotation and show the user annotation
-            [self.mapView removeAnnotation: [self.holeAnnotations objectAtIndex: teeAnnotationIndex]];
-        
+            // Remove the tee annotation and show the user annotation;
+            if(teeAnnotationIndex < [self.holeAnnotations count]){
+                [self.mapView removeAnnotation: [self.holeAnnotations objectAtIndex: teeAnnotationIndex]];
+            }
+            
             if(shouldDrawLine){
                 // Draw line from user location -> draggable -> green
                 [self drawMapLine];
@@ -436,40 +617,64 @@
 
 - (void) drawMapLine
 {
-    NSNumber* midLat = [(POIAnnotation*) [self.distanceAnnotations objectAtIndex: 0] latitude];
-    NSNumber* midLong = [(POIAnnotation*) [self.distanceAnnotations objectAtIndex: 0] longitude];
-    
     // Remove the old line
     [self.mapView removeOverlay: self.holeLine];
     [self setHoleLineView: nil]; 
     
-    //  Create the line from the tee to the green or from the user location to the green
-    double lat1; 
-    double long1;
-    if([self isUserLocEnabled]){
-        lat1 = self.userLoc.coordinate.latitude;
-        long1 = self.userLoc.coordinate.longitude;
-    }
-    else{
-        lat1 = [[[self.holeAnnotations objectAtIndex: teeAnnotationIndex] latitude] doubleValue];
-        long1 = [[[self.holeAnnotations objectAtIndex: teeAnnotationIndex] longitude] doubleValue];
-    }
+    NSNumber* midLat = nil;
+    NSNumber* midLong = nil;
     
-    double lat2 = [[[self.holeAnnotations objectAtIndex: greenAnnotationIndex] latitude] doubleValue];
-    double long2 = [[[self.holeAnnotations objectAtIndex: greenAnnotationIndex] longitude] doubleValue];
+    //  Create the line from the tee to the green or from the user location to the green
+    double lat1, long1; 
+    double lat2, long2;
+    CLLocation* loc1 = nil;
+    CLLocation* midloc = nil;
+    CLLocation* loc2 = nil;
+    int validLocs = 0;
     
     MKMapPoint* pointArray = malloc(sizeof(CLLocationCoordinate2D) * 3);
     
-    CLLocation* loc1 = [[CLLocation alloc] initWithLatitude: lat1 longitude:long1];
-    pointArray[0] = MKMapPointForCoordinate([loc1 coordinate]);
+    if([self isUserLocEnabled]){
+        lat1 = self.userLoc.coordinate.latitude;
+        long1 = self.userLoc.coordinate.longitude;
+
+        loc1 = [[CLLocation alloc] initWithLatitude: lat1 longitude:long1];
+        pointArray[validLocs] = MKMapPointForCoordinate([loc1 coordinate]);
+        ++validLocs;
+    }
+    else{
+        if(teeAnnotationIndex < [self.holeAnnotations count]){
+            lat1 = [[[self.holeAnnotations objectAtIndex: teeAnnotationIndex] latitude] doubleValue];
+            long1 = [[[self.holeAnnotations objectAtIndex: teeAnnotationIndex] longitude] doubleValue];
+            
+            loc1 = [[CLLocation alloc] initWithLatitude: lat1 longitude:long1];
+            pointArray[validLocs] = MKMapPointForCoordinate([loc1 coordinate]);
+            ++validLocs;
+        }
+    }
+ 
+    if([self.distanceAnnotations count] != 0){
+        midLat = [(POIAnnotation*) [self.distanceAnnotations objectAtIndex: 0] latitude];
+        midLong = [(POIAnnotation*) [self.distanceAnnotations objectAtIndex: 0] longitude];
+        
+        midloc = [[CLLocation alloc] initWithLatitude: [midLat doubleValue] longitude: [midLong doubleValue]];
+        pointArray[validLocs] = MKMapPointForCoordinate([midloc coordinate]);
+        ++validLocs;
+    }
     
-    CLLocation* midloc = [[CLLocation alloc] initWithLatitude: [midLat doubleValue] longitude: [midLong doubleValue]];
-    pointArray[1] = MKMapPointForCoordinate([midloc coordinate]);
+    if(greenAnnotationIndex < [self.holeAnnotations count]){
+        lat2 = [[[self.holeAnnotations objectAtIndex: greenAnnotationIndex] latitude] doubleValue];
+        long2 = [[[self.holeAnnotations objectAtIndex: greenAnnotationIndex] longitude] doubleValue];
+        
+        loc2 = [[CLLocation alloc] initWithLatitude: lat2 longitude:long2];
+        pointArray[validLocs] = MKMapPointForCoordinate([loc2 coordinate]);
+        ++validLocs;
+    }
     
-    CLLocation* loc2 = [[CLLocation alloc] initWithLatitude: lat2 longitude:long2];
-    pointArray[2] = MKMapPointForCoordinate([loc2 coordinate]);
+    if(validLocs == 0)
+        return;
     
-    [self setHoleLine: [MKPolyline polylineWithPoints: pointArray count: 3]];
+    [self setHoleLine: [MKPolyline polylineWithPoints: pointArray count: validLocs]];
     
     [self.mapView addOverlay: [self holeLine]];
     
@@ -485,24 +690,27 @@
         unitsStr = @"yd";
     }
     
-    CLLocationDistance distanceToGreen = [loc2 distanceFromLocation: midloc] * multiplier;
-    CLLocationDistance distanceToPin = [midloc distanceFromLocation: loc1] * multiplier;
-    CLLocationDistance distanceOverall = [loc2 distanceFromLocation: loc1] * multiplier;
+    if((loc1 != nil) && (midloc != nil)){
+        CLLocationDistance distanceToPin = [midloc distanceFromLocation: loc1] * multiplier;
+        [self.t2dLbl setText: [NSString stringWithFormat: @"%d %@", (int)distanceToPin, unitsStr]];
+        
+        [[self.distanceAnnotations objectAtIndex:0] setTitle: [NSString stringWithFormat: @"%d %@", (int) distanceToPin, unitsStr]];
+    }
     
-    // Set the distance label
-    [self.t2dLbl setText: [NSString stringWithFormat: @"%d %@", (int)distanceToPin, unitsStr]];
-    [self.d2gLbl setText: [NSString stringWithFormat: @"%d %@", (int)distanceToGreen, unitsStr]];
-    
-    // Set the title for the annotation equal to the distance to that annotation from the tee
-    [[self.distanceAnnotations objectAtIndex:0] setTitle: [NSString stringWithFormat: @"%d %@", (int) distanceToPin, unitsStr]];
-    [[self.holeAnnotations objectAtIndex: greenAnnotationIndex] setTitle: [NSString stringWithFormat: @"%d %@", (int) distanceOverall, unitsStr]];
+    if((loc2 != nil) && (midloc != nil)){
+        CLLocationDistance distanceToGreen = [loc2 distanceFromLocation: midloc] * multiplier;
+        CLLocationDistance distanceOverall = [loc2 distanceFromLocation: loc1] * multiplier;
+        
+        [self.d2gLbl setText: [NSString stringWithFormat: @"%d %@", (int)distanceToGreen, unitsStr]];
+        
+        [[self.holeAnnotations objectAtIndex: greenAnnotationIndex] setTitle: [NSString stringWithFormat: @"%d %@", (int) distanceOverall, unitsStr]];
+    }
     
     // Free up memory
     free((void*) pointArray);
     [loc1 release];
     [loc2 release];
     [midloc release];
-
 }
 
 #pragma mark Map View Methods
@@ -514,9 +722,10 @@
     if([self.holeAnnotations count] == 0)
         return;
     
-    if(([self.holeAnnotations objectAtIndex:teeAnnotationIndex]) && ([self.holeAnnotations objectAtIndex: greenAnnotationIndex])){
-        [self.mapView removeAnnotations: self.holeAnnotations];
-    }
+    if(teeAnnotationIndex < [self.holeAnnotations count])
+        [self.mapView removeAnnotation: [self.holeAnnotations objectAtIndex: teeAnnotationIndex]];
+    if(greenAnnotationIndex < [self.holeAnnotations count])
+        [self.mapView removeAnnotation: [self.holeAnnotations objectAtIndex: greenAnnotationIndex]];
     
     // If the bool flag is set then remove the annotations from the array too
     if(bClearArray)
@@ -544,27 +753,50 @@
 
 - (void) holeAnnotsTeeCoords:(NSArray *)tee greenLat:(NSArray *)green
 {
-    double lat1 = [[tee objectAtIndex: 0] doubleValue] / 1000000.0;
-    double long1 = [[tee objectAtIndex: 1] doubleValue] / 1000000.0;
-    
-    double lat2 = [[green objectAtIndex: 0] doubleValue] / 1000000.0;
-    double long2 = [[green objectAtIndex: 1] doubleValue] / 1000000.0;
+    double lat1, long1; 
+    double lat2, long2;
+    BOOL isTeeValid = NO, isGreenValid = NO;
     
     // Clear the annotations if they already exist
     [self clearHoleAnnotsAndArray: YES];
     [self clearDistanceAnnotsAndArray: YES];
     
-    POIAnnotation* teeAnnot = [[POIAnnotation alloc] initWithLat:lat1 withLong:long1];
+    if([tee count] != 0){
+        // Add the tee annotation if coordinates are available
+        lat1 = [[tee objectAtIndex: 0] doubleValue] / 1000000.0;
+        long1 = [[tee objectAtIndex: 1] doubleValue] / 1000000.0;
+        POIAnnotation* teeAnnot = [[POIAnnotation alloc] initWithLat:lat1 withLong:long1];
+        [self.holeAnnotations insertObject:teeAnnot atIndex: teeAnnotationIndex];
+        
+        isTeeValid = YES;
+    }
     
-    POIAnnotation* greenAnnot = [[POIAnnotation alloc] initWithLat:lat2 withLong:long2];
+    if([green count] != 0){
+        // Add the green annotation if coordinates are available
+        lat2 = [[green objectAtIndex: 0] doubleValue] / 1000000.0;
+        long2 = [[green objectAtIndex: 1] doubleValue] / 1000000.0;
+        POIAnnotation* greenAnnot = [[POIAnnotation alloc] initWithLat:lat2 withLong:long2];
+        [self.holeAnnotations insertObject:greenAnnot atIndex: greenAnnotationIndex];
     
-    POIAnnotation* draggable1 = [[POIAnnotation alloc] initWithLat: ((lat1+lat2)/2) withLong:((long1+long2)/2)];
-    [draggable1 setDraggable: YES];
+        isGreenValid = YES;
+    }
     
-    [self.holeAnnotations insertObject:teeAnnot atIndex: teeAnnotationIndex];
-    [self.holeAnnotations insertObject:greenAnnot atIndex: greenAnnotationIndex];
-    [self.distanceAnnotations addObject:draggable1];
-
+    if(isTeeValid && isGreenValid){
+        POIAnnotation* draggable1 = [[POIAnnotation alloc] initWithLat: ((lat1+lat2)/2) withLong:((long1+long2)/2)];
+        [draggable1 setDraggable: YES];
+        [self.distanceAnnotations addObject:draggable1];
+    }
+    else if(isTeeValid){
+        POIAnnotation* draggable1 = [[POIAnnotation alloc] initWithLat: lat1 withLong: long1];
+        [draggable1 setDraggable: YES];
+        [self.distanceAnnotations addObject:draggable1];
+    }
+    else if(isGreenValid){
+        POIAnnotation* draggable1 = [[POIAnnotation alloc] initWithLat: lat2 withLong: long2];
+        [draggable1 setDraggable: YES];
+        [self.distanceAnnotations addObject:draggable1];
+    }
+    
     [self.mapView addAnnotations: self.holeAnnotations];
     [self.mapView addAnnotations: self.distanceAnnotations];
 
