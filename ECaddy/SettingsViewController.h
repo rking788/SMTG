@@ -57,6 +57,9 @@ typedef enum _tagcontactprefs
     NSInteger selectedSettingsDetail;
     UITableView *tableV;
 }
+- (IBAction)getFullVersion:(id)sender;
+@property (retain, nonatomic) IBOutlet UIButton *upgradeBtn;
+
 @property (retain, nonatomic) IBOutlet UITableView *tableV;
 
 @property (nonatomic, retain) NSUserDefaults* defs;

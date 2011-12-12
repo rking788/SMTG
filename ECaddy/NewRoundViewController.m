@@ -14,6 +14,8 @@
 
 @implementation NewRoundViewController
 
+@synthesize liteFooterView;
+@synthesize upgradeBtn;
 @synthesize liteMessage;
 @synthesize tableV;
 @synthesize actSheet;
@@ -35,6 +37,8 @@
     [curScorecard release];
     [tableV release];
     [liteMessage release];
+    [upgradeBtn release];
+    [liteFooterView release];
     [super dealloc];
 }
 
@@ -53,7 +57,9 @@
     [super viewDidLoad];
 
 #ifdef PAID
-    [self.liteMessage setHidden: YES];
+    //[self.liteMessage setHidden: YES];
+    //[self.upgradeBtn setHidden: YES];
+    [self.liteFooterView setHidden: YES];
 #endif
      
     // Uncomment the following line to preserve selection between presentations.
@@ -113,6 +119,8 @@
 {
     [self setTableV:nil];
     [self setLiteMessage:nil];
+    [self setUpgradeBtn:nil];
+    [self setLiteFooterView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -517,4 +525,8 @@
     }
 }
 
+- (IBAction)getFullVersion:(id)sender
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.apple.com/us/app/smtg-show-me-the-green/id456482921?ls=1&mt=8"]];
+}
 @end

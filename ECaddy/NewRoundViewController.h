@@ -25,7 +25,10 @@ typedef enum _tagTableRows
     UITableView *tableV;
     UITextView *liteMessage;
 }
+- (IBAction)getFullVersion:(id)sender;
+@property (retain, nonatomic) IBOutlet UIView *liteFooterView;
 
+@property (retain, nonatomic) IBOutlet UIButton *upgradeBtn;
 @property (nonatomic, retain) IBOutlet UITextView *liteMessage;
 @property (retain, nonatomic) IBOutlet UITableView *tableV;
 @property (nonatomic, retain) UIActionSheet* actSheet;

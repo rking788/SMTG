@@ -54,12 +54,32 @@
 			<string>Yukon</string>
 		</dict>
 	</array>
+    <key>DE</key>
+    <array>
+        <string>Germany</string>
+        <dict>
+            <key>NW</key>
+            <string>North Rhine-Westphalia</string>
+        </dict>
+    </array>
+    <key>IN</key>
+    <array>
+        <string>India</string>
+        <dict>
+            <key>ND</key>
+            <string>New Delhi</string>
+        </dict>
+    </array>
     <key>IT</key>
     <array>
         <string>Italy</string>
         <dict>
             <key>PD</key>
             <string>Padova</string>
+            <key>SIC</key>
+            <string>Sicily</string>
+            <key>VE</key>
+            <string>venezia</string>
         </dict>
     </array>
     <key>FR</key>
@@ -70,18 +90,32 @@
             <string>Ile de France</string>
         </dict>
     </array>
+    <key>NZ</key>
+    <array>
+        <string>New Zealand</string>
+        <dict>
+            <key>AKLD</key>
+            <string>Auckland</string>
+        </dict>
+    </array>
 	<key>UK</key>
 	<array>
 		<string>United Kingdom</string>
 		<dict>
+            <key>DEN</key>
+            <string>Denbighshire</string>
 			<key>GL</key>
 			<string>Greater London</string>
             <key>ES</key>
             <string>East Sussex</string>
+            <key>HAM</key>
+            <string>Hampshire</string>
             <key>LANCS</key>
             <string>Lancashire</string>
             <key>SOM</key>
             <string>Somerset</string>
+            <key>SRY</key>
+            <string>Surrey</string>
             <key>STN</key>
             <string>St Neots</string>
 		</dict>

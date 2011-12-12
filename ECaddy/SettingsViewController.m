@@ -17,6 +17,7 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
 
 @implementation SettingsViewController
 
+@synthesize upgradeBtn;
 @synthesize tableV;
 @synthesize defs;
 @synthesize sectionTitles;
@@ -42,6 +43,7 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
     [coursePrefsDict release];
     [contactPrefsArr release];
     [tableV release];
+    [upgradeBtn release];
     [super dealloc];
     
 }
@@ -60,6 +62,10 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
 {
     [super viewDidLoad];
 
+#ifdef PAID
+    [self.upgradeBtn setHidden: YES];
+#endif
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -81,6 +87,7 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
 - (void)viewDidUnload
 {
     [self setTableV:nil];
+    [self setUpgradeBtn:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -550,4 +557,8 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
     [[UIApplication sharedApplication] openURL: url];
 }
 
+- (IBAction) getFullVersion:(id)sender
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.apple.com/us/app/smtg-show-me-the-green/id456482921?ls=1&mt=8"]];
+}
 @end
