@@ -274,6 +274,7 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
         // Handle the error here
         NSLog(@"Failed to save the managedObjectContext");
     }
+    
 }
 
 - (Scorecard*) findActiveScorecard
@@ -319,8 +320,8 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
     }
     
     NSDictionary* newScores = [[NSDictionary alloc] initWithObjects: [sc allValues] forKeys: [sc allKeys]];
-    self.curScorecard.scores = newScores;
-    
+    [self.curScorecard setScores: newScores];
+
     [self saveContext];
 }
 

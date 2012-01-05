@@ -97,10 +97,12 @@
         nameTF = [[UITextField alloc] initWithFrame: nameRect];
         
         playerName = [NSString stringWithFormat: @"Name %d", (i + 1)];
+        NSUInteger colInd = [HeaderFooterView colFromTag: (kPAR_TAG + (i + 1)) HeaderOrFooter: self.headerOrFooter];
+        playerName = [HeaderFooterView appendColIndex: colInd ToName: playerName];
         [playerNames addObject: playerName];
         
         // Set up the text field to be entered in the header
-        [nameTF setPlaceholder: playerName];
+        [nameTF setPlaceholder: [HeaderFooterView stripColIndexFromName: playerName]];
         [nameTF setTextAlignment: UITextAlignmentCenter];
         [nameTF setContentVerticalAlignment: UIControlContentVerticalAlignmentCenter];
         [nameTF setAdjustsFontSizeToFitWidth: YES];
@@ -125,10 +127,11 @@
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     NSString* defaultFirstPlayer = [defaults objectForKey: @"name"];
     if(defaultFirstPlayer){
-        [playerNames replaceObjectAtIndex:0 withObject: defaultFirstPlayer];
+        [playerNames replaceObjectAtIndex: 0 withObject: [HeaderFooterView appendColIndex: 0 ToName: defaultFirstPlayer]];
         [(UITextField*)[self viewWithTag: (kPAR_TAG + 1)] setText: defaultFirstPlayer];
     }
-    self.playerNamesArr = [[NSArray alloc] initWithArray: playerNames];
+   
+    [self setPlayerNamesArr: [[NSArray alloc] initWithArray: playerNames]];
     
     [playerNames release];
 }
@@ -210,7 +213,7 @@
         
         total = -1;
         textField = (UITextField*) view;
-        NSString* name = [self stringForNameInCol: [HeaderFooterView colFromTag: tag]];
+        NSString* name = [self stringForNameInCol: [HeaderFooterView colFromTag: tag HeaderOrFooter: self.headerOrFooter]];
         NSArray* scores = [scoreDict objectForKey: name];
         for(id score in scores){
             if([score isKindOfClass: [NSNumber class]]){
@@ -231,9 +234,14 @@
     }
 }
 
-+ (NSUInteger) colFromTag:(NSUInteger)tag
++ (NSUInteger) colFromTag:(NSUInteger)tag HeaderOrFooter: (NSString*) hOrF
 {
-    return [[NSNumber numberWithUnsignedInt: (tag - (kTOTAL_TAG + 1))] unsignedIntValue];
+    NSUInteger baseTagNum = kTOTAL_TAG;
+    
+    if([hOrF isEqualToString: @"Header"])
+        baseTagNum = kPAR_TAG;
+    
+    return [[NSNumber numberWithUnsignedInt: (tag - (baseTagNum + 1))] unsignedIntValue];
 }
 
 # pragma mark UITextFieldDelegate methods
@@ -250,10 +258,15 @@
     NSString* oldName = [playerNamesArr objectAtIndex: index];
     
     NSMutableArray* tempArray = [self.playerNamesArr mutableCopy];
-    [tempArray replaceObjectAtIndex: index withObject: textField.text];
+    NSString* headerText = textField.text;
+    
+    if([headerText length] == 0)
+        headerText = textField.placeholder;
+    
+    [tempArray replaceObjectAtIndex: index withObject: [HeaderFooterView appendColIndex: index ToName: headerText]];
     
     self.playerNamesArr = [[NSArray alloc] initWithArray: tempArray];
-    [(ScoreTrackerViewController*) self.scoreTracker nameChangedFrom: oldName To: textField.text];
+    [(ScoreTrackerViewController*) self.scoreTracker nameChangedFrom: oldName To: [HeaderFooterView appendColIndex: index ToName:headerText]];
     
     [tempArray release];
 }
@@ -270,17 +283,29 @@
 
 - (void) setPlayers: (NSArray*) names
 {
-    NSInteger i = 0;
-    
-    if([self.headerOrFooter isEqualToString: @"Header"]){
-        for (NSString* name in names){
-            UITextField* tf = (UITextField*) [self viewWithTag: kPAR_TAG + (i + 1)];
-            [tf setText: name];
-            i++;
-        }
+    //NSInteger i = 0;
+    NSMutableArray* tempNames = [[NSMutableArray alloc] initWithCapacity: [names count]];
+  
+    for(NSUInteger i = 0; i < [names count]; i++){
+        [tempNames addObject: @""];
     }
     
-    [self setPlayerNamesArr: names];
+    
+    for (NSString* name in names){
+        if([self.headerOrFooter isEqualToString: @"Header"]){
+            //UITextField* tf = (UITextField*) [self viewWithTag: kPAR_TAG + (i + 1)];
+            UITextField* tf = (UITextField*) [self viewWithTag: (kPAR_TAG + ([HeaderFooterView indexFromHeaderText: name] + 1))];
+            [tf setText: [HeaderFooterView stripColIndexFromName: name]];
+            //i++;
+        }
+        
+        [tempNames replaceObjectAtIndex: [HeaderFooterView indexFromHeaderText:name] withObject: name];
+    }
+    
+    
+    
+    [self setPlayerNamesArr: [NSArray arrayWithArray: tempNames]];
+    [tempNames release];
 }
 
 - (void)dealloc
@@ -290,5 +315,21 @@
     [super dealloc];
 }
 
++ (NSString*) appendColIndex: (NSUInteger) ind ToName: (NSString*) name
+{
+    return [NSString stringWithFormat: @"%@+*+%d", name, ind];
+}
+
++ (NSString*) stripColIndexFromName: (NSString*) text
+{
+    return [[text componentsSeparatedByString: @"+*+"] objectAtIndex: 0];
+}
+
++ (NSUInteger) indexFromHeaderText: (NSString*) text
+{
+    NSString* numStr = [[text componentsSeparatedByString: @"+*+"] objectAtIndex: 1];
+    return [numStr integerValue];
+    
+}
 
 @end

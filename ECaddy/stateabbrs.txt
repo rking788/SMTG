@@ -96,6 +96,8 @@
         <dict>
             <key>AKLD</key>
             <string>Auckland</string>
+            <key>CAN</key>
+            <string>Canterbury</string>
         </dict>
     </array>
 	<key>UK</key>
@@ -110,6 +112,8 @@
             <string>East Sussex</string>
             <key>HAM</key>
             <string>Hampshire</string>
+            <key>KEN</key>
+            <string>Kent</string>
             <key>LANCS</key>
             <string>Lancashire</string>
             <key>SOM</key>

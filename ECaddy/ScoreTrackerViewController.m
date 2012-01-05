@@ -17,6 +17,8 @@
 #import <Twitter/TWTweetComposeViewController.h>
 #import <Twitter/Twitter.h>
 
+#pragma mark - TODO CRITICAL: Do some debugging with changing views and stuff back and forth to fix persistence and crashing issues
+
 #pragma mark - TODO CRITICAL: ADD AN INSTANCE VARIALE FOR THE CANTWEET TEST INSTEAD OF CALLING CANSENDTWEET EVERYTIME
 
 // Facebook app ID constant string
@@ -123,10 +125,11 @@ static NSString* kAppId = @"142876775786876";
         NSUInteger num = [[self.scorecard numplayers] unsignedIntegerValue];
         
         // Add the right number of names to the header of the table view
-        [self.scoreHeaderView addHeaderColumnsForNumPlayers: num];
         [self.scoreHeaderView setHeaderOrFooter: @"Header"];
-        [self.scoreFooterView addFooterColumnsForNumPlayers: num];
+        [self.scoreHeaderView addHeaderColumnsForNumPlayers: num];
+        
         [self.scoreFooterView setHeaderOrFooter: @"Footer"];
+        [self.scoreFooterView addFooterColumnsForNumPlayers: num];
         
         // Get the player names from the header view
         [self.scorecard setPlayernames: [self.scoreHeaderView stringOfPlayers]];
@@ -155,11 +158,11 @@ static NSString* kAppId = @"142876775786876";
 
 - (void)viewDidUnload
 {
+    [super viewDidUnload];
     [self setTableV:nil];
     [self setDateLbl:nil];
     [self setBackgroundImageView:nil];
     [self setTitleView:nil];
-    [super viewDidUnload];
     [self setAppDel: nil];
     [self setScorecard: nil];
     [self setTitleTextView:nil];
@@ -179,7 +182,7 @@ static NSString* kAppId = @"142876775786876";
     
     NSMutableDictionary* scoresdict = [self.scorecard.scores mutableCopy];
     if(scoresdict){
-        self.scorecardDict = scoresdict;
+        [self setScorecardDict: scoresdict];
         [self.scoreHeaderView setPlayers: [self.scorecardDict allKeys]];
         [self.scoreFooterView setPlayers: [self.scorecardDict allKeys]];
     }
@@ -683,8 +686,9 @@ static NSString* kAppId = @"142876775786876";
         shFrame.origin.x = self.scoreHeaderView.frame.size.width;
         secondHeader = [[HeaderFooterView alloc] initWithFrame: shFrame];
         [secondHeader setScoreTracker: (ScoreTrackerViewController*) self];
-        [secondHeader addHeaderColumnsForNumPlayers: [[self.scorecard numplayers] unsignedIntValue]];
+        
         [secondHeader setHeaderOrFooter: @"Header"];
+        [secondHeader addHeaderColumnsForNumPlayers: [[self.scorecard numplayers] unsignedIntValue]];
         [secondHeader setPlayers: [self.scorecardDict allKeys]];
         [self.view addSubview: secondHeader];
         

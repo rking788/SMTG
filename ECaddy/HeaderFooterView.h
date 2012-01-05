@@ -35,6 +35,10 @@ enum{
 
 - (void) setTotalsWithScoreDict: (NSMutableDictionary*) scoreDict;
 
-+ (NSUInteger) colFromTag:(NSUInteger)tag;
++ (NSUInteger) colFromTag:(NSUInteger)tag HeaderOrFooter: (NSString*) hOrF;
+
++ (NSString*) appendColIndex: (NSUInteger) ind ToName: (NSString*) name;
++ (NSString*) stripColIndexFromName: (NSString*) text;
++ (NSUInteger) indexFromHeaderText: (NSString*) text;
 
 @end
