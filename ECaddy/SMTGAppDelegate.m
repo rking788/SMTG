@@ -319,7 +319,8 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
         return ;
     }
     
-    NSDictionary* newScores = [[NSDictionary alloc] initWithObjects: [sc allValues] forKeys: [sc allKeys]];
+    //NSDictionary* newScores = [[NSDictionary alloc] initWithObjects: [sc allValues] forKeys: [sc allKeys]];
+    NSDictionary* newScores = [NSDictionary dictionaryWithObjects: [sc allValues] forKeys: [sc allKeys]];
     [self.curScorecard setScores: newScores];
 
     [self saveContext];
@@ -357,7 +358,7 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
     
     // Check if there were any new courses or not
     if(![retStr isEqualToString: @"0\n"] && (!([retStr length] == 0))){
-        NSString* message = [NSString stringWithFormat: @"New information for %@ courses is available. Update Now? (Will run in the background)", retStr];
+        NSString* message = [NSString stringWithFormat: @"New information for %@ courses is available. Update Now?", retStr];
         UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"New Course Data" message: message delegate:self cancelButtonTitle:@"No" otherButtonTitles: @"Yes", nil];
         
         [av show];
@@ -381,8 +382,6 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
 
 - (void) downloadCourseInfo
 {
-    // TODO: Finish implementing the code to download all of the new courses and merge them into the 
-    // SQLite store.
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
     
     NSURLResponse* resp = nil;

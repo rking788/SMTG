@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F0A773114B55B0B0069E04C /* greenicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 96FA1A6313E771F4001C9163 /* greenicon.png */; };
+		0F0A773214B55B140069E04C /* greenicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96FA1A6513E77206001C9163 /* greenicon@2x.png */; };
+		0F370AE714AAC78000847B54 /* SMTG.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 96C090AF14610559003355F8 /* SMTG.sqlite */; };
 		9605CC5713E8DFAB004128D9 /* maptabicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9605CC5613E8DFAB004128D9 /* maptabicon.png */; };
 		9605CC5913E8E046004128D9 /* maptabicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9605CC5813E8E046004128D9 /* maptabicon@2x.png */; };
 		9605CC5B13E8EE9A004128D9 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 9605CC5A13E8EE9A004128D9 /* background.png */; };
@@ -238,8 +241,6 @@
 		96EE27C313ECEE4F00170A52 /* locationenabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 96EE27C213ECEE4F00170A52 /* locationenabled.png */; };
 		96F2B38113EF257A005BE308 /* MapErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F2B37F13EF257A005BE308 /* MapErrorViewController.m */; };
 		96F2B38213EF257A005BE308 /* MapErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96F2B38013EF257A005BE308 /* MapErrorView.xib */; };
-		96FA1A6413E771F4001C9163 /* greenicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 96FA1A6313E771F4001C9163 /* greenicon.png */; };
-		96FA1A6613E77206001C9163 /* greenicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96FA1A6513E77206001C9163 /* greenicon@2x.png */; };
 		AE38B0B713BE4C6900D7F9FA /* scorecard_tab.png in Resources */ = {isa = PBXBuildFile; fileRef = AE38B0B513BE4C6900D7F9FA /* scorecard_tab.png */; };
 		AE38B0B813BE4C6900D7F9FA /* scorecard_tab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE38B0B613BE4C6900D7F9FA /* scorecard_tab@2x.png */; };
 		AE3D287413B99CB10054903D /* ScorecardTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D287213B99CB00054903D /* ScorecardTableViewController.m */; };
@@ -897,6 +898,7 @@
 				961FF8131457814B0015689A /* green_mapbtn.png in Resources */,
 				961FF819145785E90015689A /* success_mapbtn.png in Resources */,
 				961FF97D145789A30015689A /* failure_mapbtn.png in Resources */,
+				0F370AE714AAC78000847B54 /* SMTG.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -977,8 +979,6 @@
 				AEE5301013C394DC003C866C /* CustomCourseView.xib in Resources */,
 				96DF437B13E0ECB6009D568B /* FBDialog.bundle in Resources */,
 				965DC23B13E5087E001E0404 /* sadweather.png in Resources */,
-				96FA1A6413E771F4001C9163 /* greenicon.png in Resources */,
-				96FA1A6613E77206001C9163 /* greenicon@2x.png in Resources */,
 				9679EAFF13E7844A001F3872 /* directorytab.png in Resources */,
 				9679EB0113E7896B001F3872 /* directorytab@2x.png in Resources */,
 				9679EB0513E79041001F3872 /* weathertab.png in Resources */,
@@ -1010,6 +1010,8 @@
 				961FF818145785E90015689A /* success_mapbtn.png in Resources */,
 				961FF97C145789A30015689A /* failure_mapbtn.png in Resources */,
 				96C090B014610559003355F8 /* SMTG.sqlite in Resources */,
+				0F0A773114B55B0B0069E04C /* greenicon.png in Resources */,
+				0F0A773214B55B140069E04C /* greenicon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1234,8 +1236,8 @@
 					armv6,
 					armv7,
 				);
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Robert KIng";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Robert KIng";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ECaddy/SMTG-Prefix.pch";
@@ -1244,8 +1246,8 @@
 				INFOPLIST_FILE = "SMTGLite-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "SMTG Lite";
-				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "DFAE5735-9850-4AEB-9B89-51CDF24FD7CD";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DFAE5735-9850-4AEB-9B89-51CDF24FD7CD";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
@@ -1335,8 +1337,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_WARN_OBJCPP_ARC_ABI = NO;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Robert KIng (PLJWL35TX2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Robert KIng (PLJWL35TX2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1349,8 +1351,8 @@
 				INFOPLIST_FILE = "ECaddy/SMTG-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = SMTG;
-				PROVISIONING_PROFILE = "770AB041-2118-4873-BAC3-4B1986040057";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "770AB041-2118-4873-BAC3-4B1986040057";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -1366,8 +1368,8 @@
 					armv7,
 				);
 				CLANG_WARN_OBJCPP_ARC_ABI = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Robert KIng";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Robert KIng";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ECaddy/SMTG-Prefix.pch";
@@ -1376,8 +1378,8 @@
 				INFOPLIST_FILE = "ECaddy/SMTG-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = SMTG;
-				PROVISIONING_PROFILE = "F7DB8F39-D556-420B-A57B-5432ABBA02AA";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F7DB8F39-D556-420B-A57B-5432ABBA02AA";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

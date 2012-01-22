@@ -19,8 +19,6 @@
 
 #pragma mark - TODO CRITICAL: Do some debugging with changing views and stuff back and forth to fix persistence and crashing issues
 
-#pragma mark - TODO CRITICAL: ADD AN INSTANCE VARIALE FOR THE CANTWEET TEST INSTEAD OF CALLING CANSENDTWEET EVERYTIME
-
 // Facebook app ID constant string
 static NSString* kAppId = @"142876775786876";
 

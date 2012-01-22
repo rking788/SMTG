@@ -58,6 +58,8 @@
     <array>
         <string>Germany</string>
         <dict>
+            <key>BY</key>
+            <string>Bayern</string>
             <key>NW</key>
             <string>North Rhine-Westphalia</string>
         </dict>
@@ -68,6 +70,14 @@
         <dict>
             <key>ND</key>
             <string>New Delhi</string>
+        </dict>
+    </array>
+    <key>IE</key>
+    <array>
+        <string>Ireland</string>
+        <dict>
+            <key>COR</key>
+            <string>Co. Cork</string>
         </dict>
     </array>
     <key>IT</key>
@@ -90,6 +100,14 @@
             <string>Ile de France</string>
         </dict>
     </array>
+    <key>NL</key>
+    <array>
+        <string>Netherlands</string>
+        <dict>
+            <key>HEU</key>
+            <string>Heusden</string>
+        </dict>
+    </array>
     <key>NZ</key>
     <array>
         <string>New Zealand</string>
@@ -100,16 +118,26 @@
             <string>Canterbury</string>
         </dict>
     </array>
+    <key>ES</key
+    <array>
+        <string>Spain</string>
+        <dict>
+            <key>GIR</key>
+            <string>Girona</string>
+        </dict>
+    </array>
 	<key>UK</key>
 	<array>
 		<string>United Kingdom</string>
 		<dict>
             <key>DEN</key>
             <string>Denbighshire</string>
-			<key>GL</key>
-			<string>Greater London</string>
             <key>ES</key>
             <string>East Sussex</string>
+			<key>GL</key>
+			<string>Greater London</string>
+            <key>GSY</key>
+            <string>Guernsey</string>
             <key>HAM</key>
             <string>Hampshire</string>
             <key>KEN</key>
