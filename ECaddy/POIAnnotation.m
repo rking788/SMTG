@@ -54,12 +54,6 @@
     [self setLongitude: [NSNumber numberWithDouble: newCoordinate.longitude]];
 }
 
-- (void)dealloc
-{
-    [title release];
-    [subtitle release];
-    [super dealloc];
-}
 
 - (NSString *)title
 {

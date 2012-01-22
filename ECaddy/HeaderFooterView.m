@@ -81,8 +81,6 @@
     [self addSubview: holeTF];
     [self addSubview: parTF];
     
-    [holeTF release];
-    [parTF release];
     
     // Set a variable number of columns that is equal to the number of players playing
     CGRect nameRect;
@@ -120,7 +118,6 @@
         
         [self addSubview: nameTF];
         
-        [nameTF release];
     }
     
     // Check for a default player name
@@ -133,7 +130,6 @@
    
     [self setPlayerNamesArr: [[NSArray alloc] initWithArray: playerNames]];
     
-    [playerNames release];
 }
 
 - (void) addFooterColumnsForNumPlayers: (NSUInteger) numPlayers
@@ -164,7 +160,6 @@
     // Add the constant columns as subviews
     [self addSubview: totalLabel];
     
-    [totalLabel release];
     
     // Set a variable number of columns that is equal to the number of players playing
     CGRect playerTotRect;
@@ -195,7 +190,6 @@
         
         [self addSubview: playerTotTF];
         
-        [playerTotTF release];
     }
 }
 
@@ -268,7 +262,6 @@
     self.playerNamesArr = [[NSArray alloc] initWithArray: tempArray];
     [(ScoreTrackerViewController*) self.scoreTracker nameChangedFrom: oldName To: [HeaderFooterView appendColIndex: index ToName:headerText]];
     
-    [tempArray release];
 }
 
 - (NSString*) stringOfPlayers
@@ -305,15 +298,8 @@
     
     
     [self setPlayerNamesArr: [NSArray arrayWithArray: tempNames]];
-    [tempNames release];
 }
 
-- (void)dealloc
-{
-    [playerNamesArr release];
-    [headerOrFooter release];
-    [super dealloc];
-}
 
 + (NSString*) appendColIndex: (NSUInteger) ind ToName: (NSString*) name
 {

@@ -54,10 +54,5 @@
     [super drawRect: rect];
 }
 
-- (void)dealloc
-{
-    [super dealloc];
-    [columns release];
-}
 
 @end

@@ -44,7 +44,7 @@ static NSString* CONTACTEMAIL = @"admin@mainelyapps.com";
     // Do any additional setup after loading the view from its nib.
     
     // Add the right bar button item for a done button to dismiss the modal view 
-    [navBar setRightBarButtonItem: [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target: self action: @selector(doneBtnClicked)] autorelease]];
+    [navBar setRightBarButtonItem: [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target: self action: @selector(doneBtnClicked)]];
     
     if([self.err isEqualToString: @"NoActiveCourse"])
         [self noActiveCourse];
@@ -72,16 +72,6 @@ static NSString* CONTACTEMAIL = @"admin@mainelyapps.com";
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)dealloc {
-    [messageTV release];
-    [actionBtn release];
-    [navBar release];
-    [coursename release];
-    [courselocation release];
-    [err release];
-    [caller release];
-    [super dealloc];
-}
 
 
 - (IBAction) btnClicked:(id)sender 

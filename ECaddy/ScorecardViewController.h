@@ -21,13 +21,13 @@
     BOOL adVisible;
     UIView *uploadingView;
 }
-@property (nonatomic, retain) IBOutlet UIView *uploadingView;
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *uploadingInd;
-@property (nonatomic, retain) IBOutlet UIView* contentView;
+@property (nonatomic, strong) IBOutlet UIView *uploadingView;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *uploadingInd;
+@property (nonatomic, strong) IBOutlet UIView* contentView;
 
-@property (nonatomic, retain) NSMutableArray* pendingCourses;
-@property (nonatomic, retain) Course* courseObj;
-@property (nonatomic, retain) id adView;
+@property (nonatomic, strong) NSMutableArray* pendingCourses;
+@property (nonatomic, strong) Course* courseObj;
+@property (nonatomic, strong) id adView;
 @property (nonatomic) BOOL adVisible;
 
 - (IBAction)startClicked:(id)sender;

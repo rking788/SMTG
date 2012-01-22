@@ -43,27 +43,27 @@ enum{
     PAR_TAG
 };
 
-@property (nonatomic, retain) IBOutlet HeaderFooterView *scoreHeaderView;
-@property (nonatomic, retain) IBOutlet HeaderFooterView *scoreFooterView;
-@property (nonatomic, retain) IBOutlet UIView *titleView;
-@property (nonatomic, retain) IBOutlet UILabel *titleTextView;
-@property (retain, nonatomic) IBOutlet UILabel *dateLbl;
-@property (nonatomic, retain) IBOutlet UIButton *favstarBtn;
-@property (nonatomic, retain) IBOutlet UITableView *tableV;
-@property (nonatomic, retain) IBOutlet UIImageView *backgroundImageView;
+@property (nonatomic, strong) IBOutlet HeaderFooterView *scoreHeaderView;
+@property (nonatomic, strong) IBOutlet HeaderFooterView *scoreFooterView;
+@property (nonatomic, strong) IBOutlet UIView *titleView;
+@property (nonatomic, strong) IBOutlet UILabel *titleTextView;
+@property (strong, nonatomic) IBOutlet UILabel *dateLbl;
+@property (nonatomic, strong) IBOutlet UIButton *favstarBtn;
+@property (nonatomic, strong) IBOutlet UITableView *tableV;
+@property (nonatomic, strong) IBOutlet UIImageView *backgroundImageView;
 
-@property (nonatomic, retain) SMTGAppDelegate* appDel;
-@property (nonatomic, retain) Scorecard* scorecard;
+@property (nonatomic, strong) SMTGAppDelegate* appDel;
+@property (nonatomic, strong) Scorecard* scorecard;
 
-@property (nonatomic, assign) UITextField* activeField;
+@property (nonatomic, unsafe_unretained) UITextField* activeField;
 
-@property (nonatomic, retain) NSMutableDictionary* scorecardDict;
+@property (nonatomic, strong) NSMutableDictionary* scorecardDict;
 
 // Facebook properties
 @property (readonly) Facebook* FB; 
-@property (nonatomic, retain) NSArray* FBpermissions;
+@property (nonatomic, strong) NSArray* FBpermissions;
 @property (nonatomic, getter = isFBLoggedIn) BOOL FBLoggedIn;
-@property (nonatomic, retain) NSString* pendingFBAction;
+@property (nonatomic, strong) NSString* pendingFBAction;
 
 - (IBAction)favstarPressed:(id)sender;
 

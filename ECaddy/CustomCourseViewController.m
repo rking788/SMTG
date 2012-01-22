@@ -54,13 +54,13 @@
     [self registerForKeyboardNotifications];
     
     // Add save and cancel buttons to the navigation bar
-    [self.navBar.topItem setLeftBarButtonItem: [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target: self action: @selector(cancel)] autorelease]];
-    [self.navBar.topItem setRightBarButtonItem: [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target: self action: @selector(save)] autorelease]];
+    [self.navBar.topItem setLeftBarButtonItem: [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target: self action: @selector(cancel)]];
+    [self.navBar.topItem setRightBarButtonItem: [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target: self action: @selector(save)]];
     
-    UIBarButtonItem *barButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:courseNameTF action:@selector(resignFirstResponder)] autorelease];
-    UIBarButtonItem *flexibleSpaceLeft = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:courseNameTF action:@selector(resignFirstResponder)];
+    UIBarButtonItem *flexibleSpaceLeft = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
-    UIToolbar *toolbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)] autorelease];
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     toolbar.items = [NSArray arrayWithObjects: flexibleSpaceLeft, barButton, nil];
     [toolbar setBarStyle: UIBarStyleBlackTranslucent];
 
@@ -94,23 +94,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)dealloc {
-    [activeField release];
-    [courseNameTF release];
-    [phoneTF release];
-    [addressTF release];
-    [cityTF release];
-    [stateTF release];
-    [countryTF release];
-    [websiteTF release];
-    [navBar release];
-    [uploadSeg release];
-    [uploadingView release];
-    [uploadingInd release];
-    [numHolesTF release];
-    [scrollView release];
-    [super dealloc];
-}
 
 - (void) textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -124,10 +107,10 @@
 
 - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
 {
-    UIBarButtonItem *barButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target: textField action:@selector(resignFirstResponder)] autorelease];
-    UIBarButtonItem *flexibleSpaceLeft = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease];
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target: textField action:@selector(resignFirstResponder)];
+    UIBarButtonItem *flexibleSpaceLeft = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
-    UIToolbar *toolbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)] autorelease];
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     toolbar.items = [NSArray arrayWithObjects: flexibleSpaceLeft, barButton, nil];
     [toolbar setBarStyle: UIBarStyleBlackTranslucent];
     
@@ -243,7 +226,6 @@
         holesNum = [NSNumber numberWithInt: 18];
     
     [newCourse setNumholes: holesNum];
-    [f release];
     
     // Save the newly added golf course in the managed object context
     //[[SMTGAppDelegate sharedAppDelegate] saveContext];
@@ -298,7 +280,6 @@
         NSLog(@"Error fetching lots");
     }
     
-    [fetchrequest release];
     
     return isEnabled;
 }
@@ -334,7 +315,6 @@
     range3.length = range2.location - (range1.location+range1.length);
     woeidStr = [str substringWithRange:range3];
     
-    [str release];
     
     return woeidStr;
 }
@@ -352,42 +332,42 @@
 - (void) writeCourseToServer:(Course *)course
 {
     BOOL pending = YES;
-    NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-    NSURLResponse* resp = nil;
-    NSError* err = nil;
-    
-    // Add the course information into the POST request content
-    NSURL* url = [NSURL URLWithString:@"http://mainelyapps.com/SMTG/NewCourse.php"];
-    NSString* content = [NSString stringWithFormat:
-                            @"cn=%@&p=%@&addr=%@&st=%@&c=%@&web=%@&woeid=%@&nh=%@&tc=%@&gc=%@", 
-                            [course coursename], [course phone], [course valueForKey: @"address"], 
-                            [course valueForKey:@"state"], [course valueForKey:@"country"], 
-                            [course website], [course woeid], [course numholes], [course teeCoords], [course greenCoords]];
-    
-    NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL: url];
-    
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody: [content dataUsingEncoding: NSUTF8StringEncoding]];
-    
-    // TODO: This should probably be an asynchronous request to not hold up the UI
-    NSData* ret = [NSURLConnection sendSynchronousRequest: request returningResponse: &resp error: &err];
-    
-    // This return value is used to set the pending value of the course
-    if((!ret) || (err))
-        pending = YES;
-    else
-        pending = NO;
-    
-    [course setPending: [NSNumber numberWithBool: pending]];
-    
-    // Hide the uploading view
-    [self.uploadingInd stopAnimating];
-    [self.uploadingView setHidden: YES];
-    
-    // Signal the main thread that we are done getting the weather
-    [self performSelectorOnMainThread:@selector(dismiss:) 
-                           withObject: [NSNumber numberWithBool: YES] waitUntilDone: YES];
-    [pool release];
+    @autoreleasepool {
+        NSURLResponse* resp = nil;
+        NSError* err = nil;
+        
+        // Add the course information into the POST request content
+        NSURL* url = [NSURL URLWithString:@"http://mainelyapps.com/SMTG/NewCourse.php"];
+        NSString* content = [NSString stringWithFormat:
+                                @"cn=%@&p=%@&addr=%@&st=%@&c=%@&web=%@&woeid=%@&nh=%@&tc=%@&gc=%@", 
+                                [course coursename], [course phone], [course valueForKey: @"address"], 
+                                [course valueForKey:@"state"], [course valueForKey:@"country"], 
+                                [course website], [course woeid], [course numholes], [course teeCoords], [course greenCoords]];
+        
+        NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL: url];
+        
+        [request setHTTPMethod:@"POST"];
+        [request setHTTPBody: [content dataUsingEncoding: NSUTF8StringEncoding]];
+        
+        // TODO: This should probably be an asynchronous request to not hold up the UI
+        NSData* ret = [NSURLConnection sendSynchronousRequest: request returningResponse: &resp error: &err];
+        
+        // This return value is used to set the pending value of the course
+        if((!ret) || (err))
+            pending = YES;
+        else
+            pending = NO;
+        
+        [course setPending: [NSNumber numberWithBool: pending]];
+        
+        // Hide the uploading view
+        [self.uploadingInd stopAnimating];
+        [self.uploadingView setHidden: YES];
+        
+        // Signal the main thread that we are done getting the weather
+        [self performSelectorOnMainThread:@selector(dismiss:) 
+                               withObject: [NSNumber numberWithBool: YES] waitUntilDone: YES];
+    }
 }
 
 #pragma mark - UIAlertViewDelegate Methods

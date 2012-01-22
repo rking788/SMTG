@@ -58,16 +58,16 @@ typedef enum _tagcontactprefs
     UITableView *tableV;
 }
 - (IBAction)getFullVersion:(id)sender;
-@property (retain, nonatomic) IBOutlet UIButton *upgradeBtn;
+@property (strong, nonatomic) IBOutlet UIButton *upgradeBtn;
 
-@property (retain, nonatomic) IBOutlet UITableView *tableV;
+@property (strong, nonatomic) IBOutlet UITableView *tableV;
 
-@property (nonatomic, retain) NSUserDefaults* defs;
+@property (nonatomic, strong) NSUserDefaults* defs;
 
-@property (nonatomic, retain) NSMutableArray* sectionTitles;
-@property (nonatomic, retain) NSMutableDictionary* userPrefsDict;
-@property (nonatomic, retain) NSMutableDictionary* coursePrefsDict;
-@property (nonatomic, retain) NSMutableArray* contactPrefsArr;
+@property (nonatomic, strong) NSMutableArray* sectionTitles;
+@property (nonatomic, strong) NSMutableDictionary* userPrefsDict;
+@property (nonatomic, strong) NSMutableDictionary* coursePrefsDict;
+@property (nonatomic, strong) NSMutableArray* contactPrefsArr;
 
 @property (nonatomic, assign) NSInteger selectedSettingsDetail;
 

@@ -34,18 +34,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [courseObj release];
-    [favstarBtn release];
-    [manObjCon release];
-    [courseNameLbl release];
-    [titleView release];
-    [tableV release];
-    [footView release];
-    [addrStr release];
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -184,7 +172,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
@@ -276,7 +264,6 @@
     UIActionSheet* actSheet = [[UIActionSheet alloc] initWithTitle: titleStr delegate: self cancelButtonTitle: @"Cancel" destructiveButtonTitle: nil otherButtonTitles: actSheetBtnTitle, nil];
     actSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     [actSheet showFromTabBar: self.tabBarController.tabBar];
-    [actSheet release];
 }
 
 #pragma mark - UIActionSheetDelegate Method

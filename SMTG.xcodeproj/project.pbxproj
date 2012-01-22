@@ -44,7 +44,7 @@
 		96A86B23142656A200F9ABD0 /* DefaultUnitsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96A86B20142656A200F9ABD0 /* DefaultUnitsViewController.m */; };
 		96A86B24142656A200F9ABD0 /* DefaultUnitsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96A86B21142656A200F9ABD0 /* DefaultUnitsView.xib */; };
 		96A86B25142656A200F9ABD0 /* DefaultUnitsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96A86B21142656A200F9ABD0 /* DefaultUnitsView.xib */; };
-		96AC66ED13F00A9200D614E0 /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = AE816DC0137B7E140023F5D7 /* TBXML.m */; };
+		96AC66ED13F00A9200D614E0 /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = AE816DC0137B7E140023F5D7 /* TBXML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		96AC66EE13F00A9200D614E0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D74F1368E34400CDA534 /* main.m */; };
 		96AC66EF13F00A9200D614E0 /* SMTGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7521368E34400CDA534 /* SMTGAppDelegate.m */; };
 		96AC66F013F00A9200D614E0 /* ScorecardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7581368E34400CDA534 /* ScorecardViewController.m */; };
@@ -52,7 +52,7 @@
 		96AC66F213F00A9200D614E0 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7721368E75700CDA534 /* MapViewController.m */; };
 		96AC66F313F00A9200D614E0 /* WeatherDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D7901369298E00CDA534 /* WeatherDetails.m */; };
 		96AC66F413F00A9200D614E0 /* POIAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = AE886D641370E2490056BDF4 /* POIAnnotation.m */; };
-		96AC66F513F00A9200D614E0 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AE816DBE137B7E140023F5D7 /* NSDataAdditions.m */; };
+		96AC66F513F00A9200D614E0 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AE816DBE137B7E140023F5D7 /* NSDataAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		96AC66F613F00A9200D614E0 /* coursemodel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AEFE6F131381BB60002B1AA3 /* coursemodel.xcdatamodeld */; };
 		96AC66F713F00A9200D614E0 /* CourseSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8FE58C1384A96900EE8E66 /* CourseSelectViewController.m */; };
 		96AC66F813F00A9200D614E0 /* CourseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA35AE61384CE7600111BAA /* CourseDetailViewController.m */; };
@@ -66,16 +66,16 @@
 		96AC670013F00A9200D614E0 /* SettingsDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8DD06B13B034A700D7FCB3 /* SettingsDetailsViewController.m */; };
 		96AC670113F00A9200D614E0 /* ScorecardTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D287213B99CB00054903D /* ScorecardTableViewController.m */; };
 		96AC670213F00A9200D614E0 /* CustomCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE5301313C39AE3003C866C /* CustomCourseViewController.m */; };
-		96AC670313F00A9200D614E0 /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF435F13E0ECB6009D568B /* Facebook.m */; };
-		96AC670413F00A9200D614E0 /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436413E0ECB6009D568B /* FBDialog.m */; };
-		96AC670513F00A9200D614E0 /* FBLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436613E0ECB6009D568B /* FBLoginDialog.m */; };
-		96AC670613F00A9200D614E0 /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436813E0ECB6009D568B /* FBRequest.m */; };
-		96AC670713F00A9200D614E0 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436C13E0ECB6009D568B /* NSObject+SBJSON.m */; };
-		96AC670813F00A9200D614E0 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436E13E0ECB6009D568B /* NSString+SBJSON.m */; };
-		96AC670913F00A9200D614E0 /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437013E0ECB6009D568B /* SBJSON.m */; };
-		96AC670A13F00A9200D614E0 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437213E0ECB6009D568B /* SBJsonBase.m */; };
-		96AC670B13F00A9200D614E0 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437413E0ECB6009D568B /* SBJsonParser.m */; };
-		96AC670C13F00A9200D614E0 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437613E0ECB6009D568B /* SBJsonWriter.m */; };
+		96AC670313F00A9200D614E0 /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF435F13E0ECB6009D568B /* Facebook.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		96AC670413F00A9200D614E0 /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436413E0ECB6009D568B /* FBDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		96AC670513F00A9200D614E0 /* FBLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436613E0ECB6009D568B /* FBLoginDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		96AC670613F00A9200D614E0 /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436813E0ECB6009D568B /* FBRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		96AC670713F00A9200D614E0 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436C13E0ECB6009D568B /* NSObject+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		96AC670813F00A9200D614E0 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436E13E0ECB6009D568B /* NSString+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		96AC670913F00A9200D614E0 /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437013E0ECB6009D568B /* SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		96AC670A13F00A9200D614E0 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437213E0ECB6009D568B /* SBJsonBase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		96AC670B13F00A9200D614E0 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437413E0ECB6009D568B /* SBJsonParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		96AC670C13F00A9200D614E0 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437613E0ECB6009D568B /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		96AC670D13F00A9200D614E0 /* MapErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F2B37F13EF257A005BE308 /* MapErrorViewController.m */; };
 		96AC671913F00A9200D614E0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE85D74B1368E34400CDA534 /* InfoPlist.strings */; };
 		96AC671A13F00A9200D614E0 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE85D7541368E34400CDA534 /* MainWindow.xib */; };
@@ -224,17 +224,17 @@
 		96CE92C61446871A00AA0EAA /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 96CE92BB144685E600AA0EAA /* libz.dylib */; };
 		96D021D713EF207400BC0A4F /* curlocbtn-enabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D021D513EF207400BC0A4F /* curlocbtn-enabled.png */; };
 		96D021D813EF207400BC0A4F /* curlocbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 96D021D613EF207400BC0A4F /* curlocbtn.png */; };
-		96DF437A13E0ECB6009D568B /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF435F13E0ECB6009D568B /* Facebook.m */; };
+		96DF437A13E0ECB6009D568B /* Facebook.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF435F13E0ECB6009D568B /* Facebook.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		96DF437B13E0ECB6009D568B /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 96DF436213E0ECB6009D568B /* FBDialog.bundle */; };
-		96DF437C13E0ECB6009D568B /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436413E0ECB6009D568B /* FBDialog.m */; };
-		96DF437D13E0ECB6009D568B /* FBLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436613E0ECB6009D568B /* FBLoginDialog.m */; };
-		96DF437E13E0ECB6009D568B /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436813E0ECB6009D568B /* FBRequest.m */; };
-		96DF437F13E0ECB6009D568B /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436C13E0ECB6009D568B /* NSObject+SBJSON.m */; };
-		96DF438013E0ECB6009D568B /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436E13E0ECB6009D568B /* NSString+SBJSON.m */; };
-		96DF438113E0ECB6009D568B /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437013E0ECB6009D568B /* SBJSON.m */; };
-		96DF438213E0ECB6009D568B /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437213E0ECB6009D568B /* SBJsonBase.m */; };
-		96DF438313E0ECB6009D568B /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437413E0ECB6009D568B /* SBJsonParser.m */; };
-		96DF438413E0ECB6009D568B /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437613E0ECB6009D568B /* SBJsonWriter.m */; };
+		96DF437C13E0ECB6009D568B /* FBDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436413E0ECB6009D568B /* FBDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		96DF437D13E0ECB6009D568B /* FBLoginDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436613E0ECB6009D568B /* FBLoginDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		96DF437E13E0ECB6009D568B /* FBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436813E0ECB6009D568B /* FBRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		96DF437F13E0ECB6009D568B /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436C13E0ECB6009D568B /* NSObject+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		96DF438013E0ECB6009D568B /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF436E13E0ECB6009D568B /* NSString+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		96DF438113E0ECB6009D568B /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437013E0ECB6009D568B /* SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		96DF438213E0ECB6009D568B /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437213E0ECB6009D568B /* SBJsonBase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		96DF438313E0ECB6009D568B /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437413E0ECB6009D568B /* SBJsonParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		96DF438413E0ECB6009D568B /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437613E0ECB6009D568B /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		96DF7D7B1409E2BA005BA340 /* stateabbrs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 96DF7D7A1409E2BA005BA340 /* stateabbrs.txt */; };
 		96DF7D7C1409E2BA005BA340 /* stateabbrs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 96DF7D7A1409E2BA005BA340 /* stateabbrs.txt */; };
 		96DF7D7D1409E2BA005BA340 /* stateabbrs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 96DF7D7A1409E2BA005BA340 /* stateabbrs.txt */; };
@@ -246,8 +246,8 @@
 		AE3D287413B99CB10054903D /* ScorecardTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D287213B99CB00054903D /* ScorecardTableViewController.m */; };
 		AE3D287513B99CB10054903D /* ScorecardTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE3D287313B99CB00054903D /* ScorecardTableView.xib */; };
 		AE7F932B13836621003CCD57 /* StateDirView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7F932A13836621003CCD57 /* StateDirView.xib */; };
-		AE816DC1137B7E140023F5D7 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AE816DBE137B7E140023F5D7 /* NSDataAdditions.m */; };
-		AE816DC2137B7E140023F5D7 /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = AE816DC0137B7E140023F5D7 /* TBXML.m */; };
+		AE816DC1137B7E140023F5D7 /* NSDataAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = AE816DBE137B7E140023F5D7 /* NSDataAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		AE816DC2137B7E140023F5D7 /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = AE816DC0137B7E140023F5D7 /* TBXML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		AE834A7F13A3F6AC00EFF1DB /* ScorecardTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE834A7E13A3F6AC00EFF1DB /* ScorecardTableCell.m */; };
 		AE85D74D1368E34400CDA534 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE85D74B1368E34400CDA534 /* InfoPlist.strings */; };
 		AE85D7501368E34400CDA534 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE85D74F1368E34400CDA534 /* main.m */; };
@@ -1206,6 +1206,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Robert KIng (PLJWL35TX2)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Robert KIng (PLJWL35TX2)";
 				COPY_PHASE_STRIP = NO;
@@ -1236,6 +1237,7 @@
 					armv6,
 					armv7,
 				);
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Robert KIng";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Robert KIng";
 				COPY_PHASE_STRIP = YES;
@@ -1336,7 +1338,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_WARN_OBJCPP_ARC_ABI = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -1367,7 +1370,8 @@
 					armv6,
 					armv7,
 				);
-				CLANG_WARN_OBJCPP_ARC_ABI = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;

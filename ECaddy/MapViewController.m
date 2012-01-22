@@ -69,17 +69,17 @@
     
     
     
-    UIBarButtonItem* nextButton = [[[UIBarButtonItem alloc] initWithTitle:@"Next"                                            
+    UIBarButtonItem* nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next"                                            
         style:UIBarButtonItemStyleBordered 
         target:self 
-        action: @selector(goToNextHole:)] autorelease];
+        action: @selector(goToNextHole:)];
     self.navigationItem.rightBarButtonItem = nextButton;
     
     // Add a button to the left side of the navigation bar for the prev hole button
-    UIBarButtonItem* prevButton = [[[UIBarButtonItem alloc] initWithTitle:@"Previous"                                             
+    UIBarButtonItem* prevButton = [[UIBarButtonItem alloc] initWithTitle:@"Previous"                                             
                                         style:UIBarButtonItemStylePlain 
                                         target:self 
-                                        action: @selector(goToPrevHole:)] autorelease];
+                                        action: @selector(goToPrevHole:)];
     self.navigationItem.leftBarButtonItem = prevButton;
     
     self.curHole = 1;
@@ -103,9 +103,9 @@
         self.curCourse = tempCourse;
         
         self.coordsAvailable = NO;
-        [self.teeCoords release];
+        self.teeCoords;
         self.teeCoords = nil;
-        [self.greenCoords release];
+        self.greenCoords;
         self.greenCoords = nil;
     }
     
@@ -139,7 +139,6 @@
         [mevc setModalTransitionStyle: UIModalTransitionStyleCoverVertical];
      
         [self presentModalViewController: mevc animated: YES];
-        [mevc release];
     }
 }
 
@@ -214,26 +213,6 @@
 }
 
 
-- (void)dealloc
-{
-    [mapView release];
-    [holeAnnotations release];
-    [distanceAnnotations release];
-    [t2dLbl release];
-    [teeCoords release];
-    [greenCoords release];
-    [tempTeeCoords release];
-    [tempGreenCoords release];
-    [manObjCon release];
-    [locManager release];
-    [userLoc release];
-    [distanceContainer release];
-    [d2gLbl release];
-    [curLocationBtn release];
-    [contentView release];
-    [adView release];
-    [super dealloc];
-}
 
 - (void)zoomToFitMapAnnotations:(MKMapView*)mapV
 {
@@ -400,7 +379,6 @@
     NSNumber* lat = [numFormat numberFromString: [[coordsStr componentsSeparatedByString:@","] objectAtIndex: 0]];
     NSNumber* longitude = [numFormat numberFromString: [[coordsStr componentsSeparatedByString: @","] objectAtIndex: 1]];
     
-    [numFormat release];
     
     if((!lat) || (!longitude))
         return nil;
@@ -422,7 +400,7 @@
         [self.locManager stopUpdatingLocation];
         [self.mapView setShowsUserLocation: NO];
         self.userLocEnabled = NO;
-        [self.userLoc release];
+        self.userLoc;
         self.userLoc = nil;
         
         // Only do this if coordinates are available
@@ -452,7 +430,6 @@
         NSString* mesg = @"Please enable your current location with the button in the bottom right corner before logging coordinates";
         UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"Enable Location" message: mesg delegate: self cancelButtonTitle: @"Dismiss" otherButtonTitles: nil];
         [av show];
-        [av release];
         return;
     }
     
@@ -506,7 +483,6 @@
         NSString* mesg = @"Please enable your current location with the button in the bottom right corner before logging coordinates";
         UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"Enable Location" message: mesg delegate: self cancelButtonTitle: @"Dismiss" otherButtonTitles: nil];
         [av show];
-        [av release];
         return;
     }
 
@@ -698,9 +674,6 @@
     
     // Free up memory
     free((void*) pointArray);
-    [loc1 release];
-    [loc2 release];
-    [midloc release];
 }
 
 #pragma mark Map View Methods
@@ -759,7 +732,7 @@
         [self.holeAnnotations insertObject:teeAnnot atIndex: teeAnnotationIndex];
         
         isTeeValid = YES;
-        [teeAnnot release]; teeAnnot = nil;
+         teeAnnot = nil;
     }
     
     if([green count] != 0){
@@ -770,7 +743,7 @@
         [self.holeAnnotations insertObject:greenAnnot atIndex: greenAnnotationIndex];
     
         isGreenValid = YES;
-        [greenAnnot release]; greenAnnot = nil;
+         greenAnnot = nil;
     }
     
     if(isTeeValid && isGreenValid){
@@ -778,21 +751,21 @@
         [draggable1 setDraggable: YES];
         [self.distanceAnnotations addObject:draggable1];
         
-        [draggable1 release]; draggable1 = nil;
+         draggable1 = nil;
     }
     else if(isTeeValid){
         POIAnnotation* draggable1 = [[POIAnnotation alloc] initWithLat: lat1 withLong: long1];
         [draggable1 setDraggable: YES];
         [self.distanceAnnotations addObject:draggable1];
         
-        [draggable1 release]; draggable1 = nil;
+         draggable1 = nil;
     }
     else if(isGreenValid){
         POIAnnotation* draggable1 = [[POIAnnotation alloc] initWithLat: lat2 withLong: long2];
         [draggable1 setDraggable: YES];
         [self.distanceAnnotations addObject:draggable1];
         
-        [draggable1 release]; draggable1 = nil;
+         draggable1 = nil;
     }
     
     [self.mapView addAnnotations: self.holeAnnotations];
@@ -810,7 +783,7 @@
     if(overlay == self.holeLine){
         //if we have not yet created an overlay view for this overlay, create it now.
         if(nil == self.holeLineView){
-            self.holeLineView = [[[MKPolylineView alloc] initWithPolyline:self.holeLine] autorelease];
+            self.holeLineView = [[MKPolylineView alloc] initWithPolyline:self.holeLine];
             self.holeLineView.fillColor = [UIColor yellowColor];
             self.holeLineView.strokeColor = [UIColor yellowColor];
             self.holeLineView.lineWidth = 2;
@@ -855,7 +828,7 @@
         [self.mapView dequeueReusableAnnotationViewWithIdentifier:POIDraggableAnnotationID];
         if (!pinView)
         {
-            MKAnnotationView* customPinView = [[[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier: POIDraggableAnnotationID] autorelease];
+            MKAnnotationView* customPinView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier: POIDraggableAnnotationID];
             
             [customPinView setCanShowCallout: YES];
             [customPinView setDraggable: YES];
@@ -892,7 +865,7 @@
             //      forControlEvents:UIControlEventTouchUpInside];
             //customPinView.rightCalloutAccessoryView = rightButton;
             
-            MKAnnotationView* customPinView = [[[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier: POIAnnotationID] autorelease];
+            MKAnnotationView* customPinView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier: POIAnnotationID];
             
             // TODO: Use this offset to offset the callout so it doesn't adjust
             // the map when the bubble is displayed this value will need to be diferent
@@ -977,8 +950,8 @@
 - (void)createAdBannerView {
     Class classAdBannerView = NSClassFromString(@"ADBannerView");
     if (classAdBannerView != nil) {
-        self.adView = [[[classAdBannerView alloc] 
-                        initWithFrame:CGRectZero] autorelease];
+        self.adView = [[classAdBannerView alloc] 
+                        initWithFrame:CGRectZero];
         [adView setRequiredContentSizeIdentifiers:[NSSet setWithObjects: 
                                                    ADBannerContentSizeIdentifierPortrait, 
                                                    ADBannerContentSizeIdentifierLandscape, nil]];

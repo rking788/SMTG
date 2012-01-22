@@ -22,9 +22,9 @@
 @property (copy, nonatomic) NSString* title;
 @property (copy, nonatomic) NSString* subtitle;
 
-@property (nonatomic, retain) UIImage *image;
-@property (nonatomic, retain) NSNumber *latitude;
-@property (nonatomic, retain) NSNumber *longitude;
+@property (nonatomic, strong) UIImage *image;
+@property (nonatomic, strong) NSNumber *latitude;
+@property (nonatomic, strong) NSNumber *longitude;
 
 @property (nonatomic, assign, getter = isDraggable) BOOL draggable;
 

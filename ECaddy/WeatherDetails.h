@@ -54,49 +54,49 @@
     UIImageView *yahooWeatherImg;
     UIImageView *backgroundImg;
 }
-@property (nonatomic, retain) Course* courseObj;
+@property (nonatomic, strong) Course* courseObj;
 
-@property (nonatomic, retain) NSString* text;
-@property (nonatomic, retain) NSString* courseName;
-@property (nonatomic, retain) NSString* courseLoc;
-@property (nonatomic, retain) NSString* WOEID;
+@property (nonatomic, strong) NSString* text;
+@property (nonatomic, strong) NSString* courseName;
+@property (nonatomic, strong) NSString* courseLoc;
+@property (nonatomic, strong) NSString* WOEID;
 
-@property (nonatomic, retain) IBOutlet UINavigationBar *navBar;
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *actIndicator;
+@property (nonatomic, strong) IBOutlet UINavigationBar *navBar;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *actIndicator;
 
 // Top Level Views (with borders)
-@property (nonatomic, retain) IBOutlet UIView *titleView;
-@property (nonatomic, retain) IBOutlet UIView *ywiView;
-@property (nonatomic, retain) IBOutlet UIView *currentView;
-@property (nonatomic, retain) IBOutlet UIView *todayView;
-@property (nonatomic, retain) IBOutlet UIView *tomView;
+@property (nonatomic, strong) IBOutlet UIView *titleView;
+@property (nonatomic, strong) IBOutlet UIView *ywiView;
+@property (nonatomic, strong) IBOutlet UIView *currentView;
+@property (nonatomic, strong) IBOutlet UIView *todayView;
+@property (nonatomic, strong) IBOutlet UIView *tomView;
 
 // Title View
-@property (nonatomic, retain) IBOutlet UIButton *favstarBtn;
-@property (nonatomic, retain) IBOutlet UILabel *courseDetailsLbl;
+@property (nonatomic, strong) IBOutlet UIButton *favstarBtn;
+@property (nonatomic, strong) IBOutlet UILabel *courseDetailsLbl;
 
 // Current Conditions
-@property (nonatomic, retain) IBOutlet UILabel *curWind;
-@property (nonatomic, retain) IBOutlet UILabel *curText;
-@property (nonatomic, retain) IBOutlet UILabel *tempLbl;
-@property (nonatomic, retain) IBOutlet UILabel *sunriseLbl;
-@property (nonatomic, retain) IBOutlet UILabel *sunsetLbl;
-@property (nonatomic, retain) IBOutlet UIImageView *weatherPic;
-@property (nonatomic, retain) IBOutlet UIImageView *windArrowImg;
+@property (nonatomic, strong) IBOutlet UILabel *curWind;
+@property (nonatomic, strong) IBOutlet UILabel *curText;
+@property (nonatomic, strong) IBOutlet UILabel *tempLbl;
+@property (nonatomic, strong) IBOutlet UILabel *sunriseLbl;
+@property (nonatomic, strong) IBOutlet UILabel *sunsetLbl;
+@property (nonatomic, strong) IBOutlet UIImageView *weatherPic;
+@property (nonatomic, strong) IBOutlet UIImageView *windArrowImg;
 
 // Today's Forecast
-@property (nonatomic, retain) IBOutlet UILabel *todayText;
-@property (nonatomic, retain) IBOutlet UILabel *todayHigh;
-@property (nonatomic, retain) IBOutlet UILabel *todayLow;
+@property (nonatomic, strong) IBOutlet UILabel *todayText;
+@property (nonatomic, strong) IBOutlet UILabel *todayHigh;
+@property (nonatomic, strong) IBOutlet UILabel *todayLow;
 
 // Tomorrow's Forecast
-@property (nonatomic, retain) IBOutlet UILabel *tomText;
-@property (nonatomic, retain) IBOutlet UILabel *tomHigh;
-@property (nonatomic, retain) IBOutlet UILabel *tomLow;
+@property (nonatomic, strong) IBOutlet UILabel *tomText;
+@property (nonatomic, strong) IBOutlet UILabel *tomHigh;
+@property (nonatomic, strong) IBOutlet UILabel *tomLow;
 
-@property (nonatomic, retain) IBOutlet UIView *errorView;
-@property (nonatomic, retain) IBOutlet UIImageView *yahooWeatherImg;
-@property (retain, nonatomic) IBOutlet UIImageView *backgroundImg;
+@property (nonatomic, strong) IBOutlet UIView *errorView;
+@property (nonatomic, strong) IBOutlet UIImageView *yahooWeatherImg;
+@property (strong, nonatomic) IBOutlet UIImageView *backgroundImg;
 
 - (IBAction)favstarPressed:(id)sender;
 

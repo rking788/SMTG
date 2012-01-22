@@ -12,17 +12,17 @@
 @interface Course : NSManagedObject {
 @private
 }
-@property (nonatomic, retain) NSString * phone;
-@property (nonatomic, retain) NSString * website;
-@property (nonatomic, retain) NSArray* womenpars;
-@property (nonatomic, retain) NSString * woeid;
-@property (nonatomic, retain) NSNumber * numholes;
-@property (nonatomic, retain) NSString * coursename;
-@property (nonatomic, retain) NSArray* menpars;
-@property (nonatomic, retain) NSNumber * favorite;
-@property (nonatomic, retain) NSNumber* pending;
-@property (nonatomic, retain) NSSet* scorecards;
-@property (nonatomic, retain) NSArray* greenCoords;
-@property (nonatomic, retain) NSArray* teeCoords;
+@property (nonatomic, strong) NSString * phone;
+@property (nonatomic, strong) NSString * website;
+@property (nonatomic, strong) NSArray* womenpars;
+@property (nonatomic, strong) NSString * woeid;
+@property (nonatomic, strong) NSNumber * numholes;
+@property (nonatomic, strong) NSString * coursename;
+@property (nonatomic, strong) NSArray* menpars;
+@property (nonatomic, strong) NSNumber * favorite;
+@property (nonatomic, strong) NSNumber* pending;
+@property (nonatomic, strong) NSSet* scorecards;
+@property (nonatomic, strong) NSArray* greenCoords;
+@property (nonatomic, strong) NSArray* teeCoords;
 
 @end

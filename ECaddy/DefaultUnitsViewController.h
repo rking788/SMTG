@@ -31,14 +31,14 @@ typedef enum _tagrowtitleinds
     NSUInteger lastSelRow;
 }
 
-@property (nonatomic, retain) IBOutlet UITableView *tableV;
-@property (nonatomic, retain) IBOutlet UINavigationBar *navBar;
+@property (nonatomic, strong) IBOutlet UITableView *tableV;
+@property (nonatomic, strong) IBOutlet UINavigationBar *navBar;
 
-@property (nonatomic, retain) NSMutableDictionary* unitsDict;
-@property (nonatomic, retain) NSUserDefaults* defs;
+@property (nonatomic, strong) NSMutableDictionary* unitsDict;
+@property (nonatomic, strong) NSUserDefaults* defs;
 
-@property (nonatomic, retain) UIActionSheet* actSheet;
-@property (nonatomic, retain) NSMutableArray* pickerOptsArr;
+@property (nonatomic, strong) UIActionSheet* actSheet;
+@property (nonatomic, strong) NSMutableArray* pickerOptsArr;
 
 @property (nonatomic, assign) NSUInteger lastSelRow;
 

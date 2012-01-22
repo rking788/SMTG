@@ -51,22 +51,6 @@ static NSString* kAppId = @"142876775786876";
     return self;
 }
 
-- (void)dealloc
-{
-    [appDel release];
-    [scorecard release];
-    [titleTextView release];
-    [scoreHeaderView release];
-    [scoreFooterView release];
-    [scorecardDict release];
-    [favstarBtn release];
-    [tableV release];
-    [FBpermissions release];
-    [dateLbl release];
-    [backgroundImageView release];
-    [titleView release];
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -88,9 +72,9 @@ static NSString* kAppId = @"142876775786876";
     [self registerForKeyboardNotifications];
     
     // TODO: Finish implementing this to provide actions like posting to facebook and finishing a round
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                                initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                               target:self action:@selector(actionButtonClicked:)] autorelease];
+                                               target:self action:@selector(actionButtonClicked:)];
     
     self.navigationItem.title = @"Scorecard";
     
@@ -116,7 +100,6 @@ static NSString* kAppId = @"142876775786876";
         [self.scoreHeaderView setScoreTracker: (ScoreTrackerViewController*) self];
         [self.scoreFooterView setScoreTracker: (ScoreTrackerViewController*) self];
         
-        [dateF release];
         
         [self.favstarBtn setImage: [UIImage imageNamed: ([[self.scorecard.course favorite] boolValue] ? @"favstarpressed.png" : @"favstarreleased.png")] forState: UIControlStateNormal];
         
@@ -148,7 +131,6 @@ static NSString* kAppId = @"142876775786876";
             // TODO: This 18 should probably be changed to the number of holes on the course
             dictArr = [[NSMutableArray alloc] initWithObjects:@"-", @"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-",@"-", nil];
             [self.scorecardDict setObject: dictArr forKey: str];
-            [dictArr release];
         }
 
     }
@@ -243,11 +225,11 @@ static NSString* kAppId = @"142876775786876";
     ScorecardTableCell *cell = (ScorecardTableCell*) [tableView dequeueReusableCellWithIdentifier: cellID];
     if (cell == nil) {
         //cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
-        cell = [[[ScorecardTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID] autorelease];
+        cell = [[ScorecardTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
         
         [cell setSelectionStyle: UITableViewCellSelectionStyleNone];
         
-        label = [[[UILabel alloc] initWithFrame: CGRectMake(0.0, 0.0, constColWidth-1, tableView.rowHeight)] autorelease];
+        label = [[UILabel alloc] initWithFrame: CGRectMake(0.0, 0.0, constColWidth-1, tableView.rowHeight)];
         
         [cell addColumn: 44];
         label.tag = HOLENUM_TAG;
@@ -258,7 +240,7 @@ static NSString* kAppId = @"142876775786876";
         label.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight;
         [cell.contentView addSubview: label];
     
-        label = [[[UILabel alloc] initWithFrame: CGRectMake(constColWidth, 0, constColWidth, tableView.rowHeight)] autorelease];
+        label = [[UILabel alloc] initWithFrame: CGRectMake(constColWidth, 0, constColWidth, tableView.rowHeight)];
         
         [cell addColumn: 90];
         label.tag = PAR_TAG;
@@ -297,7 +279,6 @@ static NSString* kAppId = @"142876775786876";
             
             [cell addSubview: scoreTF];
             
-            [scoreTF release];
         }
     }
     
@@ -410,7 +391,7 @@ static NSString* kAppId = @"142876775786876";
     [f setNumberStyle: NSNumberFormatterDecimalStyle];
     NSNumber* newNumber = [f numberFromString: textField.text];
    
-    NSArray* rowCol = [[ScoreTrackerViewController rowAndColFromTag: textField.tag] retain];
+    NSArray* rowCol = [ScoreTrackerViewController rowAndColFromTag: textField.tag];
     NSUInteger row = [[rowCol objectAtIndex: 0] unsignedIntegerValue];
     NSUInteger col = [[rowCol objectAtIndex: 1] unsignedIntegerValue];
     
@@ -431,8 +412,6 @@ static NSString* kAppId = @"142876775786876";
     // Update the scorecard managed object
     [self.appDel saveCurScorecard: self.scorecardDict];
     
-    [rowCol release];
-    [f release];
 }
 
 - (IBAction)favstarPressed:(id)sender {
@@ -542,7 +521,6 @@ static NSString* kAppId = @"142876775786876";
     
     actSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     [actSheet showFromTabBar: self.tabBarController.tabBar];
-    [actSheet release];  
 }
 
 #pragma mark - UIActionSheetDelegate Method
@@ -725,8 +703,6 @@ static NSString* kAppId = @"142876775786876";
     if(isExtended){
         self.titleView.frame = originalTitleRect;
         
-        [tabv release];
-        [secondHeader release];
        // [secondFooter release];
     }
 }
@@ -862,7 +838,6 @@ static NSString* kAppId = @"142876775786876";
                       andHttpMethod:@"POST"
                         andDelegate:self];
     
-    [img release];
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -12,7 +12,7 @@
     NSUInteger numCols;
     NSString* headerOrFooter;
     NSArray* playerNamesArr;
-    id scoreTracker;
+    id __unsafe_unretained scoreTracker;
 }
 
 
@@ -23,9 +23,9 @@ enum{
 };
 
 @property (nonatomic, assign) NSUInteger numCols;
-@property (nonatomic, retain) NSString* headerOrFooter;
-@property (nonatomic, retain) NSArray* playerNamesArr;
-@property (nonatomic, assign) id scoreTracker;
+@property (nonatomic, strong) NSString* headerOrFooter;
+@property (nonatomic, strong) NSArray* playerNamesArr;
+@property (nonatomic, unsafe_unretained) id scoreTracker;
 
 - (void) addHeaderColumnsForNumPlayers: (NSUInteger) numPlayers;
 - (void) addFooterColumnsForNumPlayers: (NSUInteger) numPlayers;

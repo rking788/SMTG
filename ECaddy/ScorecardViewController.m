@@ -87,15 +87,6 @@
 }
 
 
-- (void)dealloc
-{
-    [contentView release];
-    [adView release];
-    [pendingCourses release];
-    [uploadingView release];
-    [uploadingInd release];
-    [super dealloc];
-}
 
 - (IBAction)startClicked:(id)sender {
     [self startNewRoundWithCourseOrNil: nil];
@@ -107,7 +98,6 @@
     
     nrvc.navigationItem.title = @"Continue";
     [self.navigationController pushViewController:nrvc animated:YES];
-    [nrvc release];  
 }
 
 - (IBAction)viewClicked:(id)sender
@@ -116,7 +106,6 @@
     
     nrvc.navigationItem.title = @"View";
     [self.navigationController pushViewController:nrvc animated:YES];
-    [nrvc release];  
 }
 
 - (void) startNewRoundWithCourseOrNil: (Course*) course
@@ -127,7 +116,6 @@
         [nrvc setCurCourse: course];
     
     [self.navigationController pushViewController:nrvc animated:YES];
-    [nrvc release];    
 }
 
 - (void) checkForPending
@@ -151,7 +139,7 @@
         if([self.pendingCourses count] != 0){
             // Display the alert view and wait to see if they want to upload the courses now
             NSString* messageStr = @"Courses still need to be uploaded, would you like to upload them now?";
-            UIAlertView* av = [[[UIAlertView alloc] initWithTitle: @"Upload Courses" message: messageStr delegate:self cancelButtonTitle:nil otherButtonTitles: @"Dismiss", @"Upload", nil] autorelease];
+            UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"Upload Courses" message: messageStr delegate:self cancelButtonTitle:nil otherButtonTitles: @"Dismiss", @"Upload", nil];
             
             [av show];
         }
@@ -161,47 +149,44 @@
         NSLog(@"Error fetching lots");
     }
     
-    [sortDescript release];
-    [sdArr release];
-    [fetchrequest release];
 }
 
 - (void) uploadCourseToServer:(Course *)course
 {
     BOOL pending = YES;
-    NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-    NSURLResponse* resp = nil;
-    NSError* err = nil;
-    
-    // Add the course information into the POST request content
-    NSURL* url = [NSURL URLWithString:@"http://mainelyapps.com/SMTG/NewCourse.php"];
-    NSString* content = [NSString stringWithFormat:
-                         @"cn=%@&p=%@&addr=%@&st=%@&c=%@&web=%@&woeid=%@&nh=%@&tc=%@&gc=%@", 
-                         [course coursename], [course phone], [course valueForKey: @"address"], 
-                         [course valueForKey:@"state"], [course valueForKey:@"country"], 
-                         [course website], [course woeid], [course numholes], [course teeCoords], [course greenCoords]];
-    
-    NSMutableURLRequest* request = [[[NSMutableURLRequest alloc] initWithURL: url] autorelease];
-    
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody: [content dataUsingEncoding: NSUTF8StringEncoding]];
-    
-    // TODO: This should probably be an asynchronous request to not hold up the UI
-    NSData* ret = [NSURLConnection sendSynchronousRequest: request returningResponse: &resp error: &err];
-    
-    // This return value is used to set the pending value of the course
-    if((!ret) || (err))
-        pending = YES;
-    else
-        pending = NO;
-    
-    [course setPending: [NSNumber numberWithBool: pending]];
+    @autoreleasepool {
+        NSURLResponse* resp = nil;
+        NSError* err = nil;
+        
+        // Add the course information into the POST request content
+        NSURL* url = [NSURL URLWithString:@"http://mainelyapps.com/SMTG/NewCourse.php"];
+        NSString* content = [NSString stringWithFormat:
+                             @"cn=%@&p=%@&addr=%@&st=%@&c=%@&web=%@&woeid=%@&nh=%@&tc=%@&gc=%@", 
+                             [course coursename], [course phone], [course valueForKey: @"address"], 
+                             [course valueForKey:@"state"], [course valueForKey:@"country"], 
+                             [course website], [course woeid], [course numholes], [course teeCoords], [course greenCoords]];
+        
+        NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL: url];
+        
+        [request setHTTPMethod:@"POST"];
+        [request setHTTPBody: [content dataUsingEncoding: NSUTF8StringEncoding]];
+        
+        // TODO: This should probably be an asynchronous request to not hold up the UI
+        NSData* ret = [NSURLConnection sendSynchronousRequest: request returningResponse: &resp error: &err];
+        
+        // This return value is used to set the pending value of the course
+        if((!ret) || (err))
+            pending = YES;
+        else
+            pending = NO;
+        
+        [course setPending: [NSNumber numberWithBool: pending]];
     
     // Hide the uploading view
     //[self.uploadingInd stopAnimating];
     //[self.uploadingView setHidden: YES];
 
-    [pool release];
+    }
 
 }
 
@@ -257,8 +242,8 @@
 - (void)createAdBannerView {
     Class classAdBannerView = NSClassFromString(@"ADBannerView");
     if (classAdBannerView != nil) {
-        self.adView = [[[classAdBannerView alloc] 
-                              initWithFrame:CGRectZero] autorelease];
+        self.adView = [[classAdBannerView alloc] 
+                              initWithFrame:CGRectZero];
         [adView setRequiredContentSizeIdentifiers:[NSSet setWithObjects: 
                                                           ADBannerContentSizeIdentifierPortrait, 
                                                           ADBannerContentSizeIdentifierLandscape, nil]];

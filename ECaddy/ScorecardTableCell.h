@@ -13,7 +13,7 @@
     NSMutableArray* columns;
 }
 
-@property (nonatomic, retain) NSMutableArray* columns;
+@property (nonatomic, strong) NSMutableArray* columns;
 
 - (void) addColumn: (CGFloat) position;
 

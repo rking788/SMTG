@@ -36,20 +36,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [arrayOfChars release];
-    [coursesDict release];
-    [searchB release];
-    [tableV release];
-    [blackView release];
-    [longStateName release];
-    [favoriteNames release];
-    [favoriteLocs release];
-    [appDel release];
-    [super dealloc];
-    
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -100,14 +86,13 @@
      */
     recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
     [self.blackView addGestureRecognizer:recognizer];
-    [recognizer release];
     
     self.searching = NO;
 
     // If the view controller is presented modally we want to provide a 
     // cancel button or done button in the navigation bar
     if([self isModal]){
-        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemCancel target:self action:@selector(modalCancel:)] autorelease];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemCancel target:self action:@selector(modalCancel:)];
     }
     
 }
@@ -186,10 +171,6 @@
         NSLog(@"Error fetching lots");
     }
     
-    [sortDescript release];
-    [sdArr release];
-    [propArr release];
-    [fetchrequest release];   
 }
 
 - (void) fillNamesAndLocs
@@ -236,7 +217,7 @@
                 [self.arrayOfChars addObject: firstCharStr];
                 tmpArr = [[NSMutableArray alloc] initWithObjects: combinedStr, nil];
                 [self.coursesDict setObject: tmpArr forKey: firstCharStr];
-                [tmpArr release]; tmpArr = nil;
+                 tmpArr = nil;
             }
         }
         
@@ -246,10 +227,6 @@
         NSLog(@"Error fetching course names and locations");
     }
     
-    [propArr release];
-    [sortDescript release];
-    [sdArr release];
-    [fetchrequest release];
 }
 
 #pragma mark UITableViewDataSource Protocol Methods
@@ -393,7 +370,6 @@
         
         [cdvc setCourseObj: courseObject];
         [self.navigationController pushViewController:cdvc animated:YES];
-        [cdvc release];
     }
     else if([tabItemTitle isEqualToString: @"Weather"]){
         WeatherDetails* weatherView = [[WeatherDetails alloc] initWithNibName:@"WeatherDetails" bundle:nil];
@@ -408,7 +384,6 @@
         // Set the transition mode and display the weather detail view modally
         [weatherView setModalTransitionStyle: UIModalTransitionStyleFlipHorizontal];
         [self presentModalViewController:weatherView animated:YES];
-        [weatherView release];
     }
     else if([tabItemTitle isEqualToString: @"Settings"]){
         // Notify the settings tab that we selected a course
@@ -440,13 +415,13 @@
     if(section == 0){
         cell = [tableView dequeueReusableCellWithIdentifier: NewCourseCellIdentifier];
         if (cell == nil) {
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: NewCourseCellIdentifier] autorelease];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier: NewCourseCellIdentifier];
         }
     }
     else{
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:    CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:    CellIdentifier];
         }
     }
    
@@ -552,7 +527,6 @@
         NSLog(@"Error fetching Course for course details");
     }
     
-    [fetchrequest release];
     
     return courseObj;
 }
@@ -612,7 +586,6 @@
     }
     
     self.nameSearch = [tmpArr sortedArrayUsingSelector: @selector(compare:)];
-    [tmpArr release];
 }
 
 - (void) searchBarTextDidBeginEditing:(UISearchBar *)theSearchBar 
@@ -623,9 +596,9 @@
     self.blackView.alpha = 0.7;
     [UIView commitAnimations];
     
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc]
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                                initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                               target:self action:@selector(doneSearching_Clicked:)] autorelease];
+                                               target:self action:@selector(doneSearching_Clicked:)];
 }
 
 - (void) doneSearching_Clicked:(id)sender 
@@ -660,7 +633,6 @@
     CustomCourseViewController* ccvc = [[CustomCourseViewController alloc] initWithNibName: @"CustomCourseView" bundle: nil];
     
     [self presentModalViewController: ccvc animated: YES];
-    [ccvc release];
 }
 
 @end

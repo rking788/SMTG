@@ -35,18 +35,6 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
     return self;
 }
 
-- (void)dealloc
-{
-    [defs release];
-    [sectionTitles release];
-    [userPrefsDict release];
-    [coursePrefsDict release];
-    [contactPrefsArr release];
-    [tableV release];
-    [upgradeBtn release];
-    [super dealloc];
-    
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -140,7 +128,7 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
 
 - (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UILabel* lbl = [[[UILabel alloc] init] autorelease];
+    UILabel* lbl = [[UILabel alloc] init];
     
     lbl.frame = CGRectMake( 15, 0, 300, 40);
     [lbl setText: [self tableView: tableView titleForHeaderInSection: section]];
@@ -150,7 +138,7 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
     lbl.shadowColor = [UIColor blackColor];
     lbl.shadowOffset = CGSizeMake(0.0, 1.0);
     
-    UIView* view = [[[UIView alloc] init] autorelease];
+    UIView* view = [[UIView alloc] init];
     [view addSubview: (UIView*) lbl];
     
     return view;
@@ -182,7 +170,7 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
@@ -280,7 +268,6 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
             [sdvc setCurName: [[[tableView cellForRowAtIndexPath: indexPath] detailTextLabel] text]];
             
             [self presentModalViewController: sdvc animated: YES];
-            [sdvc release];
             [self setSelectedSettingsDetail: kNAME_EDIT];
         }
         else if(indexPath.row == kDEFUNITS){
@@ -288,7 +275,6 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
             
             [self presentModalViewController: duvc animated: YES];
             
-            [duvc release];
         }
     }
     else if(indexPath.section == kCONTACT_SEC){
@@ -307,7 +293,6 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
         UIActionSheet* actSheet = [[UIActionSheet alloc] initWithTitle: titleStr delegate: self cancelButtonTitle: @"Cancel" destructiveButtonTitle: nil otherButtonTitles: buttonTitleStr, nil];
         actSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
         [actSheet showFromTabBar: self.tabBarController.tabBar];
-        [actSheet release];
     }
     else if((indexPath.section == kCOURSE_SEC) && (indexPath.row == kCOURSE)){
         DirectoryViewController* dvc = [[DirectoryViewController alloc] initWithNibName:@"StateDirView" bundle:nil];
@@ -327,7 +312,6 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
         // Display the directory view controller with a UINavigationController as it's parent
         [uinc setModalTransitionStyle: UIModalTransitionStyleCoverVertical];
         [self presentModalViewController:uinc animated:YES];
-        [uinc release];
         
         [self setSelectedSettingsDetail: kCOURSE_EDIT];
     }
@@ -349,7 +333,6 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
         // Display the directory view controller with a UINavigationController as it's parent
         [uinc setModalTransitionStyle: UIModalTransitionStyleCoverVertical];
         [self presentModalViewController:uinc animated:YES];
-        [uinc release];
         
         [self setSelectedSettingsDetail: kSTATE_EDIT];
     }
@@ -359,7 +342,6 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
         [sdvc setDelVC: self];
         [sdvc setDetailType: kSTATE_VISIBILITY];
         [self presentModalViewController: sdvc animated: YES];
-        [sdvc release];
         [self setSelectedSettingsDetail: kSTATE_VISIBILITY];
     }
 }

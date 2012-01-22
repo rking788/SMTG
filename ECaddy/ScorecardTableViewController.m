@@ -31,14 +31,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [super dealloc];
-    [courseNameDict release];
-    [manObjCon release];
-    [actScorecard release];
-    [selScorecard release];
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -165,7 +157,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     // Configure the cell...
@@ -271,10 +263,7 @@
         NSLog(@"Error fetching lots");
     }
     
-    [sortDescript release];
-    [sdArr release];
     //[propArr release];
-    [fetchrequest release];   
 
 }
 
@@ -304,7 +293,6 @@
     
     [self.navigationController pushViewController:stvc animated:YES];
     
-    [stvc release];
 }
 
 - (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -363,7 +351,6 @@
     }
     
     //[propArr release];
-    [fetchrequest release];   
     
     return retSC;
 }

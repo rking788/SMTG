@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol StartNewRoundDelegate <NSObject>
+
+- (void) startNewRound;
+
+@end
+
 @interface MapErrorViewController : UIViewController {
     UITextView *messageTV;
     UIButton *actionBtn;
@@ -17,18 +23,18 @@
     NSString* courselocation;
     NSString* err;
     
-    id caller;
+    id<StartNewRoundDelegate> caller;
 }
 
-@property (retain, nonatomic) IBOutlet UINavigationItem *navBar;
-@property (retain, nonatomic) IBOutlet UITextView *messageTV;
-@property (retain, nonatomic) IBOutlet UIButton *actionBtn;
+@property (strong, nonatomic) IBOutlet UINavigationItem *navBar;
+@property (strong, nonatomic) IBOutlet UITextView *messageTV;
+@property (strong, nonatomic) IBOutlet UIButton *actionBtn;
 
-@property (retain, nonatomic) NSString* coursename;
-@property (retain, nonatomic) NSString* courselocation;
-@property (retain, nonatomic) NSString* err;
+@property (strong, nonatomic) NSString* coursename;
+@property (strong, nonatomic) NSString* courselocation;
+@property (strong, nonatomic) NSString* err;
 
-@property (retain, nonatomic) id caller;
+@property (strong, nonatomic) id<StartNewRoundDelegate> caller;
 
 - (IBAction) btnClicked:(id)sender;
 

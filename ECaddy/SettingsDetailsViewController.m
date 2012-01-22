@@ -30,15 +30,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [super dealloc];
-    [curName release];
-    [locObjs release];
-    [manObjCon release];
-    [abbrsDict release];
-    [stateArrDict release];
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -60,9 +51,9 @@
     [navBar setTintColor: [UIColor colorWithRed:(0.0/255.0) green:(77.0/255.0) blue:(45.0/255.0) alpha:1.0]];
     
     // Add save and cancel buttons to the navigation bar
-    [navBar.topItem setRightBarButtonItem: [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target: self action: @selector(cancel)] autorelease]];
+    [navBar.topItem setRightBarButtonItem: [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target: self action: @selector(cancel)]];
     
-    [navBar.topItem setLeftBarButtonItem: [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target: self action: @selector(save)] autorelease]];
+    [navBar.topItem setLeftBarButtonItem: [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target: self action: @selector(save)]];
     
     if(self.detailType == kNAME_EDIT){
         [self nameEditInit];
@@ -171,9 +162,6 @@
         NSLog(@"Error fetching lots");
     }
     
-    [fetchrequest release];
-    [sdArr release];
-    [sortDescript release];
 }
 
 #pragma mark UITableViewDataSource Protocol Methods
@@ -215,7 +203,7 @@
 
 - (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UILabel* lbl = [[[UILabel alloc] init] autorelease];
+    UILabel* lbl = [[UILabel alloc] init];
     
     if([self tableView: tableView titleForHeaderInSection: section] == nil)
         return nil;
@@ -228,7 +216,7 @@
     lbl.shadowColor = [UIColor blackColor];
     lbl.shadowOffset = CGSizeMake(0.0, 1.0);
     
-    UIView* view = [[[UIView alloc] init] autorelease];
+    UIView* view = [[UIView alloc] init];
     [view addSubview: (UIView*) lbl];
     
     return view;
@@ -267,13 +255,13 @@
     if(indexPath.section == 0){
         cell = [tableView dequeueReusableCellWithIdentifier:CommandCellIdentifier];
         if (cell == nil) {
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:  CommandCellIdentifier] autorelease];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:  CommandCellIdentifier];
         }
     }
     else{
         cell = [tableView dequeueReusableCellWithIdentifier:StateCellIdentifier];
         if (cell == nil) {
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:  StateCellIdentifier] autorelease];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:  StateCellIdentifier];
         }
     }
     
@@ -315,7 +303,6 @@
         [switchview setOn: isEnabled];
         [switchview addTarget: self action:@selector(switchToggled:) forControlEvents:UIControlEventValueChanged];
         cell.accessoryView = switchview;
-        [switchview release];
     }
     if(indexPath.section != 0)
         [cell setSelectionStyle: UITableViewCellSelectionStyleNone];

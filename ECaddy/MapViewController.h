@@ -10,12 +10,13 @@
 #import <MapKit/MapKit.h>
 #import <CoreData/CoreData.h>
 #import "iAd/ADBannerView.h"
+#import "MapErrorViewController.h"
 
 @class POIAnnotation;
 @class Course;
 
 
-@interface MapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, ADBannerViewDelegate> {
+@interface MapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, ADBannerViewDelegate, StartNewRoundDelegate> {
     
     NSManagedObjectContext* manObjCon;
     
@@ -55,37 +56,37 @@
 }
 
 // Properties
-@property (retain, nonatomic) IBOutlet UIView *distanceContainer;
-@property (nonatomic, retain) IBOutlet UILabel *t2dLbl;
-@property (retain, nonatomic) IBOutlet UILabel *d2gLbl;
-@property (nonatomic, retain) IBOutlet MKMapView *mapView;
-@property (retain, nonatomic) IBOutlet UIButton *curLocationBtn;
-@property (retain, nonatomic) IBOutlet UIView *contentView;
+@property (strong, nonatomic) IBOutlet UIView *distanceContainer;
+@property (nonatomic, strong) IBOutlet UILabel *t2dLbl;
+@property (strong, nonatomic) IBOutlet UILabel *d2gLbl;
+@property (nonatomic, strong) IBOutlet MKMapView *mapView;
+@property (strong, nonatomic) IBOutlet UIButton *curLocationBtn;
+@property (strong, nonatomic) IBOutlet UIView *contentView;
 
-@property (nonatomic, retain) NSManagedObjectContext* manObjCon;
+@property (nonatomic, strong) NSManagedObjectContext* manObjCon;
 
-@property (nonatomic, retain) NSMutableArray* holeAnnotations;
-@property (nonatomic, retain) NSMutableArray* distanceAnnotations;
+@property (nonatomic, strong) NSMutableArray* holeAnnotations;
+@property (nonatomic, strong) NSMutableArray* distanceAnnotations;
 
-@property (nonatomic, retain) Course* curCourse;
+@property (nonatomic, strong) Course* curCourse;
 @property (nonatomic, assign) NSUInteger curHole;
 
 @property (nonatomic, assign, getter = isCoordsAvailable) BOOL coordsAvailable;
 
-@property (nonatomic, retain) NSArray* teeCoords;
-@property (nonatomic, retain) NSArray* greenCoords;
+@property (nonatomic, strong) NSArray* teeCoords;
+@property (nonatomic, strong) NSArray* greenCoords;
 
-@property (nonatomic, retain) NSMutableArray* tempTeeCoords;
-@property (nonatomic, retain) NSMutableArray* tempGreenCoords;
+@property (nonatomic, strong) NSMutableArray* tempTeeCoords;
+@property (nonatomic, strong) NSMutableArray* tempGreenCoords;
 
-@property (nonatomic, retain) MKPolyline* holeLine;
-@property (nonatomic, retain) MKPolylineView* holeLineView;
+@property (nonatomic, strong) MKPolyline* holeLine;
+@property (nonatomic, strong) MKPolylineView* holeLineView;
 
-@property (nonatomic, retain) CLLocationManager* locManager;
-@property (nonatomic, retain) CLLocation* userLoc;
+@property (nonatomic, strong) CLLocationManager* locManager;
+@property (nonatomic, strong) CLLocation* userLoc;
 @property (nonatomic, assign, getter = isUserLocEnabled) BOOL userLocEnabled;
 
-@property (nonatomic, retain) id adView;
+@property (nonatomic, strong) id adView;
 @property (nonatomic) BOOL adVisible;
 
 // Methods

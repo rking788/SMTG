@@ -43,27 +43,27 @@ enum{
     
     SMTGAppDelegate* appDel;
     
-    id<CourseSelectDelegate> courseSelectDelegate;
+    id<CourseSelectDelegate> __unsafe_unretained courseSelectDelegate;
     
     BOOL searching;
     BOOL modal;
 }
-@property (nonatomic, retain) IBOutlet UISearchBar *searchB;
-@property (nonatomic, retain) IBOutlet UITableView *tableV;
-@property (nonatomic, retain) IBOutlet UIView *blackView;
+@property (nonatomic, strong) IBOutlet UISearchBar *searchB;
+@property (nonatomic, strong) IBOutlet UITableView *tableV;
+@property (nonatomic, strong) IBOutlet UIView *blackView;
 
-@property (nonatomic, retain) NSMutableArray* arrayOfChars;
-@property (nonatomic, retain) NSMutableDictionary* coursesDict; 
-@property (nonatomic, retain) NSArray* nameSearch;
-@property (nonatomic, retain) NSString* selectedState;
-@property (nonatomic, retain) NSString* longStateName;
-@property (nonatomic, retain) NSManagedObjectContext* manObjCon;
-@property (nonatomic, retain) NSMutableArray* favoriteNames;
-@property (nonatomic, retain) NSMutableArray* favoriteLocs;
+@property (nonatomic, strong) NSMutableArray* arrayOfChars;
+@property (nonatomic, strong) NSMutableDictionary* coursesDict; 
+@property (nonatomic, strong) NSArray* nameSearch;
+@property (nonatomic, strong) NSString* selectedState;
+@property (nonatomic, strong) NSString* longStateName;
+@property (nonatomic, strong) NSManagedObjectContext* manObjCon;
+@property (nonatomic, strong) NSMutableArray* favoriteNames;
+@property (nonatomic, strong) NSMutableArray* favoriteLocs;
 
-@property (nonatomic, retain) SMTGAppDelegate* appDel;
+@property (nonatomic, strong) SMTGAppDelegate* appDel;
 
-@property (nonatomic, assign) id<CourseSelectDelegate> courseSelectDelegate;
+@property (nonatomic, unsafe_unretained) id<CourseSelectDelegate> courseSelectDelegate;
 
 @property (nonatomic, assign, getter = isSearching) BOOL searching;
 @property (nonatomic, assign, getter = isModal) BOOL modal;

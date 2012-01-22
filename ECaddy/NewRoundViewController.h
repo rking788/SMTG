@@ -26,14 +26,14 @@ typedef enum _tagTableRows
     UITextView *liteMessage;
 }
 - (IBAction)getFullVersion:(id)sender;
-@property (retain, nonatomic) IBOutlet UIView *liteFooterView;
+@property (strong, nonatomic) IBOutlet UIView *liteFooterView;
 
-@property (retain, nonatomic) IBOutlet UIButton *upgradeBtn;
-@property (nonatomic, retain) IBOutlet UITextView *liteMessage;
-@property (retain, nonatomic) IBOutlet UITableView *tableV;
-@property (nonatomic, retain) UIActionSheet* actSheet;
-@property (nonatomic, retain) Course* curCourse;
-@property (nonatomic, retain) Scorecard* curScorecard;
+@property (strong, nonatomic) IBOutlet UIButton *upgradeBtn;
+@property (nonatomic, strong) IBOutlet UITextView *liteMessage;
+@property (strong, nonatomic) IBOutlet UITableView *tableV;
+@property (nonatomic, strong) UIActionSheet* actSheet;
+@property (nonatomic, strong) Course* curCourse;
+@property (nonatomic, strong) Scorecard* curScorecard;
 
 - (Course*) loadDefaultCourse;
 - (void) showPickerView;

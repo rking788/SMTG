@@ -27,8 +27,8 @@ enum{
 
 @interface SettingsDetailsViewController : UIViewController <UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate> {
 
-    SettingsViewController* delVC;
-    UITableView* delTV;
+    SettingsViewController* __unsafe_unretained delVC;
+    UITableView* __unsafe_unretained delTV;
     NSInteger detailType;
     NSManagedObjectContext* manObjCon;
     
@@ -39,18 +39,18 @@ enum{
     NSDictionary* abbrsDict;
 }
 
-@property (nonatomic, assign) SettingsViewController* delVC;
-@property (nonatomic, assign) UITableView* delTV;
+@property (nonatomic, unsafe_unretained) SettingsViewController* delVC;
+@property (nonatomic, unsafe_unretained) UITableView* delTV;
 @property (nonatomic, assign) NSInteger detailType;
-@property (nonatomic, retain) NSManagedObjectContext* manObjCon;
+@property (nonatomic, strong) NSManagedObjectContext* manObjCon;
 
 // Properties for the NameEdit detail type
-@property (nonatomic, retain) NSString* curName;
+@property (nonatomic, strong) NSString* curName;
 
 // Properties for state visibility view
-@property (nonatomic, retain) NSMutableArray* locObjs;
-@property (nonatomic, retain) NSMutableDictionary* stateArrDict;
-@property (nonatomic, retain) NSDictionary* abbrsDict;
+@property (nonatomic, strong) NSMutableArray* locObjs;
+@property (nonatomic, strong) NSMutableDictionary* stateArrDict;
+@property (nonatomic, strong) NSDictionary* abbrsDict;
 
 // Methods for initialization based on the setting selected
 - (void) nameEditInit;

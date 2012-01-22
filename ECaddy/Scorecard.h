@@ -16,11 +16,11 @@
 @private
 }
 
-@property (nonatomic, retain) NSNumber* active;
-@property (nonatomic, retain) NSDate * dateplayed;
-@property (nonatomic, retain) NSDictionary* scores;
-@property (nonatomic, retain) NSString* playernames;
-@property (nonatomic, retain) NSNumber* numplayers;
-@property (nonatomic, retain) Course * course;
+@property (nonatomic, strong) NSNumber* active;
+@property (nonatomic, strong) NSDate * dateplayed;
+@property (nonatomic, strong) NSDictionary* scores;
+@property (nonatomic, strong) NSString* playernames;
+@property (nonatomic, strong) NSNumber* numplayers;
+@property (nonatomic, strong) Course * course;
 
 @end

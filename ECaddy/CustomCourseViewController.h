@@ -27,20 +27,20 @@
     UITextField *numHolesTF;
     UIScrollView *scrollView;
 }
-@property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, retain) UITextField* activeField;
-@property (nonatomic, retain) IBOutlet UITextField *courseNameTF;
-@property (nonatomic, retain) IBOutlet UITextField *phoneTF;
-@property (nonatomic, retain) IBOutlet UITextField *numHolesTF;
-@property (nonatomic, retain) IBOutlet UITextField *addressTF;
-@property (nonatomic, retain) IBOutlet UITextField *cityTF;
-@property (nonatomic, retain) IBOutlet UITextField *stateTF;
-@property (nonatomic, retain) IBOutlet UITextField *countryTF;
-@property (nonatomic, retain) IBOutlet UITextField *websiteTF;
-@property (nonatomic, retain) IBOutlet UINavigationBar *navBar;
-@property (nonatomic, retain) IBOutlet UISegmentedControl *uploadSeg;
-@property (nonatomic, retain) IBOutlet UIView *uploadingView;
-@property (nonatomic, retain) IBOutlet UIActivityIndicatorView *uploadingInd;
+@property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, strong) UITextField* activeField;
+@property (nonatomic, strong) IBOutlet UITextField *courseNameTF;
+@property (nonatomic, strong) IBOutlet UITextField *phoneTF;
+@property (nonatomic, strong) IBOutlet UITextField *numHolesTF;
+@property (nonatomic, strong) IBOutlet UITextField *addressTF;
+@property (nonatomic, strong) IBOutlet UITextField *cityTF;
+@property (nonatomic, strong) IBOutlet UITextField *stateTF;
+@property (nonatomic, strong) IBOutlet UITextField *countryTF;
+@property (nonatomic, strong) IBOutlet UITextField *websiteTF;
+@property (nonatomic, strong) IBOutlet UINavigationBar *navBar;
+@property (nonatomic, strong) IBOutlet UISegmentedControl *uploadSeg;
+@property (nonatomic, strong) IBOutlet UIView *uploadingView;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *uploadingInd;
 
 - (void) save;
 - (void) cancel;

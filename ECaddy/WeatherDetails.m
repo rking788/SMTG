@@ -56,36 +56,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [navBar release];
-    [weatherPic release];
-    [courseDetailsLbl release];
-    [actIndicator release];
-    [WOEID release];
-    [favstarBtn release];
-    [errorView release];
-    [yahooWeatherImg release];
-    [windArrowImg release];
-    [tempLbl release];
-    [curText release];
-    [curWind release];
-    [sunriseLbl release];
-    [sunsetLbl release];
-    [currentView release];
-    [ywiView release];
-    [titleView release];
-    [todayText release];
-    [todayHigh release];
-    [todayLow release];
-    [tomText release];
-    [tomHigh release];
-    [tomLow release];
-    [todayView release];
-    [tomView release];
-    [backgroundImg release];
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -101,7 +71,7 @@
 {
     [super viewDidLoad];
     
-    self.navBar.topItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemCancel target:self action:@selector(cancel)] autorelease];
+    self.navBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemCancel target:self action:@selector(cancel)];
 
     // Set the borders on the view groups
     self.currentView.layer.borderColor = [UIColor colorWithRed:0 green:0.3 blue:0 alpha:1.0].CGColor;
@@ -207,19 +177,18 @@
 
 - (void) getWeatherInfo
 {
-    NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
+    @autoreleasepool {
     
     // Add the woeid to the URL
-    NSString* defTempUnits = [[NSUserDefaults standardUserDefaults] objectForKey: @"tempunits"];
-    unichar firstchar = [[defTempUnits lowercaseString] characterAtIndex: 0];
-    NSURL* url2 = [NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@&u=%C", self.WOEID, firstchar]];
-    NSString* str3 = [[NSString alloc] initWithContentsOfURL:url2 encoding:NSUTF8StringEncoding error:nil];
+        NSString* defTempUnits = [[NSUserDefaults standardUserDefaults] objectForKey: @"tempunits"];
+        unichar firstchar = [[defTempUnits lowercaseString] characterAtIndex: 0];
+        NSURL* url2 = [NSURL URLWithString:[NSString stringWithFormat:@"http://weather.yahooapis.com/forecastrss?w=%@&u=%C", self.WOEID, firstchar]];
+        NSString* str3 = [[NSString alloc] initWithContentsOfURL:url2 encoding:NSUTF8StringEncoding error:nil];
+        
+        [self setText:str3];
+        
     
-    [self setText:str3];
-    
-    [str3 release];
-    
-    [pool release];
+    }
     
     // Signal the main thread that we are done getting the weather
     [self performSelectorOnMainThread:@selector(setWeatherInfo) 
@@ -246,7 +215,7 @@
     }
     
     // Parse the XML to get the weather information
-    TBXML* tbxml = [[TBXML tbxmlWithXMLString: self.text] retain];
+    TBXML* tbxml = [TBXML tbxmlWithXMLString: self.text];
 
     TBXMLElement* CHANNEL = [TBXML childElementNamed: @"channel" parentElement:tbxml.rootXMLElement];
     TBXMLElement* UNITS = [TBXML childElementNamed: @"yweather:units" parentElement: CHANNEL];
@@ -271,7 +240,6 @@
     NSData *data = [NSData dataWithContentsOfURL: url];
     UIImage *img = [[UIImage alloc] initWithData: data];
     [self.weatherPic setImage: img];
-    [img release];
     img = nil;
     
     // Extract the other weaether info from the XML
@@ -331,7 +299,6 @@
     //NSString* tomDate = [TBXML valueOfAttributeNamed: @"date" forElement: TOMFORECAST];
     
     // Release the XML Parser
-    [tbxml release];
     tbxml = nil;
     
     // Set current weather information
@@ -366,14 +333,12 @@
 
     CGFloat rads = [windDirDegs floatValue] * 3.1416 / 180;
     windArrowImg.transform = CGAffineTransformMakeRotation(rads);
-    [f release];
     
     // Set the Yahoo weather image
     NSURL * ywimgurl = [NSURL URLWithString: [TBXML textForElement: YWIURL]];
     NSData *ywimgdata = [NSData dataWithContentsOfURL: ywimgurl];
     UIImage *ywimg = [[UIImage alloc] initWithData: ywimgdata];
     [self.yahooWeatherImg setImage: ywimg];
-    [ywimg release];
     ywimg = nil;
     
     // Stop the activity indicator

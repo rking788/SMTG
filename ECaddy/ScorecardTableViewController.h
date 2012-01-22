@@ -20,12 +20,12 @@
     Scorecard* actScorecard;
     Scorecard* selScorecard;
 }
-@property (nonatomic, retain) NSManagedObjectContext* manObjCon;
-@property (nonatomic, retain) NSMutableDictionary* courseNameDict;
+@property (nonatomic, strong) NSManagedObjectContext* manObjCon;
+@property (nonatomic, strong) NSMutableDictionary* courseNameDict;
 
 @property (nonatomic, assign, getter = isActives) BOOL actives;
-@property (nonatomic, retain) Scorecard* actScorecard;
-@property (nonatomic, retain) Scorecard* selScorecard;
+@property (nonatomic, strong) Scorecard* actScorecard;
+@property (nonatomic, strong) Scorecard* selScorecard;
 
 - (void) fillScorecards;
 - (Scorecard*) scorecardWithName: (NSString*) name AndDate: (NSDate*) date;

@@ -33,18 +33,18 @@ enum
     
     NSManagedObjectContext* manObjCon;
 }
-@property (nonatomic, retain) IBOutlet UITableView *tableV;
-@property (nonatomic, retain) IBOutlet UIView *titleView;
-@property (nonatomic, retain) IBOutlet UILabel *courseNameLbl;
-@property (nonatomic, retain) IBOutlet UIButton* favstarBtn;
-@property (nonatomic, retain) IBOutlet UIView *footView;
+@property (nonatomic, strong) IBOutlet UITableView *tableV;
+@property (nonatomic, strong) IBOutlet UIView *titleView;
+@property (nonatomic, strong) IBOutlet UILabel *courseNameLbl;
+@property (nonatomic, strong) IBOutlet UIButton* favstarBtn;
+@property (nonatomic, strong) IBOutlet UIView *footView;
 
-@property (nonatomic, retain) Course* courseObj;
+@property (nonatomic, strong) Course* courseObj;
 
 @property (nonatomic, assign) NSInteger numSects;
-@property (nonatomic, retain) NSString* addrStr;
+@property (nonatomic, strong) NSString* addrStr;
 
-@property (nonatomic, retain) NSManagedObjectContext* manObjCon;
+@property (nonatomic, strong) NSManagedObjectContext* manObjCon;
 
 - (IBAction) startRoundClicked:(id)sender;
 

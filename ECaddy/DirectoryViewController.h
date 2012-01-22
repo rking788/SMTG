@@ -28,26 +28,26 @@
     
     SMTGAppDelegate* appDel;
     
-    id<CourseSelectDelegate> courseSelectDelegate;
+    id<CourseSelectDelegate> __unsafe_unretained courseSelectDelegate;
    
     UITableView *theTable;
     
     // Property used to determine what field to pick in settings tab
     NSInteger settingsDetailType;
 }
-@property (nonatomic, retain) NSSet* stateSet;
-@property (nonatomic, retain) NSSet* countrySet;
-@property (nonatomic, retain) NSMutableArray* favoriteNames;
-@property (nonatomic, retain) NSMutableArray* favoriteLocs;
-@property (nonatomic, retain) NSDictionary* abbrsDict;
-@property (nonatomic, retain) NSDictionary* stateArrDict;
-@property (nonatomic, retain) NSManagedObjectContext* manObjCon;
+@property (nonatomic, strong) NSSet* stateSet;
+@property (nonatomic, strong) NSSet* countrySet;
+@property (nonatomic, strong) NSMutableArray* favoriteNames;
+@property (nonatomic, strong) NSMutableArray* favoriteLocs;
+@property (nonatomic, strong) NSDictionary* abbrsDict;
+@property (nonatomic, strong) NSDictionary* stateArrDict;
+@property (nonatomic, strong) NSManagedObjectContext* manObjCon;
 
-@property (nonatomic, retain) SMTGAppDelegate* appDel;
+@property (nonatomic, strong) SMTGAppDelegate* appDel;
 
-@property (nonatomic, assign) id<CourseSelectDelegate> courseSelectDelegate;
+@property (nonatomic, unsafe_unretained) id<CourseSelectDelegate> courseSelectDelegate;
 
-@property (nonatomic, retain) IBOutlet UITableView *theTable;
+@property (nonatomic, strong) IBOutlet UITableView *theTable;
 
 @property (nonatomic, assign, getter = isModal) BOOL modal;
 

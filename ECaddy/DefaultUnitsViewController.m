@@ -46,9 +46,9 @@
     [self.tableV setBackgroundColor: [UIColor clearColor]];
     
     // Add save and cancel buttons to the navigation bar
-    [navBar.topItem setRightBarButtonItem: [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target: self action: @selector(cancel)] autorelease]];
+    [navBar.topItem setRightBarButtonItem: [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target: self action: @selector(cancel)]];
     
-    [navBar.topItem setLeftBarButtonItem: [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target: self action: @selector(save)] autorelease]];
+    [navBar.topItem setLeftBarButtonItem: [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target: self action: @selector(save)]];
     
     self.defs = [NSUserDefaults standardUserDefaults];
     
@@ -166,7 +166,7 @@
     UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier: DefaultUnitsCellIdentifier];
     
     if(cell == nil){
-        cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleValue1 reuseIdentifier: DefaultUnitsCellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleValue1 reuseIdentifier: DefaultUnitsCellIdentifier];
     }
     
     UILabel* lbl = [cell textLabel];
@@ -188,7 +188,7 @@
 - (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     // Set the instructions to be the table view
-    UILabel* instLbl = [[[UILabel alloc] init] autorelease];
+    UILabel* instLbl = [[UILabel alloc] init];
     [instLbl setNumberOfLines: 0];
     [instLbl setText: @"Please select the default units that\nwill be used in the rest of the App."];
     [instLbl setTextColor: [UIColor whiteColor]];
@@ -268,12 +268,10 @@
     [doneButton addTarget:self action:@selector(dismissPickerView) forControlEvents:UIControlEventValueChanged];
     
     [self.actSheet addSubview: doneButton];
-    [doneButton release];
     
     [self.actSheet showInView: self.view.window];
     
     [self.actSheet setBounds:CGRectMake(0, 0, 320, 485)];
-    [self.actSheet autorelease];
 }
 
 - (void) dismissPickerView{
@@ -309,13 +307,4 @@
 
 }
 
-- (void)dealloc {
-    [tableV release];
-    [navBar release];
-    [unitsDict release];
-    [defs release];
-    [actSheet release];
-    [pickerOptsArr release];
-    [super dealloc];
-}
 @end

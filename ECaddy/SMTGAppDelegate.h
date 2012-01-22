@@ -20,24 +20,24 @@
     NSUserDefaults* defaultPrefs;
     NSString* lastUpdateStr;
     
-    Facebook* _FB;
+    Facebook* __unsafe_unretained _FB;
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, strong) IBOutlet UIWindow *window;
 
-@property (nonatomic, retain) IBOutlet UITabBarController *tabBarController;
+@property (nonatomic, strong) IBOutlet UITabBarController *tabBarController;
 
 // Core Data related properties
-@property (nonatomic, retain, readonly) NSManagedObjectContext* managedObjectContext;
-@property (nonatomic, retain, readonly) NSManagedObjectModel* managedObjectModel;
-@property (nonatomic, retain, readonly) NSPersistentStoreCoordinator* persistentStoreCoordinator;
+@property (nonatomic, strong, readonly) NSManagedObjectContext* managedObjectContext;
+@property (nonatomic, strong, readonly) NSManagedObjectModel* managedObjectModel;
+@property (nonatomic, strong, readonly) NSPersistentStoreCoordinator* persistentStoreCoordinator;
 
 // Properties related to the current round being played and the current scorecard for the round
-@property (nonatomic, retain) Course* curCourse;
-@property (nonatomic, retain) Scorecard* curScorecard;
+@property (nonatomic, strong) Course* curCourse;
+@property (nonatomic, strong) Scorecard* curScorecard;
 
-@property (nonatomic, retain) NSUserDefaults* defaultPrefs;
-@property (nonatomic, retain) NSString* lastUpdateStr;
+@property (nonatomic, strong) NSUserDefaults* defaultPrefs;
+@property (nonatomic, strong) NSString* lastUpdateStr;
 
 @property (readonly) Facebook* FB;
 

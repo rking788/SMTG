@@ -56,7 +56,7 @@
     // If the view controller is presented modally we want to provide a 
     // cancel button or done button in the navigation bar
     if([self isModal]){
-        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemCancel target:self action:@selector(modalCancel:)] autorelease];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemCancel target:self action:@selector(modalCancel:)];
     }
     
     // Check for a valid default state and possibly just skip to CourseSelectVC
@@ -116,18 +116,6 @@
     self.appDel = nil;
 }
 
-- (void)dealloc
-{
-    [stateSet release];
-    [countrySet release];
-    [abbrsDict release];
-    [stateArrDict release];
-    [favoriteNames release];
-    [favoriteLocs release];
-    [theTable release];
-    [appDel release];
-    [super dealloc];
-}
 
 - (void) fillFavorites
 {
@@ -172,10 +160,6 @@
         NSLog(@"Error fetching lots");
     }
     
-    [sortDescript release];
-    [sdArr release];
-    [propArr release];
-    [fetchrequest release];   
 }
 
 - (void) fillStatesCountries
@@ -215,7 +199,7 @@
             else if(![cSet member: country]) {
                 tmpArr = [[NSMutableArray alloc] initWithObjects: state, nil];
                 [saDict setObject: tmpArr forKey: country];
-                [tmpArr release]; tmpArr = nil;
+                 tmpArr = nil;
             }
             
             [cSet addObject: country];
@@ -226,18 +210,15 @@
         self.countrySet = [[NSSet alloc] initWithSet: cSet];
         self.stateArrDict = [[NSDictionary alloc] initWithDictionary: saDict];
         
-        [sSet release]; sSet = nil;
-        [cSet release]; cSet = nil;
-        [saDict release]; saDict = nil;
+         sSet = nil;
+         cSet = nil;
+         saDict = nil;
     }
     else {
         // Deal with error.
         NSLog(@"Error fetching lots");
     }
     
-    [fetchrequest release];
-    [sdArr release];
-    [sortDescript release];
 }
 
 #pragma mark UITableViewDataSource Protocol Methods
@@ -315,7 +296,7 @@
 
 - (UIView*) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UILabel* lbl = [[[UILabel alloc] init] autorelease];
+    UILabel* lbl = [[UILabel alloc] init];
     
     if([self tableView: tableView titleForHeaderInSection: section] == nil)
         return nil;
@@ -328,7 +309,7 @@
     lbl.shadowColor = [UIColor blackColor];
     lbl.shadowOffset = CGSizeMake(0.0, 1.0);
     
-    UIView* view = [[[UIView alloc] init] autorelease];
+    UIView* view = [[UIView alloc] init];
     [view addSubview: (UIView*) lbl];
     
     return view;
@@ -422,7 +403,6 @@
             
             [cdvc setCourseObj: courseObject];
             [self.navigationController pushViewController:cdvc animated:YES];
-            [cdvc release];
         }
         else if([tabItemTitle isEqualToString: @"Weather"]){
             WeatherDetails* weatherView = [[WeatherDetails alloc] initWithNibName:@"WeatherDetails" bundle:nil];
@@ -437,7 +417,6 @@
             // Set the transition mode and display the weather detail view modally
             [weatherView setModalTransitionStyle: UIModalTransitionStyleFlipHorizontal];
             [self presentModalViewController:weatherView animated:YES];
-            [weatherView release];
         }
         else if([tabItemTitle isEqualToString: @"Settings"]){
             // Notify the settings that a course was selected
@@ -498,7 +477,7 @@
     if(isNewCourseCell){
         cell = [tableView dequeueReusableCellWithIdentifier: NewCourseCellIdentifier];
         if(!cell){
-            cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: NewCourseCellIdentifier] autorelease];
+            cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: NewCourseCellIdentifier];
         }
         UILabel* lbl = [cell textLabel];
         
@@ -508,7 +487,7 @@
     else if(isActCell || isFavCell){
         cell = [tableView dequeueReusableCellWithIdentifier: ActiveFavsCellIdentifier];
         if(!cell)
-            cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier: ActiveFavsCellIdentifier] autorelease];
+            cell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier: ActiveFavsCellIdentifier];
         
         UILabel* lbl = [cell textLabel];   
         UILabel* subLbl = [cell detailTextLabel];
@@ -525,7 +504,7 @@
     else{
         cell = [tableView dequeueReusableCellWithIdentifier:StateCellIdentifier];
         if (cell == nil) {
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:StateCellIdentifier] autorelease];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:StateCellIdentifier];
         }
 
         UILabel* lbl = [cell textLabel];
@@ -582,7 +561,6 @@
     
     [self.navigationController pushViewController:csvc animated: animated];
 
-    [csvc release];
 }
 
 - (void) courseCreateModal
@@ -590,7 +568,6 @@
     CustomCourseViewController* ccvc = [[CustomCourseViewController alloc] initWithNibName: @"CustomCourseView" bundle: nil];
     
     [self presentModalViewController: ccvc animated: YES];
-    [ccvc release];
 }
 
 @end

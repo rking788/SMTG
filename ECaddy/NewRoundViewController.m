@@ -31,16 +31,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    [curCourse release];
-    [curScorecard release];
-    [tableV release];
-    [liteMessage release];
-    [upgradeBtn release];
-    [liteFooterView release];
-    [super dealloc];
-}
 
 - (void)didReceiveMemoryWarning
 {
@@ -79,7 +69,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    UIView* footView = [[[UIView alloc] init] autorelease];
+    UIView* footView = [[UIView alloc] init];
     //create the button
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     
@@ -103,7 +93,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return [[[UIView alloc] init] autorelease];
+    return [[UIView alloc] init];
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -145,7 +135,7 @@
         
         self.curCourse = self.curScorecard.course;
         
-        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Resume" style: UIBarButtonItemStyleBordered target:self action:@selector(resumeRound)] autorelease];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Resume" style: UIBarButtonItemStyleBordered target:self action:@selector(resumeRound)];
     }
 }
 
@@ -191,7 +181,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     
     // Get references to the text labels
@@ -282,7 +272,6 @@
         // Display the directory view controller with a UINavigationController as it's parent
         [uinc setModalTransitionStyle: UIModalTransitionStyleCoverVertical];
         [self presentModalViewController:uinc animated:YES];
-        [uinc release];
         
         // Don't think we need to release this anymore since we release the navcontroller
         // [dvc release];
@@ -293,7 +282,7 @@
 }
 
 - (void) showPickerView{
-    self.actSheet = [[[UIActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil] autorelease]; 
+    self.actSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:nil cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil]; 
     
     UILabel* numPlayers = [[self.tableV cellForRowAtIndexPath: [NSIndexPath indexPathForRow:kNumPlayers inSection:0]] detailTextLabel];
     NSInteger nCur = [[numPlayers text] integerValue];
@@ -322,7 +311,6 @@
     [doneButton addTarget:self action:@selector(dismissPickerView) forControlEvents:UIControlEventValueChanged];
     
     [self.actSheet addSubview: doneButton];
-    [doneButton release];
     
     [self.actSheet showInView: self.view.window];
     
@@ -390,7 +378,7 @@
     
     // If there is a current scorecard then display an alert view
     if(self.curScorecard){
-        UIAlertView* av = [[[UIAlertView alloc] initWithTitle: @"Warning" message: @"You are about to begin a new round with a round already active. The active round will be overwritten." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Continue", nil] autorelease];
+        UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"Warning" message: @"You are about to begin a new round with a round already active. The active round will be overwritten." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Continue", nil];
         
         [av show];
         return;
@@ -423,7 +411,6 @@
 
     [self gotoScoreTrackerWithSC: newScorecard];
     
-    [numFormat release];
 }
 
 - (void) gotoScoreTrackerWithSC: (Scorecard*) sc
@@ -435,7 +422,6 @@
     
     [self.navigationController pushViewController:stvc animated:YES];
     
-    [stvc release];
 }
 
 - (void) resumeRound
@@ -470,7 +456,6 @@
     }
     
     if(!predicate){
-        [fetchrequest release];
         return nil;
     }
     
@@ -491,9 +476,6 @@
         NSLog(@"Error fetching lots");
     }
     
-    [sortDescript release];
-    [sdArr release];
-    [fetchrequest release];
 
     return retCourse;
 }
