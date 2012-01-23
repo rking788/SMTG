@@ -18,9 +18,13 @@
 
 @property (nonatomic, strong) NSNumber* active;
 @property (nonatomic, strong) NSDate * dateplayed;
-@property (nonatomic, strong) NSDictionary* scores;
+@property (nonatomic, strong) id scores;
 @property (nonatomic, strong) NSString* playernames;
 @property (nonatomic, strong) NSNumber* numplayers;
 @property (nonatomic, strong) Course * course;
+
+- (NSDictionary*) scoreDictForSC;
+- (void) updateScores: (NSDictionary*) scoreDict;
+
 
 @end

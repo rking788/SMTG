@@ -15,6 +15,7 @@
 #import "SettingsViewController.h"
 #import "SettingsDetailsViewController.h"
 #import "CustomCourseViewController.h"
+#import "constants.h"
 
 @implementation DirectoryViewController
 
@@ -39,7 +40,8 @@
     self.manObjCon = [(SMTGAppDelegate*)[[UIApplication sharedApplication] delegate] managedObjectContext];
     
     // Initialize abbreviation dictionary
-    NSString* stateAbbrsPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"stateabbrs.txt"];
+    NSString* stateAbbrsPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent: 
+                                ABBRSFILENAME];
     self.abbrsDict = [[NSDictionary alloc] initWithContentsOfFile: stateAbbrsPath];
     
     // Allocate the favorites arrays
@@ -76,17 +78,6 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    BOOL ret = NO;
-    
-    // Return YES for supported orientations
-    if(interfaceOrientation == UIInterfaceOrientationLandscapeLeft){
-        ret = YES;
-    }
-    else if(interfaceOrientation == UIInterfaceOrientationPortrait){
-        ret = YES;
-    }
-    
-    //return ret;
     return YES;
 }
 

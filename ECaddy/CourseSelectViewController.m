@@ -487,7 +487,6 @@
         return -1;
 
     if([title isEqualToString: @"{search}"]){
-        retInt = 0;
         [tableView setContentOffset:CGPointMake(0, 0) animated:NO];
         return -1;
     }

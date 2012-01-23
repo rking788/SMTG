@@ -228,7 +228,7 @@
     [newCourse setNumholes: holesNum];
     
     // Save the newly added golf course in the managed object context
-    //[[SMTGAppDelegate sharedAppDelegate] saveContext];
+    [[SMTGAppDelegate sharedAppDelegate] saveContext];
     
     // Try uploading the course information to the server
     if([self.uploadSeg selectedSegmentIndex] == 0){

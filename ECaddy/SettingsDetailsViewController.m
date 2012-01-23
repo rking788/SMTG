@@ -9,6 +9,7 @@
 #import "SettingsDetailsViewController.h"
 #import "SettingsViewController.h"
 #import "SMTGAppDelegate.h"
+#import "constants.h"
 
 @implementation SettingsDetailsViewController
 
@@ -67,7 +68,7 @@
     
         [visTable setBackgroundColor: [UIColor clearColor]];
         
-        NSString* stateAbbrsPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"stateabbrs.txt"];
+        NSString* stateAbbrsPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent: ABBRSFILENAME];
         self.abbrsDict = [[NSDictionary alloc] initWithContentsOfFile: stateAbbrsPath];
         self.manObjCon = [[SMTGAppDelegate sharedAppDelegate] managedObjectContext];
         

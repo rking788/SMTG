@@ -10,6 +10,7 @@
 		0F0A773114B55B0B0069E04C /* greenicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 96FA1A6313E771F4001C9163 /* greenicon.png */; };
 		0F0A773214B55B140069E04C /* greenicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 96FA1A6513E77206001C9163 /* greenicon@2x.png */; };
 		0F370AE714AAC78000847B54 /* SMTG.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 96C090AF14610559003355F8 /* SMTG.sqlite */; };
+		0F56923014CCDF8800A7F4D2 /* SMTGLite-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0F56922F14CCDF8800A7F4D2 /* SMTGLite-Info.plist */; };
 		9605CC5713E8DFAB004128D9 /* maptabicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9605CC5613E8DFAB004128D9 /* maptabicon.png */; };
 		9605CC5913E8E046004128D9 /* maptabicon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9605CC5813E8E046004128D9 /* maptabicon@2x.png */; };
 		9605CC5B13E8EE9A004128D9 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 9605CC5A13E8EE9A004128D9 /* background.png */; };
@@ -235,9 +236,9 @@
 		96DF438213E0ECB6009D568B /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437213E0ECB6009D568B /* SBJsonBase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		96DF438313E0ECB6009D568B /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437413E0ECB6009D568B /* SBJsonParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		96DF438413E0ECB6009D568B /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 96DF437613E0ECB6009D568B /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		96DF7D7B1409E2BA005BA340 /* stateabbrs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 96DF7D7A1409E2BA005BA340 /* stateabbrs.txt */; };
-		96DF7D7C1409E2BA005BA340 /* stateabbrs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 96DF7D7A1409E2BA005BA340 /* stateabbrs.txt */; };
-		96DF7D7D1409E2BA005BA340 /* stateabbrs.txt in Resources */ = {isa = PBXBuildFile; fileRef = 96DF7D7A1409E2BA005BA340 /* stateabbrs.txt */; };
+		96DF7D7B1409E2BA005BA340 /* stateabbrs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96DF7D7A1409E2BA005BA340 /* stateabbrs.plist */; };
+		96DF7D7C1409E2BA005BA340 /* stateabbrs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96DF7D7A1409E2BA005BA340 /* stateabbrs.plist */; };
+		96DF7D7D1409E2BA005BA340 /* stateabbrs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 96DF7D7A1409E2BA005BA340 /* stateabbrs.plist */; };
 		96EE27C313ECEE4F00170A52 /* locationenabled.png in Resources */ = {isa = PBXBuildFile; fileRef = 96EE27C213ECEE4F00170A52 /* locationenabled.png */; };
 		96F2B38113EF257A005BE308 /* MapErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F2B37F13EF257A005BE308 /* MapErrorViewController.m */; };
 		96F2B38213EF257A005BE308 /* MapErrorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96F2B38013EF257A005BE308 /* MapErrorView.xib */; };
@@ -293,6 +294,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F56922E14CCC7B000A7F4D2 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
+		0F56922F14CCDF8800A7F4D2 /* SMTGLite-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SMTGLite-Info.plist"; sourceTree = "<group>"; };
 		9605CC5613E8DFAB004128D9 /* maptabicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = maptabicon.png; sourceTree = "<group>"; };
 		9605CC5813E8E046004128D9 /* maptabicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "maptabicon@2x.png"; sourceTree = "<group>"; };
 		9605CC5A13E8EE9A004128D9 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
@@ -322,7 +325,6 @@
 		96A86B20142656A200F9ABD0 /* DefaultUnitsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultUnitsViewController.m; sourceTree = "<group>"; };
 		96A86B21142656A200F9ABD0 /* DefaultUnitsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultUnitsView.xib; sourceTree = "<group>"; };
 		96AC674A13F00A9200D614E0 /* SMTG Lite.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SMTG Lite.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		96AC674C13F00A9200D614E0 /* SMTGLite-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "SMTGLite-Info.plist"; path = "/Users/rking/dev/ios/ECaddy/SMTGLite-Info.plist"; sourceTree = "<absolute>"; };
 		96AD85A213FC151B0018B03D /* SMTG Lite-iPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SMTG Lite-iPad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96AD85A713FC151C0018B03D /* SMTG Lite copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "SMTG Lite copy-Info.plist"; path = "/Users/rking/dev/ios/ECaddy/SMTG Lite copy-Info.plist"; sourceTree = "<absolute>"; };
 		96AD85A913FC15290018B03D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "Resources-iPad/ECaddy/en.lproj/MainWindow.xib"; sourceTree = "<group>"; };
@@ -380,7 +382,7 @@
 		96DF437413E0ECB6009D568B /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
 		96DF437513E0ECB6009D568B /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		96DF437613E0ECB6009D568B /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
-		96DF7D7A1409E2BA005BA340 /* stateabbrs.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stateabbrs.txt; sourceTree = "<group>"; };
+		96DF7D7A1409E2BA005BA340 /* stateabbrs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = stateabbrs.plist; sourceTree = "<group>"; };
 		96EE27C213ECEE4F00170A52 /* locationenabled.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationenabled.png; sourceTree = "<group>"; };
 		96F2B37E13EF257A005BE308 /* MapErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapErrorViewController.h; sourceTree = "<group>"; };
 		96F2B37F13EF257A005BE308 /* MapErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapErrorViewController.m; sourceTree = "<group>"; };
@@ -732,13 +734,14 @@
 		AE85D7491368E34400CDA534 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				96DF7D7A1409E2BA005BA340 /* stateabbrs.txt */,
+				96DF7D7A1409E2BA005BA340 /* stateabbrs.plist */,
 				AE85D74A1368E34400CDA534 /* SMTG-Info.plist */,
-				96AC674C13F00A9200D614E0 /* SMTGLite-Info.plist */,
+				0F56922F14CCDF8800A7F4D2 /* SMTGLite-Info.plist */,
 				AE85D74B1368E34400CDA534 /* InfoPlist.strings */,
 				AE85D74E1368E34400CDA534 /* SMTG-Prefix.pch */,
 				AE85D74F1368E34400CDA534 /* main.m */,
 				96CE92BB144685E600AA0EAA /* libz.dylib */,
+				0F56922E14CCC7B000A7F4D2 /* constants.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -891,7 +894,7 @@
 				96AC674613F00A9200D614E0 /* windarrow.png in Resources */,
 				96A3AA2913F1CCFD001D5BAC /* greenicon-lite.png in Resources */,
 				96A3AA2B13F1CD0D001D5BAC /* greenicon-lite@2x.png in Resources */,
-				96DF7D7C1409E2BA005BA340 /* stateabbrs.txt in Resources */,
+				96DF7D7C1409E2BA005BA340 /* stateabbrs.plist in Resources */,
 				96A86B25142656A200F9ABD0 /* DefaultUnitsView.xib in Resources */,
 				961FF80D14577D550015689A /* golftee_mapbtn.png in Resources */,
 				961FF81014577F530015689A /* blank_mapbtn.png in Resources */,
@@ -899,6 +902,7 @@
 				961FF819145785E90015689A /* success_mapbtn.png in Resources */,
 				961FF97D145789A30015689A /* failure_mapbtn.png in Resources */,
 				0F370AE714AAC78000847B54 /* SMTG.sqlite in Resources */,
+				0F56923014CCDF8800A7F4D2 /* SMTGLite-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -952,7 +956,7 @@
 				96AD85C613FC15290018B03D /* ScorecardTableView.xib in Resources */,
 				96AD85C713FC15290018B03D /* CustomCourseView.xib in Resources */,
 				96AD85C813FC15290018B03D /* MapErrorView.xib in Resources */,
-				96DF7D7D1409E2BA005BA340 /* stateabbrs.txt in Resources */,
+				96DF7D7D1409E2BA005BA340 /* stateabbrs.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1002,7 +1006,7 @@
 				96D021D813EF207400BC0A4F /* curlocbtn.png in Resources */,
 				96F2B38213EF257A005BE308 /* MapErrorView.xib in Resources */,
 				961BA18F13EF760C0046B850 /* windarrow.png in Resources */,
-				96DF7D7B1409E2BA005BA340 /* stateabbrs.txt in Resources */,
+				96DF7D7B1409E2BA005BA340 /* stateabbrs.plist in Resources */,
 				96A86B24142656A200F9ABD0 /* DefaultUnitsView.xib in Resources */,
 				961FF80C14577D550015689A /* golftee_mapbtn.png in Resources */,
 				961FF80F14577F530015689A /* blank_mapbtn.png in Resources */,

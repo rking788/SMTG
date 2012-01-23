@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AU</key>
+	<array>
+		<string>Australia</string>
+		<dict>
+			<key>VIC</key>
+			<string>Victoria</string>
+			<key>WA</key>
+			<string>Western Australia</string>
+			<key>QLD</key>
+			<string>Queensland</string>
+			<key>NT</key>
+			<string>Northern Territory</string>
+			<key>SA</key>
+			<string>South Australia</string>
+			<key>NSW</key>
+			<string>New South Wales</string>
+			<key>TAS</key>
+			<string>Tasmania</string>
+		</dict>
+	</array>
+	<key>CAN</key>
+	<array>
+		<string>Canada</string>
+		<dict>
+			<key>AB</key>
+			<string>Alberta</string>
+			<key>BC</key>
+			<string>British Columbia</string>
+			<key>MB</key>
+			<string>Manitoba</string>
+			<key>NB</key>
+			<string>New Brunswick</string>
+			<key>NL</key>
+			<string>Newfoundland and Labrador</string>
+			<key>NS</key>
+			<string>Nova Scotia</string>
+			<key>NT</key>
+			<string>Northwest Territories</string>
+			<key>NU</key>
+			<string>Nunavut</string>
+			<key>ON</key>
+			<string>Ontario</string>
+			<key>PE</key>
+			<string>Prince Edward Island</string>
+			<key>QC</key>
+			<string>Quebec</string>
+			<key>SK</key>
+			<string>Saskatchewan</string>
+			<key>YT</key>
+			<string>Yukon</string>
+		</dict>
+	</array>
+    <key>DE</key>
+    <array>
+        <string>Germany</string>
+        <dict>
+            <key>BY</key>
+            <string>Bayern</string>
+            <key>NW</key>
+            <string>North Rhine-Westphalia</string>
+        </dict>
+    </array>
+    <key>IN</key>
+    <array>
+        <string>India</string>
+        <dict>
+            <key>ND</key>
+            <string>New Delhi</string>
+        </dict>
+    </array>
+    <key>IE</key>
+    <array>
+        <string>Ireland</string>
+        <dict>
+            <key>COR</key>
+            <string>Co. Cork</string>
+        </dict>
+    </array>
+    <key>IT</key>
+    <array>
+        <string>Italy</string>
+        <dict>
+            <key>PD</key>
+            <string>Padova</string>
+            <key>SIC</key>
+            <string>Sicily</string>
+            <key>VE</key>
+            <string>Venezia</string>
+        </dict>
+    </array>
+    <key>FR</key>
+    <array>
+        <string>France</string>
+        <dict>
+            <key>IDF</key>
+            <string>Ile de France</string>
+        </dict>
+    </array>
+    <key>NL</key>
+    <array>
+        <string>Netherlands</string>
+        <dict>
+            <key>HEU</key>
+            <string>Heusden</string>
+        </dict>
+    </array>
+    <key>NZ</key>
+    <array>
+        <string>New Zealand</string>
+        <dict>
+            <key>AKLD</key>
+            <string>Auckland</string>
+            <key>CAN</key>
+            <string>Canterbury</string>
+        </dict>
+    </array>
+    <key>ES</key>
+    <array>
+        <string>Spain</string>
+        <dict>
+            <key>GIR</key>
+            <string>Girona</string>
+        </dict>
+    </array>
+	<key>UK</key>
+	<array>
+		<string>United Kingdom</string>
+		<dict>
+            <key>DEN</key>
+            <string>Denbighshire</string>
+            <key>ES</key>
+            <string>East Sussex</string>
+			<key>GL</key>
+			<string>Greater London</string>
+            <key>GSY</key>
+            <string>Guernsey</string>
+            <key>HAM</key>
+            <string>Hampshire</string>
+            <key>KEN</key>
+            <string>Kent</string>
+            <key>LANCS</key>
+            <string>Lancashire</string>
+            <key>SOM</key>
+            <string>Somerset</string>
+            <key>SRY</key>
+            <string>Surrey</string>
+            <key>STN</key>
+            <string>St Neots</string>
+		</dict>
+	</array>
+	<key>USA</key>
+	<array>
+		<string>USA</string>
+		<dict>
+			<key>AK</key>
+			<string>Alaska</string>
+			<key>AL</key>
+			<string>Alabama</string>
+			<key>AR</key>
+			<string>Arkansas</string>
+			<key>AS</key>
+			<string>American Samoa</string>
+			<key>AZ</key>
+			<string>Arizona</string>
+			<key>CA</key>
+			<string>California</string>
+			<key>CO</key>
+			<string>Colorado</string>
+			<key>CT</key>
+			<string>Connecticut</string>
+			<key>DC</key>
+			<string>District of Columbia</string>
+			<key>DE</key>
+			<string>Deleware</string>
+			<key>FL</key>
+			<string>Florida</string>
+			<key>FM</key>
+			<string>Federate States of Micronesia</string>
+			<key>GA</key>
+			<string>Georgia</string>
+			<key>GU</key>
+			<string>Guam</string>
+			<key>HI</key>
+			<string>Hawaii</string>
+			<key>IA</key>
+			<string>Iowa</string>
+			<key>ID</key>
+			<string>Idaho</string>
+			<key>IL</key>
+			<string>Illinois</string>
+			<key>IN</key>
+			<string>Indiana</string>
+			<key>KS</key>
+			<string>Kansas</string>
+			<key>KY</key>
+			<string>Kentucky</string>
+			<key>LA</key>
+			<string>Louisiana</string>
+			<key>MA</key>
+			<string>Massachusetts</string>
+			<key>MD</key>
+			<string>Maryland</string>
+			<key>ME</key>
+			<string>Maine</string>
+			<key>MH</key>
+			<string>Marshall Islands</string>
+			<key>MI</key>
+			<string>Michigan</string>
+			<key>MN</key>
+			<string>Minnesota</string>
+			<key>MO</key>
+			<string>Missouri</string>
+			<key>MP</key>
+			<string>Northern Mariana Islands</string>
+			<key>MS</key>
+			<string>Mississippi</string>
+			<key>MT</key>
+			<string>Montana</string>
+			<key>NC</key>
+			<string>North Carolina</string>
+			<key>ND</key>
+			<string>North Dakota</string>
+			<key>NE</key>
+			<string>Nebraska</string>
+			<key>NH</key>
+			<string>New Hampshire</string>
+			<key>NJ</key>
+			<string>New Jersey</string>		
+			<key>NM</key>
+			<string>New Mexico</string>
+			<key>NV</key>
+			<string>Nevada</string>
+			<key>NY</key>
+			<string>New York</string>
+			<key>OH</key>
+			<string>Ohio</string>
+			<key>OK</key>
+			<string>Oklahoma</string>
+			<key>OR</key>
+			<string>Oregon</string>
+			<key>PA</key>
+			<string>Pennsylvania</string>
+			<key>PR</key>
+			<string>Puerto Rico</string>
+			<key>PW</key>
+			<string>Palau</string>
+			<key>RI</key>
+			<string>Rhode Island</string>
+			<key>SC</key>
+			<string>South Carolina</string>
+			<key>SD</key>
+			<string>South Dakota</string>
+			<key>TN</key>
+			<string>Tennessee</string>
+			<key>TX</key>
+			<string>Texas</string>
+			<key>UT</key>
+			<string>Utah</string>
+			<key>VA</key>
+			<string>Virginia</string>
+			<key>VI</key>
+			<string>Virgin Islands</string>
+			<key>VT</key>
+			<string>Vermont</string>
+			<key>WA</key>
+			<string>Washington</string>
+			<key>WI</key>
+			<string>Wisconsin</string>
+			<key>WV</key>
+			<string>West Virginia</string>
+			<key>WY</key>
+			<string>Wyoming</string>
+		</dict>
+	</array>
+</dict>
+</plist>

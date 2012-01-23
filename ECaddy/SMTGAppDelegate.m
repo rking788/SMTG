@@ -9,11 +9,16 @@
 #import "SMTGAppDelegate.h"
 #import "DirectoryViewController.h"
 #import "Course.h"
+#import "constants.h"
 
 #pragma mark - TODO APPWIDE: Provide better support for different device orientations
 
+#define DBINIT  0
+
 // Include this to initliaze the database
-//#import "dbinit.h"
+#if DBINIT
+#import "dbinit.h"
+#endif
 
 @implementation SMTGAppDelegate
 
@@ -27,9 +32,6 @@
 @synthesize defaultPrefs;
 @synthesize lastUpdateStr;
 
-// Constant for the database file name
-NSString* const DBFILENAME = @"SMTG.sqlite";
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
@@ -41,11 +43,13 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
     [self loadDefaultDB];
     
     // Uncomment this to do database initialization
-    //dbinit* dbInit = [[dbinit alloc] init];
-    //[dbInit insertWOEIDS];
-    //dbInit.manObjCon = [self managedObjectContext];
-    //[dbInit fillDB];
-    //[dbInit release];
+#if DBINIT
+    dbinit* dbInit = [[dbinit alloc] init];
+    [dbInit insertWOEIDS];
+    dbInit.manObjCon = [self managedObjectContext];
+    [dbInit fillDB];
+    [dbInit release];
+#endif
     
     self.curCourse = nil;
     self.curScorecard = nil;
@@ -259,7 +263,7 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
 - (void) saveContext
 {
     NSError* err = nil;
-    
+     
     if(![self.managedObjectContext save:&err]){
         // Handle the error here
         NSLog(@"Failed to save the managedObjectContext");
@@ -295,7 +299,6 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
         NSLog(@"Error fetching lots");
     }
     
-    
     if(self.curScorecard)
         self.curCourse = self.curScorecard.course;
     
@@ -308,10 +311,10 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
         return ;
     }
     
-    //NSDictionary* newScores = [[NSDictionary alloc] initWithObjects: [sc allValues] forKeys: [sc allKeys]];
     NSDictionary* newScores = [NSDictionary dictionaryWithObjects: [sc allValues] forKeys: [sc allKeys]];
-    [self.curScorecard setScores: newScores];
-
+    
+    [self.curScorecard updateScores: newScores];
+    
     [self saveContext];
 }
 
@@ -333,7 +336,7 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
         NSError* err = nil;
         
         // Add the course information into the POST request content
-        NSURL* url = [NSURL URLWithString:@"http://mainelyapps.com/SMTG/FetchCourseUpdates.php"];
+        NSURL* url = [NSURL URLWithString: FETCHUPDATES_URLSTR];
         NSString* content = [NSString stringWithFormat: @"op=check&date=%@", self.lastUpdateStr];
         
         NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL: url];
@@ -347,6 +350,20 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
         
         // Check if there were any new courses or not
         if(![retStr isEqualToString: @"0\n"] && (!([retStr length] == 0))){
+            
+            // Need to make sure the new abbreviations file is downloaded before getting the new courses
+            NSError* error = nil;
+            NSURL* abbrsURL = [NSURL URLWithString: REMOTESTATEABBRS_URLSTR];
+            NSString* abbrsFileContents = [NSString stringWithContentsOfURL: abbrsURL
+                                                    encoding: NSUTF8StringEncoding
+                                                                      error: &error];
+            
+            if ((abbrsFileContents != nil) && ([abbrsFileContents length] != 0)){
+                NSString* destPathStr = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent: ABBRSFILENAME];
+                [abbrsFileContents writeToFile: destPathStr atomically: YES encoding: NSUTF8StringEncoding error: &error ];
+            }
+            
+            // Ask if they want to download the course updates
             NSString* message = [NSString stringWithFormat: @"New information for %@ courses is available. Update Now?", retStr];
             UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"New Course Data" message: message delegate:self cancelButtonTitle:@"No" otherButtonTitles: @"Yes", nil];
             
@@ -373,7 +390,7 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
         NSError* err = nil;
         
         // Add the course information into the POST request content
-        NSURL* url = [NSURL URLWithString:@"http://mainelyapps.com/SMTG/FetchCourseUpdates.php"];
+        NSURL* url = [NSURL URLWithString: FETCHUPDATES_URLSTR];
         NSString* content = [NSString stringWithFormat: @"op=download&date=%@", self.lastUpdateStr];
         
         NSMutableURLRequest* request = [[NSMutableURLRequest alloc] initWithURL: url];
@@ -393,7 +410,6 @@ NSString* const DBFILENAME = @"SMTG.sqlite";
         // Get an array of the new courses
         NSArray* newCoursesArr = [retStr componentsSeparatedByString: @"\n"];
         NSCharacterSet* badChars = [NSCharacterSet characterSetWithCharactersInString: @"*"];
-        
         
         // The course lines are in the form
         // courseName;address;phoneNumber;website;woeid;state;country;numHoles;mensPars;womensPars;teeCoords;greenCoords;\n

@@ -125,8 +125,6 @@
     
     if(del.curScorecard){
         self.curScorecard = del.curScorecard;
-        NSLog(@"Current Scores: %@", self.curScorecard.scores);
-        NSLog(@"Current Scores from delegate: %@", del.curScorecard.scores);
         self.curCourse = del.curScorecard.course;
     }
     

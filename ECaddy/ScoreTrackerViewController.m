@@ -160,7 +160,7 @@ static NSString* kAppId = @"142876775786876";
     [super viewWillAppear: animated];
     // Load the players scores from the current scorecard object
     
-    NSMutableDictionary* scoresdict = [self.scorecard.scores mutableCopy];
+    NSMutableDictionary* scoresdict = [[self.scorecard scoreDictForSC] mutableCopy];//[self.scorecard.scores mutableCopy];
     if(scoresdict){
         [self setScorecardDict: scoresdict];
         [self.scoreHeaderView setPlayers: [self.scorecardDict allKeys]];
