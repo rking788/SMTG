@@ -54,102 +54,175 @@
 			<string>Yukon</string>
 		</dict>
 	</array>
-    <key>DE</key>
+	<key>DE</key>
+	<array>
+		<string>Germany</string>
+		<dict>
+			<key>HH</key>
+			<string>Hamburg</string>
+			<key>BY</key>
+			<string>Bayern</string>
+			<key>NW</key>
+			<string>North Rhine-Westphalia</string>
+            <key>HE</key>
+            <string>Hesse</string>
+		</dict>
+	</array>
+	<key>DK</key>
+	<array>
+		<string>Denmark</string>
+		<dict>
+			<key>4000</key>
+			<string>4000</string>
+		</dict>
+	</array>
+    <key>ENG</key>
+	<array>
+		<string>England</string>
+		<dict>
+			<key>YKS</key>
+			<string>Yorkshire</string>
+            <key>CHES</key>
+            <string>Cheshire</string>
+        </dict>
+	</array>
+
+	<key>IN</key>
+	<array>
+		<string>India</string>
+		<dict>
+			<key>ND</key>
+			<string>New Delhi</string>
+		</dict>
+	</array>
+	<key>IE</key>
+	<array>
+		<string>Ireland</string>
+		<dict>
+			<key>COD</key>
+			<string>Co. Dublin</string>
+			<key>COR</key>
+			<string>Co. Cork</string>
+		</dict>
+	</array>
+	<key>IT</key>
+	<array>
+		<string>Italy</string>
+		<dict>
+            <key>AL</key>
+            <string>Alessandria</string>
+            <key>LZ</key>
+            <string>Lazio</string>
+			<key>TU</key>
+			<string>Turin</string>
+			<key>PD</key>
+			<string>Padova</string>
+			<key>SIC</key>
+			<string>Sicily</string>
+			<key>VE</key>
+			<string>Venezia</string>
+		</dict>
+	</array>
+	<key>FR</key>
+	<array>
+		<string>France</string>
+		<dict>
+			<key>IDF</key>
+			<string>Ile de France</string>
+            <key>CM</key>
+            <string>Charente Maritime</string>
+		</dict>
+	</array>
+    <key>MY</key>
     <array>
-        <string>Germany</string>
+        <string>Malaysia</string>
         <dict>
-            <key>BY</key>
-            <string>Bayern</string>
-            <key>NW</key>
-            <string>North Rhine-Westphalia</string>
+            <key>NS</key>
+            <string>Negeri Sembilan</string>
         </dict>
     </array>
-    <key>IN</key>
-    <array>
-        <string>India</string>
-        <dict>
-            <key>ND</key>
-            <string>New Delhi</string>
+	<key>NL</key>
+	<array>
+		<string>Netherlands</string>
+		<dict>
+			<key>HEU</key>
+			<string>Heusden</string>
+		</dict>
+	</array>
+	<key>NZ</key>
+	<array>
+		<string>New Zealand</string>
+		<dict>
+			<key>AKLD</key>
+			<string>Auckland</string>
+			<key>CAN</key>
+			<string>Canterbury</string>
+            <key>TKI</key>
+            <string>Taranaki</string>
         </dict>
-    </array>
-    <key>IE</key>
-    <array>
-        <string>Ireland</string>
-        <dict>
-            <key>COR</key>
-            <string>Co. Cork</string>
-        </dict>
-    </array>
-    <key>IT</key>
-    <array>
-        <string>Italy</string>
-        <dict>
-            <key>PD</key>
-            <string>Padova</string>
-            <key>SIC</key>
-            <string>Sicily</string>
-            <key>VE</key>
-            <string>Venezia</string>
-        </dict>
-    </array>
-    <key>FR</key>
-    <array>
-        <string>France</string>
-        <dict>
-            <key>IDF</key>
-            <string>Ile de France</string>
-        </dict>
-    </array>
-    <key>NL</key>
-    <array>
-        <string>Netherlands</string>
-        <dict>
-            <key>HEU</key>
-            <string>Heusden</string>
-        </dict>
-    </array>
-    <key>NZ</key>
-    <array>
-        <string>New Zealand</string>
-        <dict>
-            <key>AKLD</key>
-            <string>Auckland</string>
-            <key>CAN</key>
-            <string>Canterbury</string>
-        </dict>
-    </array>
-    <key>ES</key>
-    <array>
-        <string>Spain</string>
-        <dict>
-            <key>GIR</key>
-            <string>Girona</string>
-        </dict>
-    </array>
+	</array>
+	<key>ES</key>
+	<array>
+		<string>Spain</string>
+		<dict>
+			<key>GIR</key>
+			<string>Girona</string>
+            <key>M</key>
+            <string>Madrid</string>
+		</dict>
+	</array>
+	<key>CH</key>
+	<array>
+		<string>Switzerland</string>
+		<dict>
+			<key>ZH</key>
+			<string>Zurich</string>
+		</dict>
+	</array>
 	<key>UK</key>
 	<array>
 		<string>United Kingdom</string>
 		<dict>
-            <key>DEN</key>
-            <string>Denbighshire</string>
-            <key>ES</key>
-            <string>East Sussex</string>
+			<key>MIDDX</key>
+			<string>Middlesex</string>
+			<key>BDF</key>
+			<string>Bedfordshire</string>
+			<key>WIL</key>
+			<string>Wiltshire</string>
+			<key>BHAM</key>
+			<string>Birmingham</string>
+			<key>LDY</key>
+			<string>Londonderry</string>
+			<key>NIE</key>
+			<string>Northern Ireland</string>
+			<key>ESS</key>
+			<string>Essex</string>
+			<key>NY</key>
+			<string>North Yorkshire</string>
+			<key>DEN</key>
+			<string>Denbighshire</string>
+			<key>ES</key>
+			<string>East Sussex</string>
+            <key>WS</key>
+            <string>West Sussex</string>
 			<key>GL</key>
 			<string>Greater London</string>
-            <key>GSY</key>
-            <string>Guernsey</string>
-            <key>HAM</key>
-            <string>Hampshire</string>
-            <key>KEN</key>
-            <string>Kent</string>
-            <key>LANCS</key>
-            <string>Lancashire</string>
-            <key>SOM</key>
-            <string>Somerset</string>
-            <key>SRY</key>
-            <string>Surrey</string>
-            <key>STN</key>
-            <string>St Neots</string>
+			<key>GSY</key>
+			<string>Guernsey</string>
+			<key>HAM</key>
+			<string>Hampshire</string>
+			<key>KEN</key>
+			<string>Kent</string>
+			<key>LANCS</key>
+			<string>Lancashire</string>
+            <key>LST</key>
+            <string>Leicester</string>
+			<key>SOM</key>
+			<string>Somerset</string>
+			<key>SRY</key>
+			<string>Surrey</string>
+			<key>STN</key>
+			<string>St Neots</string>
 		</dict>
 	</array>
 	<key>USA</key>
@@ -229,7 +302,7 @@
 			<key>NH</key>
 			<string>New Hampshire</string>
 			<key>NJ</key>
-			<string>New Jersey</string>		
+			<string>New Jersey</string>
 			<key>NM</key>
 			<string>New Mexico</string>
 			<key>NV</key>
@@ -276,5 +349,47 @@
 			<string>Wyoming</string>
 		</dict>
 	</array>
-</dict>
+	<key>SA</key>
+	<array>
+		<string>South Africa</string>
+		<dict>
+			<key>EC</key>
+			<string>Eastern Cape</string>
+		</dict>
+	</array>
+    <key>SE</key>
+    <array>
+        <string>Sweden</string>
+        <dict>
+            <key>SK</key>
+            <string>Skane</string>
+            <key>UPP</key>
+            <string>Uppsala</string>
+        </dict>
+    </array>
+	<key>MX</key>
+	<array>
+		<string>Mexico</string>
+		<dict>
+			<key>MS</key>
+			<string>Mexico State</string>
+		</dict>
+	</array>
+	<key>SCT</key>
+	<array>
+		<string>Scotland</string>
+		<dict>
+			<key>FIF</key>
+			<string>Fife</string>
+		</dict>
+	</array>
+    <key>TR</key>
+    <array>
+        <string>Turkey</string>
+        <dict>
+            <key>ANT</key>
+            <string>Antalya</string>
+        </dict>
+    </array>
+	</dict>
 </plist>

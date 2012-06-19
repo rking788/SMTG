@@ -19,6 +19,7 @@
 @synthesize manObjCon;
 @synthesize curName;
 @synthesize locObjs;
+@synthesize sortedCountries;
 @synthesize abbrsDict;
 @synthesize stateArrDict;
 
@@ -52,9 +53,10 @@
     [navBar setTintColor: [UIColor colorWithRed:(0.0/255.0) green:(77.0/255.0) blue:(45.0/255.0) alpha:1.0]];
     
     // Add save and cancel buttons to the navigation bar
-    [navBar.topItem setRightBarButtonItem: [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target: self action: @selector(cancel)]];
-    
-    [navBar.topItem setLeftBarButtonItem: [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target: self action: @selector(save)]];
+    [navBar.topItem setRightBarButtonItem: [[UIBarButtonItem alloc] 
+                                            initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target: self action: @selector(cancel)]];
+    [navBar.topItem setLeftBarButtonItem: [[UIBarButtonItem alloc] 
+                                           initWithBarButtonSystemItem:UIBarButtonSystemItemSave target: self action: @selector(save)]];
     
     if(self.detailType == kNAME_EDIT){
         [self nameEditInit];
@@ -149,13 +151,27 @@
             [self.locObjs addObject: manObj];
         }
         
-        for(NSString* countryStr in [NSSet setWithArray: [array valueForKey: @"country"]]){
+        NSSet* tmpCountrySet = [NSSet setWithArray: [array valueForKey: @"country"]];
+        
+        NSMutableArray* tmpCountryArr = [[NSMutableArray alloc] initWithCapacity: [tmpCountrySet count]];
+        
+        for(NSString* countryStr in tmpCountrySet){
+            
+            // Add the country long name to a sorted array used in the tableview
+            [tmpCountryArr addObject: [[self.abbrsDict valueForKey: countryStr] objectAtIndex: 0]];
+            
+            // Filter the location objects to find only states in current country
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"country == %@", countryStr];  
             NSMutableArray* tmpArr = [NSMutableArray arrayWithArray: self.locObjs];
-            [tmpArr filterUsingPredicate:predicate];  
-            [self.stateArrDict setObject: 
-                [NSSet setWithArray: [tmpArr valueForKey:@"state"]] forKey: countryStr];
+            [tmpArr filterUsingPredicate: predicate];
+            
+            // Sort the state names based on long names and not short names
+            NSOrderedSet* sortedShortStates = [self sortShortStates: [tmpArr valueForKey: @"state"] InCountry: countryStr];
+            
+            [self.stateArrDict setObject: sortedShortStates forKey: countryStr];
         }
+        
+        self.sortedCountries = [self sortCountries: tmpCountryArr];
         
     }
     else {
@@ -165,6 +181,62 @@
     
 }
 
+- (NSOrderedSet*) sortShortStates: (NSArray*) shortStateNames InCountry:(NSString *)shortCountry
+{
+    NSMutableArray* sortedShortStates = [NSMutableArray arrayWithCapacity: [shortStateNames count]];
+    NSMutableArray* longNames = [NSMutableArray arrayWithCapacity: [shortStateNames count]];
+    
+    // Get an arrary of the long names for all of the states
+    for (NSString* shortName in shortStateNames){
+        NSString* longName = [[[self.abbrsDict valueForKey: shortCountry] objectAtIndex: 1] valueForKey: shortName];
+        
+        [longNames addObject: longName];
+    }
+    
+    // Sort the array of long names
+    NSArray* sortedLongStates = [longNames sortedArrayUsingSelector: @selector( caseInsensitiveCompare:)];
+    
+    // Create the array of sorted short state names
+    for(NSString* longName in sortedLongStates){
+        [sortedShortStates addObject: 
+         [SettingsDetailsViewController stateSNInAbbrs: self.abbrsDict WithCSN: shortCountry WithSLN: longName]];
+    }
+    
+    return [NSOrderedSet orderedSetWithArray: sortedShortStates];
+}
+
+- (NSArray*) sortCountries:(NSArray *)countryLongNames
+{
+    NSMutableArray* tmpShortCountryArr = [NSMutableArray arrayWithCapacity:
+                                          [countryLongNames count]];
+    NSArray* sortedLongNames = [countryLongNames sortedArrayUsingSelector: @selector(caseInsensitiveCompare:)];
+    
+    for (NSString* longCountry in sortedLongNames){
+        NSString* shortName = [SettingsDetailsViewController countrySNInAbbrs: self.abbrsDict WithLN: longCountry];
+        
+        [tmpShortCountryArr addObject: shortName];
+    }
+    
+    return [NSArray arrayWithArray: tmpShortCountryArr];
+}
+
++ (NSString*) stateSNInAbbrs:(NSDictionary*) abbrs WithCSN: (NSString*) shortCN WithSLN: (NSString*) longSN
+{
+    NSDictionary* stateDict = [[abbrs valueForKey: shortCN] objectAtIndex: 1];
+    return [[stateDict allKeysForObject: longSN] objectAtIndex: 0];
+}                                      
+                                      
++ (NSString*) countrySNInAbbrs:(NSDictionary*) abbrsDict WithLN:(NSString*) longName
+{
+    for (NSString* countryKey in [abbrsDict allKeys]){
+        NSString* tmpStateLongName = [[abbrsDict valueForKey: countryKey] objectAtIndex: 0];
+        if ([tmpStateLongName isEqualToString: longName])
+            return countryKey;
+    }
+    
+    return nil;
+}
+                               
 #pragma mark UITableViewDataSource Protocol Methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -175,7 +247,7 @@
         retInt = 2;
     }
     else{
-        NSString* countryStr = [[self.stateArrDict allKeys] objectAtIndex: (section - 1)];
+        NSString* countryStr = [self.sortedCountries objectAtIndex: (section - 1)];
         NSSet* stateSet = [self.stateArrDict objectForKey: countryStr];
    
         retInt = [stateSet count];
@@ -188,8 +260,7 @@
 {
     NSInteger retInt = -1;
     
-    NSArray* countryArr = [self.stateArrDict allKeys];
-    retInt = [countryArr count] + 1;
+    retInt = [self.sortedCountries count] + 1;
     
     return retInt;
 }
@@ -231,7 +302,9 @@
     if(section == 0)
         return retStr;
     
-    retStr = [[self.stateArrDict allKeys] objectAtIndex: (section - 1)];
+    NSString* countryShortName = [self.sortedCountries objectAtIndex: (section - 1)];
+    
+    retStr = [[self.abbrsDict valueForKey: countryShortName] objectAtIndex: 0];
     
     return retStr; 
 }
@@ -268,12 +341,6 @@
     
     UILabel* lbl = [cell textLabel];
         
-    // Set the contents of the cell to be the state name with a little arrow indicating more details
-       /* NSString* countryStr = [[countrySet allObjects] objectAtIndex: newSection];*/
-      //  NSString* stateStr = [[stateArrDict valueForKey: countryStr] objectAtIndex: indexPath.row];
-        
-        //[lbl setText: [abbrsDict valueForKey: stateStr]];
-        
     // Set the accessory view to a switch if not in the first section
     if(indexPath.section == 0){
         if(indexPath.row == 0)
@@ -282,7 +349,7 @@
             [lbl setText: @"All Off"];
     }
     else{
-        NSString* countryStr = [[self.stateArrDict allKeys] objectAtIndex: (indexPath.section - 1)];
+        NSString* countryStr = [self.sortedCountries objectAtIndex: (indexPath.section - 1)];
         NSString* stateStr =  [[[self.stateArrDict objectForKey: countryStr] allObjects] objectAtIndex: indexPath.row];
         
         NSString* longState = [[[self.abbrsDict valueForKey: countryStr] objectAtIndex: 1] valueForKey: stateStr];
@@ -327,7 +394,7 @@
     row = (tagVal - (kBASECELL_TAG + 1) - (sect * 10));
     
     tabIndPath = [NSIndexPath indexPathForRow: row inSection: sect];
-    stateName = [[[tableV cellForRowAtIndexPath:tabIndPath] textLabel] text];
+    stateName = [[[tableV cellForRowAtIndexPath: tabIndPath] textLabel] text];
     countryAbbr = [self tableView: tableV titleForHeaderInSection: sect];
 
     stateAbbr = [[[[self.abbrsDict valueForKey: countryAbbr] objectAtIndex: 1] allKeysForObject: stateName] objectAtIndex: 0];

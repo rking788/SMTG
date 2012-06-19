@@ -276,6 +276,7 @@
             adBannerViewFrame.origin.x = 0;
             adBannerViewFrame.origin.y = 0;
             [adView setFrame:adBannerViewFrame];
+           
             CGRect contentViewFrame = contentView.frame;
             contentViewFrame.origin.y = 
             [self getBannerHeight:toInterfaceOrientation];

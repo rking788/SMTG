@@ -11,9 +11,7 @@
 #import "SettingsDetailsViewController.h"
 #import "DirectoryViewController.h"
 #import "DefaultUnitsViewController.h"
-
-static NSString* CONTACTEMAIL = @"admin@mainelyapps.com";
-static NSString* CONTACTSITE = @"http://mainelyapps.com";
+#import "constants.h"
 
 @implementation SettingsViewController
 
@@ -52,6 +50,9 @@ static NSString* CONTACTSITE = @"http://mainelyapps.com";
 
 #ifdef PAID
     [self.upgradeBtn setHidden: YES];
+    CGRect newFrame = self.tableV.tableHeaderView.frame;
+    newFrame.size.height = 0;
+    [self.tableV.tableHeaderView setFrame: newFrame];
 #endif
     
     // Uncomment the following line to preserve selection between presentations.

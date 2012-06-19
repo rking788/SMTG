@@ -14,6 +14,8 @@
 
 @interface DirectoryViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
  
+    NSArray* sortedCountries;
+    
     NSSet* stateSet;
     NSSet* countrySet;
     
@@ -35,8 +37,9 @@
     // Property used to determine what field to pick in settings tab
     NSInteger settingsDetailType;
 }
-@property (nonatomic, strong) NSSet* stateSet;
-@property (nonatomic, strong) NSSet* countrySet;
+
+@property (nonatomic, strong) NSArray* sortedCountries;
+
 @property (nonatomic, strong) NSMutableArray* favoriteNames;
 @property (nonatomic, strong) NSMutableArray* favoriteLocs;
 @property (nonatomic, strong) NSDictionary* abbrsDict;
@@ -56,7 +59,13 @@
 - (void) fillStatesCountries;
 - (void) fillFavorites;
 - (void) modalCancel: (id) sender;
-- (void) gotoCourseSelectWithState: (NSString*) stateAbbr AndCountry:(NSString*) countryAbbr Animate: (BOOL) animate;
+- (void) gotoCourseSelectWithState: (NSString*) stateName AndCountry:(NSString*) countryName Animate: (BOOL) animate;
 - (void) courseCreateModal;
+
+
++ (NSString*) stateLNInAbbrs:(NSDictionary*) abbrs WithCSN: (NSString*) cShortN WithSSN: (NSString*) shortN;
++ (NSString*) stateSNInAbbrs:(NSDictionary*) abbrs WithCSN: (NSString*) shortCN WithSLN: (NSString*) longSN;
++ (NSString*) countryLNInAbbrs:(NSDictionary*) abbrs WithSN: (NSString*) shortN;
++ (NSString*) countrySNInAbbrs:(NSDictionary*) abbrs WithLN:(NSString*) longN;
 
 @end

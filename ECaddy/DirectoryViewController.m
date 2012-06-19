@@ -19,7 +19,8 @@
 
 @implementation DirectoryViewController
 
-@synthesize stateSet, countrySet, abbrsDict, stateArrDict;
+@synthesize sortedCountries;
+@synthesize abbrsDict, stateArrDict;
 @synthesize favoriteNames, favoriteLocs;
 @synthesize courseSelectDelegate;
 @synthesize theTable;
@@ -27,6 +28,9 @@
 @synthesize modal;
 @synthesize settingsDetailType;
 @synthesize appDel;
+
+#pragma mark Maybe create a helper function to return a new section number if the favorites and active courses are in the table
+#pragma mark TODO: Maybe Try to find a more efficient way of going between short and long state and country names
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -63,8 +67,13 @@
     
     // Check for a valid default state and possibly just skip to CourseSelectVC
     NSUserDefaults* defaultPrefs = [NSUserDefaults standardUserDefaults];
-    if([defaultPrefs stringForKey: @"state"] && (self.settingsDetailType != kSTATE_EDIT))
-        [self gotoCourseSelectWithState: [defaultPrefs stringForKey: @"state"] AndCountry: [defaultPrefs stringForKey: @"country"] Animate: NO];
+    if([defaultPrefs stringForKey: @"state"] && (self.settingsDetailType != kSTATE_EDIT)){
+        NSString* shortState = [defaultPrefs stringForKey: @"state"];
+        NSString* shortCountry = [defaultPrefs stringForKey: @"country"];
+        NSString* longState = [DirectoryViewController stateLNInAbbrs: self.abbrsDict WithCSN: shortCountry WithSSN: shortState];
+        NSString* longCountry = [DirectoryViewController countryLNInAbbrs: self.abbrsDict WithSN: shortCountry];
+        [self gotoCourseSelectWithState: longState AndCountry: longCountry Animate: NO];
+    }
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -98,8 +107,7 @@
 
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    self.stateSet = nil;
-    self.countrySet = nil;
+    self.sortedCountries = nil;
     self.abbrsDict = nil;
     self.stateArrDict = nil;
     self.favoriteNames = nil;
@@ -179,8 +187,17 @@
         NSMutableArray* tmpArr = nil;
         
         for(NSManagedObject* manObj in array){
-            country = [manObj valueForKey: @"country"];
-            state = [manObj valueForKey: @"state"];
+            NSString* shortCountry = [manObj valueForKey: @"country"];
+            NSString* shortState = [manObj valueForKey: @"state"];
+            
+            country = [DirectoryViewController countryLNInAbbrs: self.abbrsDict WithSN: shortCountry];
+            state = [DirectoryViewController stateLNInAbbrs: self.abbrsDict WithCSN: shortCountry WithSSN: shortState];
+            
+            // If no long name is available for the abbreviation, just use the short name
+            if (!country)
+                country = shortCountry;
+            if (!state)
+                state = shortState;
             
             if((![sSet member: state]) && [cSet member: country]){
                 tmpArr = (NSMutableArray*) [saDict valueForKey: country];
@@ -197,8 +214,16 @@
             [sSet addObject: state];
         }
     
-        self.stateSet = [[NSSet alloc] initWithSet: sSet];
-        self.countrySet = [[NSSet alloc] initWithSet: cSet];
+        NSSortDescriptor* sd = [NSSortDescriptor sortDescriptorWithKey: @"description" ascending: YES];
+        self.sortedCountries = [cSet sortedArrayUsingDescriptors: [NSArray arrayWithObject: sd]];
+        
+        // Sort the states for each country within the dictionary
+        for (NSString* countryKey in [saDict allKeys]){
+            NSMutableArray* stateArray = (NSMutableArray*) [saDict valueForKey: countryKey];
+            NSArray* sortedStates = [stateArray sortedArrayUsingSelector: @selector(caseInsensitiveCompare:)];
+            [saDict setValue: sortedStates forKey: countryKey];
+        }
+        
         self.stateArrDict = [[NSDictionary alloc] initWithDictionary: saDict];
         
          sSet = nil;
@@ -250,8 +275,8 @@
     
     // Not in an active course 
     if(retInt == -1){
-        NSString* countryStr = [[countrySet allObjects] objectAtIndex: newSection];
-        retInt = [[stateArrDict objectForKey: countryStr] count];
+        NSString* countryStr = [self.sortedCountries objectAtIndex: newSection]; 
+        retInt = [[self.stateArrDict objectForKey: countryStr] count];
     }
 
     return retInt;
@@ -263,7 +288,7 @@
     BOOL isActives = (self.appDel.curCourse) ? YES : NO;
     BOOL isFavs = ([favoriteNames count] != 0) ? YES : NO;
     
-    retInt = [self.countrySet count];
+    retInt = [self.sortedCountries count];
     
     // Always add one for the new course section
     retInt++;
@@ -336,8 +361,7 @@
     }
     
     if(retStr == nil){
-        NSString* countryAbbr = [[countrySet allObjects] objectAtIndex: newSection];
-        retStr = [[self.abbrsDict valueForKey: countryAbbr] objectAtIndex: 0];
+        retStr = [self.sortedCountries objectAtIndex: newSection];
     }
     
     return retStr; 
@@ -417,14 +441,14 @@
     }
     else{
         if(self.settingsDetailType == kSTATE_EDIT){
-            NSString* countryStr = [[countrySet allObjects] objectAtIndex: newSection];
+            NSString* countryStr = [self.sortedCountries objectAtIndex: newSection];
             NSString* stateStr = [[stateArrDict valueForKey: countryStr] objectAtIndex: indexPath.row];
             [(SettingsViewController*) self.courseSelectDelegate saveState: stateStr AndCountry: countryStr];
 
             return;
         }
         
-        NSString* countryStr = [[self.countrySet allObjects] objectAtIndex: newSection];
+        NSString* countryStr = [self.sortedCountries objectAtIndex: newSection];
         NSString* stateStr = [[self.stateArrDict valueForKey: countryStr] objectAtIndex: indexPath.row];
         [self gotoCourseSelectWithState: stateStr AndCountry: countryStr Animate: YES];
     }
@@ -501,10 +525,10 @@
         UILabel* lbl = [cell textLabel];
         
         // Set the contents of the cell to be the state name with a little arrow indicating more details
-        NSString* countryStr = [[self.countrySet allObjects] objectAtIndex: newSection];
+        NSString* countryStr = [self.sortedCountries objectAtIndex: newSection];
         NSString* stateStr = [[self.stateArrDict valueForKey: countryStr] objectAtIndex: indexPath.row];
         
-        NSString* longState = [[[self.abbrsDict valueForKey: countryStr] objectAtIndex: 1] valueForKey: stateStr];
+        NSString* longState = [DirectoryViewController stateLNInAbbrs: self.abbrsDict WithCSN: countryStr WithSSN: stateStr];
         if(longState)
             [lbl setText: longState];
         else
@@ -524,11 +548,11 @@
     [self.courseSelectDelegate selectCourse: nil];
 }
 
-- (void) gotoCourseSelectWithState: (NSString*) stateAbbr AndCountry: (NSString*) countryAbbr Animate:(BOOL) animated
+- (void) gotoCourseSelectWithState: (NSString*) stateName AndCountry: (NSString*) countryName Animate:(BOOL) animated
 {
     // If the default state isn't enabled then we don't want to go to that course
     // select page
-    if(![[self.stateSet allObjects] containsObject: stateAbbr])
+    if(![[self.stateArrDict valueForKey: countryName] containsObject: stateName])
         return;
     
     CourseSelectViewController* csvc = [[CourseSelectViewController alloc] initWithNibName:@"CourseSelectView" bundle:nil];
@@ -538,14 +562,11 @@
     else
         csvc.modal = NO;
     
-    NSString* longState = [[[self.abbrsDict valueForKey: countryAbbr] objectAtIndex: 1] valueForKey: stateAbbr];
+    NSString* shortCountryName = [DirectoryViewController countrySNInAbbrs: self.abbrsDict WithLN: countryName];
+    NSString* shortState = [DirectoryViewController stateSNInAbbrs: self.abbrsDict WithCSN: shortCountryName WithSLN: stateName];
     
-    csvc.selectedState = stateAbbr;
-    
-    if(longState)
-        csvc.longStateName = longState;
-    else
-        csvc.longStateName = stateAbbr;
+    csvc.selectedState = shortState;
+    csvc.longStateName = stateName;
     
     csvc.courseSelectDelegate = self.courseSelectDelegate;
     csvc.manObjCon = self.manObjCon;
@@ -559,6 +580,34 @@
     CustomCourseViewController* ccvc = [[CustomCourseViewController alloc] initWithNibName: @"CustomCourseView" bundle: nil];
     
     [self presentModalViewController: ccvc animated: YES];
+}
+
++ (NSString*) stateLNInAbbrs:(NSDictionary*) abbrs WithCSN: (NSString*) cShortN WithSSN: (NSString*) shortN
+{
+    NSDictionary* states = [[abbrs valueForKey: cShortN] objectAtIndex: 1];
+    return [states valueForKey: shortN];
+}
+
++ (NSString*) stateSNInAbbrs:(NSDictionary*) abbrs WithCSN: (NSString*) shortCN WithSLN: (NSString*) longSN
+{
+    NSDictionary* stateDict = [[abbrs valueForKey: shortCN] objectAtIndex: 1];
+    return [[stateDict allKeysForObject: longSN] objectAtIndex: 0];
+}
+                               
++ (NSString*) countryLNInAbbrs:(NSDictionary*) abbrs WithSN: (NSString*) shortN
+{
+    return [[abbrs valueForKey: shortN] objectAtIndex: 0];
+}
+
++ (NSString*) countrySNInAbbrs:(NSDictionary*) abbrsDict WithLN:(NSString*) longName
+{
+    for (NSString* countryKey in [abbrsDict allKeys]){
+        NSString* tmpStateLongName = [[abbrsDict valueForKey: countryKey] objectAtIndex: 0];
+        if ([tmpStateLongName isEqualToString: longName])
+            return countryKey;
+    }
+    
+    return nil;
 }
 
 @end

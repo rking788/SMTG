@@ -298,6 +298,34 @@
 								<int key="IBUITag">77</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
+							<object class="IBUIButton" id="281153109">
+								<reference key="NSNextResponder" ref="209260182"/>
+								<int key="NSvFlags">265</int>
+								<string key="NSFrame">{{278, 325}, {35, 35}}</string>
+								<reference key="NSSuperview" ref="209260182"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
+								<object class="NSColor" key="IBUIBackgroundColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC4wODIxMTc2MTQzMyAwLjM4MjIxODA3MDcgMC4wMDE2MzQ2NjU0OTkgMAA</bytes>
+								</object>
+								<bool key="IBUIOpaque">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<int key="IBUIContentHorizontalAlignment">0</int>
+								<int key="IBUIContentVerticalAlignment">0</int>
+								<reference key="IBUIHighlightedTitleColor" ref="185323722"/>
+								<object class="NSColor" key="IBUINormalTitleColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC4xOTYwNzg0MzE0IDAuMzA5ODAzOTIxNiAwLjUyMTU2ODYyNzUAA</bytes>
+								</object>
+								<reference key="IBUINormalTitleShadowColor" ref="544140322"/>
+								<object class="NSCustomResource" key="IBUINormalImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">curlocbtn.png</string>
+								</object>
+								<reference key="IBUIFontDescription" ref="42533857"/>
+								<reference key="IBUIFont" ref="301230994"/>
+							</object>
 						</object>
 						<string key="NSFrameSize">{320, 367}</string>
 						<reference key="NSSuperview" ref="191373211"/>
@@ -312,33 +340,6 @@
 							</object>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-					</object>
-					<object class="IBUIButton" id="281153109">
-						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">265</int>
-						<string key="NSFrame">{{278, 325}, {35, 35}}</string>
-						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
-						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4wODIxMTc2MTQzMyAwLjM4MjIxODA3MDcgMC4wMDE2MzQ2NjU0OTkgMAA</bytes>
-						</object>
-						<bool key="IBUIOpaque">NO</bool>
-						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<int key="IBUIContentHorizontalAlignment">0</int>
-						<int key="IBUIContentVerticalAlignment">0</int>
-						<reference key="IBUIHighlightedTitleColor" ref="185323722"/>
-						<object class="NSColor" key="IBUINormalTitleColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4xOTYwNzg0MzE0IDAuMzA5ODAzOTIxNiAwLjUyMTU2ODYyNzUAA</bytes>
-						</object>
-						<reference key="IBUINormalTitleShadowColor" ref="544140322"/>
-						<object class="NSCustomResource" key="IBUINormalImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">curlocbtn.png</string>
-						</object>
-						<reference key="IBUIFontDescription" ref="42533857"/>
-						<reference key="IBUIFont" ref="301230994"/>
 					</object>
 				</object>
 				<string key="NSFrame">{{0, 64}, {320, 367}}</string>
@@ -404,19 +405,19 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">curLocationBtn</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="281153109"/>
-					</object>
-					<int key="connectionID">29</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">contentView</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="209260182"/>
 					</object>
 					<int key="connectionID">31</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">curLocationBtn</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="281153109"/>
+					</object>
+					<int key="connectionID">29</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -471,7 +472,6 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="209260182"/>
-							<reference ref="281153109"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -497,6 +497,7 @@
 							<reference ref="875038566"/>
 							<reference ref="102676734"/>
 							<reference ref="304678241"/>
+							<reference ref="281153109"/>
 						</object>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -545,11 +546,6 @@
 						<reference key="parent" ref="209260182"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">18</int>
-						<reference key="object" ref="281153109"/>
-						<reference key="parent" ref="191373211"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">32</int>
 						<reference key="object" ref="484365179"/>
 						<reference key="parent" ref="209260182"/>
@@ -567,6 +563,11 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">41</int>
 						<reference key="object" ref="304678241"/>
+						<reference key="parent" ref="209260182"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">18</int>
+						<reference key="object" ref="281153109"/>
 						<reference key="parent" ref="209260182"/>
 					</object>
 				</object>

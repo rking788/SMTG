@@ -12,6 +12,8 @@
 #import "Scorecard.h"
 #import "FBConnect.h"
 
+@class MapViewController;
+
 # pragma mark - TODO Possibly try to reduce memory footprint for the entire app
 
 @interface SMTGAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate, UIAlertViewDelegate> {
@@ -20,12 +22,18 @@
     NSUserDefaults* defaultPrefs;
     NSString* lastUpdateStr;
     
+    MapViewController* mvcInst;
+    
+    BOOL gettingCourses;
+    
     Facebook* __unsafe_unretained _FB;
 }
 
 @property (nonatomic, strong) IBOutlet UIWindow *window;
 
 @property (nonatomic, strong) IBOutlet UITabBarController *tabBarController;
+@property (unsafe_unretained, nonatomic) IBOutlet UIView *progressView;
+@property (unsafe_unretained, nonatomic) IBOutlet UIProgressView *progressBar;
 
 // Core Data related properties
 @property (nonatomic, strong, readonly) NSManagedObjectContext* managedObjectContext;
@@ -39,7 +47,10 @@
 @property (nonatomic, strong) NSUserDefaults* defaultPrefs;
 @property (nonatomic, strong) NSString* lastUpdateStr;
 
-@property (readonly) Facebook* FB;
+@property (strong, atomic) MapViewController* mvcInst;
+@property (assign, nonatomic, getter = isGettingSports) BOOL gettingCourses;
+
+@property (readonly, unsafe_unretained) Facebook* FB;
 
 - (NSString *)applicationDocumentsDirectory;
 - (void) loadDefaultDB;
@@ -56,6 +67,10 @@
 - (void) downloadCourseInfo;
 - (void) updateOrAddCourse: (Course*) newC;
 - (BOOL) stateEnabled: (NSString*) stateStr;
+
+- (void) addProgressBarView;
+- (void) animateProgressViewIn: (NSNumber*) show;
+- (void) updateProgressBar: (NSNumber*) percent;
 
 #ifdef LITE
 - (NSUInteger) findNumSCs;

@@ -182,7 +182,8 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"state == %@", self.selectedState];
     [fetchrequest setPredicate:predicate];
     
-    NSSortDescriptor* sortDescript = [[NSSortDescriptor alloc] initWithKey:@"coursename" ascending:YES];
+    
+    NSSortDescriptor* sortDescript = [[NSSortDescriptor alloc] initWithKey:@"coursename" ascending: YES];
     NSArray* sdArr = [[NSArray alloc] initWithObjects: sortDescript, nil];
     [fetchrequest setSortDescriptors: sdArr];
     
@@ -451,7 +452,7 @@
         NSArray* componentsArr = nil;
         NSString* firstCharStr = [self.arrayOfChars objectAtIndex: newSection];
         
-        componentsArr = [[[self.coursesDict objectForKey: firstCharStr]objectAtIndex: indexPath.row ] componentsSeparatedByString: @";"];
+        componentsArr = [[[self.coursesDict objectForKey: firstCharStr] objectAtIndex: indexPath.row ] componentsSeparatedByString: @";"];
         [lbl setText: [componentsArr objectAtIndex:0]];
         [lbl2 setText: [componentsArr objectAtIndex:1]];
     }

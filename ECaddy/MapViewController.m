@@ -37,6 +37,7 @@
 @synthesize locManager;
 @synthesize userLoc;
 @synthesize userLocEnabled;
+@synthesize smaller;
 @synthesize adView;
 @synthesize adVisible;
 
@@ -53,9 +54,15 @@
 {
     [super viewDidLoad];
     
+    [[SMTGAppDelegate sharedAppDelegate] setMvcInst: self];
+    
 #ifdef LITE
     [self createAdBannerView];
 #endif
+    
+    if([[SMTGAppDelegate sharedAppDelegate] isGettingSports]){
+        [self shrinkMapView];
+    }
     
     // Color the distance label container view
     self.distanceContainer.layer.borderColor = [UIColor colorWithRed: 0.219607845 green: 0.521568656 blue:0 alpha:1.0].CGColor;
@@ -66,8 +73,6 @@
     // Initialize the hole annotation size to 2 (tee and green)
     self.holeAnnotations = [[NSMutableArray alloc] initWithCapacity: 2];
     self.distanceAnnotations = [[NSMutableArray alloc] init];
-    
-    
     
     UIBarButtonItem* nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next"                                            
         style:UIBarButtonItemStyleBordered 
@@ -86,12 +91,18 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated
-{
-    
+{    
 #ifdef LITE
     [self fixupAdView: self.interfaceOrientation];
 #endif
 
+    if([[SMTGAppDelegate sharedAppDelegate] isGettingSports]){
+        [self shrinkMapView];
+    }
+    else if(self.isSmaller){
+        [self growMapView];
+    }
+    
     NSString* errStr = nil;
     Course* tempCourse = (Course*) [[SMTGAppDelegate sharedAppDelegate] curCourse];
     if(!self.curCourse)
@@ -103,9 +114,7 @@
         self.curCourse = tempCourse;
         
         self.coordsAvailable = NO;
-        self.teeCoords;
         self.teeCoords = nil;
-        self.greenCoords;
         self.greenCoords = nil;
     }
     
@@ -162,6 +171,8 @@
     if(shouldSave){
         [self.manObjCon save: nil];
     }
+    
+    [[SMTGAppDelegate sharedAppDelegate] setMvcInst: nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -190,6 +201,7 @@
 
 - (void)viewDidUnload
 {
+    [[SMTGAppDelegate sharedAppDelegate] setMvcInst: nil];
     [self setManObjCon: nil];
     [self setMapView:nil];
     [self setHoleAnnotations: nil];
@@ -211,8 +223,6 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
-
-
 
 - (void)zoomToFitMapAnnotations:(MKMapView*)mapV
 {
@@ -400,7 +410,6 @@
         [self.locManager stopUpdatingLocation];
         [self.mapView setShowsUserLocation: NO];
         self.userLocEnabled = NO;
-        self.userLoc;
         self.userLoc = nil;
         
         // Only do this if coordinates are available
@@ -553,6 +562,7 @@
             // If coordinates are available then we want to zoom
             // in on all three points not just the user
             [self zoomToFitMapAnnotations: mapView];
+            
         }
         
         shouldDrawLine = YES;
@@ -563,6 +573,9 @@
     if(!((newLocation.coordinate.latitude == oldLocation.coordinate.latitude)
          && (newLocation.coordinate.longitude == oldLocation.coordinate.longitude))){
         shouldDrawLine = YES;
+    }
+    else{
+        self.userLoc = newLocation;
     }
         
     if([self isUserLocEnabled]){
@@ -931,6 +944,30 @@
     [[[navCont viewControllers] objectAtIndex: 0] setValue:self.curCourse forKey: @"courseObj"];
     [navCont popToRootViewControllerAnimated: NO];
     [[[navCont viewControllers] objectAtIndex: 0] viewDidAppear: YES];
+}
+
+- (void) shrinkMapView
+{
+    if(!self.isSmaller){
+        self.smaller = YES;
+        
+        CGRect newFrame = self.mapView.frame;
+        SMTGAppDelegate* appDel = [SMTGAppDelegate sharedAppDelegate];
+        newFrame.size.height = newFrame.size.height - appDel.progressView.frame.size.height;
+        [self.mapView setFrame: newFrame];
+     }
+}
+
+- (void) growMapView
+{
+    if(self.isSmaller){
+        self.smaller = NO;
+        
+        CGRect newFrame = self.mapView.frame;
+        SMTGAppDelegate* appDel = [SMTGAppDelegate sharedAppDelegate];
+        newFrame.size.height = newFrame.size.height + appDel.progressView.frame.size.height;
+        [self.mapView setFrame: newFrame];
+    }
 }
 
 #pragma mark - iAd methods

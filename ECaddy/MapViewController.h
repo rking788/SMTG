@@ -51,6 +51,8 @@
     BOOL userLocEnabled;
     UIView *distanceContainer;
     
+    BOOL smaller;
+    
     id adView;
     BOOL adVisible;
 }
@@ -86,6 +88,8 @@
 @property (nonatomic, strong) CLLocation* userLoc;
 @property (nonatomic, assign, getter = isUserLocEnabled) BOOL userLocEnabled;
 
+@property (nonatomic, assign, getter = isSmaller) BOOL smaller;
+
 @property (nonatomic, strong) id adView;
 @property (nonatomic) BOOL adVisible;
 
@@ -110,6 +114,9 @@
 - (IBAction)logGreenCoords:(id)sender;
 
 - (void) startNewRound;
+
+- (void) shrinkMapView;
+- (void) growMapView;
 
 #ifdef LITE
 - (void)createAdBannerView;

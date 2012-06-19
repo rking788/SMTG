@@ -35,6 +35,7 @@ enum{
     NSString* curName;
     
     NSMutableArray* locObjs;
+    NSArray* sortedCountries;
     NSMutableDictionary* stateArrDict;
     NSDictionary* abbrsDict;
 }
@@ -49,6 +50,7 @@ enum{
 
 // Properties for state visibility view
 @property (nonatomic, strong) NSMutableArray* locObjs;
+@property (nonatomic, strong) NSArray* sortedCountries;
 @property (nonatomic, strong) NSMutableDictionary* stateArrDict;
 @property (nonatomic, strong) NSDictionary* abbrsDict;
 
@@ -57,6 +59,10 @@ enum{
 
 // Methods for the state visibility settings details
 - (void) fillStatesCountries;
+- (NSOrderedSet*) sortShortStates: (NSArray*) shortStateNames InCountry: (NSString*) shortCountry;
+- (NSArray*) sortCountries: (NSArray*) countryLongNames;
++ (NSString*) stateSNInAbbrs:(NSDictionary*) abbrs WithCSN: (NSString*) shortCN WithSLN: (NSString*) longSN;
++ (NSString*) countrySNInAbbrs:(NSDictionary*) abbrsDict WithLN:(NSString*) longName;
 
 - (void) switchToggled: (id) sender;
 - (void) allSwitchesOnOff: (BOOL) on;

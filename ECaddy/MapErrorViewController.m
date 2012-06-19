@@ -43,6 +43,8 @@ static NSString* CONTACTEMAIL = @"admin@mainelyapps.com";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [self.navigationController.navigationBar setTintColor: [UIColor colorWithRed:(0.0/255.0) green:(77.0/255.0) blue:(45.0/255.0) alpha:1.0]];
+    
     // Add the right bar button item for a done button to dismiss the modal view 
     [navBar setRightBarButtonItem: [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target: self action: @selector(doneBtnClicked)]];
     

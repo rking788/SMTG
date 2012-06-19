@@ -338,7 +338,7 @@
     NSURL * ywimgurl = [NSURL URLWithString: [TBXML textForElement: YWIURL]];
     NSData *ywimgdata = [NSData dataWithContentsOfURL: ywimgurl];
     UIImage *ywimg = [[UIImage alloc] initWithData: ywimgdata];
-    [self.yahooWeatherImg setImage: ywimg];
+    //[self.yahooWeatherImg setImage: ywimg];
     ywimg = nil;
     
     // Stop the activity indicator

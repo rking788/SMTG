@@ -8,6 +8,7 @@
 
 #import "SMTGAppDelegate.h"
 #import "DirectoryViewController.h"
+#import "MapViewController.h"
 #import "Course.h"
 #import "constants.h"
 
@@ -25,12 +26,16 @@
 @synthesize window=_window;
 
 @synthesize tabBarController=_tabBarController;
+@synthesize progressView;
+@synthesize progressBar;
 
 @synthesize managedObjectModel, managedObjectContext, persistentStoreCoordinator;
 @synthesize curCourse, curScorecard;
 @synthesize FB = _FB;
 @synthesize defaultPrefs;
 @synthesize lastUpdateStr;
+@synthesize mvcInst;
+@synthesize gettingCourses;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -38,6 +43,9 @@
     // Add the tab bar controller's current view as a subview of the window
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
+    
+    // Add the progress view to the view hierarchy
+    [self addProgressBarView];
     
     // Migrate the default DB if necessary
     [self loadDefaultDB];
@@ -126,6 +134,10 @@
     [self saveContext];
 }
 
++ (SMTGAppDelegate*) sharedAppDelegate
+{
+    return (SMTGAppDelegate*) [[UIApplication sharedApplication] delegate];
+}
 
 /*
 // Optional UITabBarControllerDelegate method.
@@ -318,11 +330,6 @@
     [self saveContext];
 }
 
-+ (SMTGAppDelegate*) sharedAppDelegate
-{
-    return (SMTGAppDelegate*) [[UIApplication sharedApplication] delegate];
-}
-
 - (void) checkServerForCourses
 {
     @autoreleasepool {
@@ -331,6 +338,9 @@
         [dateformatter setDateFormat: @"yyyy-MM-dd"];
         
         [self setLastUpdateStr: [dateformatter stringFromDate: lastScanDate]];
+        
+        if(!self.lastUpdateStr)
+            [self setLastUpdateStr: @"2012-01-22"];
         
         NSURLResponse* resp = nil;
         NSError* err = nil;
@@ -385,7 +395,15 @@
 - (void) downloadCourseInfo
 {
     @autoreleasepool {
-    
+        self.gettingCourses = YES;
+        
+        // Set the progress bar to 0.0% and animate it onto the screen
+        [self performSelectorOnMainThread: @selector(updateProgressBar:) 
+                               withObject: [NSNumber numberWithFloat: 0.0] 
+                            waitUntilDone: YES];
+        [self performSelectorOnMainThread: @selector(animateProgressViewIn:) 
+                               withObject: [NSNumber numberWithBool: YES] waitUntilDone: YES];
+        
         NSURLResponse* resp = nil;
         NSError* err = nil;
         
@@ -406,10 +424,12 @@
         if([retStr isEqualToString: @""])
             return;
         
-        
         // Get an array of the new courses
         NSArray* newCoursesArr = [retStr componentsSeparatedByString: @"\n"];
         NSCharacterSet* badChars = [NSCharacterSet characterSetWithCharactersInString: @"*"];
+        
+        float totalCourses = [newCoursesArr count];
+        float currentCourse = 0.0;
         
         // The course lines are in the form
         // courseName;address;phoneNumber;website;woeid;state;country;numHoles;mensPars;womensPars;teeCoords;greenCoords;\n
@@ -464,7 +484,18 @@
             
             [self updateOrAddCourse: tempCourse];
             
+            // Update the progress bar in the progress view
+            ++currentCourse;
+            [self performSelectorOnMainThread: @selector(updateProgressBar:) 
+                                   withObject: [NSNumber numberWithFloat: (currentCourse/totalCourses)] 
+                                waitUntilDone: YES];
         }
+        
+        // Animate the progress view off screen
+        [self performSelectorOnMainThread: @selector(animateProgressViewIn:) 
+                               withObject: [NSNumber numberWithBool: NO] waitUntilDone: YES];
+        
+        self.gettingCourses = NO;
         
         // Just updated the courses so set the last course update as today's date
         NSDate* lastScanDate = [NSDate date];
@@ -560,8 +591,58 @@
         NSLog(@"Error fetching lots");
     }
     
-    
     return ret;
+}
+
+- (void) addProgressBarView
+{
+    UITabBar* tBar = self.tabBarController.tabBar;
+    CGRect tbFrame = CGRectMake(0, tBar.frame.origin.y,  self.progressView.frame.size.width, progressView.frame.size.height);
+    [progressView setFrame: tbFrame];
+    
+    [self.tabBarController.view addSubview: progressView];
+    NSInteger tabBarIndex = [self.tabBarController.view.subviews indexOfObject: self.tabBarController.tabBar];
+    NSInteger progressIndex = [self.tabBarController.view.subviews indexOfObject: self.progressView];
+    [self.tabBarController.view exchangeSubviewAtIndex: tabBarIndex withSubviewAtIndex: progressIndex];
+}
+
+- (void) animateProgressViewIn: (NSNumber*) show
+{
+    [UIView beginAnimations:@"fixupViews" context:nil];
+    
+    if ([show boolValue]) {
+        // Animate the map view up so the Google logo isn't hidden
+        if(self.mvcInst && self.mvcInst.isViewLoaded && self.mvcInst.view.window){
+            [self.mvcInst shrinkMapView];
+        }
+        
+        // Display the progress view
+        CGRect progressViewFrame = [self.progressView frame];
+        progressViewFrame.origin.x = 0;
+        progressViewFrame.origin.y = (self.tabBarController.tabBar.frame.origin.y - self.progressView.frame.size.height);
+        [self.progressView setFrame: progressViewFrame];
+    }
+    else {
+        // Animate the map view back down
+        if(self.mvcInst && self.mvcInst.isViewLoaded && self.mvcInst.view.window){
+            [self.mvcInst growMapView];
+        }
+        
+        // Hide the progress view
+        
+        CGRect progressViewFrame = [self.progressView frame];
+        progressViewFrame.origin.x = 0;
+        progressViewFrame.origin.y = self.tabBarController.tabBar.frame.origin.y;
+        [self.progressView setFrame: progressViewFrame];         
+    }
+    
+    [UIView commitAnimations];
+
+}
+
+- (void) updateProgressBar: (NSNumber*) percent
+{
+    [self.progressBar setProgress: [percent floatValue]];
 }
 
 #ifdef LITE
