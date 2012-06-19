@@ -13,6 +13,9 @@
 #import "DefaultUnitsViewController.h"
 #import "constants.h"
 
+/* TODO CRTICAL: Remove this */
+#import "ScorePlotViewController.h"
+
 @implementation SettingsViewController
 
 @synthesize upgradeBtn;
@@ -95,6 +98,10 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    /* TODO CRITICAL: Remove this */
+    ScorePlotViewController* spvc = [[ScorePlotViewController alloc] initWithNibName: nil bundle:nil];
+    [self presentModalViewController: spvc animated: YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
