@@ -9,6 +9,19 @@
 /* Begin PBXBuildFile section */
 		0F2E39BD14E44C46009660FD /* news-wea.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0F2E39BC14E44C46009660FD /* news-wea.gif */; };
 		0F2E39BE14E44C46009660FD /* news-wea.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0F2E39BC14E44C46009660FD /* news-wea.gif */; };
+		0F4153AE1605321C00B9F8C0 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E325516050E5300D8339A /* FacebookSDK.framework */; };
+		0F4153AF1605322E00B9F8C0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E32021605065100D8339A /* CoreGraphics.framework */; };
+		0F4153B01605322E00B9F8C0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E32001605064B00D8339A /* libz.dylib */; };
+		0F4153B11605322E00B9F8C0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E31FE1605064400D8339A /* Foundation.framework */; };
+		0F4153B21605322E00B9F8C0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E31FC1605063C00D8339A /* UIKit.framework */; };
+		0F4153B31605322E00B9F8C0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E31FA1605063600D8339A /* CoreLocation.framework */; };
+		0F4153B41605322E00B9F8C0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E31F81605062F00D8339A /* MapKit.framework */; };
+		0F4153B51605322E00B9F8C0 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E31F61605062900D8339A /* CoreData.framework */; };
+		0F4153B61605322E00B9F8C0 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E31F41605062100D8339A /* Twitter.framework */; };
+		0F4153B71605322E00B9F8C0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E31F21605061A00D8339A /* QuartzCore.framework */; };
+		0F4153B91605326700B9F8C0 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F4153B81605326700B9F8C0 /* iAd.framework */; };
+		0F4153BB1605342A00B9F8C0 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F4153BA1605342A00B9F8C0 /* Accounts.framework */; };
+		0F4153BC1605343100B9F8C0 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F4153BA1605342A00B9F8C0 /* Accounts.framework */; };
 		0F56923014CCDF8800A7F4D2 /* SMTGLite-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0F56922F14CCDF8800A7F4D2 /* SMTGLite-Info.plist */; };
 		0F56923914CD112300A7F4D2 /* SMTG.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 0F56923814CD112200A7F4D2 /* SMTG.sqlite */; };
 		0F56923A14CD112300A7F4D2 /* SMTG.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 0F56923814CD112200A7F4D2 /* SMTG.sqlite */; };
@@ -252,6 +265,8 @@
 
 /* Begin PBXFileReference section */
 		0F2E39BC14E44C46009660FD /* news-wea.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "news-wea.gif"; sourceTree = "<group>"; };
+		0F4153B81605326700B9F8C0 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.1.sdk/System/Library/Frameworks/iAd.framework; sourceTree = DEVELOPER_DIR; };
+		0F4153BA1605342A00B9F8C0 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.1.sdk/System/Library/Frameworks/Accounts.framework; sourceTree = DEVELOPER_DIR; };
 		0F56922E14CCC7B000A7F4D2 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		0F56922F14CCDF8800A7F4D2 /* SMTGLite-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SMTGLite-Info.plist"; sourceTree = "<group>"; };
 		0F56923814CD112200A7F4D2 /* SMTG.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = SMTG.sqlite; sourceTree = "<group>"; };
@@ -397,6 +412,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F4153BB1605342A00B9F8C0 /* Accounts.framework in Frameworks */,
+				0F4153AE1605321C00B9F8C0 /* FacebookSDK.framework in Frameworks */,
+				0F4153AF1605322E00B9F8C0 /* CoreGraphics.framework in Frameworks */,
+				0F4153B01605322E00B9F8C0 /* libz.dylib in Frameworks */,
+				0F4153B11605322E00B9F8C0 /* Foundation.framework in Frameworks */,
+				0F4153B21605322E00B9F8C0 /* UIKit.framework in Frameworks */,
+				0F4153B31605322E00B9F8C0 /* CoreLocation.framework in Frameworks */,
+				0F4153B41605322E00B9F8C0 /* MapKit.framework in Frameworks */,
+				0F4153B91605326700B9F8C0 /* iAd.framework in Frameworks */,
+				0F4153B51605322E00B9F8C0 /* CoreData.framework in Frameworks */,
+				0F4153B61605322E00B9F8C0 /* Twitter.framework in Frameworks */,
+				0F4153B71605322E00B9F8C0 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +441,7 @@
 				0F7E32031605065100D8339A /* CoreGraphics.framework in Frameworks */,
 				0F7E32011605064B00D8339A /* libz.dylib in Frameworks */,
 				0F7E31FF1605064400D8339A /* Foundation.framework in Frameworks */,
+				0F4153BC1605343100B9F8C0 /* Accounts.framework in Frameworks */,
 				0F7E31FD1605063C00D8339A /* UIKit.framework in Frameworks */,
 				0F7E32051605067E00D8339A /* Twitter.framework in Frameworks */,
 				0F7E32061605068100D8339A /* QuartzCore.framework in Frameworks */,
@@ -535,6 +563,8 @@
 		AE85D7411368E34400CDA534 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0F4153BA1605342A00B9F8C0 /* Accounts.framework */,
+				0F4153B81605326700B9F8C0 /* iAd.framework */,
 				0F7E325716050E9500D8339A /* FacebookSDKResources.bundle */,
 				0F7E325516050E5300D8339A /* FacebookSDK.framework */,
 				0F7E32021605065100D8339A /* CoreGraphics.framework */,
@@ -1068,9 +1098,14 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Robert KIng (PLJWL35TX2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Robert KIng (PLJWL35TX2)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ECaddy/SMTG-Prefix.pch";
@@ -1081,10 +1116,15 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "SMTGLite-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/usr/lib\"",
+				);
+				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "SMTG Lite";
-				PROVISIONING_PROFILE = "E92D200F-3FB6-4601-AF1C-5B157C18F584";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "E92D200F-3FB6-4601-AF1C-5B157C18F584";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -1103,13 +1143,23 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Robert KIng";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Robert KIng";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ECaddy/SMTG-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = LITE;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "SMTGLite-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/usr/lib\"",
+				);
+				OTHER_LDFLAGS = "-lsqlite3.0";
 				PRODUCT_NAME = "SMTG Lite";
 				PROVISIONING_PROFILE = "DFAE5735-9850-4AEB-9B89-51CDF24FD7CD";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DFAE5735-9850-4AEB-9B89-51CDF24FD7CD";
@@ -1220,7 +1270,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "\"/Users/rking188/dev/ios/CorePlot_1.0/Source/framework/**\"";
 				INFOPLIST_FILE = "ECaddy/SMTG-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lsqlite3.0",
@@ -1257,7 +1307,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = "\"/Users/rking188/dev/ios/CorePlot_1.0/Source/framework/**\"";
 				INFOPLIST_FILE = "ECaddy/SMTG-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lsqlite3.0",

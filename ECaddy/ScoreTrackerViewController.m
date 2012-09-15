@@ -16,6 +16,7 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import <Twitter/TWTweetComposeViewController.h>
 #import <Twitter/Twitter.h>
+#import <Accounts/Accounts.h>
 
 #pragma mark - TODO CRITICAL: Do some debugging with changing views and stuff back and forth to fix persistence and crashing issues
 
@@ -497,22 +498,12 @@ NSString *const FBSessionStateChangedNotification =
 - (void) actionButtonClicked: (id) sender
 {
     UIActionSheet* actSheet;
-    
-    if([TWTweetComposeViewController canSendTweet]){
-        NSLog(@"Able to send tweet");
-        actSheet = [[UIActionSheet alloc] initWithTitle: nil delegate: self 
-                        cancelButtonTitle: @"Cancel" 
-                        destructiveButtonTitle: @"Finish Round"
-                        otherButtonTitles: @"Upload to Facebook", @"Tweet", nil];
-    }
-    else{
-        NSLog(@"Cannot Tweet");
-        actSheet = [[UIActionSheet alloc] initWithTitle: nil delegate: self 
-                        cancelButtonTitle: @"Cancel" 
-                        destructiveButtonTitle: @"Finish Round"
-                        otherButtonTitles: @"Upload to Facebook", nil];
-    }
-    
+
+    actSheet = [[UIActionSheet alloc] initWithTitle: nil delegate: self
+                    cancelButtonTitle: @"Cancel"
+                    destructiveButtonTitle: @"Finish Round"
+                    otherButtonTitles: @"Upload to Facebook", @"Tweet", nil];
+        
     actSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
     [actSheet showFromTabBar: self.tabBarController.tabBar];
 }
@@ -526,6 +517,7 @@ NSString *const FBSessionStateChangedNotification =
         UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"Sorry" message: @"Sorry, this feature is only available in the Full version." delegate:self cancelButtonTitle:nil otherButtonTitles: @"Dismiss", nil];
         
         [av show];
+        return;
 #else
         [self saveScorecardImg];
         [self uploadSCToFB];
@@ -536,11 +528,14 @@ NSString *const FBSessionStateChangedNotification =
         UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"Sorry" message: @"Sorry, this feature is only available in the Full version." delegate:self cancelButtonTitle:nil otherButtonTitles: @"Dismiss", nil];
         
         [av show];
+        return;
 #else
         TWTweetComposeViewController *tweetViewController = [[TWTweetComposeViewController alloc] init];
         
         // Set the initial tweet text. See the framework for additional properties that can be set.
-        [tweetViewController setInitialText:@"Hello. This is a test tweet from Show Me the Green (iOS 5)"];
+        
+        NSString* initText = [NSString stringWithFormat: @"Played a round of golf at %@ #SMTGoniOS", [self.scorecard.course coursename]];
+        [tweetViewController setInitialText: initText];
         
         [self saveScorecardImg];
         
@@ -754,7 +749,7 @@ NSString *const FBSessionStateChangedNotification =
    
     [FBRequestConnection startForUploadPhoto:img
                            completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-                               UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"Posted Image" message:@"Success?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
+                               UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"Success" message:@"The scorecard was successfully uploaded." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
                                [av show];
                            }];
 }
