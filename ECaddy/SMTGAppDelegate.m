@@ -11,6 +11,7 @@
 #import "MapViewController.h"
 #import "Course.h"
 #import "constants.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 #pragma mark - TODO APPWIDE: Provide better support for different device orientations
 
@@ -31,7 +32,6 @@
 
 @synthesize managedObjectModel, managedObjectContext, persistentStoreCoordinator;
 @synthesize curCourse, curScorecard;
-@synthesize FB = _FB;
 @synthesize defaultPrefs;
 @synthesize lastUpdateStr;
 @synthesize mvcInst;
@@ -65,8 +65,6 @@
     [self setDefaultPrefs: [NSUserDefaults standardUserDefaults]];
     
     [self findActiveScorecard];
-    
-    _FB = nil;
     
     // Set the default units if they aren't already set
     NSUserDefaults* defs = [NSUserDefaults standardUserDefaults];
@@ -131,7 +129,23 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+    // Close the Facebook session
+    [FBSession.activeSession close];
+    
+    // Save the database
     [self saveContext];
+}
+
+/*
+ * If we have a valid session at the time of openURL call, we handle
+ * Facebook transitions by passing the url argument to handleOpenURL
+ */
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    // attempt to extract a token from the url
+    return [FBSession.activeSession handleOpenURL:url];
 }
 
 + (SMTGAppDelegate*) sharedAppDelegate
@@ -702,15 +716,5 @@
 }
 
 #endif
-
-#pragma mark - Facebook methods
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    return [self.FB handleOpenURL:url];
-}
-
-- (void) setFBInstance: (Facebook*) fb
-{
-    _FB = fb;
-}
 
 @end

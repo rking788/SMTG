@@ -10,7 +10,6 @@
 #import <CoreData/CoreData.h>
 #import "Course.h"
 #import "Scorecard.h"
-#import "FBConnect.h"
 
 @class MapViewController;
 
@@ -25,8 +24,6 @@
     MapViewController* mvcInst;
     
     BOOL gettingCourses;
-    
-    Facebook* __unsafe_unretained _FB;
 }
 
 @property (nonatomic, strong) IBOutlet UIWindow *window;
@@ -49,8 +46,6 @@
 
 @property (strong, atomic) MapViewController* mvcInst;
 @property (assign, nonatomic, getter = isGettingSports) BOOL gettingCourses;
-
-@property (readonly, unsafe_unretained) Facebook* FB;
 
 - (NSString *)applicationDocumentsDirectory;
 - (void) loadDefaultDB;
@@ -78,7 +73,5 @@
 - (NSUInteger) findNumSCs;
 - (void) removeOldestSC;
 #endif
-
-- (void) setFBInstance: (Facebook*) fb;
 
 @end

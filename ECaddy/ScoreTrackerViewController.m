@@ -12,8 +12,8 @@
 #import "Scorecard.h"
 #import "Course.h"
 #import "HeaderFooterView.h"
-#import "FBConnect.h"
 #import <QuartzCore/QuartzCore.h>
+#import <FacebookSDK/FacebookSDK.h>
 #import <Twitter/TWTweetComposeViewController.h>
 #import <Twitter/Twitter.h>
 
@@ -21,6 +21,8 @@
 
 // Facebook app ID constant string
 static NSString* kAppId = @"142876775786876";
+NSString *const FBSessionStateChangedNotification =
+@"com.mainelyapps.SMTG.Login:FBSessionStateChangedNotification";
 
 
 @implementation ScoreTrackerViewController
@@ -37,16 +39,14 @@ static NSString* kAppId = @"142876775786876";
 @synthesize tableV;
 @synthesize backgroundImageView;
 @synthesize activeField;
-@synthesize FB = _FB;
-@synthesize FBpermissions;
-@synthesize FBLoggedIn;
-@synthesize pendingFBAction;
+
+// TODO CRITICAL : When tweeting a scorecard, the twitter view controller is shown and then when it is dismissed the view is shifted down (after the keyboard goes away) and a white background is shown at the top 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.FBpermissions = [NSArray arrayWithObjects: @"publish_stream", @"offline_access", nil];
+        
     }
     return self;
 }
@@ -71,18 +71,12 @@ static NSString* kAppId = @"142876775786876";
     // Register listeners for keyboard notifications
     [self registerForKeyboardNotifications];
     
-    // TODO: Finish implementing this to provide actions like posting to facebook and finishing a round
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]
                                                initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                target:self action:@selector(actionButtonClicked:)];
     
     self.navigationItem.title = @"Scorecard";
-    
-    // Create the Facebook instance
-    self.FBLoggedIn = NO;
-    _FB = [[Facebook alloc] initWithAppId:kAppId];
-    [[SMTGAppDelegate sharedAppDelegate] setFBInstance: self.FB];
-    
+  
     if(self.scorecard){
         NSString* name;
         NSString* date;
@@ -149,7 +143,7 @@ static NSString* kAppId = @"142876775786876";
     [self setScoreHeaderView:nil];
     [self setScoreFooterView:nil];
     [self setFavstarBtn:nil];
-    [self setFBpermissions: nil];
+//    [self setFBpermissions: nil];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     [self setScorecardDict: nil];
@@ -266,7 +260,7 @@ static NSString* kAppId = @"142876775786876";
             scoreRect = CGRectMake((varColOffset + (i * varColWidth)), 0, varColWidth, cell.bounds.size.height);
             scoreTF = [[UITextField alloc] initWithFrame: scoreRect];
             
-            [scoreTF setPlaceholder: [NSString stringWithFormat: @"-", (i + 1)]];
+            [scoreTF setPlaceholder: @"-"];
             [scoreTF setTextAlignment: UITextAlignmentCenter];
             [scoreTF setContentVerticalAlignment: UIControlContentVerticalAlignmentCenter];
             [scoreTF setAdjustsFontSizeToFitWidth: YES];
@@ -646,7 +640,6 @@ static NSString* kAppId = @"142876775786876";
     // ONLY FOR 18 holes
     UITableView* tabv = nil;
     HeaderFooterView* secondHeader = nil;
-    HeaderFooterView* secondFooter = nil;
     CGRect originalTitleRect = self.titleView.frame;
     if(isExtended){
         CGRect f = self.tableV.frame;
@@ -702,8 +695,6 @@ static NSString* kAppId = @"142876775786876";
     // ONLY FOR 18 HOLES
     if(isExtended){
         self.titleView.frame = originalTitleRect;
-        
-       // [secondFooter release];
     }
 }
 
@@ -736,88 +727,15 @@ static NSString* kAppId = @"142876775786876";
     return ret;
 }
 
-
-#pragma mark - Facebook Methods
-
-- (void) login
-{
-    [self.FB authorize: self.FBpermissions delegate: self];
-}
-
-- (void) logout
-{
-    [self.FB logout: self];
-}
-
-/**
- * Called when the user has logged in successfully.
- */
-- (void)fbDidLogin {
-    self.FBLoggedIn = YES;
-    if([self.pendingFBAction isEqualToString: @"photo"]){
-        [self uploadPhoto];
-    }
-}
-
-/**
- * Called when the user canceled the authorization dialog.
- */
--(void)fbDidNotLogin:(BOOL)cancelled {
-    self.FBLoggedIn = NO;
-    NSLog(@"Failed logging in to Facebook");
-}
-
-/**
- * Called when the request logout has succeeded.
- */
-- (void)fbDidLogout {
-    self.FBLoggedIn = NO;
-}
-
 - (void) uploadSCToFB
 {
-    if(![self isFBLoggedIn]){
-        [self login];
-        self.FBLoggedIn = YES;
-        self.pendingFBAction = @"photo";
-    }
-    else{
+    if(FBSession.activeSession.isOpen){
         [self uploadPhoto];
     }
+    else {
+        [self openSessionWithAllowLoginUI: YES];
+    }
 }
-
-/**
- * Open an inline dialog that allows the logged in user to publish a story to his or
- * her wall.
- */
-#if 0
-- (void)publishStream
-{
-    
-    SBJSON *jsonWriter = [[SBJSON new] autorelease];
-    
-    NSDictionary* actionLinks = [NSArray arrayWithObjects:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                           @"Always Running",@"text",@"http://itsti.me/",@"href", nil], nil];
-    
-    NSString *actionLinksStr = [jsonWriter stringWithObject:actionLinks];
-    NSDictionary* attachment = [NSDictionary dictionaryWithObjectsAndKeys:
-                                @"a long run", @"name",
-                                @"The Facebook Running app", @"caption",
-                                @"it is fun", @"description",
-                                @"http://itsti.me/", @"href", nil];
-    NSString *attachmentStr = [jsonWriter stringWithObject:attachment];
-    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   @"Share on Facebook",  @"user_message_prompt",
-                                   actionLinksStr, @"action_links",
-                                   attachmentStr, @"attachment",
-                                   nil];
-    
-    
-    [self.FB dialog:@"feed"
-            andParams:params
-          andDelegate:self];
-}
-#endif
 
 /**
  * Upload a photo.
@@ -832,73 +750,70 @@ static NSString* kAppId = @"142876775786876";
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                    img, @"picture",
                                    nil];
-    
-    [self.FB requestWithGraphPath:@"me/photos"
-                          andParams:params
-                      andHttpMethod:@"POST"
-                        andDelegate:self];
-    
+
+   
+    [FBRequestConnection startForUploadPhoto:img
+                           completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                               UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"Posted Image" message:@"Success?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: nil];
+                               [av show];
+                           }];
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// FBRequestDelegate
-
-/**
- * Called when the Facebook API request has returned a response. This callback
- * gives you access to the raw response. It's called before
- * (void)request:(FBRequest *)request didLoad:(id)result,
- * which is passed the parsed response object.
+#pragma mark - New Facebook iOS 3.0 SDK Methods
+/*
+ * Callback for session changes.
  */
-- (void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response {
-    NSLog(@"received response");
-}
-
-/**
- * Called when a request returns and its response has been parsed into
- * an object. The resulting object may be a dictionary, an array, a string,
- * or a number, depending on the format of the API response. If you need access
- * to the raw response, use:
- *
- * (void)request:(FBRequest *)request
- *      didReceiveResponse:(NSURLResponse *)response
- */
-- (void)request:(FBRequest *)request didLoad:(id)result {
-    UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"Success" message: @"Successfully uploaded scorecard to Facebook" delegate:self cancelButtonTitle:nil otherButtonTitles: @"Dismiss", nil];
-    
-    [av show];
-    
-    if ([result isKindOfClass:[NSArray class]]) {
-        result = [result objectAtIndex:0];
+- (void)sessionStateChanged:(FBSession *)session
+                      state:(FBSessionState) state
+                      error:(NSError *)error
+{
+    switch (state) {
+        case FBSessionStateOpen:
+            if (!error) {
+                // We have a valid session
+                NSLog(@"User session found");
+                [self uploadPhoto];
+            }
+            break;
+        case FBSessionStateClosed:
+        case FBSessionStateClosedLoginFailed:
+            [FBSession.activeSession closeAndClearTokenInformation];
+            break;
+        default:
+            break;
     }
-    if ([result objectForKey:@"owner"]) {
-        NSLog(@"Photo upload Success");
-    } else {
-        NSLog(@"Request returned name %@", [result objectForKey:@"name"]);
-    }
-};
-
-/**
- * Called when an error prevents the Facebook API request from completing
- * successfully.
- */
-- (void)request:(FBRequest *)request didFailWithError:(NSError *)error {
-    UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"Error" message: @"An error occurred uploading the scorecard.\nPlease try again later." delegate:self cancelButtonTitle:nil otherButtonTitles: @"Dismiss", nil];
     
-    [av show];
-    NSLog(@"Request Failed: %@", [error localizedDescription]);
-    NSLog(@"Error Details: %@", [error description]);
-};
-
-
-////////////////////////////////////////////////////////////////////////////////
-// FBDialogDelegate
-
-/**
- * Called when a UIServer Dialog successfully return.
- */
-- (void)dialogDidComplete:(FBDialog *)dialog {
-    NSLog(@"publish successfully");
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:FBSessionStateChangedNotification
+     object:session];
+    
+    if (error) {
+        UIAlertView *alertView = [[UIAlertView alloc]
+                                  initWithTitle:@"Error"
+                                  message:error.localizedDescription
+                                  delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+        [alertView show];
+    }
 }
 
+/*
+ * Opens a Facebook session and optionally shows the login UX.
+ */
+- (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI
+{
+    NSArray* permissions = @[@"publish_actions"];
+    
+    return [FBSession openActiveSessionWithPermissions: permissions
+                                          allowLoginUI: allowLoginUI
+                                     completionHandler: ^(FBSession *session,
+                                                         FBSessionState state,
+                                                         NSError *error) {
+                                         [self sessionStateChanged:session
+                                                             state:state
+                                                             error:error];
+                                     }];
+}
 
 @end

@@ -7,17 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "FBConnect.h"
 
 @class SMTGAppDelegate;
 @class Course;
 @class Scorecard;
 @class HeaderFooterView;
-@class Facebook;
+
+extern NSString *const FBSessionStateChangedNotification;
 
 @interface ScoreTrackerViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, 
-                                                            UIActionSheetDelegate, UIAlertViewDelegate, FBSessionDelegate, 
-                                                            FBDialogDelegate, FBRequestDelegate>{
+                                                            UIActionSheetDelegate, UIAlertViewDelegate>{
     HeaderFooterView *scoreHeaderView;
     HeaderFooterView *scoreFooterView;
                                                                 UIView *titleView;
@@ -32,10 +31,6 @@
     
     NSMutableDictionary* scorecardDict;
     UIButton *saveCurSC;
-    
-    Facebook* _FB;
-    NSArray* FBpermissions;
-    BOOL FBLoggedIn;
 }
 
 enum{
@@ -59,12 +54,6 @@ enum{
 
 @property (nonatomic, strong) NSMutableDictionary* scorecardDict;
 
-// Facebook properties
-@property (readonly) Facebook* FB; 
-@property (nonatomic, strong) NSArray* FBpermissions;
-@property (nonatomic, getter = isFBLoggedIn) BOOL FBLoggedIn;
-@property (nonatomic, strong) NSString* pendingFBAction;
-
 - (IBAction)favstarPressed:(id)sender;
 
 - (void) nameChangedFrom: (NSString*) oldName To: (NSString*) newName;
@@ -83,13 +72,10 @@ enum{
 + (BOOL) savePNGForView:(UIView *)targetView rect:(CGRect)rect fileName:(NSString *)fileName;
 
 // Facebook Methods
-- (void) login;
-- (void) logout;
 - (void) uploadSCToFB;
-#if 0
-- (void)publishStream;
-#endif
-- (void)uploadPhoto;
+- (void) uploadPhoto;
 
+// New Facebook iOS 3.0 SDK Methods
+- (BOOL)openSessionWithAllowLoginUI:(BOOL)allowLoginUI;
 
 @end
