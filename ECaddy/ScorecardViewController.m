@@ -159,7 +159,7 @@
         NSError* err = nil;
         
         // Add the course information into the POST request content
-        NSURL* url = [NSURL URLWithString:@"http://mainelyapps.com/SMTG/NewCourse.php"];
+        NSURL* url = [NSURL URLWithString: @"http://mainelyapps.com/SMTG/NewCourse.php"];
         NSString* content = [NSString stringWithFormat:
                              @"cn=%@&p=%@&addr=%@&st=%@&c=%@&web=%@&woeid=%@&nh=%@&tc=%@&gc=%@", 
                              [course coursename], [course phone], [course valueForKey: @"address"], 

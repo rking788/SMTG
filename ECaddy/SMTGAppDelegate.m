@@ -330,6 +330,11 @@
     [self saveContext];
 }
 
+- (void) displayAlertView: (UIAlertView*) av
+{
+    [av show];
+}
+
 - (void) checkServerForCourses
 {
     @autoreleasepool {
@@ -339,7 +344,7 @@
         
         [self setLastUpdateStr: [dateformatter stringFromDate: lastScanDate]];
         
-        if(!self.lastUpdateStr)
+        if(self.lastUpdateStr)
             [self setLastUpdateStr: @"2012-01-22"];
         
         NSURLResponse* resp = nil;
@@ -377,7 +382,8 @@
             NSString* message = [NSString stringWithFormat: @"New information for %@ courses is available. Update Now?", retStr];
             UIAlertView* av = [[UIAlertView alloc] initWithTitle: @"New Course Data" message: message delegate:self cancelButtonTitle:@"No" otherButtonTitles: @"Yes", nil];
             
-            [av show];
+            [self performSelectorOnMainThread: @selector(displayAlertView:) withObject: av waitUntilDone: NO];
+            //[av show];
         }
         
     }

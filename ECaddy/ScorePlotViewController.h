@@ -9,14 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "CorePlot-CocoaTouch.h"
 
-@interface ScorePlotViewController : UIViewController <CPTBarPlotDataSource, CPTBarPlotDelegate> {
+@interface ScorePlotViewController : UIViewController <CPTPlotSpaceDelegate,
+CPTPlotDataSource,
+CPTScatterPlotDelegate>
+{
     
 }
 
 @property (nonatomic, retain) NSMutableArray *data;
 @property (nonatomic, retain) CPTGraphHostingView *hostingView;
 @property (nonatomic, retain) CPTXYGraph *graph;
+@property (nonatomic, retain) CPTLayerAnnotation   *symbolTextAnnotation;
 
-- (void) generateBarPlot;
+- (void) generateData;
+- (void) generateScatterPlot;
 
 @end

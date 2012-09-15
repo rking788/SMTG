@@ -63,6 +63,8 @@
 - (void) saveCurScorecard: (NSMutableDictionary*) sc;
 + (SMTGAppDelegate*) sharedAppDelegate;
 
+- (void) displayAlertView: (UIAlertView*) av;
+
 - (void) checkServerForCourses;
 - (void) downloadCourseInfo;
 - (void) updateOrAddCourse: (Course*) newC;

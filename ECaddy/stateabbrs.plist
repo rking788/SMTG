@@ -64,8 +64,8 @@
 			<string>Bayern</string>
 			<key>NW</key>
 			<string>North Rhine-Westphalia</string>
-            <key>HE</key>
-            <string>Hesse</string>
+			<key>HE</key>
+			<string>Hesse</string>
 		</dict>
 	</array>
 	<key>DK</key>
@@ -76,17 +76,16 @@
 			<string>4000</string>
 		</dict>
 	</array>
-    <key>ENG</key>
+	<key>ENG</key>
 	<array>
 		<string>England</string>
 		<dict>
 			<key>YKS</key>
 			<string>Yorkshire</string>
-            <key>CHES</key>
-            <string>Cheshire</string>
-        </dict>
+			<key>CHES</key>
+			<string>Cheshire</string>
+		</dict>
 	</array>
-
 	<key>IN</key>
 	<array>
 		<string>India</string>
@@ -109,10 +108,10 @@
 	<array>
 		<string>Italy</string>
 		<dict>
-            <key>AL</key>
-            <string>Alessandria</string>
-            <key>LZ</key>
-            <string>Lazio</string>
+			<key>AL</key>
+			<string>Alessandria</string>
+			<key>LZ</key>
+			<string>Lazio</string>
 			<key>TU</key>
 			<string>Turin</string>
 			<key>PD</key>
@@ -129,18 +128,18 @@
 		<dict>
 			<key>IDF</key>
 			<string>Ile de France</string>
-            <key>CM</key>
-            <string>Charente Maritime</string>
+			<key>CM</key>
+			<string>Charente Maritime</string>
 		</dict>
 	</array>
-    <key>MY</key>
-    <array>
-        <string>Malaysia</string>
-        <dict>
-            <key>NS</key>
-            <string>Negeri Sembilan</string>
-        </dict>
-    </array>
+	<key>MY</key>
+	<array>
+		<string>Malaysia</string>
+		<dict>
+			<key>NS</key>
+			<string>Negeri Sembilan</string>
+		</dict>
+	</array>
 	<key>NL</key>
 	<array>
 		<string>Netherlands</string>
@@ -157,9 +156,9 @@
 			<string>Auckland</string>
 			<key>CAN</key>
 			<string>Canterbury</string>
-            <key>TKI</key>
-            <string>Taranaki</string>
-        </dict>
+			<key>TKI</key>
+			<string>Taranaki</string>
+		</dict>
 	</array>
 	<key>ES</key>
 	<array>
@@ -167,8 +166,8 @@
 		<dict>
 			<key>GIR</key>
 			<string>Girona</string>
-            <key>M</key>
-            <string>Madrid</string>
+			<key>M</key>
+			<string>Madrid</string>
 		</dict>
 	</array>
 	<key>CH</key>
@@ -183,6 +182,8 @@
 	<array>
 		<string>United Kingdom</string>
 		<dict>
+			<key>LINCS</key>
+			<string>Lincolnshire</string>
 			<key>MIDDX</key>
 			<string>Middlesex</string>
 			<key>BDF</key>
@@ -203,8 +204,8 @@
 			<string>Denbighshire</string>
 			<key>ES</key>
 			<string>East Sussex</string>
-            <key>WS</key>
-            <string>West Sussex</string>
+			<key>WS</key>
+			<string>West Sussex</string>
 			<key>GL</key>
 			<string>Greater London</string>
 			<key>GSY</key>
@@ -215,8 +216,8 @@
 			<string>Kent</string>
 			<key>LANCS</key>
 			<string>Lancashire</string>
-            <key>LST</key>
-            <string>Leicester</string>
+			<key>LST</key>
+			<string>Leicester</string>
 			<key>SOM</key>
 			<string>Somerset</string>
 			<key>SRY</key>
@@ -357,16 +358,16 @@
 			<string>Eastern Cape</string>
 		</dict>
 	</array>
-    <key>SE</key>
-    <array>
-        <string>Sweden</string>
-        <dict>
-            <key>SK</key>
-            <string>Skane</string>
-            <key>UPP</key>
-            <string>Uppsala</string>
-        </dict>
-    </array>
+	<key>SE</key>
+	<array>
+		<string>Sweden</string>
+		<dict>
+			<key>SK</key>
+			<string>Skane</string>
+			<key>UPP</key>
+			<string>Uppsala</string>
+		</dict>
+	</array>
 	<key>MX</key>
 	<array>
 		<string>Mexico</string>
@@ -383,13 +384,13 @@
 			<string>Fife</string>
 		</dict>
 	</array>
-    <key>TR</key>
-    <array>
-        <string>Turkey</string>
-        <dict>
-            <key>ANT</key>
-            <string>Antalya</string>
-        </dict>
-    </array>
-	</dict>
+	<key>TR</key>
+	<array>
+		<string>Turkey</string>
+		<dict>
+			<key>ANT</key>
+			<string>Antalya</string>
+		</dict>
+	</array>
+</dict>
 </plist>

@@ -14,7 +14,7 @@
 #import "constants.h"
 
 /* TODO CRTICAL: Remove this */
-#import "ScorePlotViewController.h"
+//#import "ScorePlotViewController.h"
 
 @implementation SettingsViewController
 
@@ -100,8 +100,8 @@
     [super viewDidAppear:animated];
     
     /* TODO CRITICAL: Remove this */
-    ScorePlotViewController* spvc = [[ScorePlotViewController alloc] initWithNibName: nil bundle:nil];
-    [self presentModalViewController: spvc animated: YES];
+//    ScorePlotViewController* spvc = [[ScorePlotViewController alloc] initWithNibName: nil bundle:nil];
+//    [self presentModalViewController: spvc animated: YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
