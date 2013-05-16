@@ -657,6 +657,10 @@
     }
     
     [UIView commitAnimations];
+    
+    
+    if([show boolValue] == NO)
+       [self.progressView removeFromSuperview];
 
 }
 

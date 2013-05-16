@@ -741,11 +741,6 @@ NSString *const FBSessionStateChangedNotification =
     NSString *filePath =  [documentsDir stringByAppendingPathComponent: @"Screenshot.png"];
     NSData* data = [NSData dataWithContentsOfFile: filePath];
     UIImage *img  = [[UIImage alloc] initWithData:data];
-    
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                   img, @"picture",
-                                   nil];
-
    
     [FBRequestConnection startForUploadPhoto:img
                            completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {

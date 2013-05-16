@@ -11,6 +11,7 @@
 #import "ScorecardTableViewController.h"
 #import "SMTGAppDelegate.h"
 #import "Course.h"
+#import <iAd/iAd.h>
 
 @implementation ScorecardViewController
 

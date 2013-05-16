@@ -9,6 +9,7 @@
 #import "MapViewController.h"
 #import <CoreLocation/CoreLocation.h>
 #import <QuartzCore/QuartzCore.h>
+#import <iAd/iAd.h>
 #import "POIAnnotation.h"
 #import "SMTGAppDelegate.h"
 #import "Course.h"
