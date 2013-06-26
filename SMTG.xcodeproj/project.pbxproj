@@ -10,31 +10,11 @@
 		0F2E39BD14E44C46009660FD /* news-wea.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0F2E39BC14E44C46009660FD /* news-wea.gif */; };
 		0F2E39BE14E44C46009660FD /* news-wea.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0F2E39BC14E44C46009660FD /* news-wea.gif */; };
 		0F4153AE1605321C00B9F8C0 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E325516050E5300D8339A /* FacebookSDK.framework */; };
-		0F4153AF1605322E00B9F8C0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E32021605065100D8339A /* CoreGraphics.framework */; };
-		0F4153B01605322E00B9F8C0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E32001605064B00D8339A /* libz.dylib */; };
-		0F4153B11605322E00B9F8C0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E31FE1605064400D8339A /* Foundation.framework */; };
-		0F4153B21605322E00B9F8C0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E31FC1605063C00D8339A /* UIKit.framework */; };
-		0F4153B31605322E00B9F8C0 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E31FA1605063600D8339A /* CoreLocation.framework */; };
-		0F4153B41605322E00B9F8C0 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E31F81605062F00D8339A /* MapKit.framework */; };
-		0F4153B51605322E00B9F8C0 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E31F61605062900D8339A /* CoreData.framework */; };
-		0F4153B61605322E00B9F8C0 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E31F41605062100D8339A /* Twitter.framework */; };
-		0F4153B71605322E00B9F8C0 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E31F21605061A00D8339A /* QuartzCore.framework */; };
 		0F56923014CCDF8800A7F4D2 /* SMTGLite-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0F56922F14CCDF8800A7F4D2 /* SMTGLite-Info.plist */; };
 		0F56923914CD112300A7F4D2 /* SMTG.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 0F56923814CD112200A7F4D2 /* SMTG.sqlite */; };
 		0F56923A14CD112300A7F4D2 /* SMTG.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 0F56923814CD112200A7F4D2 /* SMTG.sqlite */; };
 		0F576D9416053E31002FF17A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F576D9316053E31002FF17A /* Default-568h@2x.png */; };
-		0F576D9616053FC5002FF17A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F576D9516053FC5002FF17A /* Accounts.framework */; };
-		0F576D9816053FD9002FF17A /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F576D9716053FD9002FF17A /* iAd.framework */; };
 		0F576D99160540AC002FF17A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F576D9316053E31002FF17A /* Default-568h@2x.png */; };
-		0F7E31F91605062F00D8339A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E31F81605062F00D8339A /* MapKit.framework */; };
-		0F7E31FB1605063600D8339A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E31FA1605063600D8339A /* CoreLocation.framework */; };
-		0F7E31FD1605063C00D8339A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E31FC1605063C00D8339A /* UIKit.framework */; };
-		0F7E31FF1605064400D8339A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E31FE1605064400D8339A /* Foundation.framework */; };
-		0F7E32011605064B00D8339A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E32001605064B00D8339A /* libz.dylib */; };
-		0F7E32031605065100D8339A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E32021605065100D8339A /* CoreGraphics.framework */; };
-		0F7E32041605067B00D8339A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E31F61605062900D8339A /* CoreData.framework */; };
-		0F7E32051605067E00D8339A /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E31F41605062100D8339A /* Twitter.framework */; };
-		0F7E32061605068100D8339A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E31F21605061A00D8339A /* QuartzCore.framework */; };
 		0F7E325616050E5300D8339A /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F7E325516050E5300D8339A /* FacebookSDK.framework */; };
 		0F7E325816050E9500D8339A /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0F7E325716050E9500D8339A /* FacebookSDKResources.bundle */; };
 		0FF9F8FB14E57443006D9C42 /* greenicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F5CFE0314E4D53100C65CDB /* greenicon.png */; };
@@ -59,6 +39,27 @@
 		961FF97C145789A30015689A /* failure_mapbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 961FF97B145789A30015689A /* failure_mapbtn.png */; };
 		961FF97D145789A30015689A /* failure_mapbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 961FF97B145789A30015689A /* failure_mapbtn.png */; };
 		965DC23B13E5087E001E0404 /* sadweather.png in Resources */ = {isa = PBXBuildFile; fileRef = 965DC23A13E5087E001E0404 /* sadweather.png */; };
+		9670A748177A9605008BD080 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9670A747177A9605008BD080 /* CoreGraphics.framework */; };
+		9670A74D177A9613008BD080 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9670A74C177A9613008BD080 /* libz.dylib */; };
+		9670A74F177A961B008BD080 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9670A74E177A961B008BD080 /* Foundation.framework */; };
+		9670A751177A9621008BD080 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9670A750177A9621008BD080 /* UIKit.framework */; };
+		9670A753177A9629008BD080 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9670A752177A9629008BD080 /* Twitter.framework */; };
+		9670A755177A9630008BD080 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9670A754177A9630008BD080 /* QuartzCore.framework */; };
+		9670A757177A9637008BD080 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9670A756177A9637008BD080 /* CoreLocation.framework */; };
+		9670A759177A963D008BD080 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9670A758177A963D008BD080 /* CoreData.framework */; };
+		9670A75B177A9646008BD080 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9670A75A177A9646008BD080 /* MapKit.framework */; };
+		9670A75D177A9658008BD080 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9670A75C177A9658008BD080 /* Accounts.framework */; };
+		9670A76A177A969F008BD080 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9670A75E177A9664008BD080 /* iAd.framework */; };
+		9670A76B177A969F008BD080 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9670A75C177A9658008BD080 /* Accounts.framework */; };
+		9670A76C177A969F008BD080 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9670A75A177A9646008BD080 /* MapKit.framework */; };
+		9670A76D177A969F008BD080 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9670A758177A963D008BD080 /* CoreData.framework */; };
+		9670A76E177A969F008BD080 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9670A756177A9637008BD080 /* CoreLocation.framework */; };
+		9670A76F177A969F008BD080 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9670A754177A9630008BD080 /* QuartzCore.framework */; };
+		9670A770177A969F008BD080 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9670A752177A9629008BD080 /* Twitter.framework */; };
+		9670A771177A969F008BD080 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9670A750177A9621008BD080 /* UIKit.framework */; };
+		9670A772177A969F008BD080 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9670A74E177A961B008BD080 /* Foundation.framework */; };
+		9670A773177A969F008BD080 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9670A74C177A9613008BD080 /* libz.dylib */; };
+		9670A774177A969F008BD080 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9670A747177A9605008BD080 /* CoreGraphics.framework */; };
 		9679EAFF13E7844A001F3872 /* directorytab.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EAFE13E7844A001F3872 /* directorytab.png */; };
 		9679EB0113E7896B001F3872 /* directorytab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EB0013E7896B001F3872 /* directorytab@2x.png */; };
 		9679EB0513E79041001F3872 /* weathertab.png in Resources */ = {isa = PBXBuildFile; fileRef = 9679EB0413E79041001F3872 /* weathertab.png */; };
@@ -270,19 +271,8 @@
 		0F56922F14CCDF8800A7F4D2 /* SMTGLite-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "SMTGLite-Info.plist"; sourceTree = "<group>"; };
 		0F56923814CD112200A7F4D2 /* SMTG.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = SMTG.sqlite; sourceTree = "<group>"; };
 		0F576D9316053E31002FF17A /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
-		0F576D9516053FC5002FF17A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks/Accounts.framework; sourceTree = DEVELOPER_DIR; };
-		0F576D9716053FD9002FF17A /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks/iAd.framework; sourceTree = DEVELOPER_DIR; };
 		0F5CFE0314E4D53100C65CDB /* greenicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = greenicon.png; path = ../greenicon.png; sourceTree = "<group>"; };
 		0F5CFE0414E4D53100C65CDB /* greenicon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "greenicon@2x.png"; path = "../greenicon@2x.png"; sourceTree = "<group>"; };
-		0F7E31F21605061A00D8339A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		0F7E31F41605062100D8339A /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks/Twitter.framework; sourceTree = DEVELOPER_DIR; };
-		0F7E31F61605062900D8339A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
-		0F7E31F81605062F00D8339A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks/MapKit.framework; sourceTree = DEVELOPER_DIR; };
-		0F7E31FA1605063600D8339A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
-		0F7E31FC1605063C00D8339A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		0F7E31FE1605064400D8339A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		0F7E32001605064B00D8339A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
-		0F7E32021605065100D8339A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.0.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		0F7E325516050E5300D8339A /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		0F7E325716050E9500D8339A /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKResources.bundle; sourceTree = "<group>"; };
 		0FCF5110159006AC00A669E1 /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../CorePlot_1.0/Source/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
@@ -303,6 +293,17 @@
 		961FF817145785E90015689A /* success_mapbtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = success_mapbtn.png; sourceTree = "<group>"; };
 		961FF97B145789A30015689A /* failure_mapbtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = failure_mapbtn.png; sourceTree = "<group>"; };
 		965DC23A13E5087E001E0404 /* sadweather.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sadweather.png; sourceTree = "<group>"; };
+		9670A747177A9605008BD080 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
+		9670A74C177A9613008BD080 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
+		9670A74E177A961B008BD080 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		9670A750177A9621008BD080 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		9670A752177A9629008BD080 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Twitter.framework; sourceTree = DEVELOPER_DIR; };
+		9670A754177A9630008BD080 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
+		9670A756177A9637008BD080 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreLocation.framework; sourceTree = DEVELOPER_DIR; };
+		9670A758177A963D008BD080 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/CoreData.framework; sourceTree = DEVELOPER_DIR; };
+		9670A75A177A9646008BD080 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/MapKit.framework; sourceTree = DEVELOPER_DIR; };
+		9670A75C177A9658008BD080 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/Accounts.framework; sourceTree = DEVELOPER_DIR; };
+		9670A75E177A9664008BD080 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS6.1.sdk/System/Library/Frameworks/iAd.framework; sourceTree = DEVELOPER_DIR; };
 		9679EAFE13E7844A001F3872 /* directorytab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = directorytab.png; sourceTree = "<group>"; };
 		9679EB0013E7896B001F3872 /* directorytab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "directorytab@2x.png"; sourceTree = "<group>"; };
 		9679EB0413E79041001F3872 /* weathertab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weathertab.png; sourceTree = "<group>"; };
@@ -414,18 +415,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F576D9616053FC5002FF17A /* Accounts.framework in Frameworks */,
+				9670A76A177A969F008BD080 /* iAd.framework in Frameworks */,
+				9670A76B177A969F008BD080 /* Accounts.framework in Frameworks */,
+				9670A76C177A969F008BD080 /* MapKit.framework in Frameworks */,
+				9670A76D177A969F008BD080 /* CoreData.framework in Frameworks */,
+				9670A76E177A969F008BD080 /* CoreLocation.framework in Frameworks */,
+				9670A76F177A969F008BD080 /* QuartzCore.framework in Frameworks */,
+				9670A770177A969F008BD080 /* Twitter.framework in Frameworks */,
+				9670A771177A969F008BD080 /* UIKit.framework in Frameworks */,
+				9670A772177A969F008BD080 /* Foundation.framework in Frameworks */,
+				9670A773177A969F008BD080 /* libz.dylib in Frameworks */,
+				9670A774177A969F008BD080 /* CoreGraphics.framework in Frameworks */,
 				0F4153AE1605321C00B9F8C0 /* FacebookSDK.framework in Frameworks */,
-				0F4153AF1605322E00B9F8C0 /* CoreGraphics.framework in Frameworks */,
-				0F4153B01605322E00B9F8C0 /* libz.dylib in Frameworks */,
-				0F4153B11605322E00B9F8C0 /* Foundation.framework in Frameworks */,
-				0F4153B21605322E00B9F8C0 /* UIKit.framework in Frameworks */,
-				0F4153B31605322E00B9F8C0 /* CoreLocation.framework in Frameworks */,
-				0F4153B41605322E00B9F8C0 /* MapKit.framework in Frameworks */,
-				0F576D9816053FD9002FF17A /* iAd.framework in Frameworks */,
-				0F4153B51605322E00B9F8C0 /* CoreData.framework in Frameworks */,
-				0F4153B61605322E00B9F8C0 /* Twitter.framework in Frameworks */,
-				0F4153B71605322E00B9F8C0 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,15 +441,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F7E32031605065100D8339A /* CoreGraphics.framework in Frameworks */,
-				0F7E32011605064B00D8339A /* libz.dylib in Frameworks */,
-				0F7E31FF1605064400D8339A /* Foundation.framework in Frameworks */,
-				0F7E31FD1605063C00D8339A /* UIKit.framework in Frameworks */,
-				0F7E32051605067E00D8339A /* Twitter.framework in Frameworks */,
-				0F7E32061605068100D8339A /* QuartzCore.framework in Frameworks */,
-				0F7E31FB1605063600D8339A /* CoreLocation.framework in Frameworks */,
-				0F7E32041605067B00D8339A /* CoreData.framework in Frameworks */,
-				0F7E31F91605062F00D8339A /* MapKit.framework in Frameworks */,
+				9670A75D177A9658008BD080 /* Accounts.framework in Frameworks */,
+				9670A75B177A9646008BD080 /* MapKit.framework in Frameworks */,
+				9670A759177A963D008BD080 /* CoreData.framework in Frameworks */,
+				9670A757177A9637008BD080 /* CoreLocation.framework in Frameworks */,
+				9670A755177A9630008BD080 /* QuartzCore.framework in Frameworks */,
+				9670A753177A9629008BD080 /* Twitter.framework in Frameworks */,
+				9670A751177A9621008BD080 /* UIKit.framework in Frameworks */,
+				9670A74F177A961B008BD080 /* Foundation.framework in Frameworks */,
+				9670A74D177A9613008BD080 /* libz.dylib in Frameworks */,
+				9670A748177A9605008BD080 /* CoreGraphics.framework in Frameworks */,
 				0F7E325616050E5300D8339A /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -565,19 +567,19 @@
 		AE85D7411368E34400CDA534 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0F576D9716053FD9002FF17A /* iAd.framework */,
-				0F576D9516053FC5002FF17A /* Accounts.framework */,
+				9670A75E177A9664008BD080 /* iAd.framework */,
+				9670A75C177A9658008BD080 /* Accounts.framework */,
+				9670A75A177A9646008BD080 /* MapKit.framework */,
+				9670A758177A963D008BD080 /* CoreData.framework */,
+				9670A756177A9637008BD080 /* CoreLocation.framework */,
+				9670A754177A9630008BD080 /* QuartzCore.framework */,
+				9670A752177A9629008BD080 /* Twitter.framework */,
+				9670A750177A9621008BD080 /* UIKit.framework */,
+				9670A74E177A961B008BD080 /* Foundation.framework */,
+				9670A74C177A9613008BD080 /* libz.dylib */,
+				9670A747177A9605008BD080 /* CoreGraphics.framework */,
 				0F7E325716050E9500D8339A /* FacebookSDKResources.bundle */,
 				0F7E325516050E5300D8339A /* FacebookSDK.framework */,
-				0F7E32021605065100D8339A /* CoreGraphics.framework */,
-				0F7E32001605064B00D8339A /* libz.dylib */,
-				0F7E31FE1605064400D8339A /* Foundation.framework */,
-				0F7E31FC1605063C00D8339A /* UIKit.framework */,
-				0F7E31FA1605063600D8339A /* CoreLocation.framework */,
-				0F7E31F81605062F00D8339A /* MapKit.framework */,
-				0F7E31F61605062900D8339A /* CoreData.framework */,
-				0F7E31F41605062100D8339A /* Twitter.framework */,
-				0F7E31F21605061A00D8339A /* QuartzCore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
